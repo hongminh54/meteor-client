@@ -1,13 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui;
 
-import meteordevelopment.meteorclient.gui.utils.Cell;
-import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import meteordevelopment.meteorclient.gui.widgets.containers.WWindow;
+import com.hongminh54.marisaoptimize.gui.utils.Cell;
+import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WWindow;
 
 public abstract class WindowScreen extends WidgetScreen {
     protected final WWindow window;

@@ -1,26 +1,26 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.tabs.builtin;
 
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
-import meteordevelopment.meteorclient.gui.tabs.Tab;
-import meteordevelopment.meteorclient.gui.tabs.TabScreen;
-import meteordevelopment.meteorclient.gui.tabs.WindowTabScreen;
-import meteordevelopment.meteorclient.gui.widgets.containers.WContainer;
-import meteordevelopment.meteorclient.gui.widgets.containers.WHorizontalList;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WCheckbox;
-import meteordevelopment.meteorclient.systems.hud.Hud;
-import meteordevelopment.meteorclient.systems.hud.screens.HudEditorScreen;
-import meteordevelopment.meteorclient.utils.misc.NbtUtils;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
+import com.hongminh54.marisaoptimize.gui.tabs.Tab;
+import com.hongminh54.marisaoptimize.gui.tabs.TabScreen;
+import com.hongminh54.marisaoptimize.gui.tabs.WindowTabScreen;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WContainer;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WHorizontalList;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WCheckbox;
+import com.hongminh54.marisaoptimize.systems.hud.Hud;
+import com.hongminh54.marisaoptimize.systems.hud.screens.HudEditorScreen;
+import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class HudTab extends Tab {
     public HudTab() {

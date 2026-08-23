@@ -1,16 +1,16 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.world;
 
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.utils.PreInit;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.misc.Pool;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.utils.PreInit;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.misc.Pool;
 import meteordevelopment.orbit.EventHandler;
 import meteordevelopment.orbit.EventPriority;
 import net.minecraft.block.BlockState;
@@ -19,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class BlockIterator {
     private static final Pool<Callback> callbackPool = new Pool<>(Callback::new);

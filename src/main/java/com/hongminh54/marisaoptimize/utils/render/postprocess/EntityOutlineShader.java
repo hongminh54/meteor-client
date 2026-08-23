@@ -1,14 +1,14 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.render.postprocess;
 
-import meteordevelopment.meteorclient.renderer.MeshRenderer;
-import meteordevelopment.meteorclient.renderer.MeteorRenderPipelines;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.render.ESP;
+import com.hongminh54.marisaoptimize.renderer.MeshRenderer;
+import com.hongminh54.marisaoptimize.renderer.MeteorRenderPipelines;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.render.ESP;
 import net.minecraft.entity.Entity;
 
 public class EntityOutlineShader extends EntityShader {

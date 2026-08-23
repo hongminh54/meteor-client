@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -9,18 +9,18 @@ import com.mojang.authlib.Environment;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import de.florianmichael.waybackauthlib.InvalidCredentialsException;
 import de.florianmichael.waybackauthlib.WaybackAuthLib;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.systems.accounts.Account;
-import meteordevelopment.meteorclient.systems.accounts.AccountType;
-import meteordevelopment.meteorclient.systems.accounts.TokenAccount;
-import meteordevelopment.meteorclient.utils.misc.NbtException;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.systems.accounts.Account;
+import com.hongminh54.marisaoptimize.systems.accounts.AccountType;
+import com.hongminh54.marisaoptimize.systems.accounts.TokenAccount;
+import com.hongminh54.marisaoptimize.utils.misc.NbtException;
 import net.minecraft.client.session.Session;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class TheAlteningAccount extends Account<TheAlteningAccount> implements TokenAccount {
     private static final Environment ENVIRONMENT = new Environment("http://sessionserver.thealtening.com", "http://authserver.thealtening.com", "https://api.mojang.com", "The Altening");

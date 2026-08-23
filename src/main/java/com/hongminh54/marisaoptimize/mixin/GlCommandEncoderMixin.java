@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,8 +7,8 @@ package com.hongminh54.marisaoptimize.mixin;
 
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.systems.RenderPass;
-import meteordevelopment.meteorclient.mixininterface.IGpuDevice;
-import meteordevelopment.meteorclient.mixininterface.IRenderPipeline;
+import com.hongminh54.marisaoptimize.mixininterface.IGpuDevice;
+import com.hongminh54.marisaoptimize.mixininterface.IRenderPipeline;
 import net.minecraft.client.gl.GlBackend;
 import net.minecraft.client.gl.GlCommandEncoder;
 import org.spongepowered.asm.mixin.Final;

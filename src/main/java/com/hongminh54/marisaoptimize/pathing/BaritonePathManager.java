@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -13,8 +13,8 @@ import baritone.api.process.IBaritoneProcess;
 import baritone.api.process.PathingCommand;
 import baritone.api.process.PathingCommandType;
 import baritone.api.utils.SettingsUtil;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
 import meteordevelopment.orbit.EventHandler;
 import meteordevelopment.orbit.EventPriority;
 import net.minecraft.block.Block;
@@ -25,7 +25,7 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.function.Predicate;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class BaritonePathManager implements IPathManager {
     private final BaritoneSettings settings;
@@ -218,7 +218,7 @@ public class BaritonePathManager implements IPathManager {
 
         @Override
         public String displayName0() {
-            return "Meteor Client";
+            return "Marisa Optimize";
         }
     }
 }

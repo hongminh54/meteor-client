@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -29,7 +29,7 @@ public class PacketInflaterTransformer extends AsmTransformer {
     @Override
     public void transform(ClassNode klass) {
         MethodNode method = getMethod(klass, decodeMethod);
-        if (method == null) error("[Meteor Client] Could not find method PacketInflater.decode()");
+        if (method == null) error("[Marisa Optimize] Could not find method PacketInflater.decode()");
 
         int newCount = 0;
         LabelNode label = new LabelNode(new Label());
@@ -42,9 +42,9 @@ public class PacketInflaterTransformer extends AsmTransformer {
                 if (newCount == 2) {
                     InsnList list = new InsnList();
 
-                    list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "meteordevelopment/meteorclient/systems/modules/Modules", "get", "()Lmeteordevelopment/meteorclient/systems/modules/Modules;", false));
+                    list.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "com/hongminh54/marisaoptimize/systems/modules/Modules", "get", "()Lcom/hongminh54/marisaoptimize/systems/modules/Modules;", false));
                     list.add(new LdcInsnNode(Type.getType(AntiPacketKick.class)));
-                    list.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "meteordevelopment/meteorclient/systems/modules/Modules", "isActive", "(Ljava/lang/Class;)Z", false));
+                    list.add(new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "com/hongminh54/marisaoptimize/systems/modules/Modules", "isActive", "(Ljava/lang/Class;)Z", false));
 
                     list.add(new JumpInsnNode(Opcodes.IFNE, label));
 
@@ -57,6 +57,6 @@ public class PacketInflaterTransformer extends AsmTransformer {
             }
         }
 
-        error("[Meteor Client] Failed to modify PacketInflater.decode()");
+        error("[Marisa Optimize] Failed to modify PacketInflater.decode()");
     }
 }

@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.files;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;

@@ -1,16 +1,16 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.render;
 
 import com.google.gson.Gson;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.systems.accounts.TexturesJson;
-import meteordevelopment.meteorclient.systems.accounts.UuidToProfileResponse;
-import meteordevelopment.meteorclient.utils.PostInit;
-import meteordevelopment.meteorclient.utils.network.Http;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.systems.accounts.TexturesJson;
+import com.hongminh54.marisaoptimize.systems.accounts.UuidToProfileResponse;
+import com.hongminh54.marisaoptimize.utils.PostInit;
+import com.hongminh54.marisaoptimize.utils.network.Http;
 
 import java.util.Base64;
 import java.util.UUID;

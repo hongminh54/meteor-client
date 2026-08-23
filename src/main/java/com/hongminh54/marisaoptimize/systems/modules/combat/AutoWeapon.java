@@ -1,21 +1,21 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.combat;
 
-import meteordevelopment.meteorclient.events.entity.player.AttackEntityEvent;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.entity.DamageUtils;
-import meteordevelopment.meteorclient.utils.player.InvUtils;
+import com.hongminh54.marisaoptimize.events.entity.player.AttackEntityEvent;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.entity.DamageUtils;
+import com.hongminh54.marisaoptimize.utils.player.InvUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.ItemTags;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class AutoWeapon extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();

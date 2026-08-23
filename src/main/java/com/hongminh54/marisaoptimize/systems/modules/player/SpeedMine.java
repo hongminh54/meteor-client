@@ -1,17 +1,16 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.player;
 
-import meteordevelopment.meteorclient.events.packets.PacketEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.mixin.ClientPlayerInteractionManagerAccessor;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.Utils;
+import com.hongminh54.marisaoptimize.events.packets.PacketEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.mixin.ClientPlayerInteractionManagerAccessor;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.Utils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -21,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import java.util.List;
 
 import static net.minecraft.entity.effect.StatusEffects.HASTE;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class SpeedMine extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();

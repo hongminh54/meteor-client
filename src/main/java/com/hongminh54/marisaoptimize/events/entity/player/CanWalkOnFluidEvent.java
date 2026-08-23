@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -12,12 +12,12 @@ import net.minecraft.fluid.FluidState;
 /**
  * As of writing, using any method that gets the players pose within this event will cause a crash.
  * <p>
- * Getting the pose calls {@link meteordevelopment.meteorclient.mixin.EntityMixin#modifyGetPose(net.minecraft.entity.EntityPose)},
+ * Getting the pose calls {@link com.hongminh54.marisaoptimize.mixin.EntityMixin#modifyGetPose(net.minecraft.entity.EntityPose)},
  * which calls {@link PlayerEntity#canChangeIntoPose(net.minecraft.entity.EntityPose)}, which
  * calculates whether there is enough space to fit your bounding box if you change into that pose. This method ends up
  * calling {@link LivingEntity#canWalkOnFluid(FluidState)}, causing this event to fire
  * again and leading to a stack overflow crash. Introduced in
- * <a href="https://github.com/MeteorDevelopment/meteor-client/pull/5449">this pull request</a>
+ * <a href="https://github.com/TheBlueSkyARL/marisa-optimize/pull/5449">this pull request</a>
  */
 public class CanWalkOnFluidEvent {
     private static final CanWalkOnFluidEvent INSTANCE = new CanWalkOnFluidEvent();

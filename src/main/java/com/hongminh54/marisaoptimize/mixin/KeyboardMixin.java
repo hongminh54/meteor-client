@@ -1,18 +1,18 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.meteor.CharTypedEvent;
-import meteordevelopment.meteorclient.events.meteor.KeyEvent;
-import meteordevelopment.meteorclient.gui.GuiKeyEvents;
-import meteordevelopment.meteorclient.gui.WidgetScreen;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.misc.input.Input;
-import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.meteor.CharTypedEvent;
+import com.hongminh54.marisaoptimize.events.meteor.KeyEvent;
+import com.hongminh54.marisaoptimize.gui.GuiKeyEvents;
+import com.hongminh54.marisaoptimize.gui.WidgetScreen;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.misc.input.Input;
+import com.hongminh54.marisaoptimize.utils.misc.input.KeyAction;
 import net.minecraft.client.Keyboard;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.input.CharInput;

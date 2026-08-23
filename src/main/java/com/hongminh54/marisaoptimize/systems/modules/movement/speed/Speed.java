@@ -1,24 +1,24 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.movement.speed;
 
-import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
-import meteordevelopment.meteorclient.events.packets.PacketEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.movement.speed.modes.Strafe;
-import meteordevelopment.meteorclient.systems.modules.movement.speed.modes.Vanilla;
-import meteordevelopment.meteorclient.systems.modules.world.Timer;
-import meteordevelopment.meteorclient.utils.player.PlayerUtils;
+import com.hongminh54.marisaoptimize.events.entity.player.PlayerMoveEvent;
+import com.hongminh54.marisaoptimize.events.packets.PacketEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.movement.speed.modes.Strafe;
+import com.hongminh54.marisaoptimize.systems.modules.movement.speed.modes.Vanilla;
+import com.hongminh54.marisaoptimize.systems.modules.world.Timer;
+import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.MovementType;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class Speed extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();

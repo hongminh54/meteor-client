@@ -1,28 +1,28 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.screens.settings;
 
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
-import meteordevelopment.meteorclient.gui.screens.settings.base.CollectionMapSettingScreen;
-import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
-import meteordevelopment.meteorclient.settings.BlockDataSetting;
-import meteordevelopment.meteorclient.settings.IBlockData;
-import meteordevelopment.meteorclient.utils.misc.IChangeable;
-import meteordevelopment.meteorclient.utils.misc.ICopyable;
-import meteordevelopment.meteorclient.utils.misc.ISerializable;
-import meteordevelopment.meteorclient.utils.misc.Names;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
+import com.hongminh54.marisaoptimize.gui.screens.settings.base.CollectionMapSettingScreen;
+import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.settings.BlockDataSetting;
+import com.hongminh54.marisaoptimize.settings.IBlockData;
+import com.hongminh54.marisaoptimize.utils.misc.IChangeable;
+import com.hongminh54.marisaoptimize.utils.misc.ICopyable;
+import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
+import com.hongminh54.marisaoptimize.utils.misc.Names;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.registry.Registries;
 import org.jetbrains.annotations.Nullable;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class BlockDataSettingScreen<T extends ICopyable<T> & ISerializable<T> & IChangeable & IBlockData<T>> extends CollectionMapSettingScreen<Block, T> {
     private final BlockDataSetting<T> setting;

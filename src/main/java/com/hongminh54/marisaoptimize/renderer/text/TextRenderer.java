@@ -1,13 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.renderer.text;
 
-import meteordevelopment.meteorclient.renderer.Fonts;
-import meteordevelopment.meteorclient.systems.config.Config;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.renderer.Fonts;
+import com.hongminh54.marisaoptimize.systems.config.Config;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 
 public interface TextRenderer {
     static TextRenderer get() {

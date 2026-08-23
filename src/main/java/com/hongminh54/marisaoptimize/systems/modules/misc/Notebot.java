@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,30 +7,29 @@ package com.hongminh54.marisaoptimize.systems.modules.misc;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.render.Render2DEvent;
-import meteordevelopment.meteorclient.events.render.Render3DEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.widgets.WLabel;
-import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import meteordevelopment.meteorclient.gui.widgets.containers.WTable;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
-import meteordevelopment.meteorclient.renderer.ShapeMode;
-import meteordevelopment.meteorclient.renderer.text.TextRenderer;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.notebot.NotebotUtils;
-import meteordevelopment.meteorclient.utils.notebot.decoder.SongDecoder;
-import meteordevelopment.meteorclient.utils.notebot.decoder.SongDecoders;
-import meteordevelopment.meteorclient.utils.notebot.instrumentdetect.InstrumentDetectMode;
-import meteordevelopment.meteorclient.utils.notebot.song.Note;
-import meteordevelopment.meteorclient.utils.notebot.song.Song;
-import meteordevelopment.meteorclient.utils.player.Rotations;
-import meteordevelopment.meteorclient.utils.render.NametagUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.render.Render2DEvent;
+import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.widgets.WLabel;
+import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WTable;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.renderer.ShapeMode;
+import com.hongminh54.marisaoptimize.renderer.text.TextRenderer;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.notebot.NotebotUtils;
+import com.hongminh54.marisaoptimize.utils.notebot.decoder.SongDecoder;
+import com.hongminh54.marisaoptimize.utils.notebot.decoder.SongDecoders;
+import com.hongminh54.marisaoptimize.utils.notebot.instrumentdetect.InstrumentDetectMode;
+import com.hongminh54.marisaoptimize.utils.notebot.song.Note;
+import com.hongminh54.marisaoptimize.utils.notebot.song.Song;
+import com.hongminh54.marisaoptimize.utils.player.Rotations;
+import com.hongminh54.marisaoptimize.utils.render.NametagUtils;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -56,6 +55,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import com.hongminh54.marisaoptimize.settings.*;
 
 
 public class Notebot extends Module {

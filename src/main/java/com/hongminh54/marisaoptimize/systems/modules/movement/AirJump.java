@@ -1,20 +1,20 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.movement;
 
-import meteordevelopment.meteorclient.events.meteor.KeyEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.settings.BoolSetting;
-import meteordevelopment.meteorclient.settings.Setting;
-import meteordevelopment.meteorclient.settings.SettingGroup;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.render.Freecam;
-import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
+import com.hongminh54.marisaoptimize.events.meteor.KeyEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.settings.BoolSetting;
+import com.hongminh54.marisaoptimize.settings.Setting;
+import com.hongminh54.marisaoptimize.settings.SettingGroup;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.render.Freecam;
+import com.hongminh54.marisaoptimize.utils.misc.input.KeyAction;
 import meteordevelopment.orbit.EventHandler;
 
 public class AirJump extends Module {

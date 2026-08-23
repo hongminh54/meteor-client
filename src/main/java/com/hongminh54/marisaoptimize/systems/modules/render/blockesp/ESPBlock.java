@@ -1,21 +1,21 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.render.blockesp;
 
-import meteordevelopment.meteorclient.events.render.Render3DEvent;
-import meteordevelopment.meteorclient.renderer.ShapeMode;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
+import com.hongminh54.marisaoptimize.renderer.ShapeMode;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class ESPBlock {
     private static final BlockPos.Mutable blockPos = new BlockPos.Mutable();

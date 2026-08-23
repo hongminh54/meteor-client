@@ -1,19 +1,19 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.render;
 
-import meteordevelopment.meteorclient.events.render.ApplyTransformationEvent;
-import meteordevelopment.meteorclient.events.render.RenderItemEntityEvent;
-import meteordevelopment.meteorclient.mixin.ItemRenderStateAccessor;
-import meteordevelopment.meteorclient.mixin.LayerRenderStateAccessor;
-import meteordevelopment.meteorclient.settings.BoolSetting;
-import meteordevelopment.meteorclient.settings.Setting;
-import meteordevelopment.meteorclient.settings.SettingGroup;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
+import com.hongminh54.marisaoptimize.events.render.ApplyTransformationEvent;
+import com.hongminh54.marisaoptimize.events.render.RenderItemEntityEvent;
+import com.hongminh54.marisaoptimize.mixin.ItemRenderStateAccessor;
+import com.hongminh54.marisaoptimize.mixin.LayerRenderStateAccessor;
+import com.hongminh54.marisaoptimize.settings.BoolSetting;
+import com.hongminh54.marisaoptimize.settings.Setting;
+import com.hongminh54.marisaoptimize.settings.SettingGroup;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.item.ItemRenderState;

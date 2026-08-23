@@ -1,17 +1,16 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.movement;
 
-import meteordevelopment.meteorclient.events.entity.player.InteractItemEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.misc.Keybind;
+import com.hongminh54.marisaoptimize.events.entity.player.InteractItemEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.misc.Keybind;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.FireworksComponent;
@@ -26,6 +25,7 @@ import net.minecraft.util.ActionResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class ElytraBoost extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();

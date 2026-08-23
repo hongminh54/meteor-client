@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.renderer;
 
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import meteordevelopment.meteorclient.mixininterface.IRenderPipeline;
+import com.hongminh54.marisaoptimize.mixininterface.IRenderPipeline;
 
 public class ExtendedRenderPipelineBuilder extends RenderPipeline.Builder {
     private boolean lineSmooth;

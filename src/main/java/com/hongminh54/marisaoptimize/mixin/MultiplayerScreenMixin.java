@@ -1,17 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import meteordevelopment.meteorclient.gui.GuiThemes;
-import meteordevelopment.meteorclient.systems.config.Config;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.player.NameProtect;
-import meteordevelopment.meteorclient.systems.proxies.Proxies;
-import meteordevelopment.meteorclient.systems.proxies.Proxy;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.gui.GuiThemes;
+import com.hongminh54.marisaoptimize.systems.config.Config;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.player.NameProtect;
+import com.hongminh54.marisaoptimize.systems.proxies.Proxies;
+import com.hongminh54.marisaoptimize.systems.proxies.Proxy;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 @Mixin(MultiplayerScreen.class)
 public abstract class MultiplayerScreenMixin extends Screen {

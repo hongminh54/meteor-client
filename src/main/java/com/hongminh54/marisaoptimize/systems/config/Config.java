@@ -1,18 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.config;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.renderer.Fonts;
-import meteordevelopment.meteorclient.renderer.text.FontFace;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.System;
-import meteordevelopment.meteorclient.systems.Systems;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.renderer.Fonts;
+import com.hongminh54.marisaoptimize.renderer.text.FontFace;
+import com.hongminh54.marisaoptimize.systems.System;
+import com.hongminh54.marisaoptimize.systems.Systems;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
@@ -21,7 +20,8 @@ import net.minecraft.nbt.NbtString;
 import java.util.ArrayList;
 import java.util.List;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class Config extends System<Config> {
     public final Settings settings = new Settings();

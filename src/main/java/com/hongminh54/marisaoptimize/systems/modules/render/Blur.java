@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -14,19 +14,19 @@ import com.mojang.blaze3d.textures.FilterMode;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.textures.TextureFormat;
 import it.unimi.dsi.fastutil.ints.IntFloatImmutablePair;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.game.ResolutionChangedEvent;
-import meteordevelopment.meteorclient.events.render.RenderAfterWorldEvent;
-import meteordevelopment.meteorclient.gui.WidgetScreen;
-import meteordevelopment.meteorclient.renderer.FixedUniformStorage;
-import meteordevelopment.meteorclient.renderer.MeshRenderer;
-import meteordevelopment.meteorclient.renderer.MeteorRenderPipelines;
-import meteordevelopment.meteorclient.settings.BoolSetting;
-import meteordevelopment.meteorclient.settings.IntSetting;
-import meteordevelopment.meteorclient.settings.Setting;
-import meteordevelopment.meteorclient.settings.SettingGroup;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.game.ResolutionChangedEvent;
+import com.hongminh54.marisaoptimize.events.render.RenderAfterWorldEvent;
+import com.hongminh54.marisaoptimize.gui.WidgetScreen;
+import com.hongminh54.marisaoptimize.renderer.FixedUniformStorage;
+import com.hongminh54.marisaoptimize.renderer.MeshRenderer;
+import com.hongminh54.marisaoptimize.renderer.MeteorRenderPipelines;
+import com.hongminh54.marisaoptimize.settings.BoolSetting;
+import com.hongminh54.marisaoptimize.settings.IntSetting;
+import com.hongminh54.marisaoptimize.settings.Setting;
+import com.hongminh54.marisaoptimize.settings.SettingGroup;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
 import meteordevelopment.orbit.listeners.ConsumerListener;
 import net.minecraft.client.gl.DynamicUniformStorage;
 import net.minecraft.client.gui.screen.ChatScreen;

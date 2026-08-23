@@ -1,29 +1,29 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.hud.screens;
 
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.WindowScreen;
-import meteordevelopment.meteorclient.gui.utils.Cell;
-import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import meteordevelopment.meteorclient.gui.widgets.containers.WContainer;
-import meteordevelopment.meteorclient.gui.widgets.containers.WHorizontalList;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WCheckbox;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WMinus;
-import meteordevelopment.meteorclient.settings.BoolSetting;
-import meteordevelopment.meteorclient.settings.EnumSetting;
-import meteordevelopment.meteorclient.settings.SettingGroup;
-import meteordevelopment.meteorclient.settings.Settings;
-import meteordevelopment.meteorclient.systems.hud.HudElement;
-import meteordevelopment.meteorclient.systems.hud.XAnchor;
-import meteordevelopment.meteorclient.systems.hud.YAnchor;
-import meteordevelopment.meteorclient.utils.misc.NbtUtils;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.WindowScreen;
+import com.hongminh54.marisaoptimize.gui.utils.Cell;
+import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WContainer;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WHorizontalList;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WCheckbox;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WMinus;
+import com.hongminh54.marisaoptimize.settings.BoolSetting;
+import com.hongminh54.marisaoptimize.settings.EnumSetting;
+import com.hongminh54.marisaoptimize.settings.SettingGroup;
+import com.hongminh54.marisaoptimize.settings.Settings;
+import com.hongminh54.marisaoptimize.systems.hud.HudElement;
+import com.hongminh54.marisaoptimize.systems.hud.XAnchor;
+import com.hongminh54.marisaoptimize.systems.hud.YAnchor;
+import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
 import net.minecraft.client.gui.DrawContext;
 
-import static meteordevelopment.meteorclient.utils.Utils.getWindowWidth;
+import static com.hongminh54.marisaoptimize.utils.Utils.getWindowWidth;
 
 public class HudElementScreen extends WindowScreen {
     private final HudElement element;

@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.events.world;
 
-import meteordevelopment.meteorclient.events.Cancellable;
+import com.hongminh54.marisaoptimize.events.Cancellable;
 import net.minecraft.particle.ParticleEffect;
 
 public class ParticleEvent extends Cancellable {

@@ -1,15 +1,14 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.combat;
 
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.friends.Friends;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.player.InvUtils;
+import com.hongminh54.marisaoptimize.systems.friends.Friends;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.player.InvUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,6 +17,7 @@ import net.minecraft.item.TridentItem;
 import net.minecraft.registry.tag.ItemTags;
 
 import java.util.Set;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class Hitboxes extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();

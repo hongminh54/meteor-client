@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,7 +7,7 @@ package com.hongminh54.marisaoptimize.mixin.sodium;
 
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormatElement;
-import meteordevelopment.meteorclient.utils.render.MeshBuilderVertexConsumerProvider;
+import com.hongminh54.marisaoptimize.utils.render.MeshBuilderVertexConsumerProvider;
 import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
 import net.minecraft.client.render.VertexConsumer;
 import org.lwjgl.system.MemoryStack;

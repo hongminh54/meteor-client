@@ -1,13 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import meteordevelopment.meteorclient.mixininterface.IEntityRenderState;
-import meteordevelopment.meteorclient.utils.entity.fakeplayer.FakePlayerEntity;
+import com.hongminh54.marisaoptimize.mixininterface.IEntityRenderState;
+import com.hongminh54.marisaoptimize.utils.entity.fakeplayer.FakePlayerEntity;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderManager;

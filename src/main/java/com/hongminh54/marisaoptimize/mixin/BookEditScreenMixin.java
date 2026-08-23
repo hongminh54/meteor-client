@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
 import it.unimi.dsi.fastutil.io.FastByteArrayOutputStream;
-import meteordevelopment.meteorclient.MarisaOptimize;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 @Mixin(BookEditScreen.class)
 public abstract class BookEditScreenMixin extends Screen {

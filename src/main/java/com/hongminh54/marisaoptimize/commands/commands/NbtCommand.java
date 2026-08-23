@@ -1,18 +1,18 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.commands.commands;
 
+import com.hongminh54.marisaoptimize.commands.Command;
+import com.hongminh54.marisaoptimize.commands.arguments.ComponentMapArgumentType;
+import com.hongminh54.marisaoptimize.utils.misc.text.MeteorClickEvent;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.serialization.DataResult;
-import com.hongminh54.marisaoptimize.commands.Command;
-import com.hongminh54.marisaoptimize.commands.arguments.ComponentMapArgumentType;
-import com.hongminh54.marisaoptimize.utils.misc.text.MeteorClickEvent;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.DataCommandObject;
 import net.minecraft.command.EntityDataObject;

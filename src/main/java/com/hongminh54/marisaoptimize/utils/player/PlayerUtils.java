@@ -1,22 +1,22 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.player;
 
-import meteordevelopment.meteorclient.mixininterface.IVec3d;
-import meteordevelopment.meteorclient.pathing.PathManagers;
-import meteordevelopment.meteorclient.systems.config.Config;
-import meteordevelopment.meteorclient.systems.friends.Friends;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.movement.NoFall;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.entity.DamageUtils;
-import meteordevelopment.meteorclient.utils.entity.EntityUtils;
-import meteordevelopment.meteorclient.utils.misc.text.TextUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.world.Dimension;
+import com.hongminh54.marisaoptimize.mixininterface.IVec3d;
+import com.hongminh54.marisaoptimize.pathing.PathManagers;
+import com.hongminh54.marisaoptimize.systems.config.Config;
+import com.hongminh54.marisaoptimize.systems.friends.Friends;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.movement.NoFall;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.entity.DamageUtils;
+import com.hongminh54.marisaoptimize.utils.entity.EntityUtils;
+import com.hongminh54.marisaoptimize.utils.misc.text.TextUtils;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.world.Dimension;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BedBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -36,8 +36,8 @@ import net.minecraft.world.GameMode;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
-import static meteordevelopment.meteorclient.utils.Utils.WHITE;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.utils.Utils.WHITE;
 
 public class PlayerUtils {
     private static final double diagonal = 1 / Math.sqrt(2);

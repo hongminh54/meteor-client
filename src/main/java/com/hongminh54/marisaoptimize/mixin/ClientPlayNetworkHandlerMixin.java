@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -11,25 +11,25 @@ import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.commands.Commands;
-import meteordevelopment.meteorclient.events.entity.EntityDestroyEvent;
-import meteordevelopment.meteorclient.events.entity.player.PickItemsEvent;
-import meteordevelopment.meteorclient.events.game.GameJoinedEvent;
-import meteordevelopment.meteorclient.events.game.GameLeftEvent;
-import meteordevelopment.meteorclient.events.game.SendMessageEvent;
-import meteordevelopment.meteorclient.events.packets.ContainerSlotUpdateEvent;
-import meteordevelopment.meteorclient.events.packets.InventoryEvent;
-import meteordevelopment.meteorclient.events.packets.PlaySoundPacketEvent;
-import meteordevelopment.meteorclient.events.world.ChunkDataEvent;
-import meteordevelopment.meteorclient.mixininterface.IExplosionS2CPacket;
-import meteordevelopment.meteorclient.pathing.BaritoneUtils;
-import meteordevelopment.meteorclient.systems.config.Config;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.movement.Velocity;
-import meteordevelopment.meteorclient.systems.modules.player.NoRotate;
-import meteordevelopment.meteorclient.systems.modules.render.NoRender;
-import meteordevelopment.meteorclient.utils.player.ChatUtils;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.commands.Commands;
+import com.hongminh54.marisaoptimize.events.entity.EntityDestroyEvent;
+import com.hongminh54.marisaoptimize.events.entity.player.PickItemsEvent;
+import com.hongminh54.marisaoptimize.events.game.GameJoinedEvent;
+import com.hongminh54.marisaoptimize.events.game.GameLeftEvent;
+import com.hongminh54.marisaoptimize.events.game.SendMessageEvent;
+import com.hongminh54.marisaoptimize.events.packets.ContainerSlotUpdateEvent;
+import com.hongminh54.marisaoptimize.events.packets.InventoryEvent;
+import com.hongminh54.marisaoptimize.events.packets.PlaySoundPacketEvent;
+import com.hongminh54.marisaoptimize.events.world.ChunkDataEvent;
+import com.hongminh54.marisaoptimize.mixininterface.IExplosionS2CPacket;
+import com.hongminh54.marisaoptimize.pathing.BaritoneUtils;
+import com.hongminh54.marisaoptimize.systems.config.Config;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.movement.Velocity;
+import com.hongminh54.marisaoptimize.systems.modules.player.NoRotate;
+import com.hongminh54.marisaoptimize.systems.modules.render.NoRender;
+import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientCommonNetworkHandler;
 import net.minecraft.client.network.ClientConnectionState;
@@ -46,6 +46,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonNetworkHandler {

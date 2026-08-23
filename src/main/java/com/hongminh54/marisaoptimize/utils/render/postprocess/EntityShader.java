@@ -1,16 +1,16 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.render.postprocess;
 
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import meteordevelopment.meteorclient.mixininterface.IWorldRenderer;
-import meteordevelopment.meteorclient.utils.render.CustomOutlineVertexConsumerProvider;
+import com.hongminh54.marisaoptimize.mixininterface.IWorldRenderer;
+import com.hongminh54.marisaoptimize.utils.render.CustomOutlineVertexConsumerProvider;
 import net.minecraft.entity.Entity;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public abstract class EntityShader extends PostProcessShader {
     public final CustomOutlineVertexConsumerProvider vertexConsumerProvider;

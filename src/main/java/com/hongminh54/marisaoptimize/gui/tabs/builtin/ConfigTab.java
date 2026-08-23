@@ -1,18 +1,18 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.tabs.builtin;
 
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.tabs.Tab;
-import meteordevelopment.meteorclient.gui.tabs.TabScreen;
-import meteordevelopment.meteorclient.gui.tabs.WindowTabScreen;
-import meteordevelopment.meteorclient.settings.Settings;
-import meteordevelopment.meteorclient.systems.config.Config;
-import meteordevelopment.meteorclient.utils.misc.NbtUtils;
-import meteordevelopment.meteorclient.utils.render.prompts.YesNoPrompt;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.tabs.Tab;
+import com.hongminh54.marisaoptimize.gui.tabs.TabScreen;
+import com.hongminh54.marisaoptimize.gui.tabs.WindowTabScreen;
+import com.hongminh54.marisaoptimize.settings.Settings;
+import com.hongminh54.marisaoptimize.systems.config.Config;
+import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
+import com.hongminh54.marisaoptimize.utils.render.prompts.YesNoPrompt;
 import net.minecraft.client.gui.screen.Screen;
 
 public class ConfigTab extends Tab {

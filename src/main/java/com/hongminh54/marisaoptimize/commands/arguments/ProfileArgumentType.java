@@ -1,11 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.commands.arguments;
 
 import com.google.common.collect.Streams;
+import com.hongminh54.marisaoptimize.systems.profiles.Profile;
+import com.hongminh54.marisaoptimize.systems.profiles.Profiles;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -13,8 +15,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import com.hongminh54.marisaoptimize.systems.profiles.Profile;
-import com.hongminh54.marisaoptimize.systems.profiles.Profiles;
 import net.minecraft.text.Text;
 
 import java.util.Collection;
@@ -27,7 +27,7 @@ public class ProfileArgumentType implements ArgumentType<String> {
     private static final ProfileArgumentType INSTANCE = new ProfileArgumentType();
     private static final DynamicCommandExceptionType NO_SUCH_PROFILE = new DynamicCommandExceptionType(name -> Text.literal("Profile with name " + name + " doesn't exist."));
 
-    private static final Collection<String> EXAMPLES = List.of("pvp.meteorclient.com", "anarchy");
+    private static final Collection<String> EXAMPLES = List.of("anarchy.example.com", "anarchy");
 
     public static ProfileArgumentType create() {
         return INSTANCE;

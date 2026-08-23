@@ -1,18 +1,18 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.commands.commands;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.hongminh54.marisaoptimize.commands.Command;
 import com.hongminh54.marisaoptimize.commands.arguments.FriendArgumentType;
 import com.hongminh54.marisaoptimize.commands.arguments.PlayerListEntryArgumentType;
 import com.hongminh54.marisaoptimize.systems.friends.Friend;
 import com.hongminh54.marisaoptimize.systems.friends.Friends;
 import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
+import com.mojang.authlib.GameProfile;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.command.CommandSource;
 import net.minecraft.util.Formatting;
 

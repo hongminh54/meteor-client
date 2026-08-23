@@ -1,17 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.screens.accounts;
 
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.widgets.containers.WHorizontalList;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
-import meteordevelopment.meteorclient.systems.accounts.MicrosoftLogin;
-import meteordevelopment.meteorclient.systems.accounts.types.MicrosoftAccount;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WHorizontalList;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.systems.accounts.MicrosoftLogin;
+import com.hongminh54.marisaoptimize.systems.accounts.types.MicrosoftAccount;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class AddMicrosoftAccountScreen extends AddAccountScreen {
     public AddMicrosoftAccountScreen(GuiTheme theme, AccountsScreen parent) {

@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -12,9 +12,9 @@ import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.render.RenderUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gl.GpuSampler;
 import net.minecraft.client.util.math.MatrixStack;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class MeshRenderer {
     private static final MeshRenderer INSTANCE = new MeshRenderer();

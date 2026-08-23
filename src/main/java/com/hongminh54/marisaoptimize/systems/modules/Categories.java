@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules;
 
-import meteordevelopment.meteorclient.addons.AddonManager;
-import meteordevelopment.meteorclient.addons.MeteorAddon;
+import com.hongminh54.marisaoptimize.addons.AddonManager;
+import com.hongminh54.marisaoptimize.addons.MeteorAddon;
 import net.minecraft.item.Items;
 
 public class Categories {

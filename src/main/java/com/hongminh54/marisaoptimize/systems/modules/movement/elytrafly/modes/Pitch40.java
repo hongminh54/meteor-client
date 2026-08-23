@@ -1,13 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.modes;
 
-import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.ElytraFlightMode;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.ElytraFlightModes;
+import com.hongminh54.marisaoptimize.events.entity.player.PlayerMoveEvent;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.ElytraFlightMode;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.ElytraFlightModes;
 
 public class Pitch40 extends ElytraFlightMode {
     private boolean pitchingDown = true;

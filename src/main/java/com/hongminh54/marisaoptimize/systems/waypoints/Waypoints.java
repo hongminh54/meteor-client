@@ -1,22 +1,22 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.waypoints;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.game.GameJoinedEvent;
-import meteordevelopment.meteorclient.events.game.GameLeftEvent;
-import meteordevelopment.meteorclient.systems.System;
-import meteordevelopment.meteorclient.systems.Systems;
-import meteordevelopment.meteorclient.systems.waypoints.events.WaypointAddedEvent;
-import meteordevelopment.meteorclient.systems.waypoints.events.WaypointRemovedEvent;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.files.StreamUtils;
-import meteordevelopment.meteorclient.utils.misc.NbtUtils;
-import meteordevelopment.meteorclient.utils.player.PlayerUtils;
-import meteordevelopment.meteorclient.utils.world.Dimension;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.game.GameJoinedEvent;
+import com.hongminh54.marisaoptimize.events.game.GameLeftEvent;
+import com.hongminh54.marisaoptimize.systems.System;
+import com.hongminh54.marisaoptimize.systems.Systems;
+import com.hongminh54.marisaoptimize.systems.waypoints.events.WaypointAddedEvent;
+import com.hongminh54.marisaoptimize.systems.waypoints.events.WaypointRemovedEvent;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.files.StreamUtils;
+import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
+import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
+import com.hongminh54.marisaoptimize.utils.world.Dimension;
 import meteordevelopment.orbit.EventHandler;
 import meteordevelopment.orbit.EventPriority;
 import net.minecraft.client.texture.AbstractTexture;

@@ -1,17 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.world;
 
-import meteordevelopment.meteorclient.settings.PotionSetting;
-import meteordevelopment.meteorclient.settings.Setting;
-import meteordevelopment.meteorclient.settings.SettingGroup;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.misc.MyPotion;
-import meteordevelopment.meteorclient.utils.player.InvUtils;
+import com.hongminh54.marisaoptimize.settings.PotionSetting;
+import com.hongminh54.marisaoptimize.settings.Setting;
+import com.hongminh54.marisaoptimize.settings.SettingGroup;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.misc.MyPotion;
+import com.hongminh54.marisaoptimize.utils.player.InvUtils;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.Item;

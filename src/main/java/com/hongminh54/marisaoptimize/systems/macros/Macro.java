@@ -1,16 +1,15 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.macros;
 
-import meteordevelopment.meteorclient.gui.utils.StarscriptTextBoxRenderer;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.utils.misc.ISerializable;
-import meteordevelopment.meteorclient.utils.misc.Keybind;
-import meteordevelopment.meteorclient.utils.misc.MeteorStarscript;
-import meteordevelopment.meteorclient.utils.player.ChatUtils;
+import com.hongminh54.marisaoptimize.gui.utils.StarscriptTextBoxRenderer;
+import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
+import com.hongminh54.marisaoptimize.utils.misc.Keybind;
+import com.hongminh54.marisaoptimize.utils.misc.MeteorStarscript;
+import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import org.meteordev.starscript.Script;
@@ -19,7 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class Macro implements ISerializable<Macro> {
     public final Settings settings = new Settings();

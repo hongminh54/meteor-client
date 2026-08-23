@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -10,19 +10,18 @@ import it.unimi.dsi.fastutil.chars.Char2CharMap;
 import it.unimi.dsi.fastutil.chars.Char2CharOpenHashMap;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.commands.Commands;
-import meteordevelopment.meteorclient.events.game.ReceiveMessageEvent;
-import meteordevelopment.meteorclient.events.game.SendMessageEvent;
-import meteordevelopment.meteorclient.mixin.ChatHudAccessor;
-import meteordevelopment.meteorclient.mixininterface.IChatHudLine;
-import meteordevelopment.meteorclient.mixininterface.IChatHudLineVisible;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.misc.text.MeteorClickEvent;
-import meteordevelopment.meteorclient.utils.player.ChatUtils;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.commands.Commands;
+import com.hongminh54.marisaoptimize.events.game.ReceiveMessageEvent;
+import com.hongminh54.marisaoptimize.events.game.SendMessageEvent;
+import com.hongminh54.marisaoptimize.mixin.ChatHudAccessor;
+import com.hongminh54.marisaoptimize.mixininterface.IChatHudLine;
+import com.hongminh54.marisaoptimize.mixininterface.IChatHudLineVisible;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.misc.text.MeteorClickEvent;
+import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
@@ -44,6 +43,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class BetterChat extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();

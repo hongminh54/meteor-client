@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -10,21 +10,21 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import it.unimi.dsi.fastutil.Stack;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import meteordevelopment.meteorclient.mixininterface.IEntityRenderState;
-import meteordevelopment.meteorclient.mixininterface.IWorldRenderer;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.render.BlockSelection;
-import meteordevelopment.meteorclient.systems.modules.render.ESP;
-import meteordevelopment.meteorclient.systems.modules.render.Freecam;
-import meteordevelopment.meteorclient.systems.modules.render.NoRender;
-import meteordevelopment.meteorclient.systems.modules.world.Ambience;
-import meteordevelopment.meteorclient.utils.OutlineRenderCommandQueue;
-import meteordevelopment.meteorclient.utils.render.NoopImmediateVertexConsumerProvider;
-import meteordevelopment.meteorclient.utils.render.NoopOutlineVertexConsumerProvider;
-import meteordevelopment.meteorclient.utils.render.WrapperImmediateVertexConsumerProvider;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.render.postprocess.EntityShader;
-import meteordevelopment.meteorclient.utils.render.postprocess.PostProcessShaders;
+import com.hongminh54.marisaoptimize.mixininterface.IEntityRenderState;
+import com.hongminh54.marisaoptimize.mixininterface.IWorldRenderer;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.render.BlockSelection;
+import com.hongminh54.marisaoptimize.systems.modules.render.ESP;
+import com.hongminh54.marisaoptimize.systems.modules.render.Freecam;
+import com.hongminh54.marisaoptimize.systems.modules.render.NoRender;
+import com.hongminh54.marisaoptimize.systems.modules.world.Ambience;
+import com.hongminh54.marisaoptimize.utils.OutlineRenderCommandQueue;
+import com.hongminh54.marisaoptimize.utils.render.NoopImmediateVertexConsumerProvider;
+import com.hongminh54.marisaoptimize.utils.render.NoopOutlineVertexConsumerProvider;
+import com.hongminh54.marisaoptimize.utils.render.WrapperImmediateVertexConsumerProvider;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.render.postprocess.EntityShader;
+import com.hongminh54.marisaoptimize.utils.render.postprocess.PostProcessShaders;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
@@ -54,7 +54,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Function;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin implements IWorldRenderer {

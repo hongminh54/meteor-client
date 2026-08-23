@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,22 +7,21 @@ package com.hongminh54.marisaoptimize.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.entity.EntityMoveEvent;
-import meteordevelopment.meteorclient.events.entity.player.JumpVelocityMultiplierEvent;
-import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
-import meteordevelopment.meteorclient.mixininterface.ICamera;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.combat.Hitboxes;
-import meteordevelopment.meteorclient.systems.modules.movement.*;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.ElytraFly;
-import meteordevelopment.meteorclient.systems.modules.render.ESP;
-import meteordevelopment.meteorclient.systems.modules.render.FreeLook;
-import meteordevelopment.meteorclient.systems.modules.render.Freecam;
-import meteordevelopment.meteorclient.systems.modules.render.NoRender;
-import meteordevelopment.meteorclient.systems.modules.world.HighwayBuilder;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.entity.fakeplayer.FakePlayerEntity;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.entity.EntityMoveEvent;
+import com.hongminh54.marisaoptimize.events.entity.player.JumpVelocityMultiplierEvent;
+import com.hongminh54.marisaoptimize.events.entity.player.PlayerMoveEvent;
+import com.hongminh54.marisaoptimize.mixininterface.ICamera;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.combat.Hitboxes;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.ElytraFly;
+import com.hongminh54.marisaoptimize.systems.modules.render.ESP;
+import com.hongminh54.marisaoptimize.systems.modules.render.FreeLook;
+import com.hongminh54.marisaoptimize.systems.modules.render.Freecam;
+import com.hongminh54.marisaoptimize.systems.modules.render.NoRender;
+import com.hongminh54.marisaoptimize.systems.modules.world.HighwayBuilder;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.entity.fakeplayer.FakePlayerEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.render.Camera;
@@ -39,7 +38,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import com.hongminh54.marisaoptimize.systems.modules.movement.*;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {

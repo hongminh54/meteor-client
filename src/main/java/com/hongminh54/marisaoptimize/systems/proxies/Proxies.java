@@ -1,21 +1,21 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.proxies;
 
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.System;
-import meteordevelopment.meteorclient.systems.Systems;
-import meteordevelopment.meteorclient.utils.misc.NbtUtils;
-import meteordevelopment.meteorclient.utils.network.MeteorExecutor;
+import com.hongminh54.marisaoptimize.systems.System;
+import com.hongminh54.marisaoptimize.systems.Systems;
+import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
+import com.hongminh54.marisaoptimize.utils.network.MeteorExecutor;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.Pattern;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class Proxies extends System<Proxies> implements Iterable<Proxy> {
     public final Settings settings = new Settings();

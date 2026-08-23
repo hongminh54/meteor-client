@@ -1,14 +1,10 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.commands.commands;
 
-import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
-import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import com.hongminh54.marisaoptimize.MarisaOptimize;
 import com.hongminh54.marisaoptimize.commands.Command;
 import com.hongminh54.marisaoptimize.commands.arguments.NotebotSongArgumentType;
@@ -17,6 +13,10 @@ import com.hongminh54.marisaoptimize.events.world.TickEvent;
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.misc.Notebot;
 import com.hongminh54.marisaoptimize.utils.notebot.song.Note;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
+import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.command.CommandSource;
@@ -47,7 +47,7 @@ public class NotebotCommand extends Command {
     @Override
     public void build(LiteralArgumentBuilder<CommandSource> builder) {
         builder.then(literal("help").executes(ctx -> {
-            Util.getOperatingSystem().open("https://github.com/MeteorDevelopment/meteor-client/wiki/Notebot-Guide");
+            Util.getOperatingSystem().open("https://github.com/TheBlueSkyARL/marisa-optimize/wiki/Notebot-Guide");
             return SINGLE_SUCCESS;
         }));
 

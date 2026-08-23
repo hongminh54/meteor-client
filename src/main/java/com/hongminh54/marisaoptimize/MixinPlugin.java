@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 public class MixinPlugin implements IMixinConfigPlugin {
-    private static final String mixinPackage = "meteordevelopment.meteorclient.mixin";
+    private static final String mixinPackage = "com.hongminh54.marisaoptimize.mixin";
 
     private static boolean loaded;
 

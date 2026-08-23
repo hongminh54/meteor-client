@@ -1,23 +1,23 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.misc.swarm;
 
-import meteordevelopment.meteorclient.events.game.GameJoinedEvent;
-import meteordevelopment.meteorclient.events.game.GameLeftEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import meteordevelopment.meteorclient.gui.widgets.containers.WHorizontalList;
-import meteordevelopment.meteorclient.gui.widgets.containers.WVerticalList;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
+import com.hongminh54.marisaoptimize.events.game.GameJoinedEvent;
+import com.hongminh54.marisaoptimize.events.game.GameLeftEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WHorizontalList;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WVerticalList;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.util.Util;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class Swarm extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
@@ -72,7 +72,7 @@ public class Swarm extends Module {
         stop.action = this::close;
 
         WButton guide = list.add(theme.button("Guide")).expandX().widget();
-        guide.action = () -> Util.getOperatingSystem().open("https://github.com/MeteorDevelopment/meteor-client/wiki/Swarm-Guide");
+        guide.action = () -> Util.getOperatingSystem().open("https://github.com/TheBlueSkyARL/marisa-optimize/wiki/Swarm-Guide");
 
         return list;
     }

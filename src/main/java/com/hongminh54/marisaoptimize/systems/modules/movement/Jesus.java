@@ -1,26 +1,25 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.movement;
 
-import meteordevelopment.meteorclient.events.entity.player.CanWalkOnFluidEvent;
-import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
-import meteordevelopment.meteorclient.events.packets.PacketEvent;
-import meteordevelopment.meteorclient.events.world.CollisionShapeEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.mixin.EntityMixin;
-import meteordevelopment.meteorclient.mixin.PlayerMoveC2SPacketAccessor;
-import meteordevelopment.meteorclient.mixininterface.IVec3d;
-import meteordevelopment.meteorclient.pathing.PathManagers;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.movement.speed.modes.Strafe;
-import meteordevelopment.meteorclient.utils.entity.EntityUtils;
-import meteordevelopment.meteorclient.utils.player.PlayerUtils;
+import com.hongminh54.marisaoptimize.events.entity.player.CanWalkOnFluidEvent;
+import com.hongminh54.marisaoptimize.events.entity.player.PlayerMoveEvent;
+import com.hongminh54.marisaoptimize.events.packets.PacketEvent;
+import com.hongminh54.marisaoptimize.events.world.CollisionShapeEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.mixin.EntityMixin;
+import com.hongminh54.marisaoptimize.mixin.PlayerMoveC2SPacketAccessor;
+import com.hongminh54.marisaoptimize.mixininterface.IVec3d;
+import com.hongminh54.marisaoptimize.pathing.PathManagers;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.movement.speed.modes.Strafe;
+import com.hongminh54.marisaoptimize.utils.entity.EntityUtils;
+import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -38,6 +37,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.GameMode;
 import org.joml.Vector2d;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class Jesus extends Module {
     private final SettingGroup sgGeneral = settings.createGroup("General");

@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.player;
 
-import meteordevelopment.meteorclient.mixininterface.IClientPlayerInteractionManager;
+import com.hongminh54.marisaoptimize.mixininterface.IClientPlayerInteractionManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Range;
 
 import java.util.function.Predicate;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 /**
  * Util class for dealing inventories and the items in them.

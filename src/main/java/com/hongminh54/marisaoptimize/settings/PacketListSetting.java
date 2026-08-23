@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.settings;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import meteordevelopment.meteorclient.utils.network.PacketUtils;
+import com.hongminh54.marisaoptimize.utils.network.PacketUtils;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;

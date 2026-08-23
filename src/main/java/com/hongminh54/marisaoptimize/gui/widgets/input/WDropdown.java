@@ -1,16 +1,16 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.widgets.input;
 
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
-import meteordevelopment.meteorclient.gui.utils.Cell;
-import meteordevelopment.meteorclient.gui.widgets.WRoot;
-import meteordevelopment.meteorclient.gui.widgets.containers.WVerticalList;
-import meteordevelopment.meteorclient.gui.widgets.containers.WView;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WPressable;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
+import com.hongminh54.marisaoptimize.gui.utils.Cell;
+import com.hongminh54.marisaoptimize.gui.widgets.WRoot;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WVerticalList;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WView;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WPressable;
 import net.minecraft.client.gui.Click;
 import net.minecraft.client.input.CharInput;
 import net.minecraft.client.input.KeyInput;

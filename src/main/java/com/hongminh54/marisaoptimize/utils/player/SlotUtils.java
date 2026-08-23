@@ -1,13 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.player;
 
-import meteordevelopment.meteorclient.mixin.CreativeInventoryScreenAccessor;
-import meteordevelopment.meteorclient.mixin.ItemGroupsAccessor;
-import meteordevelopment.meteorclient.mixin.MountScreenHandlerAccessor;
+import com.hongminh54.marisaoptimize.mixin.CreativeInventoryScreenAccessor;
+import com.hongminh54.marisaoptimize.mixin.ItemGroupsAccessor;
+import com.hongminh54.marisaoptimize.mixin.MountScreenHandlerAccessor;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.LivingEntity;
@@ -23,7 +23,7 @@ import net.minecraft.screen.*;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class SlotUtils {
     /**

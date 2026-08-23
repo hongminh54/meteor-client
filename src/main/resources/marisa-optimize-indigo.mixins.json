@@ -1,8 +1,8 @@
 {
   "required": false,
-  "package": "meteordevelopment.meteorclient.mixin.indigo",
+  "package": "com.hongminh54.marisaoptimize.mixin.indigo",
   "compatibilityLevel": "JAVA_21",
-  "plugin": "meteordevelopment.meteorclient.MixinPlugin",
+  "plugin": "com.hongminh54.marisaoptimize.MixinPlugin",
   "client": [
     "AbstractTerrainRenderContextMixin",
     "BlockRenderInfoMixin"

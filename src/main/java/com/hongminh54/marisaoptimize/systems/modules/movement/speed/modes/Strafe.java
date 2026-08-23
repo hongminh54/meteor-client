@@ -1,18 +1,18 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.movement.speed.modes;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
-import meteordevelopment.meteorclient.mixininterface.IVec3d;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.movement.Anchor;
-import meteordevelopment.meteorclient.systems.modules.movement.speed.SpeedMode;
-import meteordevelopment.meteorclient.systems.modules.movement.speed.SpeedModes;
-import meteordevelopment.meteorclient.utils.player.PlayerUtils;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.entity.player.PlayerMoveEvent;
+import com.hongminh54.marisaoptimize.mixininterface.IVec3d;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.movement.Anchor;
+import com.hongminh54.marisaoptimize.systems.modules.movement.speed.SpeedMode;
+import com.hongminh54.marisaoptimize.systems.modules.movement.speed.SpeedModes;
+import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
 import org.joml.Vector2d;
 
 public class Strafe extends SpeedMode {

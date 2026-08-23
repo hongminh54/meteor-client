@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -11,29 +11,29 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.entity.player.DoAttackEvent;
-import meteordevelopment.meteorclient.events.entity.player.DoItemUseEvent;
-import meteordevelopment.meteorclient.events.entity.player.ItemUseCrosshairTargetEvent;
-import meteordevelopment.meteorclient.events.game.GameLeftEvent;
-import meteordevelopment.meteorclient.events.game.OpenScreenEvent;
-import meteordevelopment.meteorclient.events.game.ResolutionChangedEvent;
-import meteordevelopment.meteorclient.events.game.ResourcePacksReloadedEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.gui.WidgetScreen;
-import meteordevelopment.meteorclient.mixininterface.IMinecraftClient;
-import meteordevelopment.meteorclient.systems.config.Config;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.misc.InventoryTweaks;
-import meteordevelopment.meteorclient.systems.modules.movement.GUIMove;
-import meteordevelopment.meteorclient.systems.modules.player.FastUse;
-import meteordevelopment.meteorclient.systems.modules.player.Multitask;
-import meteordevelopment.meteorclient.systems.modules.render.ESP;
-import meteordevelopment.meteorclient.systems.modules.world.HighwayBuilder;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.misc.CPSUtils;
-import meteordevelopment.meteorclient.utils.misc.MeteorStarscript;
-import meteordevelopment.meteorclient.utils.network.OnlinePlayers;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.entity.player.DoAttackEvent;
+import com.hongminh54.marisaoptimize.events.entity.player.DoItemUseEvent;
+import com.hongminh54.marisaoptimize.events.entity.player.ItemUseCrosshairTargetEvent;
+import com.hongminh54.marisaoptimize.events.game.GameLeftEvent;
+import com.hongminh54.marisaoptimize.events.game.OpenScreenEvent;
+import com.hongminh54.marisaoptimize.events.game.ResolutionChangedEvent;
+import com.hongminh54.marisaoptimize.events.game.ResourcePacksReloadedEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.gui.WidgetScreen;
+import com.hongminh54.marisaoptimize.mixininterface.IMinecraftClient;
+import com.hongminh54.marisaoptimize.systems.config.Config;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.misc.InventoryTweaks;
+import com.hongminh54.marisaoptimize.systems.modules.movement.GUIMove;
+import com.hongminh54.marisaoptimize.systems.modules.player.FastUse;
+import com.hongminh54.marisaoptimize.systems.modules.player.Multitask;
+import com.hongminh54.marisaoptimize.systems.modules.render.ESP;
+import com.hongminh54.marisaoptimize.systems.modules.world.HighwayBuilder;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.misc.CPSUtils;
+import com.hongminh54.marisaoptimize.utils.misc.MeteorStarscript;
+import com.hongminh54.marisaoptimize.utils.network.OnlinePlayers;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.gl.Framebuffer;

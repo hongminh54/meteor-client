@@ -1,17 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.friends;
 
 import com.mojang.util.UndashedUuid;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.utils.misc.ISerializable;
-import meteordevelopment.meteorclient.utils.network.FailedHttpResponse;
-import meteordevelopment.meteorclient.utils.network.Http;
-import meteordevelopment.meteorclient.utils.render.PlayerHeadTexture;
-import meteordevelopment.meteorclient.utils.render.PlayerHeadUtils;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
+import com.hongminh54.marisaoptimize.utils.network.FailedHttpResponse;
+import com.hongminh54.marisaoptimize.utils.network.Http;
+import com.hongminh54.marisaoptimize.utils.render.PlayerHeadTexture;
+import com.hongminh54.marisaoptimize.utils.render.PlayerHeadUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
@@ -21,7 +21,7 @@ import java.net.http.HttpResponse;
 import java.util.Objects;
 import java.util.UUID;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class Friend implements ISerializable<Friend>, Comparable<Friend> {
     public volatile String name;

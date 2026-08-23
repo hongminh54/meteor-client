@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.events.meteor;
 
-import meteordevelopment.meteorclient.events.Cancellable;
-import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
+import com.hongminh54.marisaoptimize.events.Cancellable;
+import com.hongminh54.marisaoptimize.utils.misc.input.KeyAction;
 import net.minecraft.client.gui.Click;
 import net.minecraft.client.input.MouseInput;
 

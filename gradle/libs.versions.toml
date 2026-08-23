@@ -7,7 +7,7 @@ fabric-api = "0.140.0+1.21.11"
 
 # Plugins
 # Loom (https://github.com/FabricMC/fabric-loom)
-loom = "1.14-SNAPSHOT"
+loom = "1.15-SNAPSHOT"
 
 # Mods
 # Baritone (https://github.com/MeteorDevelopment/baritone)
@@ -31,7 +31,7 @@ reflections = "0.10.2"
 # Netty (https://github.com/netty/netty)
 netty = "4.2.7.Final"
 # ViaFabricPlus (https://github.com/ViaVersion/ViaFabricPlus)
-viafabricplus = "4.4.0"
+viafabricplus = "4.4.7"
 # WaybackAuthLib (https://github.com/FlorianMichael/WaybackAuthLib)
 waybackauthlib = "1.0.1"
 

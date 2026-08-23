@@ -1,30 +1,30 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.movement;
 
-import meteordevelopment.meteorclient.events.packets.PacketEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.mixin.PlayerMoveC2SPacketAccessor;
-import meteordevelopment.meteorclient.mixininterface.IPlayerMoveC2SPacket;
-import meteordevelopment.meteorclient.mixininterface.IVec3d;
-import meteordevelopment.meteorclient.pathing.PathManagers;
-import meteordevelopment.meteorclient.settings.BoolSetting;
-import meteordevelopment.meteorclient.settings.EnumSetting;
-import meteordevelopment.meteorclient.settings.Setting;
-import meteordevelopment.meteorclient.settings.SettingGroup;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.entity.EntityUtils;
-import meteordevelopment.meteorclient.utils.player.FindItemResult;
-import meteordevelopment.meteorclient.utils.player.InvUtils;
-import meteordevelopment.meteorclient.utils.player.PlayerUtils;
-import meteordevelopment.meteorclient.utils.player.Rotations;
-import meteordevelopment.meteorclient.utils.world.BlockUtils;
+import com.hongminh54.marisaoptimize.events.packets.PacketEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.mixin.PlayerMoveC2SPacketAccessor;
+import com.hongminh54.marisaoptimize.mixininterface.IPlayerMoveC2SPacket;
+import com.hongminh54.marisaoptimize.mixininterface.IVec3d;
+import com.hongminh54.marisaoptimize.pathing.PathManagers;
+import com.hongminh54.marisaoptimize.settings.BoolSetting;
+import com.hongminh54.marisaoptimize.settings.EnumSetting;
+import com.hongminh54.marisaoptimize.settings.Setting;
+import com.hongminh54.marisaoptimize.settings.SettingGroup;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.entity.EntityUtils;
+import com.hongminh54.marisaoptimize.utils.player.FindItemResult;
+import com.hongminh54.marisaoptimize.utils.player.InvUtils;
+import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
+import com.hongminh54.marisaoptimize.utils.player.Rotations;
+import com.hongminh54.marisaoptimize.utils.world.BlockUtils;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

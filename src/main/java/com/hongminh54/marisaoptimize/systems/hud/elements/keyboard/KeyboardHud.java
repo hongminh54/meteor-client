@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -8,27 +8,26 @@ package com.hongminh54.marisaoptimize.systems.hud.elements.keyboard;
 import it.unimi.dsi.fastutil.longs.LongArrayList;
 import it.unimi.dsi.fastutil.longs.LongList;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.meteor.KeyEvent;
-import meteordevelopment.meteorclient.events.meteor.MouseClickEvent;
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.WidgetScreen;
-import meteordevelopment.meteorclient.gui.WindowScreen;
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
-import meteordevelopment.meteorclient.gui.widgets.containers.WTable;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WMinus;
-import meteordevelopment.meteorclient.mixin.KeyBindingAccessor;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.hud.Hud;
-import meteordevelopment.meteorclient.systems.hud.HudElement;
-import meteordevelopment.meteorclient.systems.hud.HudElementInfo;
-import meteordevelopment.meteorclient.systems.hud.HudRenderer;
-import meteordevelopment.meteorclient.utils.misc.Keybind;
-import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
-import meteordevelopment.meteorclient.utils.misc.input.KeyBinds;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.meteor.KeyEvent;
+import com.hongminh54.marisaoptimize.events.meteor.MouseClickEvent;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.WidgetScreen;
+import com.hongminh54.marisaoptimize.gui.WindowScreen;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WTable;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WMinus;
+import com.hongminh54.marisaoptimize.mixin.KeyBindingAccessor;
+import com.hongminh54.marisaoptimize.systems.hud.Hud;
+import com.hongminh54.marisaoptimize.systems.hud.HudElement;
+import com.hongminh54.marisaoptimize.systems.hud.HudElementInfo;
+import com.hongminh54.marisaoptimize.systems.hud.HudRenderer;
+import com.hongminh54.marisaoptimize.utils.misc.Keybind;
+import com.hongminh54.marisaoptimize.utils.misc.input.KeyAction;
+import com.hongminh54.marisaoptimize.utils.misc.input.KeyBinds;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 import meteordevelopment.orbit.EventHandler;
 import meteordevelopment.orbit.EventPriority;
 import net.minecraft.client.MinecraftClient;
@@ -45,7 +44,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class KeyboardHud extends HudElement {
     public static final HudElementInfo<KeyboardHud> INFO = new HudElementInfo<>(Hud.GROUP, "keyboard", "Displays pressed keys.", KeyboardHud::new);

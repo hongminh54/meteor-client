@@ -1,17 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.tabs;
 
 import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
-import meteordevelopment.meteorclient.gui.tabs.builtin.*;
-import meteordevelopment.meteorclient.pathing.PathManagers;
-import meteordevelopment.meteorclient.utils.PreInit;
+import com.hongminh54.marisaoptimize.pathing.PathManagers;
+import com.hongminh54.marisaoptimize.utils.PreInit;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.hongminh54.marisaoptimize.gui.tabs.builtin.*;
 
 public class Tabs {
     private static final List<Tab> tabs = new ArrayList<>();

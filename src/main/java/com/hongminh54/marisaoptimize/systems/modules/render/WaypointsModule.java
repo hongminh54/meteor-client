@@ -1,32 +1,31 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.render;
 
-import meteordevelopment.meteorclient.events.game.OpenScreenEvent;
-import meteordevelopment.meteorclient.events.render.Render2DEvent;
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
-import meteordevelopment.meteorclient.gui.screens.EditSystemScreen;
-import meteordevelopment.meteorclient.gui.widgets.WLabel;
-import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import meteordevelopment.meteorclient.gui.widgets.containers.WTable;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WCheckbox;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WConfirmedMinus;
-import meteordevelopment.meteorclient.pathing.PathManagers;
-import meteordevelopment.meteorclient.renderer.text.TextRenderer;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.waypoints.Waypoint;
-import meteordevelopment.meteorclient.systems.waypoints.Waypoints;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.player.PlayerUtils;
-import meteordevelopment.meteorclient.utils.render.NametagUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.events.game.OpenScreenEvent;
+import com.hongminh54.marisaoptimize.events.render.Render2DEvent;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
+import com.hongminh54.marisaoptimize.gui.screens.EditSystemScreen;
+import com.hongminh54.marisaoptimize.gui.widgets.WLabel;
+import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WTable;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WCheckbox;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WConfirmedMinus;
+import com.hongminh54.marisaoptimize.pathing.PathManagers;
+import com.hongminh54.marisaoptimize.renderer.text.TextRenderer;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.waypoints.Waypoint;
+import com.hongminh54.marisaoptimize.systems.waypoints.Waypoints;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
+import com.hongminh54.marisaoptimize.utils.render.NametagUtils;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DeathScreen;
@@ -41,7 +40,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static meteordevelopment.meteorclient.utils.player.ChatUtils.formatCoords;
+import static com.hongminh54.marisaoptimize.utils.player.ChatUtils.formatCoords;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class WaypointsModule extends Module {
     private static final Color GRAY = new Color(200, 200, 200);

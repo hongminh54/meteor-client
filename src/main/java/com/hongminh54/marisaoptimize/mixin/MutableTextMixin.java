@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import meteordevelopment.meteorclient.mixininterface.IText;
+import com.hongminh54.marisaoptimize.mixininterface.IText;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Language;
 import org.jetbrains.annotations.Nullable;

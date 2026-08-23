@@ -1,22 +1,22 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.widgets;
 
-import meteordevelopment.meteorclient.gui.WidgetScreen;
-import meteordevelopment.meteorclient.gui.screens.accounts.AccountInfoScreen;
-import meteordevelopment.meteorclient.gui.widgets.containers.WHorizontalList;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WConfirmedMinus;
-import meteordevelopment.meteorclient.systems.accounts.Account;
-import meteordevelopment.meteorclient.systems.accounts.Accounts;
-import meteordevelopment.meteorclient.systems.accounts.TokenAccount;
-import meteordevelopment.meteorclient.utils.network.MeteorExecutor;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.gui.WidgetScreen;
+import com.hongminh54.marisaoptimize.gui.screens.accounts.AccountInfoScreen;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WHorizontalList;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WConfirmedMinus;
+import com.hongminh54.marisaoptimize.systems.accounts.Account;
+import com.hongminh54.marisaoptimize.systems.accounts.Accounts;
+import com.hongminh54.marisaoptimize.systems.accounts.TokenAccount;
+import com.hongminh54.marisaoptimize.utils.network.MeteorExecutor;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public abstract class WAccount extends WHorizontalList {
     public Runnable refreshScreenAction;

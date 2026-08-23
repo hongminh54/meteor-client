@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.widgets.pressable;
 
-import meteordevelopment.meteorclient.gui.renderer.packer.GuiTexture;
+import com.hongminh54.marisaoptimize.gui.renderer.packer.GuiTexture;
 
 public abstract class WButton extends WPressable {
     protected String text;

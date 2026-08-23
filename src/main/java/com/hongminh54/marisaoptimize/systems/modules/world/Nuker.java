@@ -1,30 +1,29 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.world;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import meteordevelopment.meteorclient.events.entity.player.BlockBreakingCooldownEvent;
-import meteordevelopment.meteorclient.events.meteor.KeyEvent;
-import meteordevelopment.meteorclient.events.meteor.MouseClickEvent;
-import meteordevelopment.meteorclient.events.render.Render3DEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.renderer.ShapeMode;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.misc.Keybind;
-import meteordevelopment.meteorclient.utils.misc.Names;
-import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
-import meteordevelopment.meteorclient.utils.player.PlayerUtils;
-import meteordevelopment.meteorclient.utils.player.Rotations;
-import meteordevelopment.meteorclient.utils.render.RenderUtils;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
-import meteordevelopment.meteorclient.utils.world.BlockIterator;
-import meteordevelopment.meteorclient.utils.world.BlockUtils;
+import com.hongminh54.marisaoptimize.events.entity.player.BlockBreakingCooldownEvent;
+import com.hongminh54.marisaoptimize.events.meteor.KeyEvent;
+import com.hongminh54.marisaoptimize.events.meteor.MouseClickEvent;
+import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.renderer.ShapeMode;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.misc.Keybind;
+import com.hongminh54.marisaoptimize.utils.misc.Names;
+import com.hongminh54.marisaoptimize.utils.misc.input.KeyAction;
+import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
+import com.hongminh54.marisaoptimize.utils.player.Rotations;
+import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.utils.world.BlockIterator;
+import com.hongminh54.marisaoptimize.utils.world.BlockUtils;
 import meteordevelopment.orbit.EventHandler;
 import meteordevelopment.orbit.EventPriority;
 import net.minecraft.block.Block;
@@ -43,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class Nuker extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();

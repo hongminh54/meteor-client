@@ -1,22 +1,22 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems;
 
 import it.unimi.dsi.fastutil.objects.Reference2ReferenceOpenHashMap;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.game.GameLeftEvent;
-import meteordevelopment.meteorclient.systems.accounts.Accounts;
-import meteordevelopment.meteorclient.systems.config.Config;
-import meteordevelopment.meteorclient.systems.friends.Friends;
-import meteordevelopment.meteorclient.systems.hud.Hud;
-import meteordevelopment.meteorclient.systems.macros.Macros;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.profiles.Profiles;
-import meteordevelopment.meteorclient.systems.proxies.Proxies;
-import meteordevelopment.meteorclient.systems.waypoints.Waypoints;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.game.GameLeftEvent;
+import com.hongminh54.marisaoptimize.systems.accounts.Accounts;
+import com.hongminh54.marisaoptimize.systems.config.Config;
+import com.hongminh54.marisaoptimize.systems.friends.Friends;
+import com.hongminh54.marisaoptimize.systems.hud.Hud;
+import com.hongminh54.marisaoptimize.systems.macros.Macros;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.profiles.Profiles;
+import com.hongminh54.marisaoptimize.systems.proxies.Proxies;
+import com.hongminh54.marisaoptimize.systems.waypoints.Waypoints;
 import meteordevelopment.orbit.EventHandler;
 
 import java.io.File;

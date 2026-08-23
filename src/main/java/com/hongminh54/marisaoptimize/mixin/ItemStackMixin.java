@@ -1,16 +1,16 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.entity.player.FinishUsingItemEvent;
-import meteordevelopment.meteorclient.events.entity.player.StoppedUsingItemEvent;
-import meteordevelopment.meteorclient.events.game.ItemStackTooltipEvent;
-import meteordevelopment.meteorclient.utils.Utils;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.entity.player.FinishUsingItemEvent;
+import com.hongminh54.marisaoptimize.events.entity.player.StoppedUsingItemEvent;
+import com.hongminh54.marisaoptimize.events.game.ItemStackTooltipEvent;
+import com.hongminh54.marisaoptimize.utils.Utils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {

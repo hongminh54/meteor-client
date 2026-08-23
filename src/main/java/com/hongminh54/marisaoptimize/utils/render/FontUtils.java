@@ -1,14 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 package com.hongminh54.marisaoptimize.utils.render;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.renderer.Fonts;
-import meteordevelopment.meteorclient.renderer.text.*;
-import meteordevelopment.meteorclient.utils.files.ByteBufferUtils;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.renderer.Fonts;
+import com.hongminh54.marisaoptimize.utils.files.ByteBufferUtils;
 import net.minecraft.util.Util;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -24,6 +23,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
+import com.hongminh54.marisaoptimize.renderer.text.*;
 
 @NullMarked
 public final class FontUtils {

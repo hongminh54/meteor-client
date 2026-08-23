@@ -1,19 +1,19 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.accounts;
 
-import meteordevelopment.meteorclient.systems.System;
-import meteordevelopment.meteorclient.systems.Systems;
-import meteordevelopment.meteorclient.systems.accounts.types.CrackedAccount;
-import meteordevelopment.meteorclient.systems.accounts.types.MicrosoftAccount;
-import meteordevelopment.meteorclient.systems.accounts.types.SessionAccount;
-import meteordevelopment.meteorclient.systems.accounts.types.TheAlteningAccount;
-import meteordevelopment.meteorclient.utils.misc.NbtException;
-import meteordevelopment.meteorclient.utils.misc.NbtUtils;
-import meteordevelopment.meteorclient.utils.network.MeteorExecutor;
+import com.hongminh54.marisaoptimize.systems.System;
+import com.hongminh54.marisaoptimize.systems.Systems;
+import com.hongminh54.marisaoptimize.systems.accounts.types.CrackedAccount;
+import com.hongminh54.marisaoptimize.systems.accounts.types.MicrosoftAccount;
+import com.hongminh54.marisaoptimize.systems.accounts.types.SessionAccount;
+import com.hongminh54.marisaoptimize.systems.accounts.types.TheAlteningAccount;
+import com.hongminh54.marisaoptimize.utils.misc.NbtException;
+import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
+import com.hongminh54.marisaoptimize.utils.network.MeteorExecutor;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 

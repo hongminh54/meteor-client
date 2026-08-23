@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.renderer.text;
 
-import meteordevelopment.meteorclient.utils.files.ByteBufferUtils;
+import com.hongminh54.marisaoptimize.utils.files.ByteBufferUtils;
 import org.jspecify.annotations.NullMarked;
 import org.lwjgl.BufferUtils;
 

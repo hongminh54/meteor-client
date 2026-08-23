@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
 import com.mojang.authlib.GameProfile;
-import meteordevelopment.meteorclient.mixininterface.IChatHudLineVisible;
+import com.hongminh54.marisaoptimize.mixininterface.IChatHudLineVisible;
 import net.minecraft.client.gui.hud.ChatHudLine;
 import net.minecraft.text.OrderedText;
 import org.spongepowered.asm.mixin.Final;

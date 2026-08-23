@@ -1,19 +1,19 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.hud.elements;
 
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.hud.*;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.hongminh54.marisaoptimize.settings.*;
+import com.hongminh54.marisaoptimize.systems.hud.*;
 
 public class ActiveModulesHud extends HudElement {
     public static final HudElementInfo<ActiveModulesHud> INFO = new HudElementInfo<>(Hud.GROUP, "active-modules", "Displays your active modules.", ActiveModulesHud::new);

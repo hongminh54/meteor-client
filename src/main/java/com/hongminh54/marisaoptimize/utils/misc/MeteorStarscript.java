@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -8,20 +8,20 @@ package com.hongminh54.marisaoptimize.utils.misc;
 import baritone.api.BaritoneAPI;
 import baritone.api.pathing.goals.Goal;
 import baritone.api.process.IBaritoneProcess;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.mixin.ClientPlayerInteractionManagerAccessor;
-import meteordevelopment.meteorclient.mixin.MinecraftClientAccessor;
-import meteordevelopment.meteorclient.pathing.BaritoneUtils;
-import meteordevelopment.meteorclient.pathing.PathManagers;
-import meteordevelopment.meteorclient.systems.config.Config;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.utils.PreInit;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.player.ChatUtils;
-import meteordevelopment.meteorclient.utils.player.PlayerUtils;
-import meteordevelopment.meteorclient.utils.world.Dimension;
-import meteordevelopment.meteorclient.utils.world.TickRate;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.mixin.ClientPlayerInteractionManagerAccessor;
+import com.hongminh54.marisaoptimize.mixin.MinecraftClientAccessor;
+import com.hongminh54.marisaoptimize.pathing.BaritoneUtils;
+import com.hongminh54.marisaoptimize.pathing.PathManagers;
+import com.hongminh54.marisaoptimize.systems.config.Config;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.utils.PreInit;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
+import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
+import com.hongminh54.marisaoptimize.utils.world.Dimension;
+import com.hongminh54.marisaoptimize.utils.world.TickRate;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.network.PlayerListEntry;
@@ -65,7 +65,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class MeteorStarscript {
     public static Starscript ss = new Starscript();

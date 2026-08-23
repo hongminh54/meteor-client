@@ -1,27 +1,27 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.renderer;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.meteor.CustomFontChangedEvent;
-import meteordevelopment.meteorclient.gui.WidgetScreen;
-import meteordevelopment.meteorclient.renderer.text.CustomTextRenderer;
-import meteordevelopment.meteorclient.renderer.text.FontFace;
-import meteordevelopment.meteorclient.renderer.text.FontFamily;
-import meteordevelopment.meteorclient.renderer.text.FontInfo;
-import meteordevelopment.meteorclient.systems.config.Config;
-import meteordevelopment.meteorclient.utils.PreInit;
-import meteordevelopment.meteorclient.utils.render.FontUtils;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.meteor.CustomFontChangedEvent;
+import com.hongminh54.marisaoptimize.gui.WidgetScreen;
+import com.hongminh54.marisaoptimize.renderer.text.CustomTextRenderer;
+import com.hongminh54.marisaoptimize.renderer.text.FontFace;
+import com.hongminh54.marisaoptimize.renderer.text.FontFamily;
+import com.hongminh54.marisaoptimize.renderer.text.FontInfo;
+import com.hongminh54.marisaoptimize.systems.config.Config;
+import com.hongminh54.marisaoptimize.utils.PreInit;
+import com.hongminh54.marisaoptimize.utils.render.FontUtils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class Fonts {
     public static final String[] BUILTIN_FONTS = { "JetBrains Mono", "Comfortaa", "Tw Cen MT", "Pixelation" };

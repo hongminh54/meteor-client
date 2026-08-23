@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,18 +7,18 @@ package com.hongminh54.marisaoptimize.gui.renderer;
 
 import it.unimi.dsi.fastutil.Stack;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.renderer.operations.TextOperation;
-import meteordevelopment.meteorclient.gui.renderer.packer.GuiTexture;
-import meteordevelopment.meteorclient.gui.renderer.packer.TexturePacker;
-import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import meteordevelopment.meteorclient.renderer.Renderer2D;
-import meteordevelopment.meteorclient.renderer.Texture;
-import meteordevelopment.meteorclient.utils.PostInit;
-import meteordevelopment.meteorclient.utils.misc.Pool;
-import meteordevelopment.meteorclient.utils.render.RenderUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.renderer.operations.TextOperation;
+import com.hongminh54.marisaoptimize.gui.renderer.packer.GuiTexture;
+import com.hongminh54.marisaoptimize.gui.renderer.packer.TexturePacker;
+import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
+import com.hongminh54.marisaoptimize.renderer.Renderer2D;
+import com.hongminh54.marisaoptimize.renderer.Texture;
+import com.hongminh54.marisaoptimize.utils.PostInit;
+import com.hongminh54.marisaoptimize.utils.misc.Pool;
+import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -26,9 +26,9 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
-import static meteordevelopment.meteorclient.utils.Utils.getWindowHeight;
-import static meteordevelopment.meteorclient.utils.Utils.getWindowWidth;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.utils.Utils.getWindowHeight;
+import static com.hongminh54.marisaoptimize.utils.Utils.getWindowWidth;
 
 public class GuiRenderer {
     private static final Color WHITE = new Color(255, 255, 255);

@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.accounts.types;
 
-import meteordevelopment.meteorclient.systems.accounts.Account;
-import meteordevelopment.meteorclient.systems.accounts.AccountType;
+import com.hongminh54.marisaoptimize.systems.accounts.Account;
+import com.hongminh54.marisaoptimize.systems.accounts.AccountType;
 import net.minecraft.client.session.Session;
 import net.minecraft.util.Uuids;
 

@@ -1,14 +1,14 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.renderer;
 
 import com.mojang.blaze3d.textures.GpuTextureView;
-import meteordevelopment.meteorclient.gui.renderer.packer.TextureRegion;
-import meteordevelopment.meteorclient.utils.PreInit;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.gui.renderer.packer.TextureRegion;
+import com.hongminh54.marisaoptimize.utils.PreInit;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.GpuSampler;
 

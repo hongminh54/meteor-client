@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -13,7 +13,7 @@ import net.minecraft.entity.LivingEntity;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class EntityTooltipComponent implements MeteorTooltipData, TooltipComponent {
     protected final LivingEntity entity;

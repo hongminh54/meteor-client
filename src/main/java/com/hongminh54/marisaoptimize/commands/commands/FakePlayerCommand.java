@@ -1,12 +1,10 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.commands.commands;
 
-import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.hongminh54.marisaoptimize.commands.Command;
 import com.hongminh54.marisaoptimize.commands.arguments.FakePlayerArgumentType;
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
@@ -14,6 +12,8 @@ import com.hongminh54.marisaoptimize.systems.modules.player.FakePlayer;
 import com.hongminh54.marisaoptimize.utils.entity.fakeplayer.FakePlayerEntity;
 import com.hongminh54.marisaoptimize.utils.entity.fakeplayer.FakePlayerManager;
 import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.command.CommandSource;
 
 public class FakePlayerCommand extends Command {

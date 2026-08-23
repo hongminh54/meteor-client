@@ -1,17 +1,16 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.movement;
 
-import meteordevelopment.meteorclient.events.entity.player.ClipAtLedgeEvent;
-import meteordevelopment.meteorclient.events.render.Render3DEvent;
-import meteordevelopment.meteorclient.renderer.ShapeMode;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.events.entity.player.ClipAtLedgeEvent;
+import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
+import com.hongminh54.marisaoptimize.renderer.ShapeMode;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.util.PlayerInput;
 import net.minecraft.util.hit.BlockHitResult;
@@ -20,6 +19,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.RaycastContext;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class SafeWalk extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
@@ -89,7 +89,7 @@ public class SafeWalk extends Module {
     @EventHandler
     private void onClipAtLedge(ClipAtLedgeEvent event) {
         if (fallDistance.get() > 1) {
-            // meteordevelopment.meteorclient.utils.entity.DamageUtils.fallDamage
+            // com.hongminh54.marisaoptimize.utils.entity.DamageUtils.fallDamage
             int surface = mc.world.getWorldChunk(mc.player.getBlockPos()).getHeightmap(Heightmap.Type.MOTION_BLOCKING).get(mc.player.getBlockX() & 15, mc.player.getBlockZ() & 15);
             if (mc.player.getBlockY() >= surface) {
                 if (mc.player.getBlockY() - surface < fallDistance.get()) return;

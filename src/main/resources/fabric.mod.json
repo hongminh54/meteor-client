@@ -1,51 +1,43 @@
 {
   "schemaVersion": 1,
-  "name": "Meteor Client",
-  "id": "meteor-client",
+  "name": "Marisa Optimize",
+  "id": "marisa-optimize",
   "version": "${version}",
-  "description": "Based utility mod.",
+  "description": "Mod tối ưu ram và xử lí thực thể",
   "authors": [
-    "MineGame159",
-    "squidoodly",
-    "seasnail"
+    "hongminh54"
   ],
-  "contact": {
-    "homepage": "https://meteorclient.com",
-    "issues": "https://github.com/MeteorDevelopment/meteor-client/issues",
-    "sources": "https://github.com/MeteorDevelopment/meteor-client",
-    "discord": "https://meteorclient.com/discord"
-  },
   "license": "GPL-3.0",
-  "icon": "assets/meteor-client/icon.png",
+  "icon": "assets/marisa-optimize/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "meteordevelopment.meteorclient.MeteorClient"
+      "com.hongminh54.marisaoptimize.MarisaOptimize"
     ],
     "modmenu": [
-      "meteordevelopment.meteorclient.modintegration.ModMenuIntegration"
+      "com.hongminh54.marisaoptimize.modintegration.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "meteor-client.mixins.json",
-    "meteor-client-baritone.mixins.json",
-    "meteor-client-indigo.mixins.json",
-    "meteor-client-sodium.mixins.json",
-    "meteor-client-lithium.mixins.json",
-    "meteor-client-viafabricplus.mixins.json"
+    "marisa-optimize.json",
+    "marisa-optimize-baritone.mixins.json",
+    "marisa-optimize-indigo.mixins.json",
+    "marisa-optimize-sodium.mixins.json",
+    "marisa-optimize-lithium.mixins.json",
+    "marisa-optimize-viafabricplus.mixins.json"
   ],
-  "accessWidener": "meteor-client.accesswidener",
+  "accessWidener": "marisa-optimize.accesswidener",
   "custom": {
-    "meteor-client:build_number": "${build_number}",
-    "meteor-client:color": "145,61,226",
-    "meteor-client:commit": "${commit}",
+    "marisa-optimize:build_number": "${build_number}",
+    "marisa-optimize:color": "145,61,226",
+    "marisa-optimize:commit": "${commit}",
     "modmenu": {
       "links": {
-        "modmenu.discord": "https://meteorclient.com/discord"
+        "modmenu.discord": "https://www.facebook.com/tybzione/"
       }
     },
     "badoptimizations:cache_hooks": {
-      "lightmap": "meteordevelopment.meteorclient.modintegration.BadOptimizationsHook"
+      "lightmap": "com.hongminh54.marisaoptimize.modintegration.BadOptimizationsHook"
     }
   },
   "depends": {

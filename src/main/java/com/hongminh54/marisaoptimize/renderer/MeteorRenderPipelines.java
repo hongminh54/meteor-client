@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -11,7 +11,7 @@ import com.mojang.blaze3d.platform.DepthTestFunction;
 import com.mojang.blaze3d.systems.GpuDevice;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import meteordevelopment.meteorclient.MarisaOptimize;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.UniformType;
 import net.minecraft.client.render.VertexFormats;

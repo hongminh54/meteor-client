@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.entity.fakeplayer;
 
 import com.mojang.authlib.GameProfile;
-import meteordevelopment.meteorclient.mixin.AbstractClientPlayerEntityAccessor;
+import com.hongminh54.marisaoptimize.mixin.AbstractClientPlayerEntityAccessor;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class FakePlayerEntity extends OtherClientPlayerEntity {
     /** Disables entity push with this fake player */

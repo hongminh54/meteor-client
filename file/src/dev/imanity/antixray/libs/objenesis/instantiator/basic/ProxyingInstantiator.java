@@ -1,0 +1,16 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package dev.imanity.antixray.libs.objenesis.instantiator.basic;
+
+import dev.imanity.antixray.libs.objenesis.instantiator.annotations.Typology;
+import dev.imanity.antixray.libs.objenesis.instantiator.annotations.Instantiator;
+
+@Instantiator(Typology.STANDARD)
+public class ProxyingInstantiator<T> extends DelegatingToExoticInstantiator<T>
+{
+    public ProxyingInstantiator(final Class<T> clazz) {
+        super("dev.imanity.antixray.libs.objenesis.instantiator.exotic.ProxyingInstantiator", clazz);
+    }
+}

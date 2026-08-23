@@ -1,0 +1,65 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package dev.imanity.antixray.a;
+
+import io.fairyproject.log.Log;
+import io.fairyproject.container.PreDestroy;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+import kotlin.jvm.internal.Intrinsics;
+import dev.imanity.antixray.config.GlobalAntiXrayConfig;
+import org.jetbrains.annotations.NotNull;
+import java.util.concurrent.ExecutorService;
+import io.fairyproject.container.InjectableComponent;
+
+@InjectableComponent
+public final class IIIlllIIlllIIllIIlllIIlllIIIllIIllIIlIIlIlIlIllIlIIllIlIlllIIIlIIIllIlIIIllIIIllIIIllIIllIIllIIlllIIlIIllIIllIlIIllIIllIIlIIIlllIIllIIllIIlIllIlIIlllIIIlIllIIlllIIIllIIllIllIlllIIllIlllIIlIIIlllIIIllIllIIlllIllIIIlllIllIIllIlllIIIlllIlll
+{
+    private final int IIlIIllIIlIIllIIllIIIlIIIlIlllIIlIIlIIllIllIIIlllIIIllIIlllIIIlIIIlIlllIllIIIllIIlllIlllIIlllIIlIlIlllIIIlllIIIlIIIllIIllIllIIllIIIllIIllIIllIlllIIllIIllIIIlllIllIIllIIlIIlllIIllIIIllIIlllIIllIIIlllIIllIIlIIlllIIIlIlllIlIlIIIllIIlIIllIlIIl;
+    @NotNull
+    private final ExecutorService IIlIIlllIIlllIIlIIlllIllIIllIIIllIlIIlllIlllIIllIIIlIlllIIllIIlIlIllIIlllIIlIIllIIllIllIIlIllIIIlllIIllIlIIlllIllIIIlIIlIIIlllIllIIllIlllIIllIllIIllIIllIIIlllIlIIIlllIIllIIllIIlllIllIIIllIIllIlIIlllIlIIIllIIllIllIIlIlllIIllIIlIIIl;
+    
+    public IIIlllIIlllIIllIIlllIIlllIIIllIIllIIlIIlIlIlIllIlIIllIlIlllIIIlIIIllIlIIIllIIIllIIIllIIllIIllIIlllIIlIIllIIllIlIIllIIllIIlIIIlllIIllIIllIIlIllIlIIlllIIIlIllIIlllIIIllIIllIllIlllIIllIlllIIlIIIlllIIIllIllIIlllIllIIIlllIllIIllIlllIIIlllIlll(@NotNull final GlobalAntiXrayConfig globalAntiXrayConfig) {
+        Intrinsics.checkNotNullParameter((Object)globalAntiXrayConfig, "");
+        this.IIlIIllIIlIIllIIllIIIlIIIlIlllIIlIIlIIllIllIIIlllIIIllIIlllIIIlIIIlIlllIllIIIllIIlllIlllIIlllIIlIlIlllIIIlllIIIlIIIllIIllIllIIllIIIllIIllIIllIlllIIllIIllIIIlllIllIIllIIlIIlllIIllIIIllIIlllIIllIIIlllIIllIIlIIlllIIIlIlllIlIlIIIllIIlIIllIlIIl = this.IllIllIIlllIIIllIIlllIIlIIlllIIIllIIIlllIIllIIIlIIIlIIIllIIllIlIIIllIlIIlllIIIlllIlIIlIIIlIIlIIlllIlIIlIlllIIllIIllIIllIIIlIIIlIIllIIllIllIIlIIIlllIllIIlIIIllIIllIIlIllIIIlllIIIllIIIllIIllIIlIIIllIIlllIIlllIIIlllIIIllIllIIlIIIlllIIlIIIllIIllIll(globalAntiXrayConfig.getObfuscateThreads());
+        final ExecutorService fixedThreadPool = Executors.newFixedThreadPool(this.IIlIIllIIlIIllIIllIIIlIIIlIlllIIlIIlIIllIllIIIlllIIIllIIlllIIIlIIIlIlllIllIIIllIIlllIlllIIlllIIlIlIlllIIIlllIIIlIIIllIIllIllIIllIIIllIIllIIllIlllIIllIIllIIIlllIllIIllIIlIIlllIIllIIIllIIlllIIllIIIlllIIllIIlIIlllIIIlIlllIlIlIIIllIIlIIllIlIIl, IIIlllIIlllIIllIIlllIIlllIIIllIIllIIlIIlIlIlIllIlIIllIlIlllIIIlIIIllIlIIIllIIIllIIIllIIllIIllIIlllIIlIIllIIllIlIIllIIllIIlIIIlllIIllIIllIIlIllIlIIlllIIIlIllIIlllIIIllIIllIllIlllIIllIlllIIlIIIlllIIIllIllIIlllIllIIIlllIllIIllIlllIIIlllIlll::IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll);
+        Intrinsics.checkNotNullExpressionValue((Object)fixedThreadPool, "");
+        this.IIlIIlllIIlllIIlIIlllIllIIllIIIllIlIIlllIlllIIllIIIlIlllIIllIIlIlIllIIlllIIlIIllIIllIllIIlIllIIIlllIIllIlIIlllIllIIIlIIlIIIlllIllIIllIlllIIllIllIIllIIllIIIlllIlIIIlllIIllIIllIIlllIllIIIllIIllIlIIlllIlIIIllIIllIllIIlIlllIIllIIlIIIl = fixedThreadPool;
+    }
+    
+    public final int IIllIIIlllIlIIlIIlllIllIIlllIIlllIlIIIllIIIlllIIlIIllIllIllIIllIIIllIIlllIllIIIlIllIIlIIlllIIllIllIlIIllIllIIllIIIllIIlIIlllIIlIIIlIlllIIllIIllIIlllIIllIIlllIIIlllIlIIlllIIllIIllIIlIIlIllIIllIlllIIIllIIllIIllIlllIIIllIlllIIllIllIIIlIl() {
+        return this.IIlIIllIIlIIllIIllIIIlIIIlIlllIIlIIlIIllIllIIIlllIIIllIIlllIIIlIIIlIlllIllIIIllIIlllIlllIIlllIIlIlIlllIIIlllIIIlIIIllIIllIllIIllIIIllIIllIIllIlllIIllIIllIIIlllIllIIllIIlIIlllIIllIIIllIIlllIIllIIIlllIIllIIlIIlllIIIlIlllIlIlIIIllIIlIIllIlIIl;
+    }
+    
+    @NotNull
+    public final ExecutorService IIllIIllIIllIIIllIIlllIlIIIllIlllIIllIIlIlIIIllIIllIlllIIllIllIIlIIllIlIIIlllIIllIlllIIIllIllIllIIllIlllIIIlIIllIlllIlllIIllIIllIllIIIlIllIIlIlIIlIIllIlIIIlIIIlIIlllIIllIllIlllIIlIlllIIlIllIlllIIIllIIIllIlIIIllIIlIIlIIlIlll() {
+        return this.IIlIIlllIIlllIIlIIlllIllIIllIIIllIlIIlllIlllIIllIIIlIlllIIllIIlIlIllIIlllIIlIIllIIllIllIIlIllIIIlllIIllIlIIlllIllIIIlIIlIIIlllIllIIllIlllIIllIllIIllIIllIIIlllIlIIIlllIIllIIllIIlllIllIIIllIIllIlIIlllIlIIIllIIllIllIIlIlllIIllIIlIIIl;
+    }
+    
+    @PreDestroy
+    public final void IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl() {
+        this.IIlIIlllIIlllIIlIIlllIllIIllIIIllIlIIlllIlllIIllIIIlIlllIIllIIlIlIllIIlllIIlIIllIIllIllIIlIllIIIlllIIllIlIIlllIllIIIlIIlIIIlllIllIIllIlllIIllIllIIllIIllIIIlllIlIIIlllIIllIIllIIlllIllIIIllIIllIlIIlllIlIIIllIIllIllIIlIlllIIllIIlIIIl.shutdown();
+    }
+    
+    private final int IllIllIIlllIIIllIIlllIIlIIlllIIIllIIIlllIIllIIIlIIIlIIIllIIllIlIIIllIlIIlllIIIlllIlIIlIIIlIIlIIlllIlIIlIlllIIllIIllIIllIIIlIIIlIIllIIllIllIIlIIIlllIllIIlIIIllIIllIIlIllIIIlllIIIllIIIllIIllIIlIIIllIIlllIIlllIIIlllIIIllIllIIlIIIlllIIlIIIllIIllIll(final int n) {
+        if (n > 0) {
+            return n;
+        }
+        return Math.max(Runtime.getRuntime().availableProcessors() - 2, 2);
+    }
+    
+    private static final void IIllIIIllIllIIIlllIIIlllIIllIIlllIlIIIllIllIlIIlIIIlllIIlIIllIIllIlIllIIllIIIllIIlIllIIlIIlIIllIIlIlIIllIllIIlIlIIlIIIllIIlIllIllIIlllIllIIlIlllIIllIlIlllIIlllIIIlIIlIIllIlllIlIIllIIIllIlIlIIlIIllIllIlIllIIIllIIll(final Thread thread, final Throwable t) {
+        Log.error("An error occurred in the AntiXray obfuscation thread", t, new Object[0]);
+    }
+    
+    private static final Thread IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(final AtomicInteger atomicInteger, final Runnable task) {
+        Intrinsics.checkNotNullParameter((Object)atomicInteger, "");
+        final Thread thread2;
+        final Thread thread = thread2 = new Thread(task, "AntiXray-Obfuscate-Thread-" + atomicInteger.incrementAndGet());
+        thread2.setDaemon(true);
+        thread2.setUncaughtExceptionHandler(IIIlllIIlllIIllIIlllIIlllIIIllIIllIIlIIlIlIlIllIlIIllIlIlllIIIlIIIllIlIIIllIIIllIIIllIIllIIllIIlllIIlIIllIIllIlIIllIIllIIlIIIlllIIllIIllIIlIllIlIIlllIIIlIllIIlllIIIllIIllIllIlllIIllIlllIIlIIIlllIIIllIllIIlllIllIIIlllIllIIllIlllIIIlllIlll::IIllIIIllIllIIIlllIIIlllIIllIIlllIlIIIllIllIlIIlIIIlllIIlIIllIIllIlIllIIllIIIllIIlIllIIlIIlIIllIIlIlIIllIllIIlIlIIlIIIllIIlIllIllIIlllIllIIlIlllIIllIlIlllIIlllIIIlIIlIIllIlllIlIIllIIIllIlIlIIlIIllIllIlIllIIIllIIll);
+        return thread;
+    }
+}

@@ -1,15 +1,15 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.meteor.MouseClickEvent;
-import meteordevelopment.meteorclient.events.meteor.MouseScrollEvent;
-import meteordevelopment.meteorclient.utils.misc.input.Input;
-import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.meteor.MouseClickEvent;
+import com.hongminh54.marisaoptimize.events.meteor.MouseScrollEvent;
+import com.hongminh54.marisaoptimize.utils.misc.input.Input;
+import com.hongminh54.marisaoptimize.utils.misc.input.KeyAction;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.gui.Click;

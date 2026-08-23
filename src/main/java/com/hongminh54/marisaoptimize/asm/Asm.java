@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -41,7 +41,10 @@ public class Asm {
         if (INSTANCE != null) return;
 
         INSTANCE = new Asm(System.getProperty("meteor.asm.export") != null);
-        INSTANCE.add(new PacketInflaterTransformer());
+
+        if (!FabricLoader.getInstance().isModLoaded("viafabricplus")) {
+            INSTANCE.add(new PacketInflaterTransformer());
+        }
     }
 
     private void add(AsmTransformer transformer) {

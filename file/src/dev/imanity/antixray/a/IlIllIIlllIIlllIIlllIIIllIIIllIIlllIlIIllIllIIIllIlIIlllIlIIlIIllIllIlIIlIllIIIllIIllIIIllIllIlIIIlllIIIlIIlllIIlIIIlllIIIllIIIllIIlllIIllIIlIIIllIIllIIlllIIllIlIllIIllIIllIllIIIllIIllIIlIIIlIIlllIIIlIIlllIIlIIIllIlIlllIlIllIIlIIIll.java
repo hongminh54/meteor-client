@@ -1,0 +1,67 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package dev.imanity.antixray.a;
+
+import dev.imanity.antixray.nms.Native;
+import io.fairyproject.util.AccessUtil;
+import xuan.cat.fartherviewdistance.api.branch.BranchNBT;
+import xuan.cat.fartherviewdistance.code.ChunkServer;
+import xuan.cat.fartherviewdistance.api.branch.BranchChunk;
+import xuan.cat.fartherviewdistance.code.ChunkIndex;
+import dev.imanity.antixray.api.nms.ChunkHandle;
+import kotlin.jvm.internal.Intrinsics;
+import org.jetbrains.annotations.Nullable;
+import java.lang.reflect.Method;
+import org.jetbrains.annotations.NotNull;
+import org.bukkit.World;
+
+public final class IlIllIIlllIIlllIIlllIIIllIIIllIIlllIlIIllIllIIIllIlIIlllIlIIlIIllIllIlIIlIllIIIllIIllIIIllIllIlIIIlllIIIlIIlllIIlIIIlllIIIllIIIllIIlllIIllIIlIIIllIIllIIlllIIllIlIllIIllIIllIllIIIllIIllIIlIIIlIIlllIIIlIIlllIIlIIIllIlIlllIlIllIIlIIIll implements IIllIIlIlIIlllIIllIIllIIIlllIIIlllIllIIllIIlllIlIIllIIllIllIIlIIllIIlIlllIIIlIIlIllIIIllIIIlllIIlIIIlllIIIlllIIlIllIIIllIIlIlIllIlIIllIlIIIlllIIllIIlIIIlIIlIIlIlIlllIlIIIlIIlIIlllIllIllIllIIIlllIIllIIIllIIllIIlllIIlIllIlIIll
+{
+    @NotNull
+    private final World IIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl;
+    @Nullable
+    private Method IlllIIlIllIIIllIllIlIlllIIIllIIIllIIlIIllIIIllIllIIllIIlllIIlllIIlIIllIIlIIllIIllIIllIIllIlllIIlIIIlIIIlllIIIllIllIIllIllIllIIlIIlIIIlllIlIIlIlIIllIIllIllIllIIIlllIlIlllIIIlIlIIlIIllIIlIIlllIIlllIIlIIIlIlllIIlIIllIIlllIlllIIll;
+    
+    public IlIllIIlllIIlllIIlllIIIllIIIllIIlllIlIIllIllIIIllIlIIlllIlIIlIIllIllIlIIlIllIIIllIIllIIIllIllIlIIIlllIIIlIIlllIIlIIIlllIIIllIIIllIIlllIIllIIlIIIllIIllIIlllIIllIlIllIIllIIllIllIIIllIIllIIlIIIlIIlllIIIlIIlllIIlIIIllIlIlllIlIllIIlIIIll(@NotNull final World iIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl) {
+        Intrinsics.checkNotNullParameter((Object)iIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl, "");
+        this.IIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl = iIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl;
+    }
+    
+    @Nullable
+    @Override
+    public ChunkHandle IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll(final int n, final int n2) {
+        final ChunkServer chunkServer = ChunkIndex.getChunkServer();
+        final BranchChunk chunkFromMemoryCache = chunkServer.branchMinecraft.getChunkFromMemoryCache(this.IIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl, n, n2);
+        if (chunkFromMemoryCache != null) {
+            return this.IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(chunkFromMemoryCache);
+        }
+        final BranchNBT chunkNBTFromDisk = chunkServer.branchMinecraft.getChunkNBTFromDisk(this.IIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl, n, n2);
+        if (chunkNBTFromDisk == null) {
+            return null;
+        }
+        final BranchNBT branchNBT = chunkNBTFromDisk;
+        if (chunkServer.branchMinecraft.fromStatus(branchNBT) != BranchChunk.Status.FULL) {
+            return null;
+        }
+        final BranchChunk fromChunk = chunkServer.branchMinecraft.fromChunk(this.IIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl, n, n2, branchNBT, true);
+        Intrinsics.checkNotNull((Object)fromChunk);
+        return this.IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(fromChunk);
+    }
+    
+    private final ChunkHandle IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(final BranchChunk obj) {
+        if (this.IlllIIlIllIIIllIllIlIlllIIIllIIIllIIlIIllIIIllIllIIllIIlllIIlllIIlIIllIIlIIllIIllIIllIIllIlllIIlIIIlIIIlllIIIllIllIIllIllIllIIlIIlIIIlllIlIIlIlIIllIIllIllIllIIIlllIlIlllIIIlIlIIlIIllIIlIIlllIIlllIIlIIIlIlllIIlIIllIIlllIlllIIll == null) {
+            final Method declaredMethod = obj.getClass().getDeclaredMethod("getLevelChunk", (Class<?>[])new Class[0]);
+            AccessUtil.setAccessible(declaredMethod);
+            this.IlllIIlIllIIIllIllIlIlllIIIllIIIllIIlIIllIIIllIllIIllIIlllIIlllIIlIIllIIlIIllIIllIIllIIllIlllIIlIIIlIIIlllIIIllIllIIllIllIllIIlIIlIIIlllIlIIlIlIIllIIllIllIllIIIlllIlIlllIIIlIlIIlIIllIIlIIlllIIlllIIlIIIlIlllIIlIIllIIlllIlllIIll = declaredMethod;
+        }
+        final Method illlIIlIllIIIllIllIlIlllIIIllIIIllIIlIIllIIIllIllIIllIIlllIIlllIIlIIllIIlIIllIIllIIllIIllIlllIIlIIIlIIIlllIIIllIllIIllIllIllIIlIIlIIIlllIlIIlIlIIllIIllIllIllIIIlllIlIlllIIIlIlIIlIIllIIlIIlllIIlllIIlIIIlIlllIIlIIllIIlllIlllIIll = this.IlllIIlIllIIIllIllIlIlllIIIllIIIllIIlIIllIIIllIllIIllIIlllIIlllIIlIIllIIlIIllIIllIIllIIllIlllIIlIIIlIIIlllIIIllIllIIllIllIllIIlIIlIIIlllIlIIlIlIIllIIllIllIllIIIlllIlIlllIIIlIlIIlIIllIIlIIlllIIlllIIlIIIlIlllIIlIIllIIlllIlllIIll;
+        Intrinsics.checkNotNull((Object)illlIIlIllIIIllIllIlIlllIIIllIIIllIIlIIllIIIllIllIIllIIlllIIlllIIlIIllIIlIIllIIllIIllIIllIlllIIlIIIlIIIlllIIIllIllIIllIllIllIIlIIlIIIlllIlIIlIlIIllIIllIllIllIIIlllIlIlllIIIlIlIIlIIllIIlIIlllIIlllIIlIIIlIlllIIlIIllIIlllIlllIIll);
+        final Object invoke = illlIIlIllIIIllIllIlIlllIIIllIIIllIIlIIllIIIllIllIIllIIlllIIlllIIlIIllIIlIIllIIllIIllIIllIlllIIlIIIlIIIlllIIIllIllIIllIllIllIIlIIlIIIlllIlIIlIlIIllIIllIllIllIIIlllIlIlllIIIlIlIIlIIllIIlIIlllIIlllIIlIIIlIlllIIlIIllIIlllIlllIIll.invoke(obj, new Object[0]);
+        final Native instance = Native.INSTANCE;
+        final World iIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl = this.IIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl;
+        Intrinsics.checkNotNull(invoke);
+        return instance.createChunkHandle(iIllIIIllIlIIllIlllIllIIIlllIlIIlllIIlIIIlllIIlllIIIlIIIlIllIIllIllIIIllIIlIIIlllIIlllIIlIlIIllIIllIIllIllIIllIlIIIlIllIIllIIllIIllIIlIlllIllIllIllIIIllIlIIllIIllIIIlllIIlllIIIlIlIIllIIlIIllIlIIlIllIllIIIllIIlIIlIIllIIlllIl, invoke);
+    }
+}

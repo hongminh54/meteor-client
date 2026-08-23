@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -8,20 +8,18 @@ package com.hongminh54.marisaoptimize.systems.modules.render;
 import com.mojang.serialization.DataResult;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import meteordevelopment.meteorclient.events.game.ItemStackTooltipEvent;
-import meteordevelopment.meteorclient.events.render.TooltipDataEvent;
-import meteordevelopment.meteorclient.gui.screens.ContainerInventoryScreen;
-import meteordevelopment.meteorclient.mixin.EntityAccessor;
-import meteordevelopment.meteorclient.mixin.EntityBucketItemAccessor;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.misc.ByteCountDataOutput;
-import meteordevelopment.meteorclient.utils.misc.Keybind;
-import meteordevelopment.meteorclient.utils.player.EChestMemory;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.tooltip.*;
+import com.hongminh54.marisaoptimize.events.game.ItemStackTooltipEvent;
+import com.hongminh54.marisaoptimize.events.render.TooltipDataEvent;
+import com.hongminh54.marisaoptimize.gui.screens.ContainerInventoryScreen;
+import com.hongminh54.marisaoptimize.mixin.EntityAccessor;
+import com.hongminh54.marisaoptimize.mixin.EntityBucketItemAccessor;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.misc.ByteCountDataOutput;
+import com.hongminh54.marisaoptimize.utils.misc.Keybind;
+import com.hongminh54.marisaoptimize.utils.player.EChestMemory;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.screen.ingame.BookScreen;
@@ -54,6 +52,8 @@ import java.util.function.Consumer;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_ALT;
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_MIDDLE;
+import com.hongminh54.marisaoptimize.settings.*;
+import com.hongminh54.marisaoptimize.utils.tooltip.*;
 
 public class BetterTooltips extends Module {
     public static final Color ECHEST_COLOR = new Color(0, 50, 50);

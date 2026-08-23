@@ -1,40 +1,37 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.world;
 
-import meteordevelopment.meteorclient.events.game.GameLeftEvent;
-import meteordevelopment.meteorclient.events.packets.PacketEvent;
-import meteordevelopment.meteorclient.events.render.Render2DEvent;
-import meteordevelopment.meteorclient.events.render.Render3DEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.mixin.ShulkerBoxScreenHandlerAccessor;
-import meteordevelopment.meteorclient.mixininterface.IVec3d;
-import meteordevelopment.meteorclient.renderer.ShapeMode;
-import meteordevelopment.meteorclient.renderer.text.TextRenderer;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.combat.KillAura;
-import meteordevelopment.meteorclient.systems.modules.movement.Velocity;
-import meteordevelopment.meteorclient.systems.modules.movement.speed.Speed;
-import meteordevelopment.meteorclient.systems.modules.player.*;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.entity.SortPriority;
-import meteordevelopment.meteorclient.utils.entity.TargetUtils;
-import meteordevelopment.meteorclient.utils.misc.HorizontalDirection;
-import meteordevelopment.meteorclient.utils.misc.MBlockPos;
-import meteordevelopment.meteorclient.utils.player.*;
-import meteordevelopment.meteorclient.utils.render.NametagUtils;
-import meteordevelopment.meteorclient.utils.render.RenderUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
-import meteordevelopment.meteorclient.utils.world.BlockUtils;
-import meteordevelopment.meteorclient.utils.world.Dir;
-import meteordevelopment.meteorclient.utils.world.TickRate;
+import com.hongminh54.marisaoptimize.events.game.GameLeftEvent;
+import com.hongminh54.marisaoptimize.events.packets.PacketEvent;
+import com.hongminh54.marisaoptimize.events.render.Render2DEvent;
+import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.mixin.ShulkerBoxScreenHandlerAccessor;
+import com.hongminh54.marisaoptimize.mixininterface.IVec3d;
+import com.hongminh54.marisaoptimize.renderer.ShapeMode;
+import com.hongminh54.marisaoptimize.renderer.text.TextRenderer;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.combat.KillAura;
+import com.hongminh54.marisaoptimize.systems.modules.movement.Velocity;
+import com.hongminh54.marisaoptimize.systems.modules.movement.speed.Speed;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.entity.SortPriority;
+import com.hongminh54.marisaoptimize.utils.entity.TargetUtils;
+import com.hongminh54.marisaoptimize.utils.misc.HorizontalDirection;
+import com.hongminh54.marisaoptimize.utils.misc.MBlockPos;
+import com.hongminh54.marisaoptimize.utils.render.NametagUtils;
+import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.utils.world.BlockUtils;
+import com.hongminh54.marisaoptimize.utils.world.Dir;
+import com.hongminh54.marisaoptimize.utils.world.TickRate;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.*;
 import net.minecraft.client.MinecraftClient;
@@ -75,6 +72,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
+import com.hongminh54.marisaoptimize.settings.*;
+import com.hongminh54.marisaoptimize.systems.modules.player.*;
+import com.hongminh54.marisaoptimize.utils.player.*;
 
 @SuppressWarnings("ConstantConditions")
 public class HighwayBuilder extends Module {
@@ -1762,7 +1762,7 @@ public class HighwayBuilder extends Module {
              * cancelled by default within the handleInputEvents method if you do not have the use key held down,
              * essentially meaning without the following injection it would not work if you don't have a screen open.
              *
-             * @see meteordevelopment.meteorclient.mixin.MinecraftClientMixin#wrapStopUsing(ClientPlayerInteractionManager, PlayerEntity)
+             * @see com.hongminh54.marisaoptimize.mixin.MinecraftClientMixin#wrapStopUsing(ClientPlayerInteractionManager, PlayerEntity)
              */
             @Override
             protected void tick(HighwayBuilder b) {

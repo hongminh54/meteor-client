@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.events.render;
 
-import meteordevelopment.meteorclient.renderer.Renderer3D;
-import meteordevelopment.meteorclient.utils.Utils;
+import com.hongminh54.marisaoptimize.renderer.Renderer3D;
+import com.hongminh54.marisaoptimize.utils.Utils;
 import net.minecraft.client.util.math.MatrixStack;
 
 public class Render3DEvent {

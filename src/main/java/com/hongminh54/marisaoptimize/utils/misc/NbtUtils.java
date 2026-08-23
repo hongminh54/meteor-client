@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.misc;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
 import net.minecraft.nbt.*;
 
 import java.io.ByteArrayInputStream;
@@ -13,7 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.util.*;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class NbtUtils {
     public static <T extends ISerializable<?>> NbtList listToTag(Iterable<T> list) {

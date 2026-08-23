@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,7 +7,7 @@ package com.hongminh54.marisaoptimize.utils.network;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import meteordevelopment.meteorclient.utils.other.JsonDateDeserializer;
+import com.hongminh54.marisaoptimize.utils.other.JsonDateDeserializer;
 
 import javax.annotation.Nullable;
 import java.io.IOException;

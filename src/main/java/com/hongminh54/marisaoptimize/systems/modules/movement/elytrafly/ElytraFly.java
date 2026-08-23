@@ -1,27 +1,26 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
-import meteordevelopment.meteorclient.events.packets.PacketEvent;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.mixin.AbstractBlockAccessor;
-import meteordevelopment.meteorclient.mixininterface.IVec3d;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.modes.Bounce;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.modes.Packet;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.modes.Pitch40;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.modes.Vanilla;
-import meteordevelopment.meteorclient.systems.modules.player.ChestSwap;
-import meteordevelopment.meteorclient.systems.modules.player.Rotation;
-import meteordevelopment.meteorclient.systems.modules.render.Freecam;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.entity.player.PlayerMoveEvent;
+import com.hongminh54.marisaoptimize.events.packets.PacketEvent;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.mixin.AbstractBlockAccessor;
+import com.hongminh54.marisaoptimize.mixininterface.IVec3d;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.modes.Bounce;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.modes.Packet;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.modes.Pitch40;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.modes.Vanilla;
+import com.hongminh54.marisaoptimize.systems.modules.player.ChestSwap;
+import com.hongminh54.marisaoptimize.systems.modules.player.Rotation;
+import com.hongminh54.marisaoptimize.systems.modules.render.Freecam;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -36,6 +35,7 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class ElytraFly extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();

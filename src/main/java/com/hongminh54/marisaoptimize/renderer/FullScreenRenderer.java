@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,7 +7,7 @@ package com.hongminh54.marisaoptimize.renderer;
 
 import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import meteordevelopment.meteorclient.utils.PreInit;
+import com.hongminh54.marisaoptimize.utils.PreInit;
 
 public class FullScreenRenderer {
     public static GpuBuffer vbo;

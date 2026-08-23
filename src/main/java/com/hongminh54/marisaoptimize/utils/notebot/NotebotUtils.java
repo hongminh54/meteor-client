@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.notebot;
 
-import meteordevelopment.meteorclient.utils.notebot.instrumentdetect.InstrumentDetectFunction;
-import meteordevelopment.meteorclient.utils.notebot.song.Note;
+import com.hongminh54.marisaoptimize.utils.notebot.instrumentdetect.InstrumentDetectFunction;
+import com.hongminh54.marisaoptimize.utils.notebot.song.Note;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.NoteBlock;
 import net.minecraft.block.enums.NoteBlockInstrument;

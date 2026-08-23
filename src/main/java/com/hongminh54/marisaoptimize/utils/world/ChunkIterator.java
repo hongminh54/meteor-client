@@ -1,17 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.world;
 
-import meteordevelopment.meteorclient.mixin.ClientChunkManagerAccessor;
-import meteordevelopment.meteorclient.mixin.ClientChunkMapAccessor;
+import com.hongminh54.marisaoptimize.mixin.ClientChunkManagerAccessor;
+import com.hongminh54.marisaoptimize.mixin.ClientChunkMapAccessor;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.Iterator;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class ChunkIterator implements Iterator<Chunk> {
     private final ClientChunkMapAccessor map = (ClientChunkMapAccessor) (Object) ((ClientChunkManagerAccessor) mc.world.getChunkManager()).meteor$getChunks();

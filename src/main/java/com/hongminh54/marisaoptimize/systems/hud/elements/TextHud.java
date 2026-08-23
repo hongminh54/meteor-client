@@ -1,20 +1,19 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.hud.elements;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.gui.utils.StarscriptTextBoxRenderer;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.hud.Hud;
-import meteordevelopment.meteorclient.systems.hud.HudElement;
-import meteordevelopment.meteorclient.systems.hud.HudElementInfo;
-import meteordevelopment.meteorclient.systems.hud.HudRenderer;
-import meteordevelopment.meteorclient.utils.misc.MeteorStarscript;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.gui.utils.StarscriptTextBoxRenderer;
+import com.hongminh54.marisaoptimize.systems.hud.Hud;
+import com.hongminh54.marisaoptimize.systems.hud.HudElement;
+import com.hongminh54.marisaoptimize.systems.hud.HudElementInfo;
+import com.hongminh54.marisaoptimize.systems.hud.HudRenderer;
+import com.hongminh54.marisaoptimize.utils.misc.MeteorStarscript;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 import org.meteordev.starscript.Script;
 import org.meteordev.starscript.Section;
 import org.meteordev.starscript.compiler.Compiler;
@@ -22,6 +21,7 @@ import org.meteordev.starscript.compiler.Parser;
 import org.meteordev.starscript.utils.StarscriptError;
 
 import java.util.List;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class TextHud extends HudElement {
     private static final Color WHITE = new Color();

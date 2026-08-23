@@ -1,14 +1,14 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.themes.meteor.widgets;
 
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
-import meteordevelopment.meteorclient.gui.themes.meteor.MeteorWidget;
-import meteordevelopment.meteorclient.gui.widgets.WMultiLabel;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.MeteorWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.WMultiLabel;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 
 public class WMeteorMultiLabel extends WMultiLabel implements MeteorWidget {
     public WMeteorMultiLabel(String text, boolean title, double maxWidth) {

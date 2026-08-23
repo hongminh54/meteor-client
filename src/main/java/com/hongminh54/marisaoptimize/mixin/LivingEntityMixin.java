@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,18 +7,18 @@ package com.hongminh54.marisaoptimize.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.entity.player.CanWalkOnFluidEvent;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.movement.HighJump;
-import meteordevelopment.meteorclient.systems.modules.movement.Sprint;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.ElytraFlightModes;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.ElytraFly;
-import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.modes.Bounce;
-import meteordevelopment.meteorclient.systems.modules.player.NoStatusEffects;
-import meteordevelopment.meteorclient.systems.modules.player.OffhandCrash;
-import meteordevelopment.meteorclient.systems.modules.render.HandView;
-import meteordevelopment.meteorclient.systems.modules.render.NoRender;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.entity.player.CanWalkOnFluidEvent;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.movement.HighJump;
+import com.hongminh54.marisaoptimize.systems.modules.movement.Sprint;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.ElytraFlightModes;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.ElytraFly;
+import com.hongminh54.marisaoptimize.systems.modules.movement.elytrafly.modes.Bounce;
+import com.hongminh54.marisaoptimize.systems.modules.player.NoStatusEffects;
+import com.hongminh54.marisaoptimize.systems.modules.player.OffhandCrash;
+import com.hongminh54.marisaoptimize.systems.modules.render.HandView;
+import com.hongminh54.marisaoptimize.systems.modules.render.NoRender;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {

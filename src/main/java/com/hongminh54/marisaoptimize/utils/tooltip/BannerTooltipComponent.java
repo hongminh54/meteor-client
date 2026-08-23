@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.tooltip;
 
-import meteordevelopment.meteorclient.mixin.DrawContextAccessor;
-import meteordevelopment.meteorclient.utils.render.CustomBannerGuiElementRenderState;
+import com.hongminh54.marisaoptimize.mixin.DrawContextAccessor;
+import com.hongminh54.marisaoptimize.utils.render.CustomBannerGuiElementRenderState;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
@@ -19,7 +19,7 @@ import net.minecraft.item.BannerItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DyeColor;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class BannerTooltipComponent implements MeteorTooltipData, TooltipComponent {
     private final DyeColor color;

@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -10,16 +10,15 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.authlib.GameProfile;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.entity.DropItemsEvent;
-import meteordevelopment.meteorclient.events.entity.player.PlayerTickMovementEvent;
-import meteordevelopment.meteorclient.events.entity.player.SendMovementPacketsEvent;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.movement.*;
-import meteordevelopment.meteorclient.systems.modules.player.LiquidInteract;
-import meteordevelopment.meteorclient.systems.modules.player.NoMiningTrace;
-import meteordevelopment.meteorclient.systems.modules.player.Portals;
-import meteordevelopment.meteorclient.utils.entity.fakeplayer.FakePlayerEntity;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.entity.DropItemsEvent;
+import com.hongminh54.marisaoptimize.events.entity.player.PlayerTickMovementEvent;
+import com.hongminh54.marisaoptimize.events.entity.player.SendMovementPacketsEvent;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.player.LiquidInteract;
+import com.hongminh54.marisaoptimize.systems.modules.player.NoMiningTrace;
+import com.hongminh54.marisaoptimize.systems.modules.player.Portals;
+import com.hongminh54.marisaoptimize.utils.entity.fakeplayer.FakePlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -37,6 +36,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import com.hongminh54.marisaoptimize.systems.modules.movement.*;
 
 @Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {

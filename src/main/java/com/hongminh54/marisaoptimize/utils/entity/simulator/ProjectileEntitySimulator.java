@@ -1,18 +1,18 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.entity.simulator;
 
-import meteordevelopment.meteorclient.mixin.CrossbowItemAccessor;
-import meteordevelopment.meteorclient.mixin.ProjectileInGroundAccessor;
-import meteordevelopment.meteorclient.mixininterface.IVec3d;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.movement.NoSlow;
-import meteordevelopment.meteorclient.systems.modules.movement.Sneak;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.player.Rotations;
+import com.hongminh54.marisaoptimize.mixin.CrossbowItemAccessor;
+import com.hongminh54.marisaoptimize.mixin.ProjectileInGroundAccessor;
+import com.hongminh54.marisaoptimize.mixininterface.IVec3d;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.movement.NoSlow;
+import com.hongminh54.marisaoptimize.systems.modules.movement.Sneak;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.player.Rotations;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ChargedProjectilesComponent;
 import net.minecraft.enchantment.Enchantments;
@@ -35,7 +35,7 @@ import org.joml.Vector3d;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class ProjectileEntitySimulator {
     private final BlockPos.Mutable blockPos = new BlockPos.Mutable();

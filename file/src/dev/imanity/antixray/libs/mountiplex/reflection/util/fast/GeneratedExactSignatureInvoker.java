@@ -1,0 +1,12 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package dev.imanity.antixray.libs.mountiplex.reflection.util.fast;
+
+public interface GeneratedExactSignatureInvoker<T> extends Invoker<T>
+{
+    String getInvokerClassInternalName();
+    
+    String getInvokerClassTypeDescriptor();
+}

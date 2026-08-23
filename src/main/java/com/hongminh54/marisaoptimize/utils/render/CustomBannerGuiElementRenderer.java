@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,7 +7,6 @@ package com.hongminh54.marisaoptimize.utils.render;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.render.SpecialGuiElementRenderer;
-import net.minecraft.client.gui.render.state.special.BannerResultGuiElementRenderState;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -17,6 +16,7 @@ import net.minecraft.client.render.command.RenderDispatcher;
 import net.minecraft.client.render.model.ModelBaker;
 import net.minecraft.client.texture.SpriteHolder;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.render.state.special.BannerResultGuiElementRenderState;
 
 public class CustomBannerGuiElementRenderer extends SpecialGuiElementRenderer<CustomBannerGuiElementRenderState> {
     private final SpriteHolder sprite;

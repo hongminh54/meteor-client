@@ -1,0 +1,206 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package dev.imanity.antixray.a;
+
+import io.fairyproject.log.Log;
+import java.util.function.Supplier;
+import org.bukkit.event.Cancellable;
+import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.event.world.WorldUnloadEvent;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.world.WorldLoadEvent;
+import org.bukkit.Chunk;
+import dev.imanity.antixray.config.AntiXrayConfig;
+import org.bukkit.World;
+import io.fairyproject.container.PreDestroy;
+import io.fairyproject.data.MetaStorage;
+import java.util.Iterator;
+import io.fairyproject.mc.data.MCMetadata;
+import org.bukkit.Bukkit;
+import io.fairyproject.container.PostInitialize;
+import kotlin.jvm.internal.Intrinsics;
+import dev.imanity.antixray.api.chunk.IDirectChunkCache;
+import io.fairyproject.data.MetaKey;
+import dev.imanity.antixray.api.tick.InitialTickProcessor;
+import org.jetbrains.annotations.NotNull;
+import dev.imanity.antixray.config.AntiXrayConfigService;
+import kotlin.jvm.internal.SourceDebugExtension;
+import kotlin.Metadata;
+import io.fairyproject.bukkit.listener.RegisterAsListener;
+import io.fairyproject.container.InjectableComponent;
+import org.bukkit.event.Listener;
+import dev.imanity.antixray.api.chunk.IDirectChunkManager;
+
+@InjectableComponent
+@RegisterAsListener
+@Metadata(mv = { 1, 9, 0 }, k = 1, xi = 48, d1 = { "\u0000^\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0004\n\u0002\u0018\u0002\n\u0002\u0010\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0004\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\t\n\u0002\u0010\u000b\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0002\b\u0003\b\u0007\u0018\u00002\u00020\u00012\u00020\u0002B\u001f\u0012\u0006\u0010\u0004\u001a\u00020\u0003\u0012\u0006\u0010\u0006\u001a\u00020\u0005\u0012\u0006\u0010\b\u001a\u00020\u0007¢\u0006\u0004\b\t\u0010\nJ\u0017\u0010\r\u001a\u00020\f2\u0006\u0010\u0004\u001a\u00020\u000bH\u0017¢\u0006\u0004\b\r\u0010\u000eJ\u0017\u0010\u000f\u001a\u00020\f2\u0006\u0010\u0004\u001a\u00020\u000bH\u0007¢\u0006\u0004\b\u000f\u0010\u000eJ\u0017\u0010\u0010\u001a\u00020\f2\u0006\u0010\u0004\u001a\u00020\u000bH\u0002¢\u0006\u0004\b\u0010\u0010\u000eJ\u0017\u0010\u0013\u001a\u00020\u00122\u0006\u0010\u0004\u001a\u00020\u0011H\u0007¢\u0006\u0004\b\u0013\u0010\u0014J\u0017\u0010\u0013\u001a\u00020\u00122\u0006\u0010\u0004\u001a\u00020\u0015H\u0007¢\u0006\u0004\b\u0013\u0010\u0016J\u000f\u0010\u0017\u001a\u00020\u0012H\u0007¢\u0006\u0004\b\u0017\u0010\u0018J\u000f\u0010\u0019\u001a\u00020\u0012H\u0007¢\u0006\u0004\b\u0019\u0010\u0018J\u0017\u0010\u0013\u001a\u00020\u00122\u0006\u0010\u0004\u001a\u00020\u001aH\u0007¢\u0006\u0004\b\u0013\u0010\u001bJ\u0017\u0010\u0013\u001a\u00020\u00122\u0006\u0010\u0004\u001a\u00020\u001cH\u0007¢\u0006\u0004\b\u0013\u0010\u001dR\u0014\u0010\u0013\u001a\u00020\u00038\u0002X\u0083\u0004¢\u0006\u0006\n\u0004\b\u001e\u0010\u001fR\u0014\u0010\"\u001a\u00020\u00058\u0002X\u0083\u0004¢\u0006\u0006\n\u0004\b \u0010!R\u0014\u0010%\u001a\u00020\u00078\u0002X\u0083\u0004¢\u0006\u0006\n\u0004\b#\u0010$R\u0016\u0010)\u001a\u00020&8\u0002@\u0002X\u0083\u000e¢\u0006\u0006\n\u0004\b'\u0010(R,\u0010-\u001a\u001a\u0012\b\u0012\u0006*\u00020\f0\f*\f\u0012\b\u0012\u0006*\u00020\f0\f0*0*8\u0002X\u0083\u0004¢\u0006\u0006\n\u0004\b+\u0010," }, d2 = { "Ldev/imanity/antixray/a/IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll;", "Ldev/imanity/antixray/api/chunk/IDirectChunkManager;", "Lorg/bukkit/event/Listener;", "Ldev/imanity/antixray/config/AntiXrayConfigService;", "p0", "Ldev/imanity/antixray/a/IIlIIlIllIIllIIllIIIlIIIlllIIIlIIlllIIIlIIllIIlIIlIIllIIIllIlllIIIlllIIlIlIIIllIIlllIIlIlllIIllIIlIIllIIlIllIllIIlIIllIIllIIllIIlllIIlIIllIlIIllIlIIllIlllIllIlllIIIlIIllIIlllIlIllIIlIllIIlIIllIIIllIllIIlIIIlIllIllIlllIll;", "p1", "Ldev/imanity/antixray/api/tick/InitialTickProcessor;", "p2", "<init>", "(Ldev/imanity/antixray/config/AntiXrayConfigService;Ldev/imanity/antixray/a/IIlIIlIllIIllIIllIIIlIIIlllIIIlIIlllIIIlIIllIIlIIlIIllIIIllIlllIIIlllIIlIlIIIllIIlllIIlIlllIIllIIlIIllIIlIllIllIIlIIllIIllIIllIIlllIIlIIllIlIIllIlIIllIlllIllIlllIIIlIIllIIlllIlIllIIlIllIIlIIllIIIllIllIIlIIIlIllIllIlllIll;Ldev/imanity/antixray/api/tick/InitialTickProcessor;)V", "Lorg/bukkit/World;", "Ldev/imanity/antixray/api/chunk/IDirectChunkCache;", "get", "(Lorg/bukkit/World;)Ldev/imanity/antixray/api/chunk/IDirectChunkCache;", "IllIllIIlllIIIllIIlllIIlIIlllIIIllIIIlllIIllIIIlIIIlIIIllIIllIlIIIllIlIIlllIIIlllIlIIlIIIlIIlIIlllIlIIlIlllIIllIIllIIllIIIlIIIlIIllIIllIllIIlIIIlllIllIIlIIIllIIllIIlIllIIIlllIIIllIIIllIIllIIlIIIllIIlllIIlllIIIlllIIIllIllIIlIIIlllIIlIIIllIIllIll", "IIllIllIlIlllIIlllIIlllIlIIIllIIlIIllIIllIIlIIIlllIIIlIIlllIIlllIIIlIlIIlIIllIlIIIllIIlIIllIIlIIlIIlllIIIllIlllIIlIIlllIllIllIIlllIlllIIlllIlIIIllIIllIlIlIIIllIlIIIlIIIllIIllIIlIlllIllIllIIIlIIIlIIllIIllIlIIIlIIIlIIllIIIllIIlll", "Lorg/bukkit/event/world/ChunkLoadEvent;", "", "IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll", "(Lorg/bukkit/event/world/ChunkLoadEvent;)V", "Lorg/bukkit/event/world/ChunkUnloadEvent;", "(Lorg/bukkit/event/world/ChunkUnloadEvent;)V", "IlIlIIllIIlllIIIlIIIllIIIlllIIIlllIIIlllIIllIlIIllIllIIllIIllIlIIllIIIllIllIIIlIIIllIIIllIIlIlIIllIllIIllIIIlIllIIlIIlllIIlIIlIIlllIlllIllIIIlIllIllIIIlllIllIIlllIIIlIlIIllIIlllIllIIllIIIllIIllIIlllIIllIIIllIlllIIlllIIIllIlIIlllIIIllIIl", "()V", "IllIIllIIIllIIllIllIIllIIIlIIllIllIIIlIIIlIllIIIlllIllIllIlIIllIIlllIlllIIlIIllIlIIlIIllIllIIIlIIIllIlllIIllIllIIllIIIllIIllIIIlIIIlIIIlllIIIlIIlIlllIIllIIllIIIlIIlIIlllIlIIllIllIIIllIIlIIllIIlllIIIllIIIllIIIlllIIllIIIllIIIlIIlllIIlIIll", "Lorg/bukkit/event/world/WorldLoadEvent;", "(Lorg/bukkit/event/world/WorldLoadEvent;)V", "Lorg/bukkit/event/world/WorldUnloadEvent;", "(Lorg/bukkit/event/world/WorldUnloadEvent;)V", "IIllIIlllIIIllIIIlllIlllIIIlIIlIIlIlllIlllIIllIIIllIIlIllIIIllIlllIIlIIIlIllIllIllIlllIllIlIIllIIIllIlIIIllIIllIIIllIlIIIllIllIIIlllIlllIlIIlllIIlIIIllIllIIlllIllIIllIIlllIlIlIIIlllIIlIIlllIIlllIIIllIlIllIIllIllIlllIIlIlIlIlll", "Ldev/imanity/antixray/config/AntiXrayConfigService;", "IIllIIIlllIlIIlIIlllIllIIlllIIlllIlIIIllIIIlllIIlIIllIllIllIIllIIIllIIlllIllIIIlIllIIlIIlllIIllIllIlIIllIllIIllIIIllIIlIIlllIIlIIIlIlllIIllIIllIIlllIIllIIlllIIIlllIlIIlllIIllIIllIIlIIlIllIIllIlllIIIllIIllIIllIlllIIIllIlllIIllIllIIIlIl", "Ldev/imanity/antixray/a/IIlIIlIllIIllIIllIIIlIIIlllIIIlIIlllIIIlIIllIIlIIlIIllIIIllIlllIIIlllIIlIlIIIllIIlllIIlIlllIIllIIlIIllIIlIllIllIIlIIllIIllIIllIIlllIIlIIllIlIIllIlIIllIlllIllIlllIIIlIIllIIlllIlIllIIlIllIIlIIllIIIllIllIIlIIIlIllIllIlllIll;", "IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll", "IIllIIllIIllIIIllIIlllIlIIIllIlllIIllIIlIlIIIllIIllIlllIIllIllIIlIIllIlIIIlllIIllIlllIIIllIllIllIIllIlllIIIlIIllIlllIlllIIllIIllIllIIIlIllIIlIlIIlIIllIlIIIlIIIlIIlllIIllIllIlllIIlIlllIIlIllIlllIIIllIIIllIlIIIllIIlIIlIIlIlll", "Ldev/imanity/antixray/api/tick/InitialTickProcessor;", "IlllIIlIIIlllIIIlIIllIlIllIIIlIIIllIlllIIIllIIlIIllIIllIlllIIllIIllIIllIIllIIlllIIlllIllIIllIlllIlIllIIlllIllIllIIlllIIllIIIlllIIIllIIIllIlllIIlllIIlIlIlIlIllIIIlllIIlIllIIllIIlllIIlIIIllIIIllIIlIIlllIlIllIllIIlIIIllIllIIlIIllIll", "", "initialized", "Z", "IIllIIIllIllIIIlllIIIlllIIllIIlllIlIIIllIllIlIIlIIIlllIIlIIllIIllIlIllIIllIIIllIIlIllIIlIIlIIllIIlIlIIllIllIIlIlIIlIIIllIIlIllIllIIlllIllIIlIlllIIllIlIlllIIlllIIIlIIlIIllIlllIlIIllIIIllIlIlIIlIIllIllIlIllIIIllIIll", "Lio/fairyproject/data/MetaKey;", "IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl", "Lio/fairyproject/data/MetaKey;", "IlIIIlIIllIlllIlIIIlIIlllIIlIllIIlIIllIIIlllIIlllIIIlIIIlIIllIlllIIllIllIIIlllIlIllIIIlllIIlllIlIIllIIIllIlIIlIlllIllIIlIIllIllIlIlIIlIIIllIIllIIlIllIIllIIlIIlllIllIIIllIlllIIllIlllIlIIlIllIIlllIIIllIlllIIIllIIlIIllIlllIIll" })
+@SourceDebugExtension({ "SMAP\nDirectChunkManager.kt\nKotlin\n*S Kotlin\n*F\n+ 1 DirectChunkManager.kt\ndev/imanity/antixray/core/chunk/DirectChunkManager\n+ 2 _Arrays.kt\nkotlin/collections/ArraysKt___ArraysKt\n*L\n1#1,144:1\n13309#2,2:145\n*S KotlinDebug\n*F\n+ 1 DirectChunkManager.kt\ndev/imanity/antixray/core/chunk/DirectChunkManager\n*L\n84#1:145,2\n*E\n" })
+public final class IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll implements IDirectChunkManager, Listener
+{
+    @NotNull
+    private final AntiXrayConfigService IIllIIlllIIIllIIIlllIlllIIIlIIlIIlIlllIlllIIllIIIllIIlIllIIIllIlllIIlIIIlIllIllIllIlllIllIlIIllIIIllIlIIIllIIllIIIllIlIIIllIllIIIlllIlllIlIIlllIIlIIIllIllIIlllIllIIllIIlllIlIlIIIlllIIlIIlllIIlllIIIllIlIllIIllIllIlllIIlIlIlIlll;
+    @NotNull
+    private final IIlIIlIllIIllIIllIIIlIIIlllIIIlIIlllIIIlIIllIIlIIlIIllIIIllIlllIIIlllIIlIlIIIllIIlllIIlIlllIIllIIlIIllIIlIllIllIIlIIllIIllIIllIIlllIIlIIllIlIIllIlIIllIlllIllIlllIIIlIIllIIlllIlIllIIlIllIIlIIllIIIllIllIIlIIIlIllIllIlllIll IIllIIIlllIlIIlIIlllIllIIlllIIlllIlIIIllIIIlllIIlIIllIllIllIIllIIIllIIlllIllIIIlIllIIlIIlllIIllIllIlIIllIllIIllIIIllIIlIIlllIIlIIIlIlllIIllIIllIIlllIIllIIlllIIIlllIlIIlllIIllIIllIIlIIlIllIIllIlllIIIllIIllIIllIlllIIIllIlllIIllIllIIIlIl;
+    @NotNull
+    private final InitialTickProcessor IIllIIllIIllIIIllIIlllIlIIIllIlllIIllIIlIlIIIllIIllIlllIIllIllIIlIIllIlIIIlllIIllIlllIIIllIllIllIIllIlllIIIlIIllIlllIlllIIllIIllIllIIIlIllIIlIlIIlIIllIlIIIlIIIlIIlllIIllIllIlllIIlIlllIIlIllIlllIIIllIIIllIlIIIllIIlIIlIIlIlll;
+    private final MetaKey<IDirectChunkCache> IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl;
+    private boolean initialized;
+    
+    public IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll(@NotNull final AntiXrayConfigService iIllIIlllIIIllIIIlllIlllIIIlIIlIIlIlllIlllIIllIIIllIIlIllIIIllIlllIIlIIIlIllIllIllIlllIllIlIIllIIIllIlIIIllIIllIIIllIlIIIllIllIIIlllIlllIlIIlllIIlIIIllIllIIlllIllIIllIIlllIlIlIIIlllIIlIIlllIIlllIIIllIlIllIIllIllIlllIIlIlIlIlll, @NotNull final IIlIIlIllIIllIIllIIIlIIIlllIIIlIIlllIIIlIIllIIlIIlIIllIIIllIlllIIIlllIIlIlIIIllIIlllIIlIlllIIllIIlIIllIIlIllIllIIlIIllIIllIIllIIlllIIlIIllIlIIllIlIIllIlllIllIlllIIIlIIllIIlllIlIllIIlIllIIlIIllIIIllIllIIlIIIlIllIllIlllIll iIllIIIlllIlIIlIIlllIllIIlllIIlllIlIIIllIIIlllIIlIIllIllIllIIllIIIllIIlllIllIIIlIllIIlIIlllIIllIllIlIIllIllIIllIIIllIIlIIlllIIlIIIlIlllIIllIIllIIlllIIllIIlllIIIlllIlIIlllIIllIIllIIlIIlIllIIllIlllIIIllIIllIIllIlllIIIllIlllIIllIllIIIlIl, @NotNull final InitialTickProcessor iIllIIllIIllIIIllIIlllIlIIIllIlllIIllIIlIlIIIllIIllIlllIIllIllIIlIIllIlIIIlllIIllIlllIIIllIllIllIIllIlllIIIlIIllIlllIlllIIllIIllIllIIIlIllIIlIlIIlIIllIlIIIlIIIlIIlllIIllIllIlllIIlIlllIIlIllIlllIIIllIIIllIlIIIllIIlIIlIIlIlll) {
+        Intrinsics.checkNotNullParameter((Object)iIllIIlllIIIllIIIlllIlllIIIlIIlIIlIlllIlllIIllIIIllIIlIllIIIllIlllIIlIIIlIllIllIllIlllIllIlIIllIIIllIlIIIllIIllIIIllIlIIIllIllIIIlllIlllIlIIlllIIlIIIllIllIIlllIllIIllIIlllIlIlIIIlllIIlIIlllIIlllIIIllIlIllIIllIllIlllIIlIlIlIlll, "");
+        Intrinsics.checkNotNullParameter((Object)iIllIIIlllIlIIlIIlllIllIIlllIIlllIlIIIllIIIlllIIlIIllIllIllIIllIIIllIIlllIllIIIlIllIIlIIlllIIllIllIlIIllIllIIllIIIllIIlIIlllIIlIIIlIlllIIllIIllIIlllIIllIIlllIIIlllIlIIlllIIllIIllIIlIIlIllIIllIlllIIIllIIllIIllIlllIIIllIlllIIllIllIIIlIl, "");
+        Intrinsics.checkNotNullParameter((Object)iIllIIllIIllIIIllIIlllIlIIIllIlllIIllIIlIlIIIllIIllIlllIIllIllIIlIIllIlIIIlllIIllIlllIIIllIllIllIIllIlllIIIlIIllIlllIlllIIllIIllIllIIIlIllIIlIlIIlIIllIlIIIlIIIlIIlllIIllIllIlllIIlIlllIIlIllIlllIIIllIIIllIlIIIllIIlIIlIIlIlll, "");
+        this.IIllIIlllIIIllIIIlllIlllIIIlIIlIIlIlllIlllIIllIIIllIIlIllIIIllIlllIIlIIIlIllIllIllIlllIllIlIIllIIIllIlIIIllIIllIIIllIlIIIllIllIIIlllIlllIlIIlllIIlIIIllIllIIlllIllIIllIIlllIlIlIIIlllIIlIIlllIIlllIIIllIlIllIIllIllIlllIIlIlIlIlll = iIllIIlllIIIllIIIlllIlllIIIlIIlIIlIlllIlllIIllIIIllIIlIllIIIllIlllIIlIIIlIllIllIllIlllIllIlIIllIIIllIlIIIllIIllIIIllIlIIIllIllIIIlllIlllIlIIlllIIlIIIllIllIIlllIllIIllIIlllIlIlIIIlllIIlIIlllIIlllIIIllIlIllIIllIllIlllIIlIlIlIlll;
+        this.IIllIIIlllIlIIlIIlllIllIIlllIIlllIlIIIllIIIlllIIlIIllIllIllIIllIIIllIIlllIllIIIlIllIIlIIlllIIllIllIlIIllIllIIllIIIllIIlIIlllIIlIIIlIlllIIllIIllIIlllIIllIIlllIIIlllIlIIlllIIllIIllIIlIIlIllIIllIlllIIIllIIllIIllIlllIIIllIlllIIllIllIIIlIl = iIllIIIlllIlIIlIIlllIllIIlllIIlllIlIIIllIIIlllIIlIIllIllIllIIllIIIllIIlllIllIIIlIllIIlIIlllIIllIllIlIIllIllIIllIIIllIIlIIlllIIlIIIlIlllIIllIIllIIlllIIllIIlllIIIlllIlIIlllIIllIIllIIlIIlIllIIllIlllIIIllIIllIIllIlllIIIllIlllIIllIllIIIlIl;
+        this.IIllIIllIIllIIIllIIlllIlIIIllIlllIIllIIlIlIIIllIIllIlllIIllIllIIlIIllIlIIIlllIIllIlllIIIllIllIllIIllIlllIIIlIIllIlllIlllIIllIIllIllIIIlIllIIlIlIIlIIllIlIIIlIIIlIIlllIIllIllIlllIIlIlllIIlIllIlllIIIllIIIllIlIIIllIIlIIlIIlIlll = iIllIIllIIllIIIllIIlllIlIIIllIlllIIllIIlIlIIIllIIllIlllIIllIllIIlIIllIlIIIlllIIllIlllIIIllIllIllIIllIlllIIIlIIllIlllIlllIIllIIllIllIIIlIllIIlIlIIlIIllIlIIIlIIIlIIlllIIllIllIlllIIlIlllIIlIllIlllIIIllIIIllIlIIIllIIlIIlIIlIlll;
+        this.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl = (MetaKey<IDirectChunkCache>)MetaKey.create("antixray:direct-chunk-cache", (Class)IDirectChunkCache.class);
+    }
+    
+    @PostInitialize
+    public final void IlIlIIllIIlllIIIlIIIllIIIlllIIIlllIIIlllIIllIlIIllIllIIllIIllIlIIllIIIllIllIIIlIIIllIIIllIIlIlIIllIllIIllIIIlIllIIlIIlllIIlIIlIIlllIlllIllIIIlIllIllIIIlllIllIIlllIIIlIlIIllIIlllIllIIllIIIllIIllIIlllIIllIIIllIlllIIlllIIIllIlIIlllIIIllIIl() {
+        this.IIllIIllIIllIIIllIIlllIlIIIllIlllIIllIIlIlIIIllIIllIlllIIllIllIIlIIllIlIIIlllIIllIlllIIIllIllIllIIllIlllIIIlIIllIlllIlllIIllIIllIllIIIlIllIIlIlIIlIIllIlIIIlIIIlIIlllIIllIllIlllIIlIlllIIlIllIlllIIIllIIIllIlIIIllIIlIIlIIlIlll.addTask(4, IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll::IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll);
+    }
+    
+    @PreDestroy
+    public final void IllIIllIIIllIIllIllIIllIIIlIIllIllIIIlIIIlIllIIIlllIllIllIlIIllIIlllIlllIIlIIllIlIIlIIllIllIIIlIIIllIlllIIllIllIIllIIIllIIllIIIlIIIlIIIlllIIIlIIlIlllIIllIIllIIIlIIlIIlllIlIIllIllIIIllIIlIIllIIlllIIIllIIIllIIIlllIIllIIIllIIIlIIlllIIlIIll() {
+        final Iterator iterator = Bukkit.getWorlds().iterator();
+        while (iterator.hasNext()) {
+            final MetaStorage provide = MCMetadata.provide((Object)iterator.next());
+            Intrinsics.checkNotNullExpressionValue((Object)provide, "");
+            final MetaStorage metaStorage = provide;
+            metaStorage.ifPresent((MetaKey)this.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl, IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll::IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll);
+        }
+    }
+    
+    @NotNull
+    public final IDirectChunkCache IllIllIIlllIIIllIIlllIIlIIlllIIIllIIIlllIIllIIIlIIIlIIIllIIllIlIIIllIlIIlllIIIlllIlIIlIIIlIIlIIlllIlIIlIlllIIllIIllIIllIIIlIIIlIIllIIllIllIIlIIIlllIllIIlIIIllIIllIIlIllIIIlllIIIllIIIllIIllIIlIIIllIIlllIIlllIIIlllIIIllIllIIlIIIlllIIlIIIllIIllIll(@NotNull final World world) {
+        Intrinsics.checkNotNullParameter((Object)world, "");
+        final IDirectChunkCache directChunkCache = (IDirectChunkCache)MCMetadata.provide((Object)world).getOrNull((MetaKey)this.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl);
+        IDirectChunkCache directChunkCache2;
+        if (directChunkCache == null) {
+            final IDirectChunkCache iIllIllIlIlllIIlllIIlllIlIIIllIIlIIllIIllIIlIIIlllIIIlIIlllIIlllIIIlIlIIlIIllIlIIIllIIlIIllIIlIIlIIlllIIIllIlllIIlIIlllIllIllIIlllIlllIIlllIlIIIllIIllIlIlIIIllIlIIIlIIIllIIllIIlIlllIllIllIIIlIIIlIIllIIllIlIIIlIIIlIIllIIIllIIlll = this.IIllIllIlIlllIIlllIIlllIlIIIllIIlIIllIIllIIlIIIlllIIIlIIlllIIlllIIIlIlIIlIIllIlIIIllIIlIIllIIlIIlIIlllIIIllIlllIIlIIlllIllIllIIlllIlllIIlllIlIIIllIIllIlIlIIIllIlIIIlIIIllIIllIIlIlllIllIllIIIlIIIlIIllIIllIlIIIlIIIlIIllIIIllIIlll(world);
+            MCMetadata.provide((Object)world).put((MetaKey)this.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl, (Object)iIllIllIlIlllIIlllIIlllIlIIIllIIlIIllIIllIIlIIIlllIIIlIIlllIIlllIIIlIlIIlIIllIlIIIllIIlIIllIIlIIlIIlllIIIllIlllIIlIIlllIllIllIIlllIlllIIlllIlIIIllIIllIlIlIIIllIlIIIlIIIllIIllIIlIlllIllIllIIIlIIIlIIllIIllIlIIIlIIIlIIllIIIllIIlll);
+            directChunkCache2 = iIllIllIlIlllIIlllIIlllIlIIIllIIlIIllIIllIIlIIIlllIIIlIIlllIIlllIIIlIlIIlIIllIlIIIllIIlIIllIIlIIlIIlllIIIllIlllIIlIIlllIllIllIIlllIlllIIlllIlIIIllIIllIlIlIIIllIlIIIlIIIllIIllIIlIlllIllIllIIIlIIIlIIllIIllIlIIIlIIIlIIllIIIllIIlll;
+        }
+        else {
+            directChunkCache2 = directChunkCache;
+        }
+        return directChunkCache2;
+    }
+    
+    private final IDirectChunkCache IIllIllIlIlllIIlllIIlllIlIIIllIIlIIllIIllIIlIIIlllIIIlIIlllIIlllIIIlIlIIlIIllIlIIIllIIlIIllIIlIIlIIlllIIIllIlllIIlIIlllIllIllIIlllIlllIIlllIlIIIllIIllIlIlIIIllIlIIIlIIIllIIllIIlIlllIllIllIIIlIIIlIIllIIllIlIIIlIIIlIIllIIIllIIlll(final World world) {
+        final IIllIIIlllIIIllIIIllIIlIIllIIllIIIlllIIlIIIllIIllIIIlIIIlllIIlllIIlllIIllIIlIlllIlllIlIlIlllIllIIIllIIIllIlIlIllIlIllIIlllIllIlIIlIIIlIlIIllIlllIIlIllIIIlIlllIIllIllIIlIIlllIIlllIIIllIIllIlllIIlIlIIIllIIllIIIlIIIllIIllIIllIIIlllIIll iIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll = this.IIllIIIlllIlIIlIIlllIllIIlllIIlllIlIIIllIIIlllIIlIIllIllIllIIllIIIllIIlllIllIIIlIllIIlIIlllIIllIllIlIIllIllIIllIIIllIIlIIlllIIlIIIlIlllIIllIIllIIlllIIllIIlllIIIlllIlIIlllIIllIIllIIlIIlIllIIllIlllIIIllIIllIIllIlllIIIllIlllIIllIllIIIlIl.IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(world, this.IIllIIlllIIIllIIIlllIlllIIIlIIlIIlIlllIlllIIllIIIllIIlIllIIIllIlllIIlIIIlIllIllIllIlllIllIlIIllIIIllIlIIIllIIllIIIllIlIIIllIllIIIlllIlllIlIIlllIIlIIIllIllIIlllIllIIllIIlllIlIlIIIlllIIlIIlllIIlllIIIllIlIllIIllIllIlllIIlIlIlIlll.getConfig(world));
+        final String property = System.getProperty("java.specification.version");
+        IDirectChunkCache directChunkCache;
+        try {
+            directChunkCache = ((Integer.parseInt(property) >= 17) ? new IIIlIIIllIIIllIlllIIllIlllIIlIIIllIIIlIIIllIIlllIIlllIIIlIlIllIlIIllIIlIllIIIlIlIIlllIIllIIIllIIllIIIlIIllIlIIllIIIllIlIIlllIIllIIIlIIlIIIllIlIIlllIIIllIllIlllIllIlIllIIIllIIlIllIIlIIlllIIllIlllIllIIlIllIIlIIllIlIllIIllIIl(world, iIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll) : ((IDirectChunkCache)new IlIllIlllIIllIlllIIllIIlllIIIllIIllIIlIIIlllIllIIlIlIIllIIIllIlIlIIllIllIlllIlIIllIIIlllIIllIIIlIIIlIIlIIlIIIlllIllIlllIIIlIIllIIIlIllIIIllIIlIIlIIIlIlIlIIIlllIlllIIlIllIIlllIIllIllIIlllIIIllIlIIllIIllIIlIIlIIllIllIIIllIl(world, iIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll)));
+        }
+        catch (final NumberFormatException ex) {
+            directChunkCache = new IlIllIlllIIllIlllIIllIIlllIIIllIIllIIlIIIlllIllIIlIlIIllIIIllIlIlIIllIllIlllIlIIllIIIlllIIllIIIlIIIlIIlIIlIIIlllIllIlllIIIlIIllIIIlIllIIIllIIlIIlIIIlIlIlIIIlllIlllIIlIllIIlllIIllIllIIlllIIIllIlIIllIIllIIlIIlIIllIllIIIllIl(world, iIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll);
+        }
+        final IDirectChunkCache directChunkCache2 = directChunkCache;
+        final Chunk[] loadedChunks = world.getLoadedChunks();
+        Intrinsics.checkNotNullExpressionValue((Object)loadedChunks, "");
+        final Object[] array = loadedChunks;
+        for (int i = 0; i < array.length; ++i) {
+            final Chunk chunk = (Chunk)array[i];
+            directChunkCache2.load(chunk.getX(), chunk.getZ());
+        }
+        return directChunkCache2;
+    }
+    
+    @EventHandler(priority = EventPriority.LOWEST)
+    public final void IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(@NotNull final WorldLoadEvent worldLoadEvent) {
+        Intrinsics.checkNotNullParameter((Object)worldLoadEvent, "");
+        if (!this.initialized) {
+            return;
+        }
+        final World world = worldLoadEvent.getWorld();
+        Intrinsics.checkNotNullExpressionValue((Object)world, "");
+        MCMetadata.provide((Object)worldLoadEvent.getWorld()).put((MetaKey)this.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl, (Object)this.IIllIllIlIlllIIlllIIlllIlIIIllIIlIIllIIllIIlIIIlllIIIlIIlllIIlllIIIlIlIIlIIllIlIIIllIIlIIllIIlIIlIIlllIIIllIlllIIlIIlllIllIllIIlllIlllIIlllIlIIIllIIllIlIlIIIllIlIIIlIIIllIIllIIlIlllIllIllIIIlIIIlIIllIIllIlIIIlIIIlIIllIIIllIIlll(world));
+    }
+    
+    @EventHandler(priority = EventPriority.LOWEST)
+    public final void IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(@NotNull final WorldUnloadEvent worldUnloadEvent) {
+        Intrinsics.checkNotNullParameter((Object)worldUnloadEvent, "");
+        if (!this.initialized) {
+            return;
+        }
+        final World world = worldUnloadEvent.getWorld();
+        Intrinsics.checkNotNullExpressionValue((Object)world, "");
+        MCMetadata.provide((Object)world).remove((MetaKey)this.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl);
+    }
+    
+    @EventHandler(priority = EventPriority.MONITOR)
+    public final void IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(@NotNull final ChunkLoadEvent chunkLoadEvent) {
+        Intrinsics.checkNotNullParameter((Object)chunkLoadEvent, "");
+        if (!this.initialized) {
+            return;
+        }
+        final Chunk chunk = chunkLoadEvent.getChunk();
+        Intrinsics.checkNotNullExpressionValue((Object)chunk, "");
+        final Chunk chunk2 = chunk;
+        MCMetadata.provide((Object)chunk2.getWorld()).ifPresent((MetaKey)this.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl, IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll::IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll);
+    }
+    
+    @EventHandler(priority = EventPriority.MONITOR)
+    public final void IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(@NotNull final ChunkUnloadEvent chunkUnloadEvent) {
+        Intrinsics.checkNotNullParameter((Object)chunkUnloadEvent, "");
+        if (!this.initialized) {
+            return;
+        }
+        if (chunkUnloadEvent instanceof Cancellable && ((Cancellable)chunkUnloadEvent).isCancelled()) {
+            return;
+        }
+        final Chunk chunk = chunkUnloadEvent.getChunk();
+        Intrinsics.checkNotNullExpressionValue((Object)chunk, "");
+        final Chunk chunk2 = chunk;
+        MCMetadata.provide((Object)chunk2.getWorld()).ifPresent((MetaKey)this.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl, IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll::IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll);
+    }
+    
+    @NotNull
+    @Override
+    public IDirectChunkCache get(@NotNull final World world) {
+        Intrinsics.checkNotNullParameter((Object)world, "");
+        final Object computeIfAbsent = MCMetadata.provide((Object)world).computeIfAbsent((MetaKey)this.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl, (Supplier)IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll::IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll);
+        Intrinsics.checkNotNullExpressionValue(computeIfAbsent, "");
+        return (IDirectChunkCache)computeIfAbsent;
+    }
+    
+    private static final void IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(final IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll) {
+        Intrinsics.checkNotNullParameter((Object)illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll, "");
+        illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll.initialized = true;
+        for (final World world : Bukkit.getWorlds()) {
+            Intrinsics.checkNotNull((Object)world);
+            MCMetadata.provide((Object)world).put((MetaKey)illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl, (Object)illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll.IIllIllIlIlllIIlllIIlllIlIIIllIIlIIllIIllIIlIIIlllIIIlIIlllIIlllIIIlIlIIlIIllIlIIIllIIlIIllIIlIIlIIlllIIIllIlllIIlIIlllIllIllIIlllIlllIIlllIlIIIllIIllIlIlIIIllIlIIIlIIIllIIllIIlIlllIllIllIIIlIIIlIIllIIllIlIIIlIIIlIIllIIIllIIlll(world));
+        }
+    }
+    
+    private static final void IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(final MetaStorage metaStorage, final IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll, final IDirectChunkCache directChunkCache) {
+        Intrinsics.checkNotNullParameter((Object)metaStorage, "");
+        Intrinsics.checkNotNullParameter((Object)illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll, "");
+        directChunkCache.reset();
+        metaStorage.remove((MetaKey)illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll.IIIllIllIIllIlllIIlIIIllIllIIllIIlIIIllIIllIIlIlllIIlllIlllIIllIlllIIlllIIllIllIllIIlIIlllIIIlIlIllIllIIIlllIIIlIIIllIllIIlIIlllIIlIIllIIIllIIIlllIlllIlIIlIIIlIlIllIIlIIllIIIlIIIllIIIllIIIlllIIllIllIIIllIllIlllIllIIlIIllIIlIlllIIIl);
+    }
+    
+    private static final void IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(final Chunk chunk, final IDirectChunkCache directChunkCache) {
+        Intrinsics.checkNotNullParameter((Object)chunk, "");
+        directChunkCache.load(chunk.getX(), chunk.getZ());
+    }
+    
+    private static final void IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll(final Chunk chunk, final IDirectChunkCache directChunkCache) {
+        Intrinsics.checkNotNullParameter((Object)chunk, "");
+        directChunkCache.unload(chunk.getX(), chunk.getZ());
+    }
+    
+    private static final IDirectChunkCache IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(final World world, final IllIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll) {
+        Intrinsics.checkNotNullParameter((Object)world, "");
+        Intrinsics.checkNotNullParameter((Object)illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll, "");
+        Log.warn("Creating DirectChunkCache for world " + world.getName() + " without initialization.", new Object[0]);
+        return illIlllIIllIIlIIlIlIIIllIIllIIlllIIIlIIlIIlllIIlIlIIIlIlIIIlIIllIlllIIIlllIIllIllIllIIlllIlIllIIlIlIIIlIlIlllIIIlIlllIIlIIllIIlIIllIllIIllIlllIIIllIllIlIIIllIIllIIllIIlIIIlIIlIlIIIllIIllIllIlllIIIllIIIllIIIlllIIlIIIlIlll.IIllIllIlIlllIIlllIIlllIlIIIllIIlIIllIIllIIlIIIlllIIIlIIlllIIlllIIIlIlIIlIIllIlIIIllIIlIIllIIlIIlIIlllIIIllIlllIIlIIlllIllIllIIlllIlllIIlllIlIIIllIIllIlIlIIIllIlIIIlIIIllIIllIIlIlllIllIllIIIlIIIlIIllIIllIlIIIlIIIlIIllIIIllIIlll(world);
+    }
+}

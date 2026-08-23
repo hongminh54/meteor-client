@@ -1,24 +1,28 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.screens.settings.base;
 
 import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.widgets.containers.WHorizontalList;
-import meteordevelopment.meteorclient.gui.widgets.containers.WTable;
-import meteordevelopment.meteorclient.gui.widgets.input.WTextBox;
-import meteordevelopment.meteorclient.settings.Setting;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WHorizontalList;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WTable;
+import com.hongminh54.marisaoptimize.gui.widgets.input.WTextBox;
+import com.hongminh54.marisaoptimize.settings.Setting;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.registry.*;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.InvalidIdentifierException;
 
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import net.minecraft.registry.*;
 
 public abstract class DynamicRegistryListSettingScreen<T> extends CollectionListSettingScreen<RegistryKey<T>> {
     protected final RegistryKey<Registry<T>> registryKey;

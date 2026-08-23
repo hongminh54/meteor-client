@@ -1,19 +1,19 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.commands.commands;
 
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.suggestion.Suggestion;
-import com.mojang.brigadier.suggestion.Suggestions;
 import com.hongminh54.marisaoptimize.MarisaOptimize;
 import com.hongminh54.marisaoptimize.commands.Command;
 import com.hongminh54.marisaoptimize.events.packets.PacketEvent;
 import com.hongminh54.marisaoptimize.events.world.TickEvent;
 import com.hongminh54.marisaoptimize.mixin.ClientPlayNetworkHandlerAccessor;
 import com.hongminh54.marisaoptimize.utils.world.TickRate;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.suggestion.Suggestion;
+import com.mojang.brigadier.suggestion.Suggestions;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.network.ServerAddress;
 import net.minecraft.client.network.ServerInfo;

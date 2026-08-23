@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.screens.settings.base;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import meteordevelopment.meteorclient.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.Utils;
 import net.minecraft.util.collection.IndexedIterable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

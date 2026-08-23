@@ -1,15 +1,15 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.themes.meteor.widgets.pressable;
 
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
-import meteordevelopment.meteorclient.gui.renderer.packer.GuiTexture;
-import meteordevelopment.meteorclient.gui.themes.meteor.MeteorGuiTheme;
-import meteordevelopment.meteorclient.gui.themes.meteor.MeteorWidget;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
+import com.hongminh54.marisaoptimize.gui.renderer.packer.GuiTexture;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.MeteorGuiTheme;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.MeteorWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
 
 public class WMeteorButton extends WButton implements MeteorWidget {
     public WMeteorButton(String text, GuiTexture texture) {

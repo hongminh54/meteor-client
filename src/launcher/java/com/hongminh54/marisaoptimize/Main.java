@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -20,20 +20,17 @@ public class Main {
 
         int option = JOptionPane.showOptionDialog(
             null,
-            "To install Meteor Client you need to put it in your mods folder and run Fabric for latest Minecraft version.",
-            "Meteor Client",
+            "To install Marisa Optimize you need to put it in your mods folder and run Fabric for latest Minecraft version.",
+            "Marisa Optimize",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.ERROR_MESSAGE,
             null,
-            new String[]{"Open Wiki", "Open Mods Folder"},
+            new String[]{"Open Mods Folder"},
             null
         );
 
         switch (option) {
-            case 0:
-                getOS().open("https://meteorclient.com/faq/installation");
-                break;
-            case 1: {
+            case 0: {
                 File mods = new File(getModsFolder());
                 if (!mods.exists()) mods.mkdirs();
                 getOS().open(mods);

@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.hud.elements.keyboard;
 
-import meteordevelopment.meteorclient.systems.hud.elements.keyboard.KeyboardHud.Key;
-import meteordevelopment.meteorclient.utils.misc.Keybind;
+import com.hongminh54.marisaoptimize.systems.hud.elements.keyboard.KeyboardHud.Key;
+import com.hongminh54.marisaoptimize.utils.misc.Keybind;
 import net.minecraft.client.option.KeyBinding;
 
 final class LayoutContext {

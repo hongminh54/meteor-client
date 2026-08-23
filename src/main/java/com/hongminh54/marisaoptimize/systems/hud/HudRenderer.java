@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -10,15 +10,14 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.meteor.CustomFontChangedEvent;
-import meteordevelopment.meteorclient.renderer.*;
-import meteordevelopment.meteorclient.renderer.text.CustomTextRenderer;
-import meteordevelopment.meteorclient.renderer.text.Font;
-import meteordevelopment.meteorclient.renderer.text.VanillaTextRenderer;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.render.RenderUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.meteor.CustomFontChangedEvent;
+import com.hongminh54.marisaoptimize.renderer.text.CustomTextRenderer;
+import com.hongminh54.marisaoptimize.renderer.text.Font;
+import com.hongminh54.marisaoptimize.renderer.text.VanillaTextRenderer;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
@@ -35,7 +34,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import com.hongminh54.marisaoptimize.mixininterface.IGameRenderer;
+import com.hongminh54.marisaoptimize.renderer.*;
 
 public class HudRenderer {
     public static final HudRenderer INSTANCE = new HudRenderer();

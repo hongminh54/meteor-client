@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -43,11 +43,11 @@ public class PacketUtilsUtil {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write("/*\n");
-            writer.write(" * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client/).\n");
+            writer.write(" * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize/).\n");
             writer.write(" * Copyright (c) Meteor Development.\n");
             writer.write(" */\n\n");
 
-            writer.write("package meteordevelopment.meteorclient.utils.network;\n\n");
+            writer.write("package com.hongminh54.marisaoptimize.utils.network;\n\n");
 
             //   Write imports
             writer.write("import com.google.common.collect.Sets;\n");

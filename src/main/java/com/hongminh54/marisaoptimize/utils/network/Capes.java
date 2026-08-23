@@ -1,13 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.network;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.utils.PreInit;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.utils.PreInit;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.texture.NativeImage;
 import net.minecraft.client.texture.NativeImageBackedTexture;
@@ -19,12 +19,9 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Stream;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class Capes {
-    private static final String CAPE_OWNERS_URL = "https://meteorclient.com/api/capeowners";
-    private static final String CAPES_URL = "https://meteorclient.com/api/capes";
-
     private static final Map<UUID, String> OWNERS = new HashMap<>();
     private static final Map<String, String> URLS = new HashMap<>();
     private static final Map<String, Cape> TEXTURES = new HashMap<>();
@@ -44,33 +41,6 @@ public class Capes {
         TO_REGISTER.clear();
         TO_RETRY.clear();
         TO_REMOVE.clear();
-
-        MeteorExecutor.execute(() -> {
-            // Cape owners
-            Stream<String> lines = Http.get(CAPE_OWNERS_URL)
-                .exceptionHandler(e -> MarisaOptimize.LOG.error("Could not load capes: {}",  e.getMessage()))
-                .sendLines();
-            if (lines != null) {
-                lines.forEach(s -> {
-                    String[] split = s.split(" ");
-
-                    if (split.length >= 2) {
-                        OWNERS.put(UUID.fromString(split[0]), split[1]);
-                        if (!TEXTURES.containsKey(split[1])) TEXTURES.put(split[1], new Cape(split[1]));
-                    }
-                });
-            } else return;
-
-            // Capes
-            lines = Http.get(CAPES_URL).sendLines();
-            if (lines != null) lines.forEach(s -> {
-                String[] split = s.split(" ");
-
-                if (split.length >= 2) {
-                    if (!URLS.containsKey(split[0])) URLS.put(split[0], split[1]);
-                }
-            });
-        });
 
         MarisaOptimize.EVENT_BUS.subscribe(Capes.class);
     }

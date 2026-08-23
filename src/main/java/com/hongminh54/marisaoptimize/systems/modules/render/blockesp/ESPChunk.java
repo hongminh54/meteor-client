@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,7 +7,7 @@ package com.hongminh54.marisaoptimize.systems.modules.render.blockesp;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import meteordevelopment.meteorclient.events.render.Render3DEvent;
+import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -17,8 +17,8 @@ import net.minecraft.world.chunk.Chunk;
 
 import java.util.List;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
-import static meteordevelopment.meteorclient.utils.Utils.getRenderDistance;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.utils.Utils.getRenderDistance;
 
 public class ESPChunk {
 

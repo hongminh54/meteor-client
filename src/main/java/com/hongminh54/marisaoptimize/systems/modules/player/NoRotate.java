@@ -1,14 +1,14 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.player;
 
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
-import meteordevelopment.meteorclient.mixin.ClientPlayNetworkHandlerMixin;
-import meteordevelopment.meteorclient.systems.modules.Categories;
-import meteordevelopment.meteorclient.systems.modules.Module;
+import com.hongminh54.marisaoptimize.mixin.ClientPlayNetworkHandlerMixin;
+import com.hongminh54.marisaoptimize.systems.modules.Categories;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 

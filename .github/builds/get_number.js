@@ -1,25 +1,10 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 import { getMcVersion } from "./mc_version.js"
 
-const mcVersion = await getMcVersion();
+const buildNumber = process.env.GITHUB_RUN_NUMBER ?? "local";
 
-fetch("https://meteorclient.com/api/stats")
-    .then(async res => {
-        let stats = await res.json()
-        let build = 0
-
-        if (mcVersion in stats.builds) {
-            build = parseInt(stats.builds[mcVersion])
-        }
-
-        console.log("number=" + (build + 1))
-    })
-    .catch(err => {
-        console.log("Failed to fetch stats:")
-        console.log(err)
-        process.exit(1)
-    })
+console.log("number=" + buildNumber)

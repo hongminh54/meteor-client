@@ -1,14 +1,14 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.misc;
 
 import it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.game.ResourcePacksReloadedEvent;
-import meteordevelopment.meteorclient.utils.PreInit;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.game.ResourcePacksReloadedEvent;
+import com.hongminh54.marisaoptimize.utils.PreInit;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.WeakHashMap;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class Names {
     private static final Map<StatusEffect, String> statusEffectNames = new Reference2ObjectOpenHashMap<>(16);

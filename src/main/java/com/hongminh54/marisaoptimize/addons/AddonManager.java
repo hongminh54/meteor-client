@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -26,17 +26,17 @@ public class AddonManager {
 
                 @Override
                 public String getPackage() {
-                    return "meteordevelopment.meteorclient";
+                    return "com.hongminh54.marisaoptimize";
                 }
 
                 @Override
                 public String getWebsite() {
-                    return "https://meteorclient.com";
+                    return "https://github.com/TheBlueSkyARL/marisa-optimize";
                 }
 
                 @Override
                 public GithubRepo getRepo() {
-                    return new GithubRepo("MeteorDevelopment", "marisa-optimize");
+                    return new GithubRepo("TheBlueSkyARL", "marisa-optimize");
                 }
 
                 @Override

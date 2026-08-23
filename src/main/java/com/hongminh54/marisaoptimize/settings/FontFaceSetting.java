@@ -1,14 +1,14 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.settings;
 
-import meteordevelopment.meteorclient.renderer.Fonts;
-import meteordevelopment.meteorclient.renderer.text.FontFace;
-import meteordevelopment.meteorclient.renderer.text.FontFamily;
-import meteordevelopment.meteorclient.renderer.text.FontInfo;
+import com.hongminh54.marisaoptimize.renderer.Fonts;
+import com.hongminh54.marisaoptimize.renderer.text.FontFace;
+import com.hongminh54.marisaoptimize.renderer.text.FontFamily;
+import com.hongminh54.marisaoptimize.renderer.text.FontInfo;
 import net.minecraft.nbt.NbtCompound;
 
 import java.util.List;

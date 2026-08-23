@@ -1,19 +1,19 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.modules.render.blockesp;
 
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.WidgetScreen;
-import meteordevelopment.meteorclient.renderer.ShapeMode;
-import meteordevelopment.meteorclient.settings.BlockDataSetting;
-import meteordevelopment.meteorclient.settings.GenericSetting;
-import meteordevelopment.meteorclient.settings.IBlockData;
-import meteordevelopment.meteorclient.settings.IGeneric;
-import meteordevelopment.meteorclient.utils.misc.IChangeable;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.WidgetScreen;
+import com.hongminh54.marisaoptimize.renderer.ShapeMode;
+import com.hongminh54.marisaoptimize.settings.BlockDataSetting;
+import com.hongminh54.marisaoptimize.settings.GenericSetting;
+import com.hongminh54.marisaoptimize.settings.IBlockData;
+import com.hongminh54.marisaoptimize.settings.IGeneric;
+import com.hongminh54.marisaoptimize.utils.misc.IChangeable;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NbtCompound;
 

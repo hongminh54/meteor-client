@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import meteordevelopment.meteorclient.mixininterface.IAbstractFurnaceScreenHandler;
+import com.hongminh54.marisaoptimize.mixininterface.IAbstractFurnaceScreenHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.AbstractFurnaceScreenHandler;
 import org.spongepowered.asm.mixin.Mixin;

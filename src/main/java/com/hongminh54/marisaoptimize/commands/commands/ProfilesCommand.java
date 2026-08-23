@@ -1,15 +1,15 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.commands.commands;
 
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.hongminh54.marisaoptimize.commands.Command;
 import com.hongminh54.marisaoptimize.commands.arguments.ProfileArgumentType;
 import com.hongminh54.marisaoptimize.systems.profiles.Profile;
 import com.hongminh54.marisaoptimize.systems.profiles.Profiles;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.command.CommandSource;
 
 public class ProfilesCommand extends Command {

@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,8 +7,8 @@ package com.hongminh54.marisaoptimize.systems.accounts;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.utils.network.Http;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.utils.network.Http;
 import net.minecraft.util.Pair;
 import net.minecraft.util.Util;
 

@@ -510,6 +510,7 @@ public class Modules extends System<Modules> {
         add(new FreeLook());
         add(new Fullbright());
         add(new HandView());
+        add(new HidePlayers());
         add(new HoleESP());
         add(new ItemPhysics());
         add(new ItemHighlight());

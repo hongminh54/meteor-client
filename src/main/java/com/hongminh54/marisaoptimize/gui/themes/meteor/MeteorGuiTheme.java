@@ -1,38 +1,38 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.themes.meteor;
 
-import meteordevelopment.meteorclient.gui.DefaultSettingsWidgetFactory;
-import meteordevelopment.meteorclient.gui.GuiTheme;
-import meteordevelopment.meteorclient.gui.WidgetScreen;
-import meteordevelopment.meteorclient.gui.renderer.packer.GuiTexture;
-import meteordevelopment.meteorclient.gui.themes.meteor.widgets.*;
-import meteordevelopment.meteorclient.gui.themes.meteor.widgets.input.WMeteorDropdown;
-import meteordevelopment.meteorclient.gui.themes.meteor.widgets.input.WMeteorSlider;
-import meteordevelopment.meteorclient.gui.themes.meteor.widgets.input.WMeteorTextBox;
-import meteordevelopment.meteorclient.gui.themes.meteor.widgets.pressable.*;
-import meteordevelopment.meteorclient.gui.utils.AlignmentX;
-import meteordevelopment.meteorclient.gui.utils.CharFilter;
-import meteordevelopment.meteorclient.gui.widgets.*;
-import meteordevelopment.meteorclient.gui.widgets.containers.WSection;
-import meteordevelopment.meteorclient.gui.widgets.containers.WView;
-import meteordevelopment.meteorclient.gui.widgets.containers.WWindow;
-import meteordevelopment.meteorclient.gui.widgets.input.WDropdown;
-import meteordevelopment.meteorclient.gui.widgets.input.WSlider;
-import meteordevelopment.meteorclient.gui.widgets.input.WTextBox;
-import meteordevelopment.meteorclient.gui.widgets.pressable.*;
-import meteordevelopment.meteorclient.renderer.text.TextRenderer;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.accounts.Account;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.gui.DefaultSettingsWidgetFactory;
+import com.hongminh54.marisaoptimize.gui.GuiTheme;
+import com.hongminh54.marisaoptimize.gui.WidgetScreen;
+import com.hongminh54.marisaoptimize.gui.renderer.packer.GuiTexture;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.widgets.input.WMeteorDropdown;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.widgets.input.WMeteorSlider;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.widgets.input.WMeteorTextBox;
+import com.hongminh54.marisaoptimize.gui.utils.AlignmentX;
+import com.hongminh54.marisaoptimize.gui.utils.CharFilter;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WSection;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WView;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WWindow;
+import com.hongminh54.marisaoptimize.gui.widgets.input.WDropdown;
+import com.hongminh54.marisaoptimize.gui.widgets.input.WSlider;
+import com.hongminh54.marisaoptimize.gui.widgets.input.WTextBox;
+import com.hongminh54.marisaoptimize.renderer.text.TextRenderer;
+import com.hongminh54.marisaoptimize.systems.accounts.Account;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 import net.minecraft.client.util.MacWindowUtil;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.widgets.*;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.widgets.pressable.*;
+import com.hongminh54.marisaoptimize.gui.widgets.*;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.*;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class MeteorGuiTheme extends GuiTheme {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();

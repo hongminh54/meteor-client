@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.widgets.containers;
 
-import meteordevelopment.meteorclient.gui.utils.Cell;
+import com.hongminh54.marisaoptimize.gui.utils.Cell;
 
 public class WVerticalList extends WContainer {
     public double spacing = 3;

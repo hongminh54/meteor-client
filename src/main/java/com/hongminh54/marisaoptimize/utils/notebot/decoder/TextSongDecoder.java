@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,8 +7,8 @@ package com.hongminh54.marisaoptimize.utils.notebot.decoder;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
-import meteordevelopment.meteorclient.utils.notebot.song.Note;
-import meteordevelopment.meteorclient.utils.notebot.song.Song;
+import com.hongminh54.marisaoptimize.utils.notebot.song.Note;
+import com.hongminh54.marisaoptimize.utils.notebot.song.Song;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import org.apache.commons.io.FilenameUtils;
 

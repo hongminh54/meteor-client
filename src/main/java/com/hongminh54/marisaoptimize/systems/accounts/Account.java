@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -8,11 +8,11 @@ package com.hongminh54.marisaoptimize.systems.accounts;
 import com.mojang.authlib.minecraft.UserApiService;
 import com.mojang.authlib.yggdrasil.ServicesKeyType;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
-import meteordevelopment.meteorclient.mixin.FileCacheAccessor;
-import meteordevelopment.meteorclient.mixin.MinecraftClientAccessor;
-import meteordevelopment.meteorclient.mixin.PlayerSkinProviderAccessor;
-import meteordevelopment.meteorclient.utils.misc.ISerializable;
-import meteordevelopment.meteorclient.utils.misc.NbtException;
+import com.hongminh54.marisaoptimize.mixin.FileCacheAccessor;
+import com.hongminh54.marisaoptimize.mixin.MinecraftClientAccessor;
+import com.hongminh54.marisaoptimize.mixin.PlayerSkinProviderAccessor;
+import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
+import com.hongminh54.marisaoptimize.utils.misc.NbtException;
 import net.minecraft.client.network.SocialInteractionsManager;
 import net.minecraft.client.session.ProfileKeys;
 import net.minecraft.client.session.Session;
@@ -28,7 +28,7 @@ import net.minecraft.util.Util;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public abstract class Account<T extends Account<?>> implements ISerializable<T> {
     protected AccountType type;

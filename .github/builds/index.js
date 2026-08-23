@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -9,6 +9,8 @@ const buildNumber = process.argv[2];
 const branch = process.argv[3];
 const compareUrl = process.argv[4];
 const success = process.argv[5] === "true";
+const repository = process.env.GITHUB_REPOSITORY ?? "TheBlueSkyARL/marisa-optimize";
+const repositoryUrl = "https://github.com/" + repository;
 
 const mcVersion = await getMcVersion();
 
@@ -26,23 +28,23 @@ function sendDiscordWebhook() {
             for (let i in res.commits) {
                 let commit = res.commits[i];
 
-                changes += "\n- [`" + commit.sha.substring(0, 7) + "`](https://github.com/MeteorDevelopment/meteor-client/commit/" + commit.sha + ") *" + commit.commit.message + "*";
+                changes += "\n- [`" + commit.sha.substring(0, 7) + "`](" + repositoryUrl + "/commit/" + commit.sha + ") *" + commit.commit.message + "*";
                 hasChanges = true;
             }
             if (hasChanges) description += changes;
 
             if (success) {
-                description += "\n\nVisit our [website](https://meteorclient.com) for download";
+                description += "\n\nVisit the [repository](" + repositoryUrl + ") for downloads";
             }
 
             const webhook = {
                 username: "Builds",
-                avatar_url: "https://meteorclient.com/icon.png",
+                avatar_url: "https://raw.githubusercontent.com/" + repository + "/main/src/main/resources/assets/marisa-optimize/icon.png",
                 embeds: [
                     {
-                        title: "Meteor Client " + mcVersion + " build #" + buildNumber,
+                        title: "Marisa Optimize " + mcVersion + " build #" + buildNumber,
                         description: description,
-                        url: "https://meteorclient.com",
+                        url: repositoryUrl,
                             color: success ? 2672680 : 13117480
                     }
                 ]
@@ -56,15 +58,6 @@ function sendDiscordWebhook() {
                 body: JSON.stringify(webhook)
             });
         });
-}
-
-if (success) {
-    fetch("https://meteorclient.com/api/recheckMaven", {
-        method: "POST",
-        headers: {
-            "Authorization": process.env.SERVER_TOKEN
-        }
-    });
 }
 
 sendDiscordWebhook()

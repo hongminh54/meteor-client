@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,8 +7,8 @@ package com.hongminh54.marisaoptimize.modintegration;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import meteordevelopment.meteorclient.gui.GuiThemes;
-import meteordevelopment.meteorclient.gui.screens.ModulesScreen;
+import com.hongminh54.marisaoptimize.gui.GuiThemes;
+import com.hongminh54.marisaoptimize.gui.screens.ModulesScreen;
 
 public class ModMenuIntegration implements ModMenuApi {
     @Override

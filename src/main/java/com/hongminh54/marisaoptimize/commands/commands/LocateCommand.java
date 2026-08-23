@@ -1,12 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.commands.commands;
 
 import baritone.api.BaritoneAPI;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.hongminh54.marisaoptimize.MarisaOptimize;
 import com.hongminh54.marisaoptimize.commands.Command;
 import com.hongminh54.marisaoptimize.events.entity.EntityRemovedEvent;
@@ -15,6 +14,7 @@ import com.hongminh54.marisaoptimize.pathing.BaritoneUtils;
 import com.hongminh54.marisaoptimize.pathing.PathManagers;
 import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
 import com.hongminh54.marisaoptimize.utils.player.InvUtils;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

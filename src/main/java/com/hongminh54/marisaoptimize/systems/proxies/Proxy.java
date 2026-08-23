@@ -1,15 +1,14 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.proxies;
 
 import com.google.common.net.InetAddresses;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.misc.ISerializable;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 
@@ -23,6 +22,7 @@ import java.nio.ByteBuffer;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class Proxy implements ISerializable<Proxy> {
     public final Settings settings = new Settings();
@@ -86,7 +86,7 @@ public class Proxy implements ISerializable<Proxy> {
     public long latency;
 
     // todo
-    //  - add more rigorous status checks - perhaps querying our 'mcauth.meteorclient.com' or ccbluex's 'ping.liquidproxy.net'
+    //  - add more rigorous status checks - perhaps querying an auth endpoint or ccbluex's 'ping.liquidproxy.net'
     //  - the isSocks methods could be used to try and detect the version of added proxies when it's unclear -
     //     the only complication would be that some ips seem to be valid for both 4 and 5
 

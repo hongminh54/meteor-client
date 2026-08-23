@@ -1,10 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.commands.commands;
 
+import com.hongminh54.marisaoptimize.systems.modules.misc.swarm.Swarm;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -12,18 +13,17 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import it.unimi.dsi.fastutil.objects.ObjectIntImmutablePair;
 import it.unimi.dsi.fastutil.objects.ObjectIntPair;
-import meteordevelopment.meteorclient.commands.Command;
-import meteordevelopment.meteorclient.commands.arguments.ModuleArgumentType;
-import meteordevelopment.meteorclient.commands.arguments.PlayerArgumentType;
-import meteordevelopment.meteorclient.pathing.PathManagers;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import com.hongminh54.marisaoptimize.systems.modules.misc.swarm.Swarm;
-import meteordevelopment.meteorclient.systems.modules.misc.swarm.SwarmConnection;
-import meteordevelopment.meteorclient.systems.modules.misc.swarm.SwarmWorker;
-import meteordevelopment.meteorclient.systems.modules.world.InfinityMiner;
-import meteordevelopment.meteorclient.utils.misc.text.MeteorClickEvent;
-import meteordevelopment.meteorclient.utils.player.ChatUtils;
+import com.hongminh54.marisaoptimize.commands.Command;
+import com.hongminh54.marisaoptimize.commands.arguments.ModuleArgumentType;
+import com.hongminh54.marisaoptimize.commands.arguments.PlayerArgumentType;
+import com.hongminh54.marisaoptimize.pathing.PathManagers;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.misc.swarm.SwarmConnection;
+import com.hongminh54.marisaoptimize.systems.modules.misc.swarm.SwarmWorker;
+import com.hongminh54.marisaoptimize.systems.modules.world.InfinityMiner;
+import com.hongminh54.marisaoptimize.utils.misc.text.MeteorClickEvent;
+import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.argument.BlockStateArgument;
 import net.minecraft.command.argument.BlockStateArgumentType;

@@ -1,17 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.misc.input;
 
-import meteordevelopment.meteorclient.gui.GuiKeyEvents;
-import meteordevelopment.meteorclient.mixin.KeyBindingAccessor;
-import meteordevelopment.meteorclient.utils.misc.CursorStyle;
+import com.hongminh54.marisaoptimize.gui.GuiKeyEvents;
+import com.hongminh54.marisaoptimize.mixin.KeyBindingAccessor;
+import com.hongminh54.marisaoptimize.utils.misc.CursorStyle;
 import net.minecraft.client.option.KeyBinding;
 import org.lwjgl.glfw.GLFW;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class Input {
     private static final boolean[] keys = new boolean[512];

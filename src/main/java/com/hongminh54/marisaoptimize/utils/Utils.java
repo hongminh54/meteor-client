@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -9,22 +9,21 @@ import com.mojang.blaze3d.systems.ProjectionType;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.serialization.DataResult;
 import it.unimi.dsi.fastutil.objects.*;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.world.TickEvent;
-import meteordevelopment.meteorclient.gui.tabs.TabScreen;
-import meteordevelopment.meteorclient.mixin.*;
-import meteordevelopment.meteorclient.mixininterface.IMinecraftClient;
-import meteordevelopment.meteorclient.settings.StatusEffectAmplifierMapSetting;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.render.BetterTooltips;
-import meteordevelopment.meteorclient.systems.modules.world.Timer;
-import meteordevelopment.meteorclient.utils.misc.Names;
-import meteordevelopment.meteorclient.utils.player.EChestMemory;
-import meteordevelopment.meteorclient.utils.render.PeekScreen;
-import meteordevelopment.meteorclient.utils.render.RenderUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.world.BlockEntityIterator;
-import meteordevelopment.meteorclient.utils.world.ChunkIterator;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.world.TickEvent;
+import com.hongminh54.marisaoptimize.gui.tabs.TabScreen;
+import com.hongminh54.marisaoptimize.mixininterface.IMinecraftClient;
+import com.hongminh54.marisaoptimize.settings.StatusEffectAmplifierMapSetting;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.render.BetterTooltips;
+import com.hongminh54.marisaoptimize.systems.modules.world.Timer;
+import com.hongminh54.marisaoptimize.utils.misc.Names;
+import com.hongminh54.marisaoptimize.utils.player.EChestMemory;
+import com.hongminh54.marisaoptimize.utils.render.PeekScreen;
+import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.utils.world.BlockEntityIterator;
+import com.hongminh54.marisaoptimize.utils.world.ChunkIterator;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -71,8 +70,9 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 import static org.lwjgl.glfw.GLFW.*;
+import com.hongminh54.marisaoptimize.mixin.*;
 
 public class Utils {
     public static final Pattern FILE_NAME_INVALID_CHARS_PATTERN = Pattern.compile("[\\s\\\\/:*?\"<>|]");

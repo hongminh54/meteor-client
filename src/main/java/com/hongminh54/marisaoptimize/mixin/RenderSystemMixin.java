@@ -1,23 +1,23 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import meteordevelopment.meteorclient.renderer.MeshUniforms;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.misc.InventoryTweaks;
-import meteordevelopment.meteorclient.utils.render.postprocess.ChamsShader;
-import meteordevelopment.meteorclient.utils.render.postprocess.OutlineUniforms;
-import meteordevelopment.meteorclient.utils.render.postprocess.PostProcessShader;
+import com.hongminh54.marisaoptimize.renderer.MeshUniforms;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.misc.InventoryTweaks;
+import com.hongminh54.marisaoptimize.utils.render.postprocess.ChamsShader;
+import com.hongminh54.marisaoptimize.utils.render.postprocess.OutlineUniforms;
+import com.hongminh54.marisaoptimize.utils.render.postprocess.PostProcessShader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 @Mixin(RenderSystem.class)
 public abstract class RenderSystemMixin {

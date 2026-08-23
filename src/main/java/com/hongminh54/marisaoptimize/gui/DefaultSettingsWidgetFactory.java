@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -7,24 +7,19 @@ package com.hongminh54.marisaoptimize.gui;
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
-import meteordevelopment.meteorclient.gui.screens.settings.*;
-import meteordevelopment.meteorclient.gui.themes.meteor.widgets.WMeteorLabel;
-import meteordevelopment.meteorclient.gui.utils.Cell;
-import meteordevelopment.meteorclient.gui.utils.CharFilter;
-import meteordevelopment.meteorclient.gui.utils.SettingsWidgetFactory;
-import meteordevelopment.meteorclient.gui.widgets.*;
-import meteordevelopment.meteorclient.gui.widgets.containers.*;
-import meteordevelopment.meteorclient.gui.widgets.input.*;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WCheckbox;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WMinus;
-import meteordevelopment.meteorclient.gui.widgets.pressable.WPlus;
-import meteordevelopment.meteorclient.renderer.Fonts;
-import meteordevelopment.meteorclient.settings.*;
-import meteordevelopment.meteorclient.systems.hud.elements.keyboard.KeyboardHud;
-import meteordevelopment.meteorclient.utils.Utils;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.widgets.WMeteorLabel;
+import com.hongminh54.marisaoptimize.gui.utils.Cell;
+import com.hongminh54.marisaoptimize.gui.utils.CharFilter;
+import com.hongminh54.marisaoptimize.gui.utils.SettingsWidgetFactory;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WCheckbox;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WMinus;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.WPlus;
+import com.hongminh54.marisaoptimize.renderer.Fonts;
+import com.hongminh54.marisaoptimize.systems.hud.elements.keyboard.KeyboardHud;
+import com.hongminh54.marisaoptimize.utils.Utils;
+import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 import net.minecraft.client.resource.language.I18n;
 import org.apache.commons.lang3.Strings;
 
@@ -34,7 +29,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import com.hongminh54.marisaoptimize.gui.screens.settings.*;
+import com.hongminh54.marisaoptimize.gui.widgets.*;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.*;
+import com.hongminh54.marisaoptimize.gui.widgets.input.*;
+import com.hongminh54.marisaoptimize.settings.*;
 
 public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
     private static final SettingColor WHITE = new SettingColor();

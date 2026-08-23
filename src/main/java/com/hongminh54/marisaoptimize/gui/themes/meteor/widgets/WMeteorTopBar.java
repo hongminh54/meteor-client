@@ -1,13 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.themes.meteor.widgets;
 
-import meteordevelopment.meteorclient.gui.themes.meteor.MeteorWidget;
-import meteordevelopment.meteorclient.gui.widgets.WTopBar;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.gui.themes.meteor.MeteorWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.WTopBar;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 
 public class WMeteorTopBar extends WTopBar implements MeteorWidget {
     @Override

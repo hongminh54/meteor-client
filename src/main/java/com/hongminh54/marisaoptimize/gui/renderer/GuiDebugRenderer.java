@@ -1,18 +1,18 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.renderer;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.gui.utils.Cell;
-import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import meteordevelopment.meteorclient.gui.widgets.containers.WContainer;
-import meteordevelopment.meteorclient.renderer.MeshBuilder;
-import meteordevelopment.meteorclient.renderer.MeshRenderer;
-import meteordevelopment.meteorclient.renderer.MeteorRenderPipelines;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.gui.utils.Cell;
+import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.WContainer;
+import com.hongminh54.marisaoptimize.renderer.MeshBuilder;
+import com.hongminh54.marisaoptimize.renderer.MeshRenderer;
+import com.hongminh54.marisaoptimize.renderer.MeteorRenderPipelines;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Click;
 

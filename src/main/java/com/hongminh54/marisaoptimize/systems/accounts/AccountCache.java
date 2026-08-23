@@ -1,19 +1,19 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.accounts;
 
 import com.mojang.util.UndashedUuid;
-import meteordevelopment.meteorclient.utils.network.MeteorExecutor;
-import meteordevelopment.meteorclient.utils.misc.ISerializable;
-import meteordevelopment.meteorclient.utils.misc.NbtException;
-import meteordevelopment.meteorclient.utils.render.PlayerHeadTexture;
-import meteordevelopment.meteorclient.utils.render.PlayerHeadUtils;
+import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
+import com.hongminh54.marisaoptimize.utils.misc.NbtException;
+import com.hongminh54.marisaoptimize.utils.network.MeteorExecutor;
+import com.hongminh54.marisaoptimize.utils.render.PlayerHeadTexture;
+import com.hongminh54.marisaoptimize.utils.render.PlayerHeadUtils;
 import net.minecraft.nbt.NbtCompound;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class AccountCache implements ISerializable<AccountCache> {
     public String username = "";

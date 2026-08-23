@@ -1,16 +1,16 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.systems.accounts.types;
 
 import com.mojang.util.UndashedUuid;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.systems.accounts.Account;
-import meteordevelopment.meteorclient.systems.accounts.AccountType;
-import meteordevelopment.meteorclient.systems.accounts.TokenAccount;
-import meteordevelopment.meteorclient.utils.network.Http;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.systems.accounts.Account;
+import com.hongminh54.marisaoptimize.systems.accounts.AccountType;
+import com.hongminh54.marisaoptimize.systems.accounts.TokenAccount;
+import com.hongminh54.marisaoptimize.utils.network.Http;
 import net.minecraft.client.session.Session;
 import net.minecraft.nbt.NbtCompound;
 

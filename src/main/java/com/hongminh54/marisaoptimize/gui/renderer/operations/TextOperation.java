@@ -1,12 +1,12 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.renderer.operations;
 
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderOperation;
-import meteordevelopment.meteorclient.renderer.text.TextRenderer;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderOperation;
+import com.hongminh54.marisaoptimize.renderer.text.TextRenderer;
 
 public class TextOperation extends GuiRenderOperation<TextOperation> {
     private String text;

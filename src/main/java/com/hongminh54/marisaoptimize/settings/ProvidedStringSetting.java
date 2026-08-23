@@ -1,11 +1,11 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.settings;
 
-import meteordevelopment.meteorclient.gui.widgets.input.WTextBox;
+import com.hongminh54.marisaoptimize.gui.widgets.input.WTextBox;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

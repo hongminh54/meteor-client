@@ -1,0 +1,120 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package dev.imanity.antixray.a;
+
+import java.util.Iterator;
+import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
+import io.fairyproject.log.Log;
+import kotlin.collections.CollectionsKt;
+import kotlin.comparisons.ComparisonsKt;
+import kotlin.Metadata;
+import java.util.Comparator;
+import kotlin.jvm.internal.Intrinsics;
+import io.fairyproject.container.PostInitialize;
+import io.fairyproject.mc.scheduler.MCSchedulers;
+import java.util.ArrayList;
+import dev.imanity.antixray.api.tick.DelayInitialTick;
+import org.jetbrains.annotations.NotNull;
+import java.util.List;
+import kotlin.jvm.internal.SourceDebugExtension;
+import io.fairyproject.container.InjectableComponent;
+import dev.imanity.antixray.api.tick.InitialTickProcessor;
+
+@InjectableComponent
+@SourceDebugExtension({ "SMAP\nInitialTickProcessorImpl.kt\nKotlin\n*S Kotlin\n*F\n+ 1 InitialTickProcessorImpl.kt\ndev/imanity/antixray/core/infrastructure/tick/InitialTickProcessorImpl\n+ 2 _Collections.kt\nkotlin/collections/CollectionsKt___CollectionsKt\n*L\n1#1,87:1\n1002#2,2:88\n1855#2,2:90\n*S KotlinDebug\n*F\n+ 1 InitialTickProcessorImpl.kt\ndev/imanity/antixray/core/infrastructure/tick/InitialTickProcessorImpl\n*L\n63#1:88,2\n23#1:90,2\n*E\n" })
+public final class IllIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll implements InitialTickProcessor
+{
+    @NotNull
+    private final List<IIllIIlIllIlIlIlIIlIIllIIIlllIllIIlllIlIlIIllIIllIIlIllIlllIIlIIIllIlIIlIllIIlIllIIlIlIlIIlllIIllIIIlIIIllIIlIIIlllIllIllIlllIIlIIlllIllIIIllIIlllIIlIIIllIIllIIIllIIllIIlIIllIlIIllIlllIIllIllIIlllIlIIIllIIIllIIlllIIll> IlllIlIllIIllIllIIlIIllIIIlIIlllIIIlIIIlllIIllIIlllIIlllIlIllIIIlIlIIllIIllIIIlllIllIllIlllIIIlIlIlIlIlllIIllIIIlIIlIIIlIIlIIlIIlIIIllIIlllIIlllIlIIlIIllIIlllIlllIIIlllIIllIIllIIlIIIllIIIlIlIlllIIIllIIlIIlIIllIIIllIIlIlllIll;
+    @NotNull
+    private final List<DelayInitialTick> IllIIlllIlllIIlllIIllIIIlIllIIlllIlIIlllIllIllIlIllIlIIIlIlIIllIIIlIIlllIIlIIlllIIIlIllIllIllIllIIIlllIIlllIIlIIlIIlIIlIllIIIlIIllIlIIlllIllIllIIIllIIllIlIlIlIllIIlIIllIlIllIIIlllIIllIllIIllIIllIlllIIIlIIlIIlIIIlll;
+    private boolean IIllIIIllIlIIlIllIIIlllIIIlllIIlllIllIllIllIIlllIlIIlIIllIIllIllIIIlllIIlIIllIIlIllIIIlIIIlllIIIlllIIlllIlIIlIIIllIIlIllIIIllIIlllIIIlIIlIIIlIIllIIllIIlllIlIIlIlllIlIIllIIlllIIlIIlIlllIIIlIllIIllIlIllIIIllIlIllIIllIIlllIIlIIl;
+    private boolean IIlIllIIlllIllIlIIIllIIIlIIlIllIllIIIllIIIllIllIllIIlIIllIIIllIIIlIIIllIllIIlllIllIIlllIIlllIIllIIlIIllIIllIllIIIlIIlIIllIIllIIllIIllIIllIIlIlIIIlIlllIIIllIIllIIIlIIlIllIIlIIllIIlllIIlIIllIllIIlllIlllIIllIlIIIlIllIIlllIIlIIIl;
+    
+    public IllIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll() {
+        this.IlllIlIllIIllIllIIlIIllIIIlIIlllIIIlIIIlllIIllIIlllIIlllIlIllIIIlIlIIllIIllIIIlllIllIllIlllIIIlIlIlIlIlllIIllIIIlIIlIIIlIIlIIlIIlIIIllIIlllIIlllIlIIlIIllIIlllIlllIIIlllIIllIIllIIlIIIllIIIlIlIlllIIIllIIlIIlIIllIIIllIIlIlllIll = new ArrayList<IIllIIlIllIlIlIlIIlIIllIIIlllIllIIlllIlIlIIllIIllIIlIllIlllIIlIIIllIlIIlIllIIlIllIIlIlIlIIlllIIllIIIlIIIllIIlIIIlllIllIllIlllIIlIIlllIllIIIllIIlllIIlIIIllIIllIIIllIIllIIlIIllIlIIllIlllIIllIllIIlllIlIIIllIIIllIIlllIIll>();
+        this.IllIIlllIlllIIlllIIllIIIlIllIIlllIlIIlllIllIllIlIllIlIIIlIlIIllIIIlIIlllIIlIIlllIIIlIllIllIllIllIIIlllIIlllIIlIIlIIlIIlIllIIIlIIllIlIIlllIllIllIIIllIIllIlIlIlIllIIlIIllIlIllIIIlllIIllIllIIllIIllIlllIIIlIIlIIlIIIlll = new ArrayList<DelayInitialTick>();
+    }
+    
+    @PostInitialize
+    public final void IIIlllIlllIIIlIIIlIIllIlllIIllIIllIIIllIIIlllIIIllIllIIlllIIIlllIlllIllIIIllIIllIllIlIllIIlllIIlIIlllIlIlllIIlIllIlIIIlIIllIllIlIlIIlIlllIIIllIlllIIlllIIIlIlIIIlIIllIIlllIIlllIlllIIllIlllIIlllIIlllIIllIIlIllIlIllIIlllIIIlIlllIIlIlll() {
+        MCSchedulers.getGlobalScheduler().schedule(IllIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll::IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll, 1L);
+    }
+    
+    @Override
+    public void addTask(final int n, @NotNull final Runnable runnable) {
+        Intrinsics.checkNotNullParameter((Object)runnable, "");
+        if (this.IIllIIIllIlIIlIllIIIlllIIIlllIIlllIllIllIllIIlllIlIIlIIllIIllIllIIIlllIIlIIllIIlIllIIIlIIIlllIIIlllIIlllIlIIlIIIllIIlIllIIIllIIlllIIIlIIlIIIlIIllIIllIIlllIlIIlIlllIlIIllIIlllIIlIIlIlllIIIlIllIIllIlIllIIIllIlIllIIllIIlllIIlIIl) {
+            runnable.run();
+            return;
+        }
+        this.IlllIlIllIIllIllIIlIIllIIIlIIlllIIIlIIIlllIIllIIlllIIlllIlIllIIIlIlIIllIIllIIIlllIllIllIlllIIIlIlIlIlIlllIIllIIIlIIlIIIlIIlIIlIIlIIIllIIlllIIlllIlIIlIIllIIlllIlllIIIlllIIllIIllIIlIIIllIIIlIlIlllIIIllIIlIIlIIllIIIllIIlIlllIll.add(new IIllIIlIllIlIlIlIIlIIllIIIlllIllIIlllIlIlIIllIIllIIlIllIlllIIlIIIllIlIIlIllIIlIllIIlIlIlIIlllIIllIIIlIIIllIIlIIIlllIllIllIlllIIlIIlllIllIIIllIIlllIIlIIIllIIllIIIllIIllIIlIIllIlIIllIlllIIllIllIIlllIlIIIllIIIllIIlllIIll(n, runnable));
+    }
+    
+    @Override
+    public void addDelay(@NotNull final DelayInitialTick delayInitialTick) {
+        Intrinsics.checkNotNullParameter((Object)delayInitialTick, "");
+        this.IllIIlllIlllIIlllIIllIIIlIllIIlllIlIIlllIllIllIlIllIlIIIlIlIIllIIIlIIlllIIlIIlllIIIlIllIllIllIllIIIlllIIlllIIlIIlIIlIIlIllIIIlIIllIlIIlllIllIllIIIllIIllIlIlIlIllIIlIIllIlIllIIIlllIIllIllIIllIIllIlllIIIlIIlIIlIIIlll.add(delayInitialTick);
+    }
+    
+    @Override
+    public void process() {
+        if (this.IIllIIIllIlIIlIllIIIlllIIIlllIIlllIllIllIllIIlllIlIIlIIllIIllIllIIIlllIIlIIllIIlIllIIIlIIIlllIIIlllIIlllIlIIlIIIllIIlIllIIIllIIlllIIIlIIlIIIlIIllIIllIIlllIlIIlIlllIlIIllIIlllIIlIIlIlllIIIlIllIIllIlIllIIIllIlIllIIllIIlllIIlIIl) {
+            return;
+        }
+        final List<IIllIIlIllIlIlIlIIlIIllIIIlllIllIIlllIlIlIIllIIllIIlIllIlllIIlIIIllIlIIlIllIIlIllIIlIlIlIIlllIIllIIIlIIIllIIlIIIlllIllIllIlllIIlIIlllIllIIIllIIlllIIlIIIllIIllIIIllIIllIIlIIllIlIIllIlllIIllIllIIlllIlIIIllIIIllIIlllIIll> illlIlIllIIllIllIIlIIllIIIlIIlllIIIlIIIlllIIllIIlllIIlllIlIllIIIlIlIIllIIllIIIlllIllIllIlllIIIlIlIlIlIlllIIllIIIlIIlIIIlIIlIIlIIlIIIllIIlllIIlllIlIIlIIllIIlllIlllIIIlllIIllIIllIIlIIIllIIIlIlIlllIIIllIIlIIlIIllIIIllIIlIlllIll = this.IlllIlIllIIllIllIIlIIllIIIlIIlllIIIlIIIlllIIllIIlllIIlllIlIllIIIlIlIIllIIllIIIlllIllIllIlllIIIlIlIlIlIlllIIllIIIlIIlIIIlIIlIIlIIlIIIllIIlllIIlllIlIIlIIllIIlllIlllIIIlllIIllIIllIIlIIIllIIIlIlIlllIIIllIIlIIlIIllIIIllIIlIlllIll;
+        if (illlIlIllIIllIllIIlIIllIIIlIIlllIIIlIIIlllIIllIIlllIIlllIlIllIIIlIlIIllIIllIIIlllIllIllIlllIIIlIlIlIlIlllIIllIIIlIIlIIIlIIlIIlIIlIIIllIIlllIIlllIlIIlIIllIIlllIlllIIIlllIIllIIllIIlIIIllIIIlIlIlllIIIllIIlIIlIIllIIIllIIlIlllIll.size() > 1) {
+            CollectionsKt.sortWith((List)illlIlIllIIllIllIIlIIllIIIlIIlllIIIlIIIlllIIllIIlllIIlllIlIllIIIlIlIIllIIllIIIlllIllIllIlllIIIlIlIlIlIlllIIllIIIlIIlIIIlIIlIIlIIlIIIllIIlllIIlllIlIIlIIllIIlllIlllIIIlllIIllIIllIIlIIIllIIIlIlIlllIIIllIIlIIlIIllIIIllIIlIlllIll, (Comparator)new Comparator() {
+                @Override
+                public final int compare(final T t, final T t2) {
+                    return ComparisonsKt.compareValues((Comparable)((IIllIIlIllIlIlIlIIlIIllIIIlllIllIIlllIlIlIIllIIllIIlIllIlllIIlIIIllIlIIlIllIIlIllIIlIlIlIIlllIIllIIIlIIIllIIlIIIlllIllIllIlllIIlIIlllIllIIIllIIlllIIlIIIllIIllIIIllIIllIIlIIllIlIIllIlllIIllIllIIlllIlIIIllIIIllIIlllIIll)t).IIllIIlllIIlIIlIIllIlllIllIIIllIIllIlllIIllIlIIllIllIIIlIIllIllIlllIIlIIlIllIIllIIIlIIlllIIIlIIIlIIlllIllIlIIlIIIllIllIIllIIIllIlIIIlllIIlllIllIlIIllIIllIIIllIllIllIIIlIIIllIIIlllIIlllIIllIIlIlllIIllIlllIllIIllIIlIIllIIlllIIlIIIll(), (Comparable)((IIllIIlIllIlIlIlIIlIIllIIIlllIllIIlllIlIlIIllIIllIIlIllIlllIIlIIIllIlIIlIllIIlIllIIlIlIlIIlllIIllIIIlIIIllIIlIIIlllIllIllIlllIIlIIlllIllIIIllIIlllIIlIIIllIIllIIIllIIllIIlIIllIlIIllIlllIIllIllIIlllIlIIIllIIIllIIlllIIll)t2).IIllIIlllIIlIIlIIllIlllIllIIIllIIllIlllIIllIlIIllIllIIIlIIllIllIlllIIlIIlIllIIllIIIlIIlllIIIlIIIlIIlllIllIlIIlIIIllIllIIllIIIllIlIIIlllIIlllIllIlIIllIIllIIIllIllIllIIIlIIIllIIIlllIIlllIIllIIlIlllIIllIlllIllIIllIIlIIllIIlllIIlIIIll());
+                }
+            });
+        }
+        for (final IIllIIlIllIlIlIlIIlIIllIIIlllIllIIlllIlIlIIllIIllIIlIllIlllIIlIIIllIlIIlIllIIlIllIIlIlIlIIlllIIllIIIlIIIllIIlIIIlllIllIllIlllIIlIIlllIllIIIllIIlllIIlIIIllIIllIIIllIIllIIlIIllIlIIllIlllIIllIllIIlllIlIIIllIIIllIIlllIIll illIIlIllIlIlIlIIlIIllIIIlllIllIIlllIlIlIIllIIllIIlIllIlllIIlIIIllIlIIlIllIIlIllIIlIlIlIIlllIIllIIIlIIIllIIlIIIlllIllIllIlllIIlIIlllIllIIIllIIlllIIlIIIllIIllIIIllIIllIIlIIllIlIIllIlllIIllIllIIlllIlIIIllIIIllIIlllIIll : this.IlllIlIllIIllIllIIlIIllIIIlIIlllIIIlIIIlllIIllIIlllIIlllIlIllIIIlIlIIllIIllIIIlllIllIllIlllIIIlIlIlIlIlllIIllIIIlIIlIIIlIIlIIlIIlIIIllIIlllIIlllIlIIlIIllIIlllIlllIIIlllIIllIIllIIlIIIllIIIlIlIlllIIIllIIlIIlIIllIIIllIIlIlllIll) {
+            try {
+                illIIlIllIlIlIlIIlIIllIIIlllIllIIlllIlIlIIllIIllIIlIllIlllIIlIIIllIlIIlIllIIlIllIIlIlIlIIlllIIllIIIlIIIllIIlIIIlllIllIllIlllIIlIIlllIllIIIllIIlllIIlIIIllIIllIIIllIIllIIlIIllIlIIllIlllIIllIllIIlllIlIIIllIIIllIIlllIIll.IlIIlllIIIllIlllIlllIIlllIIIllIIIlllIIIllIIlIIlIllIIllIlIIllIIlIlllIlIIIlllIllIIlIlIIIlllIIlIlIlIlllIIIllIlIllIlllIIlIIlIlIlIIllIIIlllIIlIlIIlllIIlIIIlllIIIlIllIlIllIIllIIIlIIIllIIllIlllIIlIIllIllIIllIIIllIIlllIIlIllIIl().run();
+            }
+            catch (final Throwable t) {
+                Log.error("Failed to run initial tick task!", t, new Object[0]);
+            }
+        }
+        for (final Player player : Bukkit.getOnlinePlayers()) {
+            Intrinsics.checkNotNull((Object)player);
+            IllIlIIllIIllIIllIIIlllIIIlIllIllIlIIlIIllIlllIIIllIlllIIlIllIIlllIIlllIlllIllIIIlllIllIllIlIIllIIllIIllIllIIIllIIIlIIIllIIlIllIlIIIlIIllIllIIIllIllIIlllIIlIllIIlIIIlIIlIllIllIlIlllIIlllIIlIIlllIllIIllIlIIllIlIIllIIIll.IllIIllIlIlIllIIllIIIllIIIllIIIllIIIlIlIlIllIlIIllIIlllIlllIIlIIIllIIlIllIIlllIIllIllIIIlIIlIlIlllIIIlllIIlIIIllIIIllIIIllIlIIlllIIlIlIIIlllIIlIlIIIlllIIlllIIlIllIllIIlIIIllIIllIlllIIllIIllIllIIllIIllIIlIIllIllIIllIIlIIl(player);
+        }
+        this.IIllIIIllIlIIlIllIIIlllIIIlllIIlllIllIllIllIIlllIlIIlIIllIIllIllIIIlllIIlIIllIIlIllIIIlIIIlllIIIlllIIlllIlIIlIIIllIIlIllIIIllIIlllIIIlIIlIIIlIIllIIllIIlllIlIIlIlllIlIIllIIlllIIlIIlIlllIIIlIllIIllIlIllIIIllIlIllIIllIIlllIIlIIl = true;
+    }
+    
+    @Override
+    public boolean isWaitingForInitTick() {
+        return this.IIlIllIIlllIllIlIIIllIIIlIIlIllIllIIIllIIIllIllIllIIlIIllIIIllIIIlIIIllIllIIlllIllIIlllIIlllIIllIIlIIllIIllIllIIIlIIlIIllIIllIIllIIllIIllIIlIlIIIlIlllIIIllIIllIIIlIIlIllIIlIIllIIlllIIlIIllIllIIlllIlllIIllIlIIIlIllIIlllIIlIIIl;
+    }
+    
+    private static final void IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(final IllIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll illIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll) {
+        Intrinsics.checkNotNullParameter((Object)illIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll, "");
+        if (!illIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll.IIllIIIllIlIIlIllIIIlllIIIlllIIlllIllIllIllIIlllIlIIlIIllIIllIllIIIlllIIlIIllIIlIllIIIlIIIlllIIIlllIIlllIlIIlIIIllIIlIllIIIllIIlllIIIlIIlIIIlIIllIIllIIlllIlIIlIlllIlIIllIIlllIIlIIlIlllIIIlIllIIllIlIllIIIllIlIllIIllIIlllIIlIIl) {
+            Log.error("[RaytraceAntiXray] 3 seconds and we did not receive ItemsAdder load event.", new Object[0]);
+            Log.error("[RaytraceAntiXray] We suspect that ItemsAdder didn't loaded correctly, please check your server console for any errors.", new Object[0]);
+            Log.error("[RaytraceAntiXray] We will directly load RaytraceAntiXray up, but we are not responsible for any issues that may occur.", new Object[0]);
+            illIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll.process();
+        }
+    }
+    
+    private static final void IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll(final IllIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll illIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll) {
+        Intrinsics.checkNotNullParameter((Object)illIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll, "");
+        final Iterator iterator = illIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll.IllIIlllIlllIIlllIIllIIIlIllIIlllIlIIlllIllIllIlIllIlIIIlIlIIllIIIlIIlllIIlIIlllIIIlIllIllIllIllIIIlllIIlllIIlIIlIIlIIlIllIIIlIIllIlIIlllIllIllIIIllIIllIlIlIlIllIIlIIllIlIllIIIlllIIllIllIIllIIllIlllIIIlIIlIIlIIIlll.iterator();
+        while (iterator.hasNext()) {
+            if (!((DelayInitialTick)iterator.next()).canPass()) {
+                illIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll.IIlIllIIlllIllIlIIIllIIIlIIlIllIllIIIllIIIllIllIllIIlIIllIIIllIIIlIIIllIllIIlllIllIIlllIIlllIIllIIlIIllIIllIllIIIlIIlIIllIIllIIllIIllIIllIIlIlIIIlIlllIIIllIIllIIIlIIlIllIIlIIllIIlllIIlIIllIllIIlllIlllIIllIlIIIlIllIIlllIIlIIIl = true;
+                Log.info("[RaytraceAntiXray] Initial Tick Blocked, waiting for ItemsAdder to be loaded.", new Object[0]);
+                MCSchedulers.getGlobalScheduler().schedule(IllIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll::IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll, 60L);
+                return;
+            }
+        }
+        illIllIIIlllIIIlIllIIlllIIlIllIIIlIIlllIIIllIIIlIIIllIIIllIlIIIllIIlIIllIIlIIIllIIllIlllIlllIllIIIlIllIIIlIIllIIllIIllIIlIIllIIllIIllIlIllIIlllIIIllIIlllIIllIlIllIlllIIIlIIllIIlllIIlIllIllIIlIIIllIIllIllIIIllIlIllIIIlIIIlIIlIlll.process();
+    }
+}

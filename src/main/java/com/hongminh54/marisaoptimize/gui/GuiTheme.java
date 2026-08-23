@@ -1,33 +1,29 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui;
 
-import meteordevelopment.meteorclient.gui.renderer.packer.GuiTexture;
-import meteordevelopment.meteorclient.gui.screens.ModuleScreen;
-import meteordevelopment.meteorclient.gui.screens.ModulesScreen;
-import meteordevelopment.meteorclient.gui.screens.NotebotSongsScreen;
-import meteordevelopment.meteorclient.gui.screens.ProxiesScreen;
-import meteordevelopment.meteorclient.gui.screens.accounts.AccountsScreen;
-import meteordevelopment.meteorclient.gui.tabs.TabScreen;
-import meteordevelopment.meteorclient.gui.utils.CharFilter;
-import meteordevelopment.meteorclient.gui.utils.SettingsWidgetFactory;
-import meteordevelopment.meteorclient.gui.utils.WindowConfig;
-import meteordevelopment.meteorclient.gui.widgets.*;
-import meteordevelopment.meteorclient.gui.widgets.containers.*;
-import meteordevelopment.meteorclient.gui.widgets.input.*;
-import meteordevelopment.meteorclient.gui.widgets.pressable.*;
-import meteordevelopment.meteorclient.renderer.Texture;
-import meteordevelopment.meteorclient.renderer.text.TextRenderer;
-import meteordevelopment.meteorclient.settings.Settings;
-import meteordevelopment.meteorclient.systems.accounts.Account;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.utils.misc.ISerializable;
-import meteordevelopment.meteorclient.utils.misc.Keybind;
-import meteordevelopment.meteorclient.utils.misc.Names;
-import meteordevelopment.meteorclient.utils.render.color.Color;
+import com.hongminh54.marisaoptimize.gui.renderer.packer.GuiTexture;
+import com.hongminh54.marisaoptimize.gui.screens.ModuleScreen;
+import com.hongminh54.marisaoptimize.gui.screens.ModulesScreen;
+import com.hongminh54.marisaoptimize.gui.screens.NotebotSongsScreen;
+import com.hongminh54.marisaoptimize.gui.screens.ProxiesScreen;
+import com.hongminh54.marisaoptimize.gui.screens.accounts.AccountsScreen;
+import com.hongminh54.marisaoptimize.gui.tabs.TabScreen;
+import com.hongminh54.marisaoptimize.gui.utils.CharFilter;
+import com.hongminh54.marisaoptimize.gui.utils.SettingsWidgetFactory;
+import com.hongminh54.marisaoptimize.gui.utils.WindowConfig;
+import com.hongminh54.marisaoptimize.renderer.Texture;
+import com.hongminh54.marisaoptimize.renderer.text.TextRenderer;
+import com.hongminh54.marisaoptimize.settings.Settings;
+import com.hongminh54.marisaoptimize.systems.accounts.Account;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
+import com.hongminh54.marisaoptimize.utils.misc.Keybind;
+import com.hongminh54.marisaoptimize.utils.misc.Names;
+import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -35,6 +31,10 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.hongminh54.marisaoptimize.gui.widgets.*;
+import com.hongminh54.marisaoptimize.gui.widgets.containers.*;
+import com.hongminh54.marisaoptimize.gui.widgets.input.*;
+import com.hongminh54.marisaoptimize.gui.widgets.pressable.*;
 
 public abstract class GuiTheme implements ISerializable<GuiTheme> {
     public static final double TITLE_TEXT_SCALE = 1.25;

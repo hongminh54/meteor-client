@@ -1,0 +1,143 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package dev.imanity.antixray.a;
+
+import org.bukkit.Bukkit;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import org.jetbrains.annotations.Nullable;
+import org.bukkit.block.Block;
+import io.fairyproject.util.CC;
+import io.fairyproject.bukkit.util.items.ItemBuilder;
+import org.bukkit.inventory.ItemStack;
+import io.fairyproject.libs.packetevents.protocol.world.states.WrappedBlockState;
+import kotlin.LazyKt;
+import dev.imanity.antixray.nms.NativeProvider;
+import dev.imanity.antixray.nms.Native;
+import kotlin.Metadata;
+import kotlin.jvm.internal.Lambda;
+import java.util.Set;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.internal.Intrinsics;
+import kotlin.Lazy;
+import org.bukkit.block.data.BlockData;
+import org.jetbrains.annotations.NotNull;
+
+public final class IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl implements IlIIlllIlllIlllIIIlIIlIIlIIllIIIllIlllIIllIIlIIllIllIIllIIIllIIlIlIIllIIllIllIIIlIlIIIllIIlllIllIIlIllIIlIllIlllIIllIlllIllIlllIllIIIllIllIIlIIIlIIlllIIIlIllIllIllIlllIllIIlllIlIIIlllIIlllIllIlIIlIllIIIlllIIIllIIIllIIlIl
+{
+    @NotNull
+    public static final IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll IIllIllIIlllIIIlIIllIIllIIllIIlIllIIllIIllIIIllIIIllIIllIllIllIIIlllIIlIIIllIIllIIIllIIIllIIllIIIlIIIlIIlIllIIllIIllIlllIlllIllIIllIlllIIlllIIllIIllIIIlllIIlllIIIlllIIlllIIlIIIlIIllIlIIlIlIlIIlIllIlIIIlllIllIIlllIlllIlIIIllIIIlIIlIIl;
+    @NotNull
+    private final BlockData IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl;
+    @NotNull
+    private final Lazy IlIIlIlIlllIIlIlllIllIllIIlIlIIIlllIIIllIllIlllIllIIIllIIIllIlIIIllIllIIllIlllIIIllIlIIlIllIlIlIIllIIlIIIllIlllIIllIIlIIllIIlIIIllIIlIIIllIllIIllIllIIlllIlIIlllIIlIIlllIIIlIIIlIIIlllIIIlIIlllIIllIlIIlllIIlIIIllIllIIlIIlll;
+    @NotNull
+    private final Lazy IIllIIlIIIllIIIlIllIIllIIllIIIlllIlIIllIIllIIllIIlllIIlllIllIIllIIlllIllIllIllIIlIIllIIIllIlllIllIlIlllIIllIIlllIlIIllIIllIIllIIllIlIIlIIlllIIIlllIlllIIlllIIlIIlIlIIlIIllIIIllIIllIllIIllIIlIIIllIIllIIIlIIlIIllIIIlIllIlIIllIIll;
+    
+    public IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl(@NotNull final BlockData iiIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl) {
+        Intrinsics.checkNotNullParameter((Object)iiIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl, "");
+        this.IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl = iiIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl;
+        this.IlIIlIlIlllIIlIlllIllIllIIlIlIIIlllIIIllIllIlllIllIIIllIIIllIlIIIllIllIIllIlllIIIllIlIIlIllIlIlIIllIIlIIIllIlllIIllIIlIIllIIlIIIllIIlIIIllIllIIllIllIIlllIlIIlllIIlIIlllIIIlIIIlIIIlllIIIlIIlllIIllIlIIlllIIlIIIllIllIIlIIlll = LazyKt.lazy((Function0)new Function0<Set<? extends Integer>>() {
+            final /* synthetic */ IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl IIlIIIlIIllIIIlIIllIIIllIlllIIllIIIlllIllIIllIIIllIlIllIIllIIllIIIllIIllIIlllIIIlllIIIlIllIllIIlIIlllIIIlllIlllIIlIIIlIIlllIIIlIIIlllIIllIIlIIlIIIlllIIlIIllIlllIIllIlIlIIllIIlIIlIIlIIllIIlllIIIllIlIIIllIIIllIIIllIIIlIIlIIllIIIlIlllIllIIIlll;
+            
+            @NotNull
+            public final Set<Integer> IIIllIIlIllIIIlllIIlIIlllIIIlllIIlIlIlIIIllIlIllIIIlllIllIIlIllIllIIIllIIllIllIllIllIllIIlIllIIIllIllIIIlIIlllIIllIlllIIIlIllIIlIlIIlllIIIllIlllIllIllIIllIIllIIIllIIIllIIllIllIllIIIllIIlllIIIlIIIllIllIIllIIIllIIIlllIIIllIIllIIllIIIl() {
+                final NativeProvider nativeProvider = Native.INSTANCE.getNativeProvider();
+                Intrinsics.checkNotNull((Object)nativeProvider);
+                return nativeProvider.getBlockDataIds(this.IIlIIIlIIllIIIlIIllIIIllIlllIIllIIIlllIllIIllIIIllIlIllIIllIIllIIIllIIllIIlllIIIlllIIIlIllIllIIlIIlllIIIlllIlllIIlIIIlIIlllIIIlIIIlllIIllIIlIIlIIIlllIIlIIllIlllIIllIlIlIIllIIlIIlIIlIIllIIlllIIIllIlIIIllIIIllIIIllIIIlIIlIIllIIIlIlllIllIIIlll.IlllIIIlllIIllIIIlllIIllIllIIIllIIllIIlIIlllIIlllIIlllIIlllIIllIlIIlIIlIIIlllIIllIlllIIllIIllIIllIIlIlllIllIIIlIlllIlllIIlllIllIIllIIllIlIIlllIlIIllIlIIIllIIIlllIIllIlllIIllIlIIlIIlllIIIlIIllIIIlllIIlIlIIlllIIIlIIlllIllIlIllIIllIlllIIlll());
+            }
+        });
+        this.IIllIIlIIIllIIIlIllIIllIIllIIIlllIlIIllIIllIIllIIlllIIlllIllIIllIIlllIllIllIllIIlIIllIIIllIlllIllIlIlllIIllIIlllIlIIllIIllIIllIIllIlIIlIIlllIIIlllIlllIIlllIIlIIlIlIIlIIllIIIllIIllIllIIllIIlIIIllIIllIIIlIIlIIllIIIlIllIlIIllIIll = LazyKt.lazy((Function0)new Function0<WrappedBlockState>() {
+            final /* synthetic */ IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl IIIlIIllIIIlllIIlllIlIIIllIIllIlIIlllIIlllIlllIIlIIllIllIlllIIIlllIlllIlIIIllIIIlllIIIlIIlIlllIlllIIIlllIIlllIIlllIIllIIllIIlllIllIllIlIIIlIllIIllIllIIIlllIIllIIllIIIllIIIlIIIllIlIIlllIIlllIIIlllIllIIIllIIIllIIllIIlllIllIllIIlIIllIIIllIIIlllIIlllIll;
+            
+            @NotNull
+            public final WrappedBlockState IIllIlllIlllIllIlIIlllIIlIIIlllIIIlIlIllIlIIllIIIllIlIlllIIIllIIIllIlIllIlllIIlllIIIlllIIIlllIIlllIIIlllIIllIIllIlllIIIlllIIlIIlIIllIIIlIIIllIlIIIlIIIllIIIlllIIllIIllIIllIIlIlIIllIlIIlllIllIIllIIIllIIlllIIlIIIllIIIlIlllIIlllIIllIIIlIllIll() {
+                final String asString = this.IIIlIIllIIIlllIIlllIlIIIllIIllIlIIlllIIlllIlllIIlIIllIllIlllIIIlllIlllIlIIIllIIIlllIIIlIIlIlllIlllIIIlllIIlllIIlllIIllIIllIIlllIllIllIlIIIlIllIIllIllIIIlllIIllIIllIIIllIIIlIIIllIlIIlllIIlllIIIlllIllIIIllIIIllIIllIIlllIllIllIIlIIllIIIllIIIlllIIlllIll.IlllIIIlllIIllIIIlllIIllIllIIIllIIllIIlIIlllIIlllIIlllIIlllIIllIlIIlIIlIIIlllIIllIlllIIllIIllIIllIIlIlllIllIIIlIlllIlllIIlllIllIIllIIllIlIIlllIlIIllIlIIIllIIIlllIIllIlllIIllIlIIlIIlllIIIlIIllIIIlllIIlIlIIlllIIIlIIlllIllIlIllIIllIlllIIlll().getAsString();
+                Intrinsics.checkNotNullExpressionValue((Object)asString, "");
+                return IIIllIIlIIIlIIllIIIlllIIIlIllIllIIllIIlllIlIllIIllIIIlIIlllIIIlllIIlIllIIIllIllIlIlIIIllIllIIllIllIIllIIIlllIlIIllIllIIllIlllIIIllIIlllIlIIIllIIlIIllIlIlllIllIIlllIIllIlllIlIllIIIllIllIIlIIlIIIllIlllIIIlIIllIIllIIlllIlIIIllIlll.IlllIIlIIIlllIIIlIIllIlIllIIIlIIIllIlllIIIllIIlIIllIIllIlllIIllIIllIIllIIllIIlllIIlllIllIIllIlllIlIllIIlllIllIllIIlllIIllIIIlllIIIllIIIllIlllIIlllIIlIlIlIlIllIIIlllIIlIllIIllIIlllIIlIIIllIIIllIIlIIlllIlIllIllIIlIIIllIllIIlIIllIll(asString);
+            }
+        });
+    }
+    
+    @NotNull
+    public final BlockData IlllIIIlllIIllIIIlllIIllIllIIIllIIllIIlIIlllIIlllIIlllIIlllIIllIlIIlIIlIIIlllIIllIlllIIllIIllIIllIIlIlllIllIIIlIlllIlllIIlllIllIIllIIllIlIIlllIlIIllIlIIIllIIIlllIIllIlllIIllIlIIlIIlllIIIlIIllIIIlllIIlIlIIlllIIIlIIlllIllIlIllIIllIlllIIlll() {
+        return this.IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl;
+    }
+    
+    @NotNull
+    @Override
+    public String getName() {
+        final String asString = this.IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl.getAsString();
+        Intrinsics.checkNotNullExpressionValue((Object)asString, "");
+        return asString;
+    }
+    
+    @NotNull
+    @Override
+    public Set<Integer> getGlobalIds() {
+        return (Set)this.IlIIlIlIlllIIlIlllIllIllIIlIlIIIlllIIIllIllIlllIllIIIllIIIllIlIIIllIllIIllIlllIIIllIlIIlIllIlIlIIllIIlIIIllIlllIIllIIlIIllIIlIIIllIIlIIIllIllIIllIllIIlllIlIIlllIIlIIlllIIIlIIIlIIIlllIIIlIIlllIIllIlIIlllIIlIIIllIllIIlIIlll.getValue();
+    }
+    
+    @NotNull
+    @Override
+    public WrappedBlockState getBlockState() {
+        return (WrappedBlockState)this.IIllIIlIIIllIIIlIllIIllIIllIIIlllIlIIllIIllIIllIIlllIIlllIllIIllIIlllIllIllIllIIlIIllIIIllIlllIllIlIlllIIllIIlllIlIIllIIllIIllIIllIlIIlIIlllIIIlllIlllIIlllIIlIIlIlIIlIIllIIIllIIllIllIIllIIlIIIllIIllIIIlIIlIIllIIIlIllIlIIllIIll.getValue();
+    }
+    
+    @NotNull
+    @Override
+    public ItemStack getDisplayItem() {
+        final ItemStack build = ItemBuilder.of(this.IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl.getMaterial()).name(CC.YELLOW + this.IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl.getAsString()).build();
+        Intrinsics.checkNotNullExpressionValue((Object)build, "");
+        return build;
+    }
+    
+    @Override
+    public boolean isSimilar(@NotNull final Block block) {
+        Intrinsics.checkNotNullParameter((Object)block, "");
+        return block.getBlockData().matches(this.IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl);
+    }
+    
+    @Override
+    public boolean equals(@Nullable final Object o) {
+        return this == o || (o instanceof IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl && Intrinsics.areEqual((Object)this.IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl, (Object)((IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl)o).IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl));
+    }
+    
+    @Override
+    public int hashCode() {
+        return this.IIIllIIllIIllIIIlIlIlllIIllIIllIIlIIlllIIIllIllIllIIlIllIIllIIIllIIIlllIlIIIlllIllIllIIIlIIlIIllIIIllIIlllIllIIllIIIllIIIllIlIllIlllIlIIIlllIllIIIlllIIIlIIlllIIllIIlllIIlllIIIllIllIIlllIIllIIllIllIlllIIllIIllIIllIIlllIIllIllIllIllIllIIl.hashCode();
+    }
+    
+    @Override
+    public boolean isSupported() {
+        return IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll.IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(this);
+    }
+    
+    static {
+        IIllIllIIlllIIIlIIllIIllIIllIIlIllIIllIIllIIIllIIIllIIllIllIllIIIlllIIlIIIllIIllIIIllIIIllIIllIIIlIIIlIIlIllIIllIIllIlllIlllIllIIllIlllIIlllIIllIIllIIIlllIIlllIIIlllIIlllIIlIIIlIIllIlIIlIlIlIIlIllIlIIIlllIllIIlllIlllIlIIIllIIIlIIlIIl = new IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(null);
+    }
+    
+    @Metadata(mv = { 1, 9, 0 }, k = 1, xi = 48, d1 = { "\u0000\"\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0010\u000e\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\b\u0086\u0003\u0018\u00002\u00020\u0001B\t\b\u0002¢\u0006\u0004\b\u0002\u0010\u0003J\u0017\u0010\u0007\u001a\u00020\u00062\u0006\u0010\u0005\u001a\u00020\u0004H\u0007¢\u0006\u0004\b\u0007\u0010\bJ\u0017\u0010\n\u001a\u00020\u00062\u0006\u0010\u0005\u001a\u00020\tH\u0007¢\u0006\u0004\b\n\u0010\u000b" }, d2 = { "Ldev/imanity/antixray/a/IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl$IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll;", "", "<init>", "()V", "", "p0", "Ldev/imanity/antixray/a/IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl;", "IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll", "(Ljava/lang/String;)Ldev/imanity/antixray/a/IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl;", "Lorg/bukkit/inventory/ItemStack;", "IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll", "(Lorg/bukkit/inventory/ItemStack;)Ldev/imanity/antixray/a/IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl;" })
+    public static final class IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll
+    {
+        private IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll() {
+        }
+        
+        @NotNull
+        public final IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl IIllIIlIllIIlIlllIIllIIIllIIIllIlIIlIIIllIIlllIIllIllIlIIlllIIlllIlIlIIlllIIlllIIIllIIllIIlIIIllIIIlllIIIllIllIIIlllIIllIllIlllIIIllIIIllIIlIlIIllIIlIIIlllIIllIIllIllIlllIIIlIIlIIIlIIllIlIIllIlllIlIIIllIIIlIIIllIIIlIlIllIIllIlIll(@NotNull final ItemStack itemStack) {
+            Intrinsics.checkNotNullParameter((Object)itemStack, "");
+            final BlockData blockData = Bukkit.createBlockData(itemStack.getType());
+            Intrinsics.checkNotNullExpressionValue((Object)blockData, "");
+            return new IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl(blockData);
+        }
+        
+        @NotNull
+        public final IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll(@NotNull final String s) {
+            Intrinsics.checkNotNullParameter((Object)s, "");
+            final BlockData blockData = Bukkit.createBlockData(s);
+            Intrinsics.checkNotNullExpressionValue((Object)blockData, "");
+            return new IIllIllIIllIIlllIIlIIlIIIlIllIllIIlIIIlllIIllIIllIlllIIllIIlIIlllIlllIllIlllIIllIIlIlllIlllIlIlllIllIlllIIlIlllIIlIIlIIlllIIlllIlIlIIIllIlIllIllIIllIIIlllIIIllIllIIlIlIllIllIIIllIIIlIlIIlllIIIllIlIlIIlIlllIIlllIIllIIIl(blockData);
+        }
+    }
+}

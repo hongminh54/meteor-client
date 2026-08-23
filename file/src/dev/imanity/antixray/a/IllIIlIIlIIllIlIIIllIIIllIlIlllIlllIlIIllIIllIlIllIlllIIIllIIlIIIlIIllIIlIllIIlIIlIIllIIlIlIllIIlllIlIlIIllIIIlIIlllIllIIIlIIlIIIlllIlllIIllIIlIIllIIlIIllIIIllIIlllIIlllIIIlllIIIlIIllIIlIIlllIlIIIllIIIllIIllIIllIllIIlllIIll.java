@@ -1,0 +1,197 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package dev.imanity.antixray.a;
+
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.Intrinsics;
+import org.jetbrains.annotations.Nullable;
+import dev.imanity.antixray.api.block.RaytraceBlockGroup;
+import io.fairyproject.libs.packetevents.protocol.world.states.WrappedBlockState;
+import io.fairyproject.mc.util.BlockPosition;
+import org.jetbrains.annotations.NotNull;
+import dev.imanity.antixray.api.chunk.DirectChunk;
+import dev.imanity.antixray.api.block.RaytraceBlock;
+
+public final class IllIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll implements RaytraceBlock
+{
+    @NotNull
+    private final DirectChunk IIllIlllIlllIllIlIIlllIIlIIIlllIIIlIlIllIlIIllIIIllIlIlllIIIllIIIllIlIllIlllIIlllIIIlllIIIlllIIlllIIIlllIIllIIllIlllIIIlllIIlIIlIIllIIIlIIIllIlIIIlIIIllIIIlllIIllIIllIIllIIlIlIIllIlIIlllIllIIllIIIllIIlllIIlIIIllIIIlIlllIIlllIIllIIIlIllIll;
+    @NotNull
+    private final BlockPosition IIIllIIlIllIIIlllIIlIIlllIIIlllIIlIlIlIIIllIlIllIIIlllIllIIlIllIllIIIllIIllIllIllIllIllIIlIllIIIllIllIIIlIIlllIIllIlllIIIlIllIIlIlIIlllIIIllIlllIllIllIIllIIllIIIllIIIllIIllIllIllIIIllIIlllIIIlIIIllIllIIllIIIllIIIlllIIIllIIllIIllIIIl;
+    @NotNull
+    private final WrappedBlockState IllIIllIIllIlllIIlIIllIIlIIllIIlllIIIllIlIlllIlllIIllIIllIllIIllIllIIllIIlIIlllIlllIIlllIIIllIIllIIIllIlIIllIllIllIllIIllIIIlIIlllIlllIIIllIIIlIIllIllIIIllIIIllIIlIIIllIIlIIllIllIIlllIlIlIllIllIllIlIIlIllIIlIIllIIllIIIlllIIl;
+    @NotNull
+    private final WrappedBlockState IIllIIIlllIIlllIIllIlIIIlllIIIllIlIIllIIlIllIIlllIIIlIIIlIIIlIIlIIlIIIllIlllIllIIIllIIllIlIlllIllIIllIIlIIlllIlllIIlllIIIlllIIllIlllIlIIllIllIlIIllIIIlIIIlIIIllIIlIIlIIlllIllIlllIlIIllIIIllIIlIIlllIIlIIllIlllIIIlIlIIllIIIlllIIIlIll;
+    private boolean initialized;
+    private volatile boolean IllIIlIllIlIllIIIllIlIlllIllIllIlIllIIIllIIlllIIIllIllIIllIIllIIllIllIllIIlIIlIIlIIIlllIIIlllIIlIllIllIlllIIlIllIllIIIlIIIllIIlIlIIIlIIIlIIIlllIllIIlllIIIllIIlIllIlIIlIIIllIIIlllIIlIIIlllIIlIlIIIllIIIlIIlIIIlIIIllIllIl;
+    private volatile boolean IIIllIllIllIllIIllIIlIIllIIIllIlIIIlIIlIlllIlIllIIlllIIIlllIIIllIIlIIllIlllIlIIIllIlllIIllIIlllIIIllIIIlllIIllIlllIIIlIllIIIllIIlllIIlIllIllIllIlIIlllIIllIIlIIIlIIlIllIlIIIllIIIlllIllIlllIlIIlIIIlIIllIIlllIIllIIllIIIllIllIlllIIll;
+    @Nullable
+    private volatile RaytraceBlockGroup IIIllIIlIIllIlIIllIIlIIlIllIIlIllIIllIllIIlIIllIIIlIlllIIIlllIIlIIlIllIIIllIllIllIIlllIIllIIllIIIlIllIIlIIlIIlllIlIIIlllIllIIlIlIlllIlllIIIlIlllIllIIllIlIIlllIIIlllIIlIIIlllIIlIllIIIlIIllIllIIlllIIIlllIIIlIIlIIIllIlIIIlIll;
+    private volatile boolean IIIlIIIllIIllIIllIIllIIIllIIIlIIllIIllIIllIlIIlllIIllIIIlIIlIlllIIllIIlllIIllIIllIlllIIlIIIlIIllIIllIIllIIlllIIllIlllIIlIIlIIIlIIIllIlIlllIIIllIlllIIlllIllIIIlIllIIlIIlllIllIIllIIIlIllIIlllIlIIllIllIlIIlIllIIllIIllIllIllIIlllIIlll;
+    
+    public IllIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll(@NotNull final DirectChunk iIllIlllIlllIllIlIIlllIIlIIIlllIIIlIlIllIlIIllIIIllIlIlllIIIllIIIllIlIllIlllIIlllIIIlllIIIlllIIlllIIIlllIIllIIllIlllIIIlllIIlIIlIIllIIIlIIIllIlIIIlIIIllIIIlllIIllIIllIIllIIlIlIIllIlIIlllIllIIllIIIllIIlllIIlIIIllIIIlIlllIIlllIIllIIIlIllIll, @NotNull final BlockPosition iiIllIIlIllIIIlllIIlIIlllIIIlllIIlIlIlIIIllIlIllIIIlllIllIIlIllIllIIIllIIllIllIllIllIllIIlIllIIIllIllIIIlIIlllIIllIlllIIIlIllIIlIlIIlllIIIllIlllIllIllIIllIIllIIIllIIIllIIllIllIllIIIllIIlllIIIlIIIllIllIIllIIIllIIIlllIIIllIIllIIllIIIl, @NotNull final WrappedBlockState illIIllIIllIlllIIlIIllIIlIIllIIlllIIIllIlIlllIlllIIllIIllIllIIllIllIIllIIlIIlllIlllIIlllIIIllIIllIIIllIlIIllIllIllIllIIllIIIlIIlllIlllIIIllIIIlIIllIllIIIllIIIllIIlIIIllIIlIIllIllIIlllIlIlIllIllIllIlIIlIllIIlIIllIIllIIIlllIIl, @NotNull final WrappedBlockState iIllIIIlllIIlllIIllIlIIIlllIIIllIlIIllIIlIllIIlllIIIlIIIlIIIlIIlIIlIIIllIlllIllIIIllIIllIlIlllIllIIllIIlIIlllIlllIIlllIIIlllIIllIlllIlIIllIllIlIIllIIIlIIIlIIIllIIlIIlIIlllIllIlllIlIIllIIIllIIlIIlllIIlIIllIlllIIIlIlIIllIIIlllIIIlIll) {
+        Intrinsics.checkNotNullParameter((Object)iIllIlllIlllIllIlIIlllIIlIIIlllIIIlIlIllIlIIllIIIllIlIlllIIIllIIIllIlIllIlllIIlllIIIlllIIIlllIIlllIIIlllIIllIIllIlllIIIlllIIlIIlIIllIIIlIIIllIlIIIlIIIllIIIlllIIllIIllIIllIIlIlIIllIlIIlllIllIIllIIIllIIlllIIlIIIllIIIlIlllIIlllIIllIIIlIllIll, "");
+        Intrinsics.checkNotNullParameter((Object)iiIllIIlIllIIIlllIIlIIlllIIIlllIIlIlIlIIIllIlIllIIIlllIllIIlIllIllIIIllIIllIllIllIllIllIIlIllIIIllIllIIIlIIlllIIllIlllIIIlIllIIlIlIIlllIIIllIlllIllIllIIllIIllIIIllIIIllIIllIllIllIIIllIIlllIIIlIIIllIllIIllIIIllIIIlllIIIllIIllIIllIIIl, "");
+        Intrinsics.checkNotNullParameter((Object)illIIllIIllIlllIIlIIllIIlIIllIIlllIIIllIlIlllIlllIIllIIllIllIIllIllIIllIIlIIlllIlllIIlllIIIllIIllIIIllIlIIllIllIllIllIIllIIIlIIlllIlllIIIllIIIlIIllIllIIIllIIIllIIlIIIllIIlIIllIllIIlllIlIlIllIllIllIlIIlIllIIlIIllIIllIIIlllIIl, "");
+        Intrinsics.checkNotNullParameter((Object)iIllIIIlllIIlllIIllIlIIIlllIIIllIlIIllIIlIllIIlllIIIlIIIlIIIlIIlIIlIIIllIlllIllIIIllIIllIlIlllIllIIllIIlIIlllIlllIIlllIIIlllIIllIlllIlIIllIllIlIIllIIIlIIIlIIIllIIlIIlIIlllIllIlllIlIIllIIIllIIlIIlllIIlIIllIlllIIIlIlIIllIIIlllIIIlIll, "");
+        this.IIllIlllIlllIllIlIIlllIIlIIIlllIIIlIlIllIlIIllIIIllIlIlllIIIllIIIllIlIllIlllIIlllIIIlllIIIlllIIlllIIIlllIIllIIllIlllIIIlllIIlIIlIIllIIIlIIIllIlIIIlIIIllIIIlllIIllIIllIIllIIlIlIIllIlIIlllIllIIllIIIllIIlllIIlIIIllIIIlIlllIIlllIIllIIIlIllIll = iIllIlllIlllIllIlIIlllIIlIIIlllIIIlIlIllIlIIllIIIllIlIlllIIIllIIIllIlIllIlllIIlllIIIlllIIIlllIIlllIIIlllIIllIIllIlllIIIlllIIlIIlIIllIIIlIIIllIlIIIlIIIllIIIlllIIllIIllIIllIIlIlIIllIlIIlllIllIIllIIIllIIlllIIlIIIllIIIlIlllIIlllIIllIIIlIllIll;
+        this.IIIllIIlIllIIIlllIIlIIlllIIIlllIIlIlIlIIIllIlIllIIIlllIllIIlIllIllIIIllIIllIllIllIllIllIIlIllIIIllIllIIIlIIlllIIllIlllIIIlIllIIlIlIIlllIIIllIlllIllIllIIllIIllIIIllIIIllIIllIllIllIIIllIIlllIIIlIIIllIllIIllIIIllIIIlllIIIllIIllIIllIIIl = iiIllIIlIllIIIlllIIlIIlllIIIlllIIlIlIlIIIllIlIllIIIlllIllIIlIllIllIIIllIIllIllIllIllIllIIlIllIIIllIllIIIlIIlllIIllIlllIIIlIllIIlIlIIlllIIIllIlllIllIllIIllIIllIIIllIIIllIIllIllIllIIIllIIlllIIIlIIIllIllIIllIIIllIIIlllIIIllIIllIIllIIIl;
+        this.IllIIllIIllIlllIIlIIllIIlIIllIIlllIIIllIlIlllIlllIIllIIllIllIIllIllIIllIIlIIlllIlllIIlllIIIllIIllIIIllIlIIllIllIllIllIIllIIIlIIlllIlllIIIllIIIlIIllIllIIIllIIIllIIlIIIllIIlIIllIllIIlllIlIlIllIllIllIlIIlIllIIlIIllIIllIIIlllIIl = illIIllIIllIlllIIlIIllIIlIIllIIlllIIIllIlIlllIlllIIllIIllIllIIllIllIIllIIlIIlllIlllIIlllIIIllIIllIIIllIlIIllIllIllIllIIllIIIlIIlllIlllIIIllIIIlIIllIllIIIllIIIllIIlIIIllIIlIIllIllIIlllIlIlIllIllIllIlIIlIllIIlIIllIIllIIIlllIIl;
+        this.IIllIIIlllIIlllIIllIlIIIlllIIIllIlIIllIIlIllIIlllIIIlIIIlIIIlIIlIIlIIIllIlllIllIIIllIIllIlIlllIllIIllIIlIIlllIlllIIlllIIIlllIIllIlllIlIIllIllIlIIllIIIlIIIlIIIllIIlIIlIIlllIllIlllIlIIllIIIllIIlIIlllIIlIIllIlllIIIlIlIIllIIIlllIIIlIll = iIllIIIlllIIlllIIllIlIIIlllIIIllIlIIllIIlIllIIlllIIIlIIIlIIIlIIlIIlIIIllIlllIllIIIllIIllIlIlllIllIIllIIlIIlllIlllIIlllIIIlllIIllIlllIlIIllIllIlIIllIIIlIIIlIIIllIIlIIlIIlllIllIlllIlIIllIIIllIIlIIlllIIlIIllIlllIIIlIlIIllIIIlllIIIlIll;
+    }
+    
+    @NotNull
+    @Override
+    public DirectChunk getChunk() {
+        return this.IIllIlllIlllIllIlIIlllIIlIIIlllIIIlIlIllIlIIllIIIllIlIlllIIIllIIIllIlIllIlllIIlllIIIlllIIIlllIIlllIIIlllIIllIIllIlllIIIlllIIlIIlIIllIIIlIIIllIlIIIlIIIllIIIlllIIllIIllIIllIIlIlIIllIlIIlllIllIIllIIIllIIlllIIlIIIllIIIlIlllIIlllIIllIIIlIllIll;
+    }
+    
+    @NotNull
+    @Override
+    public BlockPosition getBlockPosition() {
+        return this.IIIllIIlIllIIIlllIIlIIlllIIIlllIIlIlIlIIIllIlIllIIIlllIllIIlIllIllIIIllIIllIllIllIllIllIIlIllIIIllIllIIIlIIlllIIllIlllIIIlIllIIlIlIIlllIIIllIlllIllIllIIllIIllIIIllIIIllIIllIllIllIIIllIIlllIIIlIIIllIllIIllIIIllIIIlllIIIllIIllIIllIIIl;
+    }
+    
+    @NotNull
+    @Override
+    public WrappedBlockState getOriginal() {
+        return this.IllIIllIIllIlllIIlIIllIIlIIllIIlllIIIllIlIlllIlllIIllIIllIllIIllIllIIllIIlIIlllIlllIIlllIIIllIIllIIIllIlIIllIllIllIllIIllIIIlIIlllIlllIIIllIIIlIIllIllIIIllIIIllIIlIIIllIIlIIllIllIIlllIlIlIllIllIllIlIIlIllIIlIIllIIllIIIlllIIl;
+    }
+    
+    @NotNull
+    @Override
+    public WrappedBlockState getReplacement() {
+        return this.IIllIIIlllIIlllIIllIlIIIlllIIIllIlIIllIIlIllIIlllIIIlIIIlIIIlIIlIIlIIIllIlllIllIIIllIIllIlIlllIllIIllIIlIIlllIlllIIlllIIIlllIIllIlllIlIIllIllIlIIllIIIlIIIlIIIllIIlIIlIIlllIllIlllIlIIllIIIllIIlIIlllIIlIIllIlllIIIlIlIIllIIIlllIIIlIll;
+    }
+    
+    @Override
+    public boolean getInitialized() {
+        return this.initialized;
+    }
+    
+    @Override
+    public void setInitialized(final boolean initialized) {
+        this.initialized = initialized;
+    }
+    
+    @Override
+    public boolean getVisible() {
+        return this.IllIIlIllIlIllIIIllIlIlllIllIllIlIllIIIllIIlllIIIllIllIIllIIllIIllIllIllIIlIIlIIlIIIlllIIIlllIIlIllIllIlllIIlIllIllIIIlIIIllIIlIlIIIlIIIlIIIlllIllIIlllIIIllIIlIllIlIIlIIIllIIIlllIIlIIIlllIIlIlIIIllIIIlIIlIIIlIIIllIllIl;
+    }
+    
+    @Override
+    public void setVisible(final boolean illIIlIllIlIllIIIllIlIlllIllIllIlIllIIIllIIlllIIIllIllIIllIIllIIllIllIllIIlIIlIIlIIIlllIIIlllIIlIllIllIlllIIlIllIllIIIlIIIllIIlIlIIIlIIIlIIIlllIllIIlllIIIllIIlIllIlIIlIIIllIIIlllIIlIIIlllIIlIlIIIllIIIlIIlIIIlIIIllIllIl) {
+        this.IllIIlIllIlIllIIIllIlIlllIllIllIlIllIIIllIIlllIIIllIllIIllIIllIIllIllIllIIlIIlIIlIIIlllIIIlllIIlIllIllIlllIIlIllIllIIIlIIIllIIlIlIIIlIIIlIIIlllIllIIlllIIIllIIlIllIlIIlIIIllIIIlllIIlIIIlllIIlIlIIIllIIIlIIlIIIlIIIllIllIl = illIIlIllIlIllIIIllIlIlllIllIllIlIllIIIllIIlllIIIllIllIIllIIllIIllIllIllIIlIIlIIlIIIlllIIIlllIIlIllIllIlllIIlIllIllIIIlIIIllIIlIlIIIlIIIlIIIlllIllIIlllIIIllIIlIllIlIIlIIIllIIIlllIIlIIIlllIIlIlIIIllIIIlIIlIIIlIIIllIllIl;
+    }
+    
+    @Override
+    public boolean getPendingRemoval() {
+        return this.IIIllIllIllIllIIllIIlIIllIIIllIlIIIlIIlIlllIlIllIIlllIIIlllIIIllIIlIIllIlllIlIIIllIlllIIllIIlllIIIllIIIlllIIllIlllIIIlIllIIIllIIlllIIlIllIllIllIlIIlllIIllIIlIIIlIIlIllIlIIIllIIIlllIllIlllIlIIlIIIlIIllIIlllIIllIIllIIIllIllIlllIIll;
+    }
+    
+    @Override
+    public void setPendingRemoval(final boolean iiIllIllIllIllIIllIIlIIllIIIllIlIIIlIIlIlllIlIllIIlllIIIlllIIIllIIlIIllIlllIlIIIllIlllIIllIIlllIIIllIIIlllIIllIlllIIIlIllIIIllIIlllIIlIllIllIllIlIIlllIIllIIlIIIlIIlIllIlIIIllIIIlllIllIlllIlIIlIIIlIIllIIlllIIllIIllIIIllIllIlllIIll) {
+        this.IIIllIllIllIllIIllIIlIIllIIIllIlIIIlIIlIlllIlIllIIlllIIIlllIIIllIIlIIllIlllIlIIIllIlllIIllIIlllIIIllIIIlllIIllIlllIIIlIllIIIllIIlllIIlIllIllIllIlIIlllIIllIIlIIIlIIlIllIlIIIllIIIlllIllIlllIlIIlIIIlIIllIIlllIIllIIllIIIllIllIlllIIll = iiIllIllIllIllIIllIIlIIllIIIllIlIIIlIIlIlllIlIllIIlllIIIlllIIIllIIlIIllIlllIlIIIllIlllIIllIIlllIIIllIIIlllIIllIlllIIIlIllIIIllIIlllIIlIllIllIllIlIIlllIIllIIlIIIlIIlIllIlIIIllIIIlllIllIlllIlIIlIIIlIIllIIlllIIllIIllIIIllIllIlllIIll;
+    }
+    
+    @Nullable
+    @Override
+    public RaytraceBlockGroup getGroup() {
+        return this.IIIllIIlIIllIlIIllIIlIIlIllIIlIllIIllIllIIlIIllIIIlIlllIIIlllIIlIIlIllIIIllIllIllIIlllIIllIIllIIIlIllIIlIIlIIlllIlIIIlllIllIIlIlIlllIlllIIIlIlllIllIIllIlIIlllIIIlllIIlIIIlllIIlIllIIIlIIllIllIIlllIIIlllIIIlIIlIIIllIlIIIlIll;
+    }
+    
+    @Override
+    public void setGroup(@Nullable final RaytraceBlockGroup iiIllIIlIIllIlIIllIIlIIlIllIIlIllIIllIllIIlIIllIIIlIlllIIIlllIIlIIlIllIIIllIllIllIIlllIIllIIllIIIlIllIIlIIlIIlllIlIIIlllIllIIlIlIlllIlllIIIlIlllIllIIllIlIIlllIIIlllIIlIIIlllIIlIllIIIlIIllIllIIlllIIIlllIIIlIIlIIIllIlIIIlIll) {
+        this.IIIllIIlIIllIlIIllIIlIIlIllIIlIllIIllIllIIlIIllIIIlIlllIIIlllIIlIIlIllIIIllIllIllIIlllIIllIIllIIIlIllIIlIIlIIlllIlIIIlllIllIIlIlIlllIlllIIIlIlllIllIIllIlIIlllIIIlllIIlIIIlllIIlIllIIIlIIllIllIIlllIIIlllIIIlIIlIIIllIlIIIlIll = iiIllIIlIIllIlIIllIIlIIlIllIIlIllIIllIllIIlIIllIIIlIlllIIIlllIIlIIlIllIIIllIllIllIIlllIIllIIllIIIlIllIIlIIlIIlllIlIIIlllIllIIlIlIlllIlllIIIlIlllIllIIllIlIIlllIIIlllIIlIIIlllIIlIllIIIlIIllIllIIlllIIIlllIIIlIIlIIIllIlIIIlIll;
+    }
+    
+    @Override
+    public boolean getLavaCovered() {
+        return this.IIIlIIIllIIllIIllIIllIIIllIIIlIIllIIllIIllIlIIlllIIllIIIlIIlIlllIIllIIlllIIllIIllIlllIIlIIIlIIllIIllIIllIIlllIIllIlllIIlIIlIIIlIIIllIlIlllIIIllIlllIIlllIllIIIlIllIIlIIlllIllIIllIIIlIllIIlllIlIIllIllIlIIlIllIIllIIllIllIllIIlllIIlll;
+    }
+    
+    @Override
+    public void setLavaCovered(final boolean iiIlIIIllIIllIIllIIllIIIllIIIlIIllIIllIIllIlIIlllIIllIIIlIIlIlllIIllIIlllIIllIIllIlllIIlIIIlIIllIIllIIllIIlllIIllIlllIIlIIlIIIlIIIllIlIlllIIIllIlllIIlllIllIIIlIllIIlIIlllIllIIllIIIlIllIIlllIlIIllIllIlIIlIllIIllIIllIllIllIIlllIIlll) {
+        this.IIIlIIIllIIllIIllIIllIIIllIIIlIIllIIllIIllIlIIlllIIllIIIlIIlIlllIIllIIlllIIllIIllIlllIIlIIIlIIllIIllIIllIIlllIIllIlllIIlIIlIIIlIIIllIlIlllIIIllIlllIIlllIllIIIlIllIIlIIlllIllIIllIIIlIllIIlllIlIIllIllIlIIlIllIIllIIllIllIllIIlllIIlll = iiIlIIIllIIllIIllIIllIIIllIIIlIIllIIllIIllIlIIlllIIllIIIlIIlIlllIIllIIlllIIllIIllIlllIIlIIIlIIllIIllIIllIIlllIIllIlllIIlIIlIIIlIIIllIlIlllIIIllIlllIIlllIllIIIlIllIIlIIlllIllIIllIIIlIllIIlllIlIIllIllIlIIlIllIIllIIllIllIllIIlllIIlll;
+    }
+    
+    @NotNull
+    public IllIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll IIllIllIIlIllIIllIIllIllIIIllIIIlllIIllIIIllIlIIllIllIIIllIlllIIIlIllIIlllIIlllIIllIlllIIllIIIllIllIllIllIlllIIlllIlIIlIIllIIllIllIlIllIlIIllIIIllIIllIIllIIIlllIIIlIllIIllIIIlIIlllIllIIlIllIIlIIlllIllIlIlllIIlllIlllIIllIlllIIl() {
+        final IllIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll illIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll = new IllIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll(this.getChunk(), this.getBlockPosition(), this.getOriginal(), this.getReplacement());
+        illIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll.setVisible(this.getVisible());
+        illIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll.setLavaCovered(this.getLavaCovered());
+        return illIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll;
+    }
+    
+    @Override
+    public boolean isNearby(@NotNull final RaytraceBlock raytraceBlock) {
+        Intrinsics.checkNotNullParameter((Object)raytraceBlock, "");
+        if (this.getChunk().getX() == raytraceBlock.getChunk().getX() && this.getChunk().getZ() == raytraceBlock.getChunk().getZ()) {
+            final int n = this.getBlockPosition().getX() - raytraceBlock.getBlockPosition().getX();
+            if (-1 <= n && n < 2) {
+                final int n2 = this.getBlockPosition().getY() - raytraceBlock.getBlockPosition().getY();
+                if (-1 <= n2 && n2 < 2) {
+                    final int n3 = this.getBlockPosition().getZ() - raytraceBlock.getBlockPosition().getZ();
+                    if (-1 <= n3 && n3 < 2) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean checkVisibility(final int n, @NotNull final Function1<? super RaytraceBlock, Boolean> function1) {
+        Intrinsics.checkNotNullParameter((Object)function1, "");
+        final RaytraceBlockGroup group = this.getGroup();
+        return (boolean)((group != null) ? group.checkVisibility(n, function1) : function1.invoke((Object)this));
+    }
+    
+    @Override
+    public int hashCode() {
+        return this.getBlockPosition().hashCode();
+    }
+    
+    @Override
+    public boolean equals(@Nullable final Object o) {
+        return o instanceof IllIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll && Intrinsics.areEqual((Object)this.getBlockPosition(), (Object)((IllIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll)o).getBlockPosition());
+    }
+    
+    @NotNull
+    public final DirectChunk IIIlllIIIllIIlIIIllIlllIlIIIllIlIIllIIlllIIllIIlIIIlIIIlIIlIlllIIIllIIlIlllIIllIlIIlIIIlIIIllIIllIIlIIlIllIlIllIIllIlIIlllIllIIllIlllIlIIIlIlllIIlIlllIIllIllIIllIlIIllIIlllIIllIlllIIlIIllIIlllIIIlIIllIIlIIlIIllIIlllIlllIIIl() {
+        return this.IIllIlllIlllIllIlIIlllIIlIIIlllIIIlIlIllIlIIllIIIllIlIlllIIIllIIIllIlIllIlllIIlllIIIlllIIIlllIIlllIIIlllIIllIIllIlllIIIlllIIlIIlIIllIIIlIIIllIlIIIlIIIllIIIlllIIllIIllIIllIIlIlIIllIlIIlllIllIIllIIIllIIlllIIlIIIllIIIlIlllIIlllIIllIIIlIllIll;
+    }
+    
+    @NotNull
+    public final BlockPosition IIIlIIIllIIIlIllIIlIIllIIlllIIllIlllIIllIllIIllIIIlIIIlllIlllIlllIIllIllIlIIlllIIlllIIllIIlllIIlIlllIIllIIIllIIIlIIlIIllIIlllIIIllIIIlllIIIlIIIlIIIllIIllIIllIIlIIllIIIlIlllIIIllIIlllIIllIIIlllIIllIIlllIIIlllIIllIlllIIIlIlllIIllIIIllIIIllIlllIlIIlllIIIl() {
+        return this.IIIllIIlIllIIIlllIIlIIlllIIIlllIIlIlIlIIIllIlIllIIIlllIllIIlIllIllIIIllIIllIllIllIllIllIIlIllIIIllIllIIIlIIlllIIllIlllIIIlIllIIlIlIIlllIIIllIlllIllIllIIllIIllIIIllIIIllIIllIllIllIIIllIIlllIIIlIIIllIllIIllIIIllIIIlllIIIllIIllIIllIIIl;
+    }
+    
+    @NotNull
+    public final WrappedBlockState IIIllIIllIIIllIIIlIlllIIIllIIllIllIIlllIlIIlllIlllIIllIllIIIlllIIllIIIlllIlIIIllIIllIIIlIIIllIIlIIllIIlllIllIllIIllIllIIllIllIIllIIIllIlllIllIllIIllIIllIlllIIlIIllIIllIlIIllIIIlllIIIllIllIllIllIllIIIlIIlIllIIIllIIlIIllIlIllIIlllIIll() {
+        return this.IllIIllIIllIlllIIlIIllIIlIIllIIlllIIIllIlIlllIlllIIllIIllIllIIllIllIIllIIlIIlllIlllIIlllIIIllIIllIIIllIlIIllIllIllIllIIllIIIlIIlllIlllIIIllIIIlIIllIllIIIllIIIllIIlIIIllIIlIIllIllIIlllIlIlIllIllIllIlIIlIllIIlIIllIIllIIIlllIIl;
+    }
+    
+    @NotNull
+    public final WrappedBlockState IlIIIlIllIIllIlIIlIIllIIlllIIIllIIllIIlIIlIIllIlIIllIlllIIllIllIIlIIlIIlIIlIIlllIlllIIllIIIlllIIIlIIlIIIllIllIIllIlIllIlllIIIlIllIIlIIIllIlllIlIIlIIIllIIlIIIllIIllIIllIIIllIIlIIllIIlIIllIIlllIIIllIIllIlIIlllIIlIIIlllIlIIIll() {
+        return this.IIllIIIlllIIlllIIllIlIIIlllIIIllIlIIllIIlIllIIlllIIIlIIIlIIIlIIlIIlIIIllIlllIllIIIllIIllIlIlllIllIIllIIlIIlllIlllIIlllIIIlllIIllIlllIlIIllIllIlIIllIIIlIIIlIIIllIIlIIlIIlllIllIlllIlIIllIIIllIIlIIlllIIlIIllIlllIIIlIlIIllIIIlllIIIlIll;
+    }
+    
+    @NotNull
+    public final IllIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll(@NotNull final DirectChunk directChunk, @NotNull final BlockPosition blockPosition, @NotNull final WrappedBlockState wrappedBlockState, @NotNull final WrappedBlockState wrappedBlockState2) {
+        Intrinsics.checkNotNullParameter((Object)directChunk, "");
+        Intrinsics.checkNotNullParameter((Object)blockPosition, "");
+        Intrinsics.checkNotNullParameter((Object)wrappedBlockState, "");
+        Intrinsics.checkNotNullParameter((Object)wrappedBlockState2, "");
+        return new IllIIlIIlIIllIlIIIllIIIllIlIlllIlllIlIIllIIllIlIllIlllIIIllIIlIIIlIIllIIlIllIIlIIlIIllIIlIlIllIIlllIlIlIIllIIIlIIlllIllIIIlIIlIIIlllIlllIIllIIlIIllIIlIIllIIIllIIlllIIlllIIIlllIIIlIIllIIlIIlllIlIIIllIIIllIIllIIllIllIIlllIIll(directChunk, blockPosition, wrappedBlockState, wrappedBlockState2);
+    }
+    
+    @NotNull
+    @Override
+    public String toString() {
+        return "RaytraceBlockImpl(chunk=" + this.IIllIlllIlllIllIlIIlllIIlIIIlllIIIlIlIllIlIIllIIIllIlIlllIIIllIIIllIlIllIlllIIlllIIIlllIIIlllIIlllIIIlllIIllIIllIlllIIIlllIIlIIlIIllIIIlIIIllIlIIIlIIIllIIIlllIIllIIllIIllIIlIlIIllIlIIlllIllIIllIIIllIIlllIIlIIIllIIIlIlllIIlllIIllIIIlIllIll + ", blockPosition=" + this.IIIllIIlIllIIIlllIIlIIlllIIIlllIIlIlIlIIIllIlIllIIIlllIllIIlIllIllIIIllIIllIllIllIllIllIIlIllIIIllIllIIIlIIlllIIllIlllIIIlIllIIlIlIIlllIIIllIlllIllIllIIllIIllIIIllIIIllIIllIllIllIIIllIIlllIIIlIIIllIllIIllIIIllIIIlllIIIllIIllIIllIIIl + ", original=" + this.IllIIllIIllIlllIIlIIllIIlIIllIIlllIIIllIlIlllIlllIIllIIllIllIIllIllIIllIIlIIlllIlllIIlllIIIllIIllIIIllIlIIllIllIllIllIIllIIIlIIlllIlllIIIllIIIlIIllIllIIIllIIIllIIlIIIllIIlIIllIllIIlllIlIlIllIllIllIlIIlIllIIlIIllIIllIIIlllIIl + ", replacement=" + this.IIllIIIlllIIlllIIllIlIIIlllIIIllIlIIllIIlIllIIlllIIIlIIIlIIIlIIlIIlIIIllIlllIllIIIllIIllIlIlllIllIIllIIlIIlllIlllIIlllIIIlllIIllIlllIlIIllIllIlIIllIIIlIIIlIIIllIIlIIlIIlllIllIlllIlIIllIIIllIIlIIlllIIlIIllIlllIIIlIlIIllIIIlllIIIlIll + ')';
+    }
+}

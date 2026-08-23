@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -8,14 +8,14 @@ package com.hongminh54.marisaoptimize.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.events.game.ReceiveMessageEvent;
-import meteordevelopment.meteorclient.mixininterface.IChatHud;
-import meteordevelopment.meteorclient.mixininterface.IChatHudLine;
-import meteordevelopment.meteorclient.mixininterface.IChatHudLineVisible;
-import meteordevelopment.meteorclient.mixininterface.IMessageHandler;
-import meteordevelopment.meteorclient.systems.modules.Modules;
-import meteordevelopment.meteorclient.systems.modules.misc.BetterChat;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.events.game.ReceiveMessageEvent;
+import com.hongminh54.marisaoptimize.mixininterface.IChatHud;
+import com.hongminh54.marisaoptimize.mixininterface.IChatHudLine;
+import com.hongminh54.marisaoptimize.mixininterface.IChatHudLineVisible;
+import com.hongminh54.marisaoptimize.mixininterface.IMessageHandler;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.systems.modules.misc.BetterChat;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.gui.hud.ChatHudLine;

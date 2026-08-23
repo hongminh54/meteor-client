@@ -1,13 +1,13 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.widgets.containers;
 
-import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
-import meteordevelopment.meteorclient.gui.utils.Cell;
-import meteordevelopment.meteorclient.gui.widgets.WWidget;
+import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
+import com.hongminh54.marisaoptimize.gui.utils.Cell;
+import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.gui.Click;
 import net.minecraft.client.input.CharInput;
@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
-import static meteordevelopment.meteorclient.utils.Utils.getWindowHeight;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.utils.Utils.getWindowHeight;
 
 public abstract class WContainer extends WWidget {
     public final List<Cell<?>> cells = new ArrayList<>();

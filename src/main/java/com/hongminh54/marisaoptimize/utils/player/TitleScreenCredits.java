@@ -1,20 +1,20 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.utils.player;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.addons.AddonManager;
-import meteordevelopment.meteorclient.addons.GithubRepo;
-import meteordevelopment.meteorclient.addons.MeteorAddon;
-import meteordevelopment.meteorclient.gui.GuiThemes;
-import meteordevelopment.meteorclient.gui.screens.CommitsScreen;
-import meteordevelopment.meteorclient.mixininterface.IText;
-import meteordevelopment.meteorclient.utils.network.Http;
-import meteordevelopment.meteorclient.utils.network.MeteorExecutor;
-import meteordevelopment.meteorclient.utils.render.MeteorToast;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.addons.AddonManager;
+import com.hongminh54.marisaoptimize.addons.GithubRepo;
+import com.hongminh54.marisaoptimize.addons.MeteorAddon;
+import com.hongminh54.marisaoptimize.gui.GuiThemes;
+import com.hongminh54.marisaoptimize.gui.screens.CommitsScreen;
+import com.hongminh54.marisaoptimize.mixininterface.IText;
+import com.hongminh54.marisaoptimize.utils.network.Http;
+import com.hongminh54.marisaoptimize.utils.network.MeteorExecutor;
+import com.hongminh54.marisaoptimize.utils.render.MeteorToast;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.item.Items;
 import net.minecraft.text.MutableText;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static meteordevelopment.meteorclient.MarisaOptimize.mc;
+import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class TitleScreenCredits {
     private static final List<Credit> credits = new ArrayList<>();

@@ -1,8 +1,8 @@
 {
   "required": true,
-  "package": "meteordevelopment.meteorclient.mixin",
+  "package": "com.hongminh54.marisaoptimize.mixin",
   "compatibilityLevel": "JAVA_21",
-  "plugin": "meteordevelopment.meteorclient.MixinPlugin",
+  "plugin": "com.hongminh54.marisaoptimize.MixinPlugin",
   "client": [
     "AbstractBlockAccessor",
     "AbstractBlockMixin",

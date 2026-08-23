@@ -1,17 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.gui.renderer;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import meteordevelopment.meteorclient.mixininterface.IGpuDevice;
+import com.hongminh54.marisaoptimize.mixininterface.IGpuDevice;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static meteordevelopment.meteorclient.utils.Utils.getWindowHeight;
+import static com.hongminh54.marisaoptimize.utils.Utils.getWindowHeight;
 
 public class Scissor {
     public int x, y;

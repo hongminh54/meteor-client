@@ -1,5 +1,5 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
@@ -8,12 +8,12 @@ package com.hongminh54.marisaoptimize.commands.commands;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import meteordevelopment.meteorclient.commands.Command;
-import meteordevelopment.meteorclient.commands.arguments.BlockPosArgumentType;
-import meteordevelopment.meteorclient.commands.arguments.WaypointArgumentType;
-import meteordevelopment.meteorclient.systems.waypoints.Waypoint;
-import meteordevelopment.meteorclient.systems.waypoints.Waypoints;
-import meteordevelopment.meteorclient.utils.player.PlayerUtils;
+import com.hongminh54.marisaoptimize.commands.Command;
+import com.hongminh54.marisaoptimize.commands.arguments.BlockPosArgumentType;
+import com.hongminh54.marisaoptimize.commands.arguments.WaypointArgumentType;
+import com.hongminh54.marisaoptimize.systems.waypoints.Waypoint;
+import com.hongminh54.marisaoptimize.systems.waypoints.Waypoints;
+import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
 import net.minecraft.command.CommandSource;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;

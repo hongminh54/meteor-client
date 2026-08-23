@@ -1,0 +1,15 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package dev.imanity.antixray.a;
+
+import org.jetbrains.annotations.NotNull;
+import org.bukkit.World;
+
+public interface IllIIlIIllIllIIlllIlllIlIIllIlIllIIllIlllIIllIIIlIIIlllIIllIIllIlIIIlIIllIIlIIIlIllIIllIIlIIllIIIlIIlllIIllIIIlIIlIlIIIlIllIIlIIIllIIlIlIIIlIIIllIIlllIIllIIlllIIlIIIllIIllIIlllIllIllIIlIIllIIlllIIIlllIllIllIIlIIlllIlllIIIlIIIll
+{
+    boolean IIllIIlIIllIIlllIIIlllIlIllIIlIIlIllIIIllIIlIIlIIlIIllIllIIlIIllIIlllIIlIlllIlllIlllIIIlllIIllIIllIIllIlllIlllIIIlIllIIllIIIllIIlIlIIllIIlllIlllIIIllIIllIlllIlllIIllIIlllIIllIIlIIllIllIllIllIIIlIIIllIIIlIIIlIllIllIIIllIllIllIll();
+    
+    boolean IIllIllIIllIlIIlIlIIlllIllIIllIIllIlIIllIIIllIIIllIIllIIIlIllIIlIIlllIllIIlIllIllIIlIIlIlIIIlIllIIllIlllIllIIIllIIlIIlllIllIIlIIIlIIllIIllIIlIlIIlIllIIlllIlIIlllIIlIlIIlIIlIlllIIlIIIlIIllIllIlllIIlllIIIlIIllIIIlll(@NotNull final World p0);
+}

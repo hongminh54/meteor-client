@@ -1,17 +1,17 @@
 /*
- * This file is part of the Meteor Client distribution (https://github.com/MeteorDevelopment/meteor-client).
+ * This file is part of the Marisa Optimize distribution (https://github.com/TheBlueSkyARL/marisa-optimize).
  * Copyright (c) Meteor Development.
  */
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import meteordevelopment.meteorclient.MarisaOptimize;
-import meteordevelopment.meteorclient.systems.hud.Hud;
-import meteordevelopment.meteorclient.systems.hud.HudElement;
-import meteordevelopment.meteorclient.systems.hud.elements.TextHud;
-import meteordevelopment.meteorclient.systems.modules.Category;
-import meteordevelopment.meteorclient.systems.modules.Module;
-import meteordevelopment.meteorclient.systems.modules.Modules;
+import com.hongminh54.marisaoptimize.MarisaOptimize;
+import com.hongminh54.marisaoptimize.systems.hud.Hud;
+import com.hongminh54.marisaoptimize.systems.hud.HudElement;
+import com.hongminh54.marisaoptimize.systems.hud.elements.TextHud;
+import com.hongminh54.marisaoptimize.systems.modules.Category;
+import com.hongminh54.marisaoptimize.systems.modules.Module;
+import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import net.minecraft.util.crash.CrashReport;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,7 +24,7 @@ import java.util.List;
 public abstract class CrashReportMixin {
     @Inject(method = "addDetails", at = @At("TAIL"))
     private void onAddDetails(StringBuilder sb, CallbackInfo info) {
-        sb.append("\n\n-- Meteor Client --\n\n");
+        sb.append("\n\n-- Marisa Optimize --\n\n");
         sb.append("Version: ").append(MarisaOptimize.VERSION).append("\n");
         if (!MarisaOptimize.BUILD_NUMBER.isEmpty()) {
             sb.append("Build: ").append(MarisaOptimize.BUILD_NUMBER).append("\n");
