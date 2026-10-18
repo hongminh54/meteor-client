@@ -24,6 +24,16 @@ import java.util.List;
 public abstract class CrashReportMixin {
     @Inject(method = "getDetails(Ljava/lang/StringBuilder;)V", at = @At("TAIL"))
     private void onAddDetails(StringBuilder sb, CallbackInfo info) {
+        try {
+            meteor$appendDetails(sb);
+        } catch (Throwable failure) {
+            // Reporting must never hide the original crash if client initialization failed.
+            sb.append("\nMarisa Optimize diagnostic details unavailable: ").append(failure.getClass().getName()).append('\n');
+        }
+    }
+
+    @org.spongepowered.asm.mixin.Unique
+    private void meteor$appendDetails(StringBuilder sb) {
         sb.append("\n\n-- Marisa Optimize --\n\n");
         sb.append("Version: ").append(MarisaOptimize.VERSION).append("\n");
         if (!MarisaOptimize.BUILD_NUMBER.isEmpty()) {

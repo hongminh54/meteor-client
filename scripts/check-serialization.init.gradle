@@ -4,6 +4,20 @@ allprojects {
         if (!project.plugins.hasPlugin('java')) return
 
         def output = project.layout.buildDirectory.dir('migration-checks/serialization')
+        def versionCompile = project.tasks.register('compileMigrationVersion', JavaCompile) {
+            javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files()
+            destinationDirectory = output.map { it.dir('version-classes') }
+            options.encoding = 'UTF-8'
+            source project.file('src/main/java/com/hongminh54/marisaoptimize/utils/misc/Version.java')
+            source project.file('scripts/tests/VersionCheck.java')
+        }
+        project.tasks.register('checkMigrationVersion', JavaExec) {
+            dependsOn versionCompile
+            javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(versionCompile.flatMap { it.destinationDirectory })
+            mainClass = 'VersionCheck'
+        }
         def packetCompile = project.tasks.register('compileMigrationPackets', JavaCompile) {
             javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
             classpath = project.sourceSets.main.compileClasspath
