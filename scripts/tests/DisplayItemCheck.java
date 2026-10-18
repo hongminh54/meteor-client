@@ -1,4 +1,5 @@
 import com.hongminh54.marisaoptimize.systems.modules.Category;
+import com.hongminh54.marisaoptimize.utils.misc.MyPotion;
 import com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.component.DataComponents;
@@ -21,6 +22,13 @@ public class DisplayItemCheck {
         }
         if (!DisplayItemUtils.toStack(Items.AIR).isEmpty() || !new Category("empty").icon.isEmpty()) throw new AssertionError("Empty icons");
         if (DisplayItemUtils.toStack(Items.DIAMOND, 7).getCount() != 7) throw new AssertionError("Display count");
+        for (MyPotion potion : MyPotion.values()) {
+            if (potion.potion.getItem() != Items.POTION) throw new AssertionError("Potion icon item: " + potion);
+            var contents = potion.potion.get(DataComponents.POTION_CONTENTS);
+            if (contents == null || contents.potion().isEmpty()) throw new AssertionError("Missing potion contents: " + potion);
+            if (potion.ingredients.length == 0) throw new AssertionError("Missing brewing ingredients: " + potion);
+        }
+        if (!MyPotion.Strength.potion.get(DataComponents.POTION_CONTENTS).potion().orElseThrow().equals(net.minecraft.world.item.alchemy.Potions.STRENGTH)) throw new AssertionError("Strength icon contents");
         if (Items.GOLDEN_SWORD.builtInRegistryHolder().areComponentsBound()) throw new AssertionError("Display helper modified global registry");
         System.out.println("Display item checks passed with unbound registry components; no world or renderer tested.");
     }

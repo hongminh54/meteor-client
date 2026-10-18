@@ -44,9 +44,9 @@ public class StatusEffectListSettingScreen extends CollectionListSettingScreen<M
         potion.set(
             DataComponents.POTION_CONTENTS,
             new PotionContents(
-                potion.get(DataComponents.POTION_CONTENTS).potion(),
+                Optional.empty(),
                 Optional.of(effect.getColor()),
-                potion.get(DataComponents.POTION_CONTENTS).customEffects(),
+                java.util.List.of(),
                 Optional.empty()
             )
         );

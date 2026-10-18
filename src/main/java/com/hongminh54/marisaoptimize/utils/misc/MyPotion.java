@@ -12,6 +12,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils;
 
 public enum MyPotion {
     Swiftness(Potions.SWIFTNESS, Items.NETHER_WART, Items.SUGAR),
@@ -70,7 +72,9 @@ public enum MyPotion {
     public final Item[] ingredients;
 
     MyPotion(Holder<Potion> potion, Item... ingredients) {
-        this.potion = PotionContents.createItemStack(Items.POTION, potion);
+        // This stack is an icon, not a brewing input; it must also work at the title screen.
+        this.potion = DisplayItemUtils.toStack(Items.POTION);
+        this.potion.set(DataComponents.POTION_CONTENTS, new PotionContents(potion));
         this.ingredients = ingredients;
     }
 }

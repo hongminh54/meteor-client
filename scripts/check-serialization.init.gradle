@@ -13,6 +13,7 @@ allprojects {
             options.sourcepath = project.files()
             source project.file('src/main/java/com/hongminh54/marisaoptimize/utils/render/DisplayItemUtils.java')
             source project.file('src/main/java/com/hongminh54/marisaoptimize/systems/modules/Category.java')
+            source project.file('src/main/java/com/hongminh54/marisaoptimize/utils/misc/MyPotion.java')
             source project.file('scripts/tests/DisplayItemCheck.java')
         }
         project.tasks.register('checkMigrationDisplayItems', JavaExec) {
