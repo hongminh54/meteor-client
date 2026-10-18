@@ -72,7 +72,7 @@ public class Swarm extends Module {
         stop.action = this::close;
 
         WButton guide = list.add(theme.button("Guide")).expandX().widget();
-        guide.action = () -> Util.getOperatingSystem().open("https://github.com/TheBlueSkyARL/marisa-optimize/wiki/Swarm-Guide");
+        guide.action = () -> Util.getPlatform().openUri("https://github.com/TheBlueSkyARL/marisa-optimize/wiki/Swarm-Guide");
 
         return list;
     }

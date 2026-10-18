@@ -9,9 +9,9 @@ import com.hongminh54.marisaoptimize.MarisaOptimize;
 import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.resources.Identifier;
 
 import java.util.Set;
 import com.hongminh54.marisaoptimize.settings.*;

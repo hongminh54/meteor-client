@@ -6,12 +6,17 @@
 package com.hongminh54.marisaoptimize.renderer;
 
 import com.mojang.blaze3d.buffers.GpuBuffer;
+import com.mojang.blaze3d.IndexType;
+import com.mojang.blaze3d.PrimitiveTopology;
+import com.mojang.blaze3d.buffers.GpuBufferSlice;
+import com.mojang.blaze3d.systems.CommandEncoder;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.phys.Vec3;
 import org.lwjgl.BufferUtils;
 
 import java.nio.ByteBuffer;
@@ -40,16 +45,16 @@ public class MeshBuilder {
     private double cameraX, cameraZ;
 
     public MeshBuilder(RenderPipeline pipeline) {
-        this(pipeline.getVertexFormat(), pipeline.getVertexFormatMode());
+        this(java.util.Objects.requireNonNull(pipeline.getVertexFormatBinding(0)), pipeline.getPrimitiveTopology());
     }
 
-    public MeshBuilder(VertexFormat format, VertexFormat.DrawMode drawMode) {
+    public MeshBuilder(VertexFormat format, PrimitiveTopology drawMode) {
         this.format = format;
         primitiveVerticesSize = format.getVertexSize();
-        primitiveIndicesCount = drawMode.firstVertexCount;
+        primitiveIndicesCount = drawMode.primitiveLength;
     }
 
-    public MeshBuilder(VertexFormat format, VertexFormat.DrawMode drawMode, int vertexCount, int indexCount) {
+    public MeshBuilder(VertexFormat format, PrimitiveTopology drawMode, int vertexCount, int indexCount) {
         this(format, drawMode);
         allocateBuffers(vertexCount, indexCount);
     }
@@ -64,7 +69,7 @@ public class MeshBuilder {
         building = true;
 
         if (Utils.rendering3D) {
-            Vec3d camera = mc.gameRenderer.getCamera().getCameraPos();
+            Vec3 camera = mc.gameRenderer.mainCamera().position();
 
             cameraX = camera.x;
             cameraZ = camera.z;
@@ -221,16 +226,30 @@ public class MeshBuilder {
 
     public GpuBuffer getVertexBuffer() {
         vertices.limit(getVerticesOffset());
-        return format.uploadImmediateVertexBuffer(vertices);
+        return RenderSystem.getDevice().createBuffer(() -> "Marisa mesh vertices", GpuBuffer.USAGE_VERTEX, vertices);
     }
 
     public GpuBuffer getIndexBuffer() {
         indices.limit(indicesCount * Integer.BYTES);
-        return format.uploadImmediateIndexBuffer(indices);
+        return RenderSystem.getDevice().createBuffer(() -> "Marisa mesh indices", GpuBuffer.USAGE_INDEX, indices);
     }
 
     public int getIndicesCount() {
         return indicesCount;
+    }
+
+    public IndexType getIndexType() {
+        return IndexType.INT;
+    }
+
+    public GpuBufferSlice uploadVertexBuffer(CommandEncoder encoder) {
+        vertices.limit(getVerticesOffset());
+        return encoder.transientMemory().uploadGpu(vertices, primitiveVerticesSize, GpuBuffer.USAGE_VERTEX);
+    }
+
+    public GpuBufferSlice uploadIndexBuffer(CommandEncoder encoder) {
+        indices.limit(indicesCount * Integer.BYTES);
+        return encoder.transientMemory().uploadGpu(indices, Integer.BYTES, GpuBuffer.USAGE_INDEX);
     }
 
     private int getVerticesOffset() {

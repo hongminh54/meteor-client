@@ -5,8 +5,8 @@
 
 package com.hongminh54.marisaoptimize.settings;
 
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.BlockPos;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -35,14 +35,14 @@ public class BlockPosSetting extends Setting<BlockPos> {
     }
 
     @Override
-    protected NbtCompound save(NbtCompound tag) {
+    protected CompoundTag save(CompoundTag tag) {
         tag.putIntArray("value", new int[] {value.getX(), value.getY(), value.getZ()});
 
         return tag;
     }
 
     @Override
-    protected BlockPos load(NbtCompound tag) {
+    protected BlockPos load(CompoundTag tag) {
         if (tag.getIntArray("value").isPresent()) {
             int[] value = tag.getIntArray("value").get();
             set(new BlockPos(value[0], value[1], value[2]));

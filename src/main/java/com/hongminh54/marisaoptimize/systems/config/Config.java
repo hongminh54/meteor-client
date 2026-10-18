@@ -12,10 +12,10 @@ import com.hongminh54.marisaoptimize.systems.System;
 import com.hongminh54.marisaoptimize.systems.Systems;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.nbt.NbtString;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +75,8 @@ public class Config extends System<Config> {
         .name("custom-window-title")
         .description("Show custom text in the window title.")
         .defaultValue(false)
-        .onModuleActivated(setting -> mc.updateWindowTitle())
-        .onChanged(value -> mc.updateWindowTitle())
+        .onModuleActivated(setting -> mc.updateTitle())
+        .onChanged(value -> mc.updateTitle())
         .build()
     );
 
@@ -85,7 +85,7 @@ public class Config extends System<Config> {
         .description("The text it displays in the window title.")
         .visible(customWindowTitle::get)
         .defaultValue("Minecraft {mc_version} - {meteor.name} {meteor.version}")
-        .onChanged(value -> mc.updateWindowTitle())
+        .onChanged(value -> mc.updateTitle())
         .build()
     );
 
@@ -205,8 +205,8 @@ public class Config extends System<Config> {
     }
 
     @Override
-    public NbtCompound toTag() {
-        NbtCompound tag = new NbtCompound();
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
 
         tag.putString("version", MarisaOptimize.VERSION.toString());
         tag.put("settings", settings.toTag());
@@ -216,22 +216,22 @@ public class Config extends System<Config> {
     }
 
     @Override
-    public Config fromTag(NbtCompound tag) {
+    public Config fromTag(CompoundTag tag) {
         if (tag.contains("settings")) settings.fromTag(tag.getCompoundOrEmpty("settings"));
         if (tag.contains("dontShowAgainPrompts")) dontShowAgainPrompts = listFromTag(tag, "dontShowAgainPrompts");
 
         return this;
     }
 
-    private NbtList listToTag(List<String> list) {
-        NbtList nbt = new NbtList();
-        for (String item : list) nbt.add(NbtString.of(item));
+    private ListTag listToTag(List<String> list) {
+        ListTag nbt = new ListTag();
+        for (String item : list) nbt.add(StringTag.valueOf(item));
         return nbt;
     }
 
-    private List<String> listFromTag(NbtCompound tag, String key) {
+    private List<String> listFromTag(CompoundTag tag, String key) {
         List<String> list = new ArrayList<>();
-        for (NbtElement item : tag.getListOrEmpty(key)) list.add(item.asString().orElse(""));
+        for (Tag item : tag.getListOrEmpty(key)) list.add(item.asString().orElse(""));
         return list;
     }
 

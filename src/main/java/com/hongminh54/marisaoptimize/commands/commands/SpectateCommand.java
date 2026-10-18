@@ -13,8 +13,8 @@ import com.hongminh54.marisaoptimize.events.meteor.MouseClickEvent;
 import com.hongminh54.marisaoptimize.utils.misc.input.Input;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.command.CommandSource;
-import net.minecraft.text.Text;
+import net.minecraft.client.multiplayer.ClientSuggestionProvider;
+import net.minecraft.network.chat.Component;
 
 public class SpectateCommand extends Command {
 
@@ -25,7 +25,7 @@ public class SpectateCommand extends Command {
     }
 
     @Override
-    public void build(LiteralArgumentBuilder<CommandSource> builder) {
+    public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.then(literal("reset").executes(context -> {
             mc.setCameraEntity(mc.player);
             return SINGLE_SUCCESS;
@@ -33,7 +33,7 @@ public class SpectateCommand extends Command {
 
         builder.then(argument("player", PlayerArgumentType.create()).executes(context -> {
             mc.setCameraEntity(PlayerArgumentType.get(context));
-            mc.player.sendMessage(Text.literal("Sneak to un-spectate."), true);
+            mc.gui.hud.setOverlayMessage(Component.literal("Sneak to un-spectate."), false);
             MarisaOptimize.EVENT_BUS.subscribe(shiftListener);
             return SINGLE_SUCCESS;
         }));
@@ -42,7 +42,7 @@ public class SpectateCommand extends Command {
     private static class StaticListener {
         @EventHandler
         private void onKey(KeyEvent event) {
-            if (Input.isPressed(mc.options.sneakKey)) {
+            if (Input.isPressed(mc.options.keyShift)) {
                 mc.setCameraEntity(mc.player);
                 event.cancel();
                 MarisaOptimize.EVENT_BUS.unsubscribe(this);
@@ -51,7 +51,7 @@ public class SpectateCommand extends Command {
 
         @EventHandler
         private void onMouse(MouseClickEvent event) {
-            if (Input.isPressed(mc.options.sneakKey)) {
+            if (Input.isPressed(mc.options.keyShift)) {
                 mc.setCameraEntity(mc.player);
                 event.cancel();
                 MarisaOptimize.EVENT_BUS.unsubscribe(this);

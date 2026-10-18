@@ -17,7 +17,7 @@ import com.hongminh54.marisaoptimize.systems.hud.Hud;
 import com.hongminh54.marisaoptimize.systems.hud.HudElementInfo;
 import com.hongminh54.marisaoptimize.systems.hud.HudGroup;
 import com.hongminh54.marisaoptimize.utils.Utils;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -107,7 +107,7 @@ public class AddHudElementScreen extends WindowScreen {
         if (object == null) return;
         if (object instanceof HudElementInfo<?>.Preset preset) {
             Hud.get().add(preset, x, y);
-            close();
+            onClose();
         }
         else {
             HudElementInfo<?> info = (HudElementInfo<?>) object;
@@ -116,17 +116,17 @@ public class AddHudElementScreen extends WindowScreen {
                 HudElementPresetsScreen screen = new HudElementPresetsScreen(theme, info, x, y);
                 screen.parent = parent;
 
-                mc.setScreen(screen);
+                mc.gui.setScreen(screen);
             }
             else {
                 Hud.get().add(info, x, y);
-                close();
+                onClose();
             }
         }
     }
 
     @Override
-    protected void onRenderBefore(DrawContext drawContext, float delta) {
+    protected void onRenderBefore(GuiGraphicsExtractor drawContext, float delta) {
         HudEditorScreen.renderElements(drawContext);
     }
 

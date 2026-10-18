@@ -8,7 +8,7 @@ package com.hongminh54.marisaoptimize.systems.modules.render.marker;
 import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
 import com.hongminh54.marisaoptimize.renderer.ShapeMode;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import com.hongminh54.marisaoptimize.settings.*;
 
 // TODO: Add outline and more modes

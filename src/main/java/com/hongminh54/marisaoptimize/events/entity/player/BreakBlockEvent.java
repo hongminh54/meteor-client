@@ -6,7 +6,7 @@
 package com.hongminh54.marisaoptimize.events.entity.player;
 
 import com.hongminh54.marisaoptimize.events.Cancellable;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 
 public class BreakBlockEvent extends Cancellable {
     private static final BreakBlockEvent INSTANCE = new BreakBlockEvent();

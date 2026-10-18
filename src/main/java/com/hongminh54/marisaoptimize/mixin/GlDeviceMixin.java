@@ -5,14 +5,14 @@
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import com.mojang.blaze3d.systems.RenderPass;
+import com.mojang.blaze3d.systems.RenderPassBackend;
 import com.hongminh54.marisaoptimize.mixininterface.IGpuDevice;
-import net.minecraft.client.gl.GlBackend;
+import com.mojang.blaze3d.opengl.GlDevice;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(GlBackend.class)
-public abstract class GlBackendMixin implements IGpuDevice {
+@Mixin(GlDevice.class)
+public abstract class GlDeviceMixin implements IGpuDevice {
     @Unique
     private int x, y, width, height;
 
@@ -42,7 +42,7 @@ public abstract class GlBackendMixin implements IGpuDevice {
 
     @Deprecated
     @Override
-    public void meteor$onCreateRenderPass(RenderPass pass) {
+    public void meteor$onCreateRenderPass(RenderPassBackend pass) {
         if (set) {
             pass.enableScissor(x, y, width, height);
         }

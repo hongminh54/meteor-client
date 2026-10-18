@@ -6,7 +6,7 @@
 package com.hongminh54.marisaoptimize.gui.widgets;
 
 import com.hongminh54.marisaoptimize.gui.renderer.GuiRenderer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class WItem extends WWidget {
     protected ItemStack itemStack;

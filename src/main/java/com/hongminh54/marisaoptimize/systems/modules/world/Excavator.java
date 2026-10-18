@@ -18,7 +18,7 @@ import com.hongminh54.marisaoptimize.utils.misc.Keybind;
 import com.hongminh54.marisaoptimize.utils.misc.input.KeyAction;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.world.phys.BlockHitResult;
 import org.lwjgl.glfw.GLFW;
 import com.hongminh54.marisaoptimize.settings.*;
 
@@ -88,13 +88,13 @@ public class Excavator extends Module {
     @Override
     public void onDeactivate() {
         baritone.getSelectionManager().removeSelection(baritone.getSelectionManager().getLastSelection());
-        if (baritone.getBuilderProcess().isActive()) baritone.getCommandManager().execute("stop");
+        if (baritone.getBuilderProcess().isActive()) baritone.getPathingBehavior().cancelEverything();
         status = Status.SEL_START;
     }
 
     @EventHandler
     private void onMouseClick(MouseClickEvent event) {
-        if (event.action != KeyAction.Press || !selectionBind.get().isPressed() || mc.currentScreen != null) {
+        if (event.action != KeyAction.Press || !selectionBind.get().isPressed() || mc.gui.screen() != null) {
             return;
         }
         selectCorners();
@@ -102,14 +102,14 @@ public class Excavator extends Module {
 
     @EventHandler
     private void onKey(KeyEvent event) {
-        if (event.action != KeyAction.Press || !selectionBind.get().isPressed() || mc.currentScreen != null) {
+        if (event.action != KeyAction.Press || !selectionBind.get().isPressed() || mc.gui.screen() != null) {
             return;
         }
         selectCorners();
     }
 
     private void selectCorners() {
-        if (!(mc.crosshairTarget instanceof BlockHitResult result)) return;
+        if (!(mc.hitResult instanceof BlockHitResult result)) return;
 
         if (status == Status.SEL_START) {
             start = BetterBlockPos.from(result.getBlockPos());
@@ -131,7 +131,7 @@ public class Excavator extends Module {
     @EventHandler
     private void onRender3D(Render3DEvent event) {
         if (status == Status.SEL_START || status == Status.SEL_END) {
-            if (!(mc.crosshairTarget instanceof BlockHitResult result)) return;
+            if (!(mc.hitResult instanceof BlockHitResult result)) return;
             event.renderer.box(result.getBlockPos(), sideColor.get(), lineColor.get(), shapeMode.get(), 0);
         } else if (status == Status.WORKING && !baritone.getBuilderProcess().isActive()) {
             if (keepActive.get()) {

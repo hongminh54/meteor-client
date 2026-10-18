@@ -9,7 +9,7 @@ import com.hongminh54.marisaoptimize.gui.GuiTheme;
 import com.hongminh54.marisaoptimize.gui.WindowScreen;
 import com.hongminh54.marisaoptimize.renderer.ShapeMode;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 import com.hongminh54.marisaoptimize.settings.*;
 

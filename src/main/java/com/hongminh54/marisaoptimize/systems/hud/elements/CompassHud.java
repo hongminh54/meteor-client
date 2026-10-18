@@ -10,7 +10,7 @@ import com.hongminh54.marisaoptimize.systems.hud.HudElement;
 import com.hongminh54.marisaoptimize.systems.hud.HudElementInfo;
 import com.hongminh54.marisaoptimize.systems.hud.HudRenderer;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 import com.hongminh54.marisaoptimize.settings.*;
@@ -115,10 +115,10 @@ public class CompassHud extends HudElement {
         double x = this.x + (getWidth() / 2.0);
         double y = this.y + (getHeight() / 2.0);
 
-        double pitch = isInEditor() ? 120 : MathHelper.clamp(mc.player.getPitch() + 30, -90, 90);
+        double pitch = isInEditor() ? 120 : Mth.clamp(mc.player.getXRot() + 30, -90, 90);
         pitch = Math.toRadians(pitch);
 
-        double yaw = isInEditor() ? 180 : MathHelper.wrapDegrees(mc.player.getYaw());
+        double yaw = isInEditor() ? 180 : Mth.wrapDegrees(mc.player.getYRot());
         yaw = Math.toRadians(yaw);
 
         for (Direction direction : Direction.values()) {

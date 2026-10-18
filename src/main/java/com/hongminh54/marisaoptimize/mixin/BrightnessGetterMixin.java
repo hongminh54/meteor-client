@@ -7,22 +7,22 @@ package com.hongminh54.marisaoptimize.mixin;
 
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.render.Fullbright;
-import net.minecraft.client.render.WorldRenderer;
-import net.minecraft.world.LightType;
+import net.minecraft.util.LightCoordsUtil;
+import net.minecraft.world.level.LightLayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(WorldRenderer.BrightnessGetter.class)
+@Mixin(LightCoordsUtil.BrightnessGetter.class)
 public interface BrightnessGetterMixin {
 
-    @ModifyVariable(method = "method_68890", at = @At(value = "STORE"), ordinal = 0)
+    @ModifyVariable(method = "lambda$static$0", at = @At(value = "STORE"), name = "sky")
     private static int getLightmapCoordinatesModifySkyLight(int sky) {
-        return Math.max(Modules.get().get(Fullbright.class).getLuminance(LightType.SKY), sky);
+        return Math.max(Modules.get().get(Fullbright.class).getLuminance(LightLayer.SKY), sky);
     }
 
-    @ModifyVariable(method = "method_68890", at = @At(value = "STORE"), ordinal = 1)
+    @ModifyVariable(method = "lambda$static$0", at = @At(value = "STORE"), name = "block")
     private static int getLightmapCoordinatesModifyBlockLight(int sky) {
-        return Math.max(Modules.get().get(Fullbright.class).getLuminance(LightType.BLOCK), sky);
+        return Math.max(Modules.get().get(Fullbright.class).getLuminance(LightLayer.BLOCK), sky);
     }
 }

@@ -11,7 +11,7 @@ import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.utils.misc.Keybind;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.client.option.Perspective;
+import net.minecraft.client.CameraType;
 import org.lwjgl.glfw.GLFW;
 import com.hongminh54.marisaoptimize.settings.*;
 
@@ -81,7 +81,7 @@ public class CameraTweaks extends Module {
 
     @EventHandler
     private void onMouseScroll(MouseScrollEvent event) {
-        if (mc.options.getPerspective() == Perspective.FIRST_PERSON || mc.currentScreen != null || !scrollingEnabled.get() || (scrollKeybind.get().isSet() && !scrollKeybind.get().isPressed())) return;
+        if (mc.options.getCameraType() == CameraType.FIRST_PERSON || mc.gui.screen() != null || !scrollingEnabled.get() || (scrollKeybind.get().isSet() && !scrollKeybind.get().isPressed())) return;
 
         if (scrollSensitivity.get() > 0) {
             distance -= event.value * 0.25 * (scrollSensitivity.get() * distance);

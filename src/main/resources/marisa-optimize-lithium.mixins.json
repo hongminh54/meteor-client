@@ -1,7 +1,7 @@
 {
   "required": false,
   "package": "com.hongminh54.marisaoptimize.mixin.lithium",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_25",
   "plugin": "com.hongminh54.marisaoptimize.MixinPlugin",
   "client": [
     "ChunkAwareBlockCollisionSweeperMixin",

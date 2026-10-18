@@ -5,13 +5,13 @@
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import net.minecraft.client.render.ProjectionMatrix2;
+import net.minecraft.client.renderer.Projection;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(ProjectionMatrix2.class)
+@Mixin(Projection.class)
 public interface ProjectionMatrix2Accessor {
     @Invoker("getMatrix")
-    Matrix4f meteor$callGetMatrix(float width, float height);
+    Matrix4f meteor$callGetMatrix(Matrix4f destination);
 }

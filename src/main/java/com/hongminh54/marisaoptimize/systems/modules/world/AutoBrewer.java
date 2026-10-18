@@ -12,13 +12,12 @@ import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.utils.misc.MyPotion;
 import com.hongminh54.marisaoptimize.utils.player.InvUtils;
-import net.minecraft.client.resource.language.I18n;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.Potions;
-import net.minecraft.screen.BrewingStandScreenHandler;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.inventory.BrewingStandMenu;
 
 public class AutoBrewer extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
@@ -47,7 +46,7 @@ public class AutoBrewer extends Module {
         first = false;
     }
 
-    public void tick(BrewingStandScreenHandler c) {
+    public void tick(BrewingStandMenu c) {
         timer++;
 
         // When the brewing stand is opened.
@@ -59,7 +58,7 @@ public class AutoBrewer extends Module {
         }
 
         // Wait for the brewing to complete.
-        if (c.getBrewTime() != 0 || timer < 5) return;
+        if (c.getBrewingTicks() != 0 || timer < 5) return;
 
         if (ingredientI == -2) {
             // Take the bottles.
@@ -84,18 +83,18 @@ public class AutoBrewer extends Module {
         }
     }
 
-    private boolean insertIngredient(BrewingStandScreenHandler c, Item ingredient) {
+    private boolean insertIngredient(BrewingStandMenu c, Item ingredient) {
         int slot = -1;
 
         for (int slotI = 5; slotI < c.slots.size(); slotI++) {
-            if (c.slots.get(slotI).getStack().getItem() == ingredient) {
+            if (c.slots.get(slotI).getItem().getItem() == ingredient) {
                 slot = slotI;
                 break;
             }
         }
 
         if (slot == -1) {
-            error("You do not have any %s left in your inventory... disabling.", I18n.translate(ingredient.getTranslationKey()));
+            error("You do not have any %s left in your inventory... disabling.", ingredient.components().get(DataComponents.ITEM_NAME).getString());
             toggle();
             return true;
         }
@@ -105,12 +104,12 @@ public class AutoBrewer extends Module {
         return false;
     }
 
-    private boolean checkFuel(BrewingStandScreenHandler c) {
+    private boolean checkFuel(BrewingStandMenu c) {
         if (c.getFuel() == 0) {
             int slot = -1;
 
             for (int slotI = 5; slotI < c.slots.size(); slotI++) {
-                if (c.slots.get(slotI).getStack().getItem() == Items.BLAZE_POWDER) {
+                if (c.slots.get(slotI).getItem().getItem() == Items.BLAZE_POWDER) {
                     slot = slotI;
                     break;
                 }
@@ -128,18 +127,18 @@ public class AutoBrewer extends Module {
         return false;
     }
 
-    private void moveOneItem(BrewingStandScreenHandler c, int from, int to) {
+    private void moveOneItem(BrewingStandMenu c, int from, int to) {
         InvUtils.move().fromId(from).toId(to);
     }
 
-    private boolean insertWaterBottles(BrewingStandScreenHandler c) {
+    private boolean insertWaterBottles(BrewingStandMenu c) {
         for (int i = 0; i < 3; i++) {
             int slot = -1;
 
             for (int slotI = 5; slotI < c.slots.size(); slotI++) {
-                if (c.slots.get(slotI).getStack().getItem() == Items.POTION) {
-                    Potion potion = c.slots.get(slotI).getStack().get(DataComponentTypes.POTION_CONTENTS).potion().get().value();
-                    if (potion == Potions.WATER.value()) {
+                if (c.slots.get(slotI).getItem().getItem() == Items.POTION) {
+                    PotionContents contents = c.slots.get(slotI).getItem().getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
+                    if (contents.potion().filter(Potions.WATER::equals).isPresent()) {
                         slot = slotI;
                         break;
                     }
@@ -158,11 +157,11 @@ public class AutoBrewer extends Module {
         return false;
     }
 
-    private boolean takePotions(BrewingStandScreenHandler c) {
+    private boolean takePotions(BrewingStandMenu c) {
         for (int i = 0; i < 3; i++) {
             InvUtils.shiftClick().slotId(i);
 
-            if (!c.slots.get(i).getStack().isEmpty()) {
+            if (!c.slots.get(i).getItem().isEmpty()) {
                 error("You do not have a sufficient amount of inventory space... disabling.");
                 toggle();
                 return true;

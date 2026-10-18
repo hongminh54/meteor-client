@@ -6,12 +6,12 @@
 package com.hongminh54.marisaoptimize.utils.world;
 
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.chunk.WorldChunk;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.chunk.LevelChunk;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,11 +70,11 @@ public class XrayNoiseFilter {
     }
 
     public static void invalidate(BlockPos pos) {
-        chunks.remove(ChunkPos.toLong(pos.getX() >> 4, pos.getZ() >> 4));
+        chunks.remove(ChunkPos.pack(pos.getX() >> 4, pos.getZ() >> 4));
     }
 
     public static void invalidateChunk(ChunkPos chunkPos) {
-        chunks.remove(chunkPos.toLong());
+        chunks.remove(chunkPos.pack());
     }
 
     public static void clearAll() {
@@ -82,8 +82,8 @@ public class XrayNoiseFilter {
     }
 
     public static boolean isSuspect(ChunkPos chunkPos) {
-        long key = chunkPos.toLong();
-        if (!chunks.containsKey(key) && mc.world != null) analyze(mc.world.getChunk(chunkPos.x, chunkPos.z));
+        long key = chunkPos.pack();
+        if (!chunks.containsKey(key) && mc.level != null) analyze(mc.level.getChunk(chunkPos.x(), chunkPos.z()));
 
         ChunkInfo info = chunks.get(key);
         return info != null && info.suspect();
@@ -96,12 +96,12 @@ public class XrayNoiseFilter {
         if (whitelist == null || !whitelist.test(state.getBlock())) return false;
         if (XrayMemory.isRemembered(pos)) return false;
 
-        long key = ChunkPos.toLong(pos.getX() >> 4, pos.getZ() >> 4);
+        long key = ChunkPos.pack(pos.getX() >> 4, pos.getZ() >> 4);
         ChunkInfo info = chunks.get(key);
 
         if (info == null) {
-            if (mc.world == null) return false;
-            analyze(mc.world.getChunk(pos.getX() >> 4, pos.getZ() >> 4));
+            if (mc.level == null) return false;
+            analyze(mc.level.getChunk(pos.getX() >> 4, pos.getZ() >> 4));
             info = chunks.get(key);
             if (info == null) return false;
         }
@@ -116,18 +116,18 @@ public class XrayNoiseFilter {
      * Analyzes a chunk: counts whitelisted blocks and classifies it as
      * obfuscated (suspect) when the density is unrealistic.
      */
-    public static void analyze(WorldChunk chunk) {
-        if (chunk == null || whitelist == null || mc.world == null) return;
+    public static void analyze(LevelChunk chunk) {
+        if (chunk == null || whitelist == null || mc.level == null) return;
 
-        long key = chunk.getPos().toLong();
+        long key = chunk.getPos().pack();
         if (chunks.containsKey(key)) return;
 
         int count = 0;
-        BlockPos.Mutable pos = new BlockPos.Mutable();
-        int startX = chunk.getPos().getStartX();
-        int startZ = chunk.getPos().getStartZ();
-        int bottomY = mc.world.getBottomY();
-        int topY = bottomY + mc.world.getDimension().height();
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        int startX = chunk.getPos().getMinBlockX();
+        int startZ = chunk.getPos().getMinBlockZ();
+        int bottomY = mc.level.getMinY();
+        int topY = bottomY + mc.level.getHeight();
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {

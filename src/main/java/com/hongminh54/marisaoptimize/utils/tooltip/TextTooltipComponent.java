@@ -5,22 +5,22 @@
 
 package com.hongminh54.marisaoptimize.utils.tooltip;
 
-import net.minecraft.client.gui.tooltip.OrderedTextTooltipComponent;
-import net.minecraft.client.gui.tooltip.TooltipComponent;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTextTooltip;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.network.chat.Component;
 
-public class TextTooltipComponent extends OrderedTextTooltipComponent implements MeteorTooltipData {
-    public TextTooltipComponent(OrderedText text) {
+public class TextTooltipComponent extends ClientTextTooltip implements MeteorTooltipData {
+    public TextTooltipComponent(FormattedCharSequence text) {
         super(text);
     }
 
-    public TextTooltipComponent(Text text) {
-        this(text.asOrderedText());
+    public TextTooltipComponent(Component text) {
+        this(text.getVisualOrderText());
     }
 
     @Override
-    public TooltipComponent getComponent() {
+    public ClientTooltipComponent getComponent() {
         return this;
     }
 }

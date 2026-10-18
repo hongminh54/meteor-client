@@ -10,7 +10,7 @@ import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.utils.misc.UnorderedArrayList;
 import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

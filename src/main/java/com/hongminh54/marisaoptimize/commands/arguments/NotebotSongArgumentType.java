@@ -13,7 +13,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import net.minecraft.command.CommandSource;
+import net.minecraft.commands.SharedSuggestionProvider;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,7 +39,7 @@ public class NotebotSongArgumentType implements ArgumentType<Path> {
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
         try (var suggestions = Files.list(MarisaOptimize.FOLDER.toPath().resolve("notebot"))) {
-            return CommandSource.suggestMatching(suggestions
+            return SharedSuggestionProvider.suggest(suggestions
                     .filter(SongDecoders::hasDecoder)
                     .map(path -> path.getFileName().toString()),
                 builder

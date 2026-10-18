@@ -13,7 +13,7 @@ import com.hongminh54.marisaoptimize.systems.friends.Friends;
 import com.hongminh54.marisaoptimize.utils.network.Capes;
 import com.hongminh54.marisaoptimize.utils.network.MeteorExecutor;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.minecraft.command.CommandSource;
+import net.minecraft.client.multiplayer.ClientSuggestionProvider;
 
 public class ReloadCommand extends Command {
     public ReloadCommand() {
@@ -21,7 +21,7 @@ public class ReloadCommand extends Command {
     }
 
     @Override
-    public void build(LiteralArgumentBuilder<CommandSource> builder) {
+    public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.executes(context -> {
             warning("Reloading systems, this may take a while.");
 

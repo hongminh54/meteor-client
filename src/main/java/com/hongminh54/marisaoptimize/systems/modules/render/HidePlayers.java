@@ -8,8 +8,8 @@ package com.hongminh54.marisaoptimize.systems.modules.render;
 import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.utils.entity.fakeplayer.FakePlayerEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
@@ -20,7 +20,7 @@ public class HidePlayers extends Module {
 
     public boolean shouldHide(Entity entity) {
         if (!isActive()) return false;
-        if (!(entity instanceof PlayerEntity player)) return false;
+        if (!(entity instanceof Player player)) return false;
         if (player == mc.player) return false;
         if (entity instanceof FakePlayerEntity) return false;
 

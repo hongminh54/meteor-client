@@ -5,7 +5,7 @@
 
 package com.hongminh54.marisaoptimize.mixininterface;
 
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 
 public interface IBox {
     void meteor$expand(double v);

@@ -12,7 +12,7 @@ import com.hongminh54.marisaoptimize.utils.network.MeteorExecutor;
 import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
 import com.hongminh54.marisaoptimize.utils.world.Dir;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
 import java.util.List;

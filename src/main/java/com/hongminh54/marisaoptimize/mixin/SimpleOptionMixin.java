@@ -6,28 +6,30 @@
 package com.hongminh54.marisaoptimize.mixin;
 
 import com.hongminh54.marisaoptimize.mixininterface.ISimpleOption;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.SimpleOption;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.OptionInstance;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.Objects;
-import java.util.function.Consumer;
 
-@Mixin(SimpleOption.class)
-public abstract class SimpleOptionMixin implements ISimpleOption {
-    @Shadow Object value;
-    @Shadow @Final private Consumer<Object> changeCallback;
+@Mixin(OptionInstance.class)
+public abstract class SimpleOptionMixin<T> implements ISimpleOption {
+    @Shadow private T value;
+    @Shadow @Final private OptionInstance.ValueUpdateListener<? super T> onValueUpdate;
 
     @Override
     public void meteor$set(Object value) {
-        if (!MinecraftClient.getInstance().isRunning()) {
-            this.value = value;
+        @SuppressWarnings("unchecked")
+        T cast = (T) value;
+
+        if (!Minecraft.getInstance().isRunning()) {
+            this.value = cast;
         } else {
-            if (!Objects.equals(this.value, value)) {
-                this.value = value;
-                this.changeCallback.accept(this.value);
+            if (!Objects.equals(this.value, cast)) {
+                this.value = cast;
+                this.onValueUpdate.valueChanged(cast);
             }
         }
     }

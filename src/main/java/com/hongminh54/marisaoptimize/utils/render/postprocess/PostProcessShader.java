@@ -12,22 +12,24 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.FilterMode;
 import com.hongminh54.marisaoptimize.MarisaOptimize;
 import com.hongminh54.marisaoptimize.renderer.MeshRenderer;
-import net.minecraft.client.gl.DynamicUniformStorage;
-import net.minecraft.client.gl.Framebuffer;
-import net.minecraft.client.gl.SimpleFramebuffer;
+import net.minecraft.client.renderer.DynamicUniformStorage;
+import net.minecraft.client.gui.render.GuiRenderer;
+import com.mojang.blaze3d.GpuFormat;
+import com.mojang.blaze3d.pipeline.RenderTarget;
+import com.mojang.blaze3d.pipeline.TextureTarget;
 
 import java.nio.ByteBuffer;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
-import static org.lwjgl.glfw.GLFW.glfwGetTime;
 
 public abstract class PostProcessShader {
     protected final RenderPipeline pipeline;
-    public final Framebuffer framebuffer;
+    public final RenderTarget framebuffer;
 
     protected PostProcessShader(RenderPipeline pipeline) {
         this.pipeline = pipeline;
-        this.framebuffer = new SimpleFramebuffer(MarisaOptimize.NAME + " PostProcessShader " + this.getClass().getSimpleName(), mc.getWindow().getFramebufferWidth(), mc.getWindow().getFramebufferHeight(), true);
+        this.framebuffer = new TextureTarget(MarisaOptimize.NAME + " PostProcessShader " + this.getClass().getSimpleName(),
+            mc.getWindow().getWidth(), mc.getWindow().getHeight(), true, GpuFormat.RGBA8_UNORM);
     }
 
     protected abstract boolean shouldDraw();
@@ -39,7 +41,7 @@ public abstract class PostProcessShader {
 
     public void clearTexture() {
         if (this.shouldDraw()) {
-            RenderSystem.getDevice().createCommandEncoder().clearColorTexture(framebuffer.getColorAttachment(), 0);
+            RenderSystem.getDevice().createCommandEncoder().clearColorTexture(framebuffer.getColorTexture(), GuiRenderer.CLEAR_COLOR);
         }
     }
 
@@ -47,22 +49,25 @@ public abstract class PostProcessShader {
         if (!shouldDraw()) return;
 
         preDraw();
-        draw.run();
-        postDraw();
+        try {
+            draw.run();
+        } finally {
+            postDraw();
+        }
     }
 
     public void render() {
         if (!shouldDraw()) return;
 
         var renderer = MeshRenderer.begin()
-            .attachments(mc.getFramebuffer())
+            .attachments(mc.gameRenderer.mainRenderTarget())
             .pipeline(pipeline)
             .fullscreen()
-            .uniform("PostData", UNIFORM_STORAGE.write(new UniformData(
-                (float) mc.getWindow().getFramebufferWidth(), (float) mc.getWindow().getFramebufferHeight(),
-                (float) glfwGetTime()
+            .uniform("PostData", UNIFORM_STORAGE.writeUniform(new UniformData(
+                (float) mc.getWindow().getWidth(), (float) mc.getWindow().getHeight(),
+                (float) (mc.getFrameTimeNs() / 1e9)
             )))
-            .sampler("u_Texture", framebuffer.getColorAttachmentView(), RenderSystem.getSamplerCache().get(FilterMode.NEAREST));
+            .sampler("u_Texture", framebuffer.getColorTextureView(), RenderSystem.getSamplerCache().getClampToEdge(FilterMode.NEAREST));
 
         setupPass(renderer);
 
@@ -84,10 +89,10 @@ public abstract class PostProcessShader {
     private static final DynamicUniformStorage<UniformData> UNIFORM_STORAGE = new DynamicUniformStorage<>("Meteor - Post UBO", UNIFORM_SIZE, 16);
 
     public static void flipFrame() {
-        UNIFORM_STORAGE.clear();
+        UNIFORM_STORAGE.endFrame();
     }
 
-    private record UniformData(float sizeX, float sizeY, float time) implements DynamicUniformStorage.Uploadable {
+    private record UniformData(float sizeX, float sizeY, float time) implements DynamicUniformStorage.DynamicUniform {
         @Override
         public void write(ByteBuffer buffer) {
             Std140Builder.intoBuffer(buffer)

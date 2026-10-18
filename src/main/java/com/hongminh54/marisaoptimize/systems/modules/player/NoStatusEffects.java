@@ -7,17 +7,17 @@ package com.hongminh54.marisaoptimize.systems.modules.player;
 
 import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
-import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.world.effect.MobEffect;
 
 import java.util.List;
 
-import static net.minecraft.entity.effect.StatusEffects.*;
+import static net.minecraft.world.effect.MobEffects.*;
 import com.hongminh54.marisaoptimize.settings.*;
 
 public class NoStatusEffects extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
 
-    private final Setting<List<StatusEffect>> blockedEffects = sgGeneral.add(new StatusEffectListSetting.Builder()
+    private final Setting<List<MobEffect>> blockedEffects = sgGeneral.add(new StatusEffectListSetting.Builder()
         .name("blocked-effects")
         .description("Effects to block.")
         .defaultValue(
@@ -33,7 +33,7 @@ public class NoStatusEffects extends Module {
         super(Categories.Player, "no-status-effects", "Blocks specified status effects.");
     }
 
-    public boolean shouldBlock(StatusEffect effect) {
+    public boolean shouldBlock(MobEffect effect) {
         return isActive() && blockedEffects.get().contains(effect);
     }
 }

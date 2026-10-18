@@ -17,17 +17,17 @@ import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
 import com.hongminh54.marisaoptimize.utils.misc.Keybind;
 import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public abstract class Module implements ISerializable<Module>, Comparable<Module> {
-    protected final MinecraftClient mc;
+    protected final Minecraft mc;
 
     public final Category category;
     public final String name;
@@ -53,7 +53,7 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
     public Module(Category category, String name, String description, String... aliases) {
         if (name.contains(" ")) MarisaOptimize.LOG.warn("Module '{}' contains invalid characters in its name making it incompatible with Marisa Optimize commands.", name);
 
-        this.mc = MinecraftClient.getInstance();
+        this.mc = Minecraft.getInstance();
         this.category = category;
         this.name = name;
         this.title = Utils.nameToTitle(name);
@@ -117,11 +117,11 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
     public void sendToggledMsg() {
         if (Config.get().chatFeedback.get() && chatFeedback) {
             ChatUtils.forceNextPrefixClass(getClass());
-            ChatUtils.sendMsg(this.hashCode(), Formatting.GRAY, "Toggled (highlight)%s(default) %s(default).", title, isActive() ? Formatting.GREEN + "on" : Formatting.RED + "off");
+            ChatUtils.sendMsg(this.hashCode(), ChatFormatting.GRAY, "Toggled (highlight)%s(default) %s(default).", title, isActive() ? ChatFormatting.GREEN + "on" : ChatFormatting.RED + "off");
         }
     }
 
-    public void info(Text message) {
+    public void info(Component message) {
         ChatUtils.forceNextPrefixClass(getClass());
         ChatUtils.sendMsg(title, message);
     }
@@ -150,9 +150,9 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
     }
 
     @Override
-    public NbtCompound toTag() {
+    public CompoundTag toTag() {
         if (!serialize) return null;
-        NbtCompound tag = new NbtCompound();
+        CompoundTag tag = new CompoundTag();
 
         tag.putString("name", name);
         tag.put("keybind", keybind.toTag());
@@ -166,18 +166,18 @@ public abstract class Module implements ISerializable<Module>, Comparable<Module
     }
 
     @Override
-    public Module fromTag(NbtCompound tag) {
+    public Module fromTag(CompoundTag tag) {
         // General
         keybind.fromTag(tag.getCompoundOrEmpty("keybind"));
-        toggleOnBindRelease = tag.getBoolean("toggleOnKeyRelease", false);
-        chatFeedback = !tag.contains("chatFeedback") || tag.getBoolean("chatFeedback", false);
-        favorite = tag.getBoolean("favorite", false);
+        toggleOnBindRelease = tag.getBooleanOr("toggleOnKeyRelease", false);
+        chatFeedback = !tag.contains("chatFeedback") || tag.getBooleanOr("chatFeedback", false);
+        favorite = tag.getBooleanOr("favorite", false);
 
         // Settings
-        NbtElement settingsTag = tag.get("settings");
-        if (settingsTag instanceof NbtCompound) settings.fromTag((NbtCompound) settingsTag);
+        Tag settingsTag = tag.get("settings");
+        if (settingsTag instanceof CompoundTag compoundTag) settings.fromTag(compoundTag);
 
-        boolean active = tag.getBoolean("active", false);
+        boolean active = tag.getBooleanOr("active", false);
         if (active != isActive()) toggle();
 
         return this;

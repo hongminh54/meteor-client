@@ -7,7 +7,7 @@ package com.hongminh54.marisaoptimize.utils.render;
 
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.textures.FilterMode;
-import com.mojang.blaze3d.textures.TextureFormat;
+import com.mojang.blaze3d.GpuFormat;
 import com.hongminh54.marisaoptimize.MarisaOptimize;
 import com.hongminh54.marisaoptimize.renderer.Texture;
 import com.hongminh54.marisaoptimize.utils.network.Http;
@@ -29,16 +29,16 @@ public class PlayerHeadTexture extends Texture {
     private boolean needsRotate;
 
     public PlayerHeadTexture(byte[] head, boolean needsRotate) {
-        super(8, 8, TextureFormat.RGBA8, FilterMode.NEAREST, FilterMode.NEAREST);
+        super(8, 8, GpuFormat.RGBA8_UNORM, FilterMode.NEAREST, FilterMode.NEAREST);
 
         upload(BufferUtils.createByteBuffer(head.length).put(head));
         this.needsRotate = needsRotate;
     }
 
     public PlayerHeadTexture() {
-        super(8, 8, TextureFormat.RGBA8, FilterMode.NEAREST, FilterMode.NEAREST);
+        super(8, 8, GpuFormat.RGBA8_UNORM, FilterMode.NEAREST, FilterMode.NEAREST);
 
-        try (InputStream inputStream = mc.getResourceManager().getResource(MarisaOptimize.identifier("textures/steve.png")).get().getInputStream()) {
+        try (InputStream inputStream = mc.getResourceManager().getResource(MarisaOptimize.identifier("textures/steve.png")).orElseThrow(() -> new IOException("Missing default head texture")).open()) {
             ByteBuffer data = TextureUtil.readResource(inputStream);
             data.rewind();
 

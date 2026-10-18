@@ -24,10 +24,10 @@ import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
 import com.hongminh54.marisaoptimize.utils.misc.Keybind;
 import com.hongminh54.marisaoptimize.utils.misc.Names;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.BlockPos;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -321,13 +321,13 @@ public abstract class GuiTheme implements ISerializable<GuiTheme> {
     // Saving / Loading
 
     @Override
-    public NbtCompound toTag() {
-        NbtCompound tag = new NbtCompound();
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
 
         tag.putString("name", name);
         tag.put("settings", settings.toTag());
 
-        NbtCompound configs = new NbtCompound();
+        CompoundTag configs = new CompoundTag();
         for (String id : windowConfigs.keySet()) {
             configs.put(id, windowConfigs.get(id).toTag());
         }
@@ -337,11 +337,11 @@ public abstract class GuiTheme implements ISerializable<GuiTheme> {
     }
 
     @Override
-    public GuiTheme fromTag(NbtCompound tag) {
+    public GuiTheme fromTag(CompoundTag tag) {
         tag.getCompound("settings").ifPresent(settings::fromTag);
 
         tag.getCompound("windowConfigs").ifPresent(configs -> {
-            for (String id : configs.getKeys()) {
+            for (String id : configs.keySet()) {
                 windowConfigs.put(id, new WindowConfig().fromTag(configs.getCompound(id).get()));
             }
         });

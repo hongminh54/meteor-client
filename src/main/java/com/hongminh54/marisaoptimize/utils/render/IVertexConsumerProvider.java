@@ -5,8 +5,10 @@
 
 package com.hongminh54.marisaoptimize.utils.render;
 
-import net.minecraft.client.render.VertexConsumerProvider;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.rendertype.RenderType;
 
-public interface IVertexConsumerProvider extends VertexConsumerProvider {
+public interface IVertexConsumerProvider {
+    VertexConsumer getBuffer(RenderType layer);
     void setOffset(int offsetX, int offsetY, int offsetZ);
 }

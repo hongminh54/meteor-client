@@ -20,11 +20,24 @@
 ## Usage
 
 ### Building
+- Use JDK 25 (Minecraft 26.2 uses official names, not Yarn mappings).
 - Clone this repository
 - Run `./gradlew build`
 
 ### Installation
 Put the built jar from `build/libs` into your Minecraft `mods` folder and run it with Fabric Loader.
+Use Minecraft 26.2, Fabric Loader 0.19.3 or newer and the matching Fabric API.
+The local build is `build/libs/marisa-optimize-26.2-local.jar`.
+
+### Migration checks
+Run the isolated regression suite with:
+```sh
+./gradlew -I scripts/check-serialization.init.gradle compileMigrationCommands compileMigrationEvents checkMigrationSerialization checkMigrationInventory checkMigrationFriends checkMigrationSlider checkMigrationAccount checkMigrationPackets
+```
+Resource and bytecode smoke checks are in `scripts/validate_resources.py`,
+`scripts/validate_render_api.py` and `scripts/audit_mixin_targets.py`.
+Bytecode checks require the Loom-prepared Minecraft JAR and `JAVA_HOME` pointing to JDK 25.
+These checks do not replace testing mixin application, rendering and gameplay in a running client.
 
 ## Contributions
 We will review and help with all reasonable pull requests as long as the guidelines below are met.

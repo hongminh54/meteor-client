@@ -6,8 +6,8 @@
 package com.hongminh54.marisaoptimize.mixininterface;
 
 import com.hongminh54.marisaoptimize.mixin.EntityRenderManagerMixin;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.Nullable;
 
 public interface IEntityRenderState {

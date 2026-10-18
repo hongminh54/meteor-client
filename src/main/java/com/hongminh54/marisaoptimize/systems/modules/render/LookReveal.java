@@ -16,11 +16,11 @@ import com.hongminh54.marisaoptimize.utils.world.LookRaycaster;
 import com.hongminh54.marisaoptimize.utils.world.XrayMemory;
 import it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.block.BlockState;
-import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Reveals hidden ores by punching the first remembered block along the player's
@@ -90,13 +90,13 @@ public class LookReveal extends Module {
 
     @EventHandler
     private void onTick(TickEvent.Post event) {
-        if (mc.world == null || mc.player == null || mc.getNetworkHandler() == null) return;
+        if (mc.level == null || mc.player == null || mc.getConnection() == null) return;
 
         if (requireXray.get() && !Modules.get().get(Xray.class).isActive()) return;
         if (adaptive.get() && AntiXrayServerType.isLookRevealServer()) return;
 
         if (pauseWhenMoving.get()) {
-            Vec3d v = mc.player.getVelocity();
+            Vec3 v = mc.player.getDeltaMovement();
             if (Math.sqrt(v.x * v.x + v.z * v.z) > 0.1) return;
         }
 
@@ -109,22 +109,22 @@ public class LookReveal extends Module {
         if (punchesThisSecond >= maxRevealsPerSecond.get()) return;
         if (now < nextPunchTime) return;
 
-        Vec3d eye = mc.player.getEyePos();
-        BlockPos target = LookRaycaster.firstOpaque(eye, mc.player.getRotationVector(), reach.get(), pos -> {
+        Vec3 eye = mc.player.getEyePosition();
+        BlockPos target = LookRaycaster.firstOpaque(eye, mc.player.getLookAngle(), reach.get(), pos -> {
             if (XrayMemory.isRemembered(pos)) return true;
-            BlockState state = mc.world.getBlockState(pos);
-            return state.isOpaqueFullCube();
+            BlockState state = mc.level.getBlockState(pos);
+            return state.isSolidRender();
         });
 
         if (target == null) return;
-        if (mc.world.isOutOfHeightLimit(target)) return;
+        if (mc.level.isOutsideBuildHeight(target)) return;
         if (!XrayMemory.isRemembered(target)) return;
 
         BlockState memoryState = XrayMemory.get(target);
-        BlockState worldState = mc.world.getBlockState(target);
+        BlockState worldState = mc.level.getBlockState(target);
         if (worldState == memoryState) return;
 
-        if (eye.distanceTo(target.toCenterPos()) > 4.5) return;
+        if (eye.distanceTo(Vec3.atCenterOf(target)) > 4.5) return;
         if (now - lastPunched.getOrDefault(target.asLong(), 0) < 2000) return;
 
         punch(target);
@@ -137,7 +137,7 @@ public class LookReveal extends Module {
         lastPunched.put(pos.asLong(), System.currentTimeMillis());
 
         Direction side = BlockUtils.getDirection(pos);
-        mc.interactionManager.sendSequencedPacket(mc.world, sequence -> new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, pos, side, sequence));
-        mc.getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK, pos, side));
+        mc.gameMode.startPrediction(mc.level, sequence -> new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK, pos, side, sequence));
+        mc.getConnection().send(new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.ABORT_DESTROY_BLOCK, pos, side));
     }
 }

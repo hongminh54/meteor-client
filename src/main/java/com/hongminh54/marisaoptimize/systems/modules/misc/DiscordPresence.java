@@ -22,17 +22,15 @@ import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.misc.MeteorStarscript;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.client.gui.screen.CreditsScreen;
-import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.client.gui.screen.multiplayer.AddServerScreen;
-import net.minecraft.client.gui.screen.multiplayer.ConnectScreen;
-import net.minecraft.client.gui.screen.multiplayer.DirectConnectScreen;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.client.gui.screen.option.*;
-import net.minecraft.client.gui.screen.pack.PackScreen;
-import net.minecraft.client.gui.screen.world.*;
-import net.minecraft.client.realms.gui.screen.RealmsScreen;
-import net.minecraft.util.Pair;
+import net.minecraft.client.gui.screens.*;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.gui.screens.options.*;
+import net.minecraft.client.gui.screens.options.controls.ControlsScreen;
+import net.minecraft.client.gui.screens.packs.PackSelectionScreen;
+import net.minecraft.client.gui.screens.worldselection.*;
+import net.minecraft.realms.RealmsScreen;
+import it.unimi.dsi.fastutil.Pair;
+import it.unimi.dsi.fastutil.objects.ObjectObjectMutablePair;
 import net.minecraft.util.Util;
 import org.meteordev.starscript.Script;
 
@@ -130,18 +128,18 @@ public class DiscordPresence extends Module {
     /** Registers a custom state to be used when the current screen is a class in the specified package. */
     public static void registerCustomState(String packageName, String state) {
         for (var pair : customStates) {
-            if (pair.getLeft().equals(packageName)) {
-                pair.setRight(state);
+            if (pair.left().equals(packageName)) {
+                pair.right(state);
                 return;
             }
         }
 
-        customStates.add(new Pair<>(packageName, state));
+        customStates.add(new ObjectObjectMutablePair<>(packageName, state));
     }
 
     /** The package name must match exactly to the one provided through {@link #registerCustomState(String, String)}. */
     public static void unregisterCustomState(String packageName) {
-        customStates.removeIf(pair -> pair.getLeft().equals(packageName));
+        customStates.removeIf(pair -> pair.left().equals(packageName));
     }
 
     @Override
@@ -245,25 +243,25 @@ public class DiscordPresence extends Module {
             if (!lastWasInMainMenu) {
                 rpc.setDetails(MarisaOptimize.NAME + " " + (MarisaOptimize.BUILD_NUMBER.isEmpty() ? MarisaOptimize.VERSION : MarisaOptimize.VERSION + " " + MarisaOptimize.BUILD_NUMBER));
 
-                if (mc.currentScreen instanceof TitleScreen) rpc.setState("Looking at title screen");
-                else if (mc.currentScreen instanceof SelectWorldScreen) rpc.setState("Selecting world");
-                else if (mc.currentScreen instanceof CreateWorldScreen || mc.currentScreen instanceof EditGameRulesScreen) rpc.setState("Creating world");
-                else if (mc.currentScreen instanceof EditWorldScreen) rpc.setState("Editing world");
-                else if (mc.currentScreen instanceof LevelLoadingScreen) rpc.setState("Loading world");
-                else if (mc.currentScreen instanceof MultiplayerScreen) rpc.setState("Selecting server");
-                else if (mc.currentScreen instanceof AddServerScreen) rpc.setState("Adding server");
-                else if (mc.currentScreen instanceof ConnectScreen || mc.currentScreen instanceof DirectConnectScreen) rpc.setState("Connecting to server");
-                else if (mc.currentScreen instanceof WidgetScreen) rpc.setState("Browsing Meteor's GUI");
-                else if (mc.currentScreen instanceof OptionsScreen || mc.currentScreen instanceof SkinOptionsScreen || mc.currentScreen instanceof SoundOptionsScreen || mc.currentScreen instanceof VideoOptionsScreen || mc.currentScreen instanceof ControlsOptionsScreen || mc.currentScreen instanceof LanguageOptionsScreen || mc.currentScreen instanceof ChatOptionsScreen || mc.currentScreen instanceof PackScreen || mc.currentScreen instanceof AccessibilityOptionsScreen) rpc.setState("Changing options");
-                else if (mc.currentScreen instanceof CreditsScreen) rpc.setState("Reading credits");
-                else if (mc.currentScreen instanceof RealmsScreen) rpc.setState("Browsing Realms");
+                if (mc.gui.screen() instanceof TitleScreen) rpc.setState("Looking at title screen");
+                else if (mc.gui.screen() instanceof SelectWorldScreen) rpc.setState("Selecting world");
+                else if (mc.gui.screen() instanceof CreateWorldScreen || mc.gui.screen() instanceof AbstractGameRulesScreen) rpc.setState("Creating world");
+                else if (mc.gui.screen() instanceof EditWorldScreen) rpc.setState("Editing world");
+                else if (mc.gui.screen() instanceof LevelLoadingScreen) rpc.setState("Loading world");
+                else if (mc.gui.screen() instanceof JoinMultiplayerScreen) rpc.setState("Selecting server");
+                else if (mc.gui.screen() instanceof ManageServerScreen) rpc.setState("Adding server");
+                else if (mc.gui.screen() instanceof ConnectScreen || mc.gui.screen() instanceof DirectJoinServerScreen) rpc.setState("Connecting to server");
+                else if (mc.gui.screen() instanceof WidgetScreen) rpc.setState("Browsing Meteor's GUI");
+                else if (mc.gui.screen() instanceof OptionsScreen || mc.gui.screen() instanceof SkinCustomizationScreen || mc.gui.screen() instanceof SoundOptionsScreen || mc.gui.screen() instanceof VideoSettingsScreen || mc.gui.screen() instanceof ControlsScreen || mc.gui.screen() instanceof LanguageSelectScreen || mc.gui.screen() instanceof ChatOptionsScreen || mc.gui.screen() instanceof PackSelectionScreen || mc.gui.screen() instanceof AccessibilityOptionsScreen) rpc.setState("Changing options");
+                else if (mc.gui.screen() instanceof WinScreen) rpc.setState("Reading credits");
+                else if (mc.gui.screen() instanceof RealmsScreen) rpc.setState("Browsing Realms");
                 else {
                     boolean setState = false;
-                    if (mc.currentScreen != null) {
-                        String className = mc.currentScreen.getClass().getName();
+                    if (mc.gui.screen() != null) {
+                        String className = mc.gui.screen().getClass().getName();
                         for (var pair : customStates) {
-                            if (className.startsWith(pair.getLeft())) {
-                                rpc.setState(pair.getRight());
+                            if (className.startsWith(pair.left())) {
+                                rpc.setState(pair.right());
                                 setState = true;
                                 break;
                             }
@@ -290,7 +288,7 @@ public class DiscordPresence extends Module {
     @Override
     public WWidget getWidget(GuiTheme theme) {
         WButton help = theme.button("Open documentation.");
-        help.action = () -> Util.getOperatingSystem().open("https://github.com/TheBlueSkyARL/marisa-optimize/wiki/Starscript");
+        help.action = () -> Util.getPlatform().openUri("https://github.com/TheBlueSkyARL/marisa-optimize/wiki/Starscript");
 
         return help;
     }

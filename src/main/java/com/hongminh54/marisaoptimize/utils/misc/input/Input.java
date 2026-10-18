@@ -8,7 +8,7 @@ package com.hongminh54.marisaoptimize.utils.misc.input;
 import com.hongminh54.marisaoptimize.gui.GuiKeyEvents;
 import com.hongminh54.marisaoptimize.mixin.KeyBindingAccessor;
 import com.hongminh54.marisaoptimize.utils.misc.CursorStyle;
-import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.KeyMapping;
 import org.lwjgl.glfw.GLFW;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
@@ -30,15 +30,15 @@ public class Input {
         if (button >= 0 && button < buttons.length) buttons[button] = pressed;
     }
 
-    public static int getKey(KeyBinding bind) {
-        return ((KeyBindingAccessor) bind).meteor$getKey().getCode();
+    public static int getKey(KeyMapping bind) {
+        return ((KeyBindingAccessor) bind).meteor$getKey().getValue();
     }
 
-    public static void setKeyState(KeyBinding bind, boolean pressed) {
+    public static void setKeyState(KeyMapping bind, boolean pressed) {
         setKeyState(getKey(bind), pressed);
     }
 
-    public static boolean isPressed(KeyBinding bind) {
+    public static boolean isPressed(KeyMapping bind) {
         return isKeyPressed(getKey(bind)) || isButtonPressed(getKey(bind));
     }
 
@@ -46,17 +46,17 @@ public class Input {
         if (!GuiKeyEvents.canUseKeys) return false;
 
         if (key == GLFW.GLFW_KEY_UNKNOWN) return false;
-        return key < keys.length && keys[key];
+        return key >= 0 && key < keys.length && keys[key];
     }
 
     public static boolean isButtonPressed(int button) {
         if (button == -1) return false;
-        return button < buttons.length && buttons[button];
+        return button >= 0 && button < buttons.length && buttons[button];
     }
 
     public static void setCursorStyle(CursorStyle style) {
         if (lastCursorStyle != style) {
-            GLFW.glfwSetCursor(mc.getWindow().getHandle(), style.getGlfwCursor());
+            GLFW.glfwSetCursor(mc.getWindow().handle(), style.getGlfwCursor());
             lastCursorStyle = style;
         }
     }

@@ -1,0 +1,27 @@
+classTweaker	v1	official
+
+# Skin cache and firework particles
+accessible   class   net/minecraft/client/resources/SkinManager$TextureCache
+accessible   class   net/minecraft/client/particle/FireworkParticles$SparkParticle
+# Client chunk cache, also used by Marisa's XrayMemory
+accessible   class   net/minecraft/client/multiplayer/ClientChunkCache$Storage
+
+accessible   field   net/minecraft/client/resources/MapTextureManager$MapInstance texture Lnet/minecraft/client/renderer/texture/DynamicTexture;
+accessible   class   net/minecraft/client/gui/screens/inventory/BeaconScreen$BeaconPowerButton
+accessible   class   net/minecraft/client/gui/screens/inventory/BeaconScreen$BeaconConfirmButton
+accessible   class   net/minecraft/client/gui/screens/inventory/BeaconScreen$BeaconCancelButton
+accessible   class   net/minecraft/client/ResourceLoadStateTracker$ReloadState
+
+accessible   method  com/mojang/blaze3d/pipeline/RenderPipeline$Builder <init> ()V
+accessible   method  com/mojang/blaze3d/pipeline/RenderPipeline$Builder withSnippet (Lcom/mojang/blaze3d/pipeline/RenderPipeline$Snippet;)V
+accessible   field   net/minecraft/client/renderer/SubmitNodeStorage submitsPerOrder Lit/unimi/dsi/fastutil/ints/Int2ObjectAVLTreeMap;
+accessible   class   com/mojang/blaze3d/opengl/GlDevice
+accessible   class   com/mojang/blaze3d/opengl/GlCommandEncoder
+
+accessible   class   net/minecraft/world/entity/projectile/FishingHook$FishHookState
+accessible   field   net/minecraft/world/entity/projectile/FishingHook currentState Lnet/minecraft/world/entity/projectile/FishingHook$FishHookState;
+# Prediction is used by both upstream modules and Marisa's reveal actions
+accessible   method  net/minecraft/client/multiplayer/MultiPlayerGameMode startPrediction (Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/client/multiplayer/prediction/PredictiveAction;)V
+accessible   class   net/minecraft/client/gui/GuiGraphicsExtractor$ScissorStack
+accessible   field   net/minecraft/client/renderer/rendertype/RenderSetup outputTarget Lnet/minecraft/client/renderer/rendertype/OutputTarget;
+accessible   method  net/minecraft/world/entity/projectile/Projectile shouldBounceOnWorldBorder ()Z

@@ -14,7 +14,7 @@ import com.hongminh54.marisaoptimize.utils.entity.fakeplayer.FakePlayerManager;
 import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.minecraft.command.CommandSource;
+import net.minecraft.client.multiplayer.ClientSuggestionProvider;
 
 public class FakePlayerCommand extends Command {
     public FakePlayerCommand() {
@@ -22,7 +22,7 @@ public class FakePlayerCommand extends Command {
     }
 
     @Override
-    public void build(LiteralArgumentBuilder<CommandSource> builder) {
+    public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.then(literal("add")
             .executes(context -> {
                 FakePlayer fakePlayer = Modules.get().get(FakePlayer.class);

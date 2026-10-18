@@ -13,8 +13,8 @@ import com.hongminh54.marisaoptimize.renderer.MeshBuilder;
 import com.hongminh54.marisaoptimize.renderer.MeshRenderer;
 import com.hongminh54.marisaoptimize.renderer.MeteorRenderPipelines;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.Click;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.input.MouseButtonEvent;
 
 public class GuiDebugRenderer {
     private static final Color CELL_COLOR = new Color(25, 225, 25);
@@ -30,13 +30,13 @@ public class GuiDebugRenderer {
         mesh.end();
 
         MeshRenderer.begin()
-            .attachments(MinecraftClient.getInstance().getFramebuffer())
+            .attachments(Minecraft.getInstance().gameRenderer.mainRenderTarget())
             .pipeline(MeteorRenderPipelines.WORLD_COLORED_LINES)
             .mesh(mesh)
             .end();
     }
 
-    public void mouseReleased(WWidget widget, Click click, int i) {
+    public void mouseReleased(WWidget widget, MouseButtonEvent click, int i) {
         if (widget == null) return;
 
         MarisaOptimize.LOG.info("{} {}", widget.getClass(), i);

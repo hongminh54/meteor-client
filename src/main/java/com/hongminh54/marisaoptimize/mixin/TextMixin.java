@@ -6,10 +6,10 @@
 package com.hongminh54.marisaoptimize.mixin;
 
 import com.hongminh54.marisaoptimize.mixininterface.IText;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(Text.class)
+@Mixin(Component.class)
 public interface TextMixin extends IText {
     @Override
     default void meteor$invalidateCache() {}

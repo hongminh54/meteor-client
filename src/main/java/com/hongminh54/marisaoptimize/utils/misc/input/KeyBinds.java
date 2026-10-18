@@ -6,22 +6,22 @@
 package com.hongminh54.marisaoptimize.utils.misc.input;
 
 import com.hongminh54.marisaoptimize.MarisaOptimize;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
+import net.minecraft.client.KeyMapping;
+import com.mojang.blaze3d.platform.InputConstants;
 import org.lwjgl.glfw.GLFW;
 
 public class KeyBinds {
-    private static final KeyBinding.Category CATEGORY = KeyBinding.Category.create(MarisaOptimize.identifier("marisa-optimize"));
+    private static final KeyMapping.Category CATEGORY = KeyMapping.Category.register(MarisaOptimize.identifier("marisa-optimize"));
 
-    public static KeyBinding OPEN_GUI = new KeyBinding("key.marisa-optimize.open-gui", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, CATEGORY);
-    public static KeyBinding OPEN_COMMANDS = new KeyBinding("key.marisa-optimize.open-commands", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_PERIOD, CATEGORY);
+    public static KeyMapping OPEN_GUI = new KeyMapping("key.marisa-optimize.open-gui", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, CATEGORY);
+    public static KeyMapping OPEN_COMMANDS = new KeyMapping("key.marisa-optimize.open-commands", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_PERIOD, CATEGORY);
 
     private KeyBinds() {
     }
 
-    public static KeyBinding[] apply(KeyBinding[] binds) {
+    public static KeyMapping[] apply(KeyMapping[] binds) {
         // Add key binding
-        KeyBinding[] newBinds = new KeyBinding[binds.length + 2];
+        KeyMapping[] newBinds = new KeyMapping[binds.length + 2];
 
         System.arraycopy(binds, 0, newBinds, 0, binds.length);
         newBinds[binds.length] = OPEN_GUI;

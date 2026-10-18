@@ -5,13 +5,13 @@
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import net.minecraft.client.render.block.entity.BlockEntityRenderManager;
-import net.minecraft.client.texture.SpriteHolder;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(BlockEntityRenderManager.class)
+@Mixin(BlockEntityRenderDispatcher.class)
 public interface BlockEntityRenderManagerAccessor {
-    @Accessor("spriteHolder")
-    SpriteHolder getSpriteHolder();
+    @Accessor("sprites")
+    SpriteGetter getSpriteHolder();
 }

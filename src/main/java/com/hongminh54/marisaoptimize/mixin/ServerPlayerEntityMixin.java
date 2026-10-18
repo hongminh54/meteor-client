@@ -8,24 +8,24 @@ package com.hongminh54.marisaoptimize.mixin;
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.movement.Anchor;
 import com.hongminh54.marisaoptimize.systems.modules.movement.Scaffold;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ServerPlayerEntity.class)
+@Mixin(ServerPlayer.class)
 public abstract class ServerPlayerEntityMixin extends LivingEntity {
-    protected ServerPlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+    protected ServerPlayerEntityMixin(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
 
-    @Inject(method = "jump", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "jumpFromGround", at = @At("HEAD"), cancellable = true)
     public void dontJump(CallbackInfo ci) {
-        if (!getEntityWorld().isClient()) return;
+        if (!level().isClientSide()) return;
 
         Anchor module = Modules.get().get(Anchor.class);
         if (module.isActive() && module.cancelJump) ci.cancel();

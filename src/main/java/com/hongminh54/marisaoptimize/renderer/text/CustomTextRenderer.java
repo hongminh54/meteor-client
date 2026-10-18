@@ -9,7 +9,8 @@ import com.hongminh54.marisaoptimize.renderer.MeshBuilder;
 import com.hongminh54.marisaoptimize.renderer.MeshRenderer;
 import com.hongminh54.marisaoptimize.renderer.MeteorRenderPipelines;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
-import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -46,7 +47,7 @@ public class CustomTextRenderer implements TextRenderer {
     }
 
     @Override
-    public void begin(double scale, boolean scaleOnly, boolean big) {
+    public void begin(GuiGraphicsExtractor graphics, double scale, boolean scaleOnly, boolean big) {
         if (building) throw new RuntimeException("CustomTextRenderer.begin() called twice");
 
         if (!scaleOnly) mesh.begin();
@@ -91,17 +92,20 @@ public class CustomTextRenderer implements TextRenderer {
     @Override
     public double render(String text, double x, double y, Color color, boolean shadow) {
         boolean wasBuilding = building;
-        if (!wasBuilding) begin();
+        // Custom glyphs use our mesh pipeline, not vanilla GUI text extraction.
+        if (!wasBuilding) begin(null);
 
         double width;
         if (shadow) {
             int preShadowA = SHADOW_COLOR.a;
             SHADOW_COLOR.a = (int) (color.a / 255.0 * preShadowA);
 
-            width = font.render(mesh, text, x + fontScale * scale / 1.5, y + fontScale * scale / 1.5, SHADOW_COLOR, scale / 1.5);
-            font.render(mesh, text, x, y, color, scale / 1.5);
-
-            SHADOW_COLOR.a = preShadowA;
+            try {
+                width = font.render(mesh, text, x + fontScale * scale / 1.5, y + fontScale * scale / 1.5, SHADOW_COLOR, scale / 1.5);
+                font.render(mesh, text, x, y, color, scale / 1.5);
+            } finally {
+                SHADOW_COLOR.a = preShadowA;
+            }
         }
         else {
             width = font.render(mesh, text, x, y, color, scale / 1.5);
@@ -124,10 +128,10 @@ public class CustomTextRenderer implements TextRenderer {
             mesh.end();
 
             MeshRenderer.begin()
-                .attachments(MinecraftClient.getInstance().getFramebuffer())
+                .attachments(Minecraft.getInstance().gameRenderer.mainRenderTarget())
                 .pipeline(MeteorRenderPipelines.UI_TEXT)
                 .mesh(mesh)
-                .sampler("u_Texture", font.texture.getGlTextureView(), font.texture.getSampler())
+                .sampler("u_Texture", font.texture.getTextureView(), font.texture.getSampler())
                 .end();
         }
 

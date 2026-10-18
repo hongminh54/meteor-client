@@ -6,22 +6,22 @@
 package com.hongminh54.marisaoptimize.renderer;
 
 import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormatElement;
+import com.mojang.blaze3d.GpuFormat;
 
 public abstract class MeteorVertexFormats {
-    public static final VertexFormat POS2 = VertexFormat.builder()
-        .add("Position", MeteorVertexFormatElements.POS2)
+    public static final VertexFormat POS2 = VertexFormat.builder(0)
+        .addAttribute("Position", GpuFormat.RG32_FLOAT)
         .build();
 
-    public static final VertexFormat POS2_COLOR = VertexFormat.builder()
-        .add("Position", MeteorVertexFormatElements.POS2)
-        .add("Color", VertexFormatElement.COLOR)
+    public static final VertexFormat POS2_COLOR = VertexFormat.builder(0)
+        .addAttribute("Position", GpuFormat.RG32_FLOAT)
+        .addAttribute("Color", GpuFormat.RGBA8_UNORM)
         .build();
 
-    public static final VertexFormat POS2_TEXTURE_COLOR = VertexFormat.builder()
-        .add("Position", MeteorVertexFormatElements.POS2)
-        .add("Texture", VertexFormatElement.UV)
-        .add("Color", VertexFormatElement.COLOR)
+    public static final VertexFormat POS2_TEXTURE_COLOR = VertexFormat.builder(0)
+        .addAttribute("Position", GpuFormat.RG32_FLOAT)
+        .addAttribute("Texture", GpuFormat.RG32_FLOAT)
+        .addAttribute("Color", GpuFormat.RGBA8_UNORM)
         .build();
 
     private MeteorVertexFormats() {}

@@ -12,7 +12,7 @@ import com.hongminh54.marisaoptimize.systems.Systems;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -82,14 +82,14 @@ public class Profiles extends System<Profiles> implements Iterable<Profile> {
     }
 
     @Override
-    public NbtCompound toTag() {
-        NbtCompound tag = new NbtCompound();
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
         tag.put("profiles", NbtUtils.listToTag(profiles));
         return tag;
     }
 
     @Override
-    public Profiles fromTag(NbtCompound tag) {
+    public Profiles fromTag(CompoundTag tag) {
         profiles = NbtUtils.listFromTag(tag.getListOrEmpty("profiles"), Profile::new);
 
         for (File file : FOLDER.listFiles()) {

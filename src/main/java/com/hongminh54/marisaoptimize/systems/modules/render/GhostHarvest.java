@@ -12,8 +12,8 @@ import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.utils.world.AntiXrayServerType;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
+import net.minecraft.world.phys.Vec3;
 
 public class GhostHarvest extends Module {
     private final SettingGroup sgGeneral = settings.getDefaultGroup();
@@ -87,11 +87,11 @@ public class GhostHarvest extends Module {
 
     @EventHandler
     private void onTick(TickEvent.Pre event) {
-        if (mc.world == null || mc.player == null || mc.getNetworkHandler() == null) return;
+        if (mc.level == null || mc.player == null || mc.getConnection() == null) return;
 
         if (awaitingRestore) {
             if (++restoreTicks >= restoreDelay.get()) {
-                mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY(), mc.player.getZ(), mc.player.isOnGround(), mc.player.horizontalCollision));
+                mc.getConnection().send(new ServerboundMovePlayerPacket.Pos(mc.player.getX(), mc.player.getY(), mc.player.getZ(), mc.player.onGround(), mc.player.horizontalCollision));
                 awaitingRestore = false;
             }
             return;
@@ -101,7 +101,7 @@ public class GhostHarvest extends Module {
         if (adaptive.get() && AntiXrayServerType.isLookRevealServer()) return;
 
         if (pauseWhenMoving.get()) {
-            Vec3d v = mc.player.getVelocity();
+            Vec3 v = mc.player.getDeltaMovement();
             if (Math.sqrt(v.x * v.x + v.z * v.z) > 0.1) return;
         }
 
@@ -112,9 +112,9 @@ public class GhostHarvest extends Module {
         double rad = Math.toRadians(harvestIndex * 45.0);
         double x = mc.player.getX() + Math.sin(rad) * distance.get();
         double z = mc.player.getZ() + Math.cos(rad) * distance.get();
-        double y = Math.max(mc.world.getBottomY() + 2, Math.min(mc.world.getBottomY() + mc.world.getDimension().height() - 2, mc.player.getY()));
+        double y = Math.max(mc.level.getMinY() + 2, Math.min(mc.level.getMinY() + mc.level.dimensionType().height() - 2, mc.player.getY()));
 
-        mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(x, y, z, mc.player.isOnGround(), mc.player.horizontalCollision));
+        mc.getConnection().send(new ServerboundMovePlayerPacket.Pos(x, y, z, mc.player.onGround(), mc.player.horizontalCollision));
         awaitingRestore = true;
         restoreTicks = 0;
     }

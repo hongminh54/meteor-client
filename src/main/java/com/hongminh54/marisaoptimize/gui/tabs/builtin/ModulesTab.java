@@ -9,7 +9,7 @@ import com.hongminh54.marisaoptimize.gui.GuiTheme;
 import com.hongminh54.marisaoptimize.gui.GuiThemes;
 import com.hongminh54.marisaoptimize.gui.tabs.Tab;
 import com.hongminh54.marisaoptimize.gui.tabs.TabScreen;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 
 public class ModulesTab extends Tab {
     public ModulesTab() {

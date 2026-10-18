@@ -5,12 +5,12 @@
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import net.minecraft.client.texture.PlayerSkinProvider;
+import net.minecraft.client.resources.SkinManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(PlayerSkinProvider.class)
+@Mixin(SkinManager.class)
 public interface PlayerSkinProviderAccessor {
-    @Accessor("skinCache")
-    PlayerSkinProvider.FileCache meteor$getSkinCache();
+    @Accessor("skinTextures")
+    SkinManager.TextureCache meteor$getSkinCache();
 }

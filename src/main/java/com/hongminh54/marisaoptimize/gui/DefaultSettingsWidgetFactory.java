@@ -20,7 +20,7 @@ import com.hongminh54.marisaoptimize.renderer.Fonts;
 import com.hongminh54.marisaoptimize.systems.hud.elements.keyboard.KeyboardHud;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.client.resource.language.I18n;
+import net.minecraft.client.resources.language.I18n;
 import org.apache.commons.lang3.Strings;
 
 import java.util.ArrayList;
@@ -220,7 +220,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
 
     private void genericW(WTable table, GenericSetting<?> setting) {
         WButton edit = table.add(theme.button(GuiRenderer.EDIT)).widget();
-        edit.action = () -> mc.setScreen(setting.createScreen(theme));
+        edit.action = () -> mc.gui.setScreen(setting.createScreen(theme));
 
         reset(table, setting, null);
     }
@@ -231,7 +231,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
         WQuad quad = list.add(theme.quad(setting.get())).widget();
 
         WButton edit = list.add(theme.button(GuiRenderer.EDIT)).widget();
-        edit.action = () -> mc.setScreen(new ColorSettingScreen(theme, setting));
+        edit.action = () -> mc.gui.setScreen(new ColorSettingScreen(theme, setting));
 
         reset(table, setting, () -> quad.color = setting.get());
     }
@@ -251,17 +251,17 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
     private void blockW(WTable table, BlockSetting setting) {
         WHorizontalList list = table.add(theme.horizontalList()).expandX().widget();
 
-        WItem item = list.add(theme.item(setting.get().asItem().getDefaultStack())).widget();
+        WItem item = list.add(theme.item(setting.get().asItem().getDefaultInstance())).widget();
 
         WButton select = list.add(theme.button("Select")).widget();
         select.action = () -> {
             BlockSettingScreen screen = new BlockSettingScreen(theme, setting);
-            screen.onClosed(() -> item.set(setting.get().asItem().getDefaultStack()));
+            screen.onClosed(() -> item.set(setting.get().asItem().getDefaultInstance()));
 
-            mc.setScreen(screen);
+            mc.gui.setScreen(screen);
         };
 
-        reset(table, setting, () -> item.set(setting.get().asItem().getDefaultStack()));
+        reset(table, setting, () -> item.set(setting.get().asItem().getDefaultInstance()));
     }
 
     private void blockPosW(WTable table, BlockPosSetting setting) {
@@ -275,86 +275,86 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
     }
 
     private void blockListW(WTable table, BlockListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new BlockListSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new BlockListSettingScreen(theme, setting)));
     }
 
     private void itemW(WTable table, ItemSetting setting) {
         WHorizontalList list = table.add(theme.horizontalList()).expandX().widget();
 
-        WItem item = list.add(theme.item(setting.get().asItem().getDefaultStack())).widget();
+        WItem item = list.add(theme.item(setting.get().asItem().getDefaultInstance())).widget();
 
         WButton select = list.add(theme.button("Select")).widget();
         select.action = () -> {
             ItemSettingScreen screen = new ItemSettingScreen(theme, setting);
-            screen.onClosed(() -> item.set(setting.get().getDefaultStack()));
+            screen.onClosed(() -> item.set(setting.get().getDefaultInstance()));
 
-            mc.setScreen(screen);
+            mc.gui.setScreen(screen);
         };
 
-        reset(table, setting, () -> item.set(setting.get().getDefaultStack()));
+        reset(table, setting, () -> item.set(setting.get().getDefaultInstance()));
     }
 
     private void itemListW(WTable table, ItemListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new ItemListSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new ItemListSettingScreen(theme, setting)));
     }
 
     private void entityTypeListW(WTable table, EntityTypeListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new EntityTypeListSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new EntityTypeListSettingScreen(theme, setting)));
     }
 
     private void enchantmentListW(WTable table, EnchantmentListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new EnchantmentListSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new EnchantmentListSettingScreen(theme, setting)));
     }
 
     private void moduleListW(WTable table, ModuleListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new ModuleListSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new ModuleListSettingScreen(theme, setting)));
     }
 
     private void packetListW(WTable table, PacketListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new PacketBoolSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new PacketBoolSettingScreen(theme, setting)));
     }
 
     private void particleTypeListW(WTable table, ParticleTypeListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new ParticleTypeListSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new ParticleTypeListSettingScreen(theme, setting)));
     }
 
     private void soundEventListW(WTable table, SoundEventListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new SoundEventListSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new SoundEventListSettingScreen(theme, setting)));
     }
 
     private void statusEffectAmplifierMapW(WTable table, StatusEffectAmplifierMapSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new StatusEffectAmplifierMapSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new StatusEffectAmplifierMapSettingScreen(theme, setting)));
     }
 
     private void statusEffectListW(WTable table, StatusEffectListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new StatusEffectListSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new StatusEffectListSettingScreen(theme, setting)));
     }
 
     private void storageBlockListW(WTable table, StorageBlockListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new StorageBlockListSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new StorageBlockListSettingScreen(theme, setting)));
     }
 
     private void screenHandlerListW(WTable table, ScreenHandlerListSetting setting) {
-        selectW(table, setting, () -> mc.setScreen(new ScreenHandlerSettingScreen(theme, setting)));
+        selectW(table, setting, () -> mc.gui.setScreen(new ScreenHandlerSettingScreen(theme, setting)));
     }
 
     private void blockDataW(WTable table, BlockDataSetting<?> setting) {
         WButton button = table.add(theme.button(GuiRenderer.EDIT)).expandCellX().widget();
-        button.action = () -> mc.setScreen(new BlockDataSettingScreen<>(theme, setting));
+        button.action = () -> mc.gui.setScreen(new BlockDataSettingScreen<>(theme, setting));
 
         reset(table, setting, null);
     }
 
     private void potionW(WTable table, PotionSetting setting) {
         WHorizontalList list = table.add(theme.horizontalList()).expandX().widget();
-        WItemWithLabel item = list.add(theme.itemWithLabel(setting.get().potion, I18n.translate(setting.get().potion.getItem().getTranslationKey()))).widget();
+        WItemWithLabel item = list.add(theme.itemWithLabel(setting.get().potion, I18n.get(setting.get().potion.getItem().getDescriptionId()))).widget();
 
         WButton button = list.add(theme.button("Select")).expandCellX().widget();
         button.action = () -> {
             WidgetScreen screen = new PotionSettingScreen(theme, setting);
             screen.onClosed(() -> item.set(setting.get().potion));
 
-            mc.setScreen(screen);
+            mc.gui.setScreen(screen);
         };
 
         reset(list, setting, () -> item.set(setting.get().potion));
@@ -369,7 +369,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
             WidgetScreen screen = new FontFaceSettingScreen(theme, setting);
             screen.onClosed(() -> label.set(setting.get().info.family()));
 
-            mc.setScreen(screen);
+            mc.gui.setScreen(screen);
         };
 
         reset(list, setting, () -> label.set(Fonts.DEFAULT_FONT.info.family()));
@@ -416,7 +416,7 @@ public class DefaultSettingsWidgetFactory extends SettingsWidgetFactory {
                     setting.onChanged();
                 }, null, null);
                 set.set(setting.get().get(_i));
-                mc.setScreen(new ColorSettingScreen(theme, set));
+                mc.gui.setScreen(new ColorSettingScreen(theme, set));
             };
 
             WMinus remove = t.add(theme.minus()).expandCellX().right().widget();

@@ -6,28 +6,30 @@
 package com.hongminh54.marisaoptimize.mixin.indigo;
 
 import com.hongminh54.marisaoptimize.systems.modules.render.Xray;
-import net.fabricmc.fabric.impl.client.indigo.renderer.mesh.MutableQuadViewImpl;
-import net.fabricmc.fabric.impl.client.indigo.renderer.render.AbstractTerrainRenderContext;
-import net.fabricmc.fabric.impl.client.indigo.renderer.render.BlockRenderInfo;
-import org.spongepowered.asm.mixin.Final;
+import net.fabricmc.fabric.api.client.renderer.v1.mesh.MutableQuadView;
+import net.fabricmc.fabric.impl.client.indigo.renderer.render.AltModelBlockRendererImpl;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(AbstractTerrainRenderContext.class)
+@Mixin(AltModelBlockRendererImpl.class)
 public abstract class AbstractTerrainRenderContextMixin {
-    @Final @Shadow(remap = false)
-    protected BlockRenderInfo blockInfo;
+    @Shadow private BlockState blockState;
+    @Shadow private BlockPos pos;
 
-    @Inject(method = "bufferQuad", at = @At(value = "INVOKE", target = "Lnet/fabricmc/fabric/impl/client/indigo/renderer/render/AbstractTerrainRenderContext;bufferQuad(Lnet/fabricmc/fabric/impl/client/indigo/renderer/mesh/MutableQuadViewImpl;Lnet/minecraft/client/render/VertexConsumer;)V"), cancellable = true)
-    private void onBufferQuad(MutableQuadViewImpl quad, CallbackInfo ci) {
-        int alpha = Xray.getAlpha(blockInfo.blockState, blockInfo.blockPos);
+    @Inject(method = "transform", at = @At("RETURN"), cancellable = true)
+    private void onBufferQuad(MutableQuadView quad, CallbackInfoReturnable<Boolean> ci) {
+        int alpha = Xray.getAlpha(blockState, pos);
 
-        if (alpha == 0) ci.cancel();
+        if (alpha == 0) ci.setReturnValue(false);
         else if (alpha != -1) {
+            if (alpha > 0 && alpha < 255) quad.chunkLayer(ChunkSectionLayer.TRANSLUCENT);
             for (int i = 0; i < 4; i++) {
                 quad.color(i, rewriteQuadAlpha(quad.color(i), alpha));
             }

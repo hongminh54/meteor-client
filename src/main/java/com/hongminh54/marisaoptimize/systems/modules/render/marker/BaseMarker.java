@@ -12,8 +12,8 @@ import com.hongminh54.marisaoptimize.gui.widgets.WWidget;
 import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
 import com.hongminh54.marisaoptimize.utils.player.PlayerUtils;
 import com.hongminh54.marisaoptimize.utils.world.Dimension;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.nbt.CompoundTag;
 import com.hongminh54.marisaoptimize.settings.*;
 
 public abstract class BaseMarker implements ISerializable<BaseMarker> {
@@ -90,15 +90,15 @@ public abstract class BaseMarker implements ISerializable<BaseMarker> {
     }
 
     @Override
-    public NbtCompound toTag() {
-        NbtCompound tag = new NbtCompound();
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
         tag.put("settings", settings.toTag());
         return tag;
     }
 
     @Override
-    public BaseMarker fromTag(NbtCompound tag) {
-        NbtCompound settingsTag = (NbtCompound) tag.get("settings");
+    public BaseMarker fromTag(CompoundTag tag) {
+        CompoundTag settingsTag = (CompoundTag) tag.get("settings");
         if (settingsTag != null) settings.fromTag(settingsTag);
 
         return this;

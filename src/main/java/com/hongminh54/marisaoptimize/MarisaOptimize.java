@@ -35,9 +35,9 @@ import meteordevelopment.orbit.IEventBus;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.metadata.ModMetadata;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ChatScreen;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.MixinEnvironment;
@@ -55,7 +55,7 @@ public class MarisaOptimize implements ClientModInitializer {
     public static MarisaOptimize INSTANCE;
     public static MeteorAddon ADDON;
 
-    public static MinecraftClient mc;
+    public static Minecraft mc;
     public static final IEventBus EVENT_BUS = new EventBus();
     public static final File FOLDER = FabricLoader.getInstance().getGameDir().resolve(MOD_ID).toFile();
     public static final Logger LOG;
@@ -84,7 +84,7 @@ public class MarisaOptimize implements ClientModInitializer {
         }
 
         // Global minecraft client accessor
-        mc = MinecraftClient.getInstance();
+        mc = Minecraft.getInstance();
 
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             LOG.info("Force loading mixins");
@@ -149,14 +149,14 @@ public class MarisaOptimize implements ClientModInitializer {
 
     @EventHandler
     private void onTick(TickEvent.Post event) {
-        if (mc.currentScreen == null && mc.getOverlay() == null && KeyBinds.OPEN_COMMANDS.wasPressed()) {
-            mc.setScreen(new ChatScreen(Config.get().prefix.get(), true));
+        if (mc.gui.screen() == null && mc.gui.overlay() == null && KeyBinds.OPEN_COMMANDS.consumeClick()) {
+            mc.gui.setScreen(new ChatScreen(Config.get().prefix.get(), true));
         }
     }
 
     @EventHandler
     private void onKey(KeyEvent event) {
-        if (event.action == KeyAction.Press && KeyBinds.OPEN_GUI.matchesKey(event.input)) {
+        if (event.action == KeyAction.Press && KeyBinds.OPEN_GUI.matches(event.input)) {
             toggleGui();
         }
     }
@@ -169,7 +169,7 @@ public class MarisaOptimize implements ClientModInitializer {
     }
 
     private void toggleGui() {
-        if (Utils.canCloseGui()) mc.currentScreen.close();
+        if (Utils.canCloseGui()) mc.gui.screen().onClose();
         else if (Utils.canOpenGui()) Tabs.get().getFirst().openScreen(GuiThemes.get());
     }
 
@@ -180,21 +180,21 @@ public class MarisaOptimize implements ClientModInitializer {
     @EventHandler(priority = EventPriority.LOWEST)
     private void onOpenScreen(OpenScreenEvent event) {
         if (event.screen instanceof WidgetScreen) {
-            if (!wasWidgetScreen) wasHudHiddenRoot = mc.options.hudHidden;
+            if (!wasWidgetScreen) wasHudHiddenRoot = mc.gameRenderer.gameRenderState().guiRenderState.isHudHidden;
             if (GuiThemes.get().hideHUD() || wasHudHiddenRoot) {
                 // Always show the MC HUD in the HUD editor screen since people like
                 // to align some items with the hotbar or chat
-                mc.options.hudHidden = !(event.screen instanceof HudEditorScreen);
+                mc.gameRenderer.gameRenderState().guiRenderState.isHudHidden = !(event.screen instanceof HudEditorScreen);
             }
         } else {
-            if (wasWidgetScreen) mc.options.hudHidden = wasHudHiddenRoot;
-            wasHudHiddenRoot = mc.options.hudHidden;
+            if (wasWidgetScreen) mc.gameRenderer.gameRenderState().guiRenderState.isHudHidden = wasHudHiddenRoot;
+            wasHudHiddenRoot = mc.gameRenderer.gameRenderState().guiRenderState.isHudHidden;
         }
 
         wasWidgetScreen = event.screen instanceof WidgetScreen;
     }
 
     public static Identifier identifier(String path) {
-        return Identifier.of(MarisaOptimize.MOD_ID, path);
+        return Identifier.fromNamespaceAndPath(MarisaOptimize.MOD_ID, path);
     }
 }

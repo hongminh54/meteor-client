@@ -8,9 +8,9 @@ package com.hongminh54.marisaoptimize.pathing;
 import com.hongminh54.marisaoptimize.settings.BoolSetting;
 import com.hongminh54.marisaoptimize.settings.Setting;
 import com.hongminh54.marisaoptimize.settings.Settings;
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.core.BlockPos;
 
 import java.util.function.Predicate;
 

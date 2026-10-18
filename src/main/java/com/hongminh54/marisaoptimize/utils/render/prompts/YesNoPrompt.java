@@ -8,7 +8,7 @@ package com.hongminh54.marisaoptimize.utils.render.prompts;
 import com.hongminh54.marisaoptimize.gui.GuiTheme;
 import com.hongminh54.marisaoptimize.gui.GuiThemes;
 import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
@@ -21,7 +21,7 @@ public class YesNoPrompt extends Prompt<YesNoPrompt> {
     }
 
     public static YesNoPrompt create() {
-        return new YesNoPrompt(GuiThemes.get(), mc.currentScreen);
+        return new YesNoPrompt(GuiThemes.get(), mc.gui.screen());
     }
 
     public static YesNoPrompt create(GuiTheme theme, Screen parent) {
@@ -44,14 +44,14 @@ public class YesNoPrompt extends Prompt<YesNoPrompt> {
         yesButton.action = () -> {
             dontShowAgain(screen);
             onYes.run();
-            screen.close();
+            screen.onClose();
         };
 
         WButton noButton = screen.list.add(theme.button("No")).expandX().widget();
         noButton.action = () -> {
             dontShowAgain(screen);
             onNo.run();
-            screen.close();
+            screen.onClose();
         };
     }
 }

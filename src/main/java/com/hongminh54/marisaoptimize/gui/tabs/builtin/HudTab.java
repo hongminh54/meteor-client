@@ -17,8 +17,8 @@ import com.hongminh54.marisaoptimize.gui.widgets.pressable.WCheckbox;
 import com.hongminh54.marisaoptimize.systems.hud.Hud;
 import com.hongminh54.marisaoptimize.systems.hud.screens.HudEditorScreen;
 import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.screens.Screen;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
@@ -56,7 +56,7 @@ public class HudTab extends Tab {
             add(theme.horizontalSeparator()).expandX();
 
             WButton openEditor = add(theme.button("Edit")).expandX().widget();
-            openEditor.action = () -> mc.setScreen(new HudEditorScreen(theme));
+            openEditor.action = () -> mc.gui.setScreen(new HudEditorScreen(theme));
 
             WHorizontalList buttons = add(theme.horizontalList()).expandX().widget();
             buttons.add(theme.confirmedButton("Clear", "Confirm")).expandX().widget().action = hud::clear;
@@ -76,7 +76,7 @@ public class HudTab extends Tab {
         }
 
         @Override
-        protected void onRenderBefore(DrawContext drawContext, float delta) {
+        protected void onRenderBefore(GuiGraphicsExtractor drawContext, float delta) {
             HudEditorScreen.renderElements(drawContext);
         }
 

@@ -7,7 +7,7 @@ package com.hongminh54.marisaoptimize.systems.modules.movement;
 
 import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 import com.hongminh54.marisaoptimize.settings.*;

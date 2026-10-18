@@ -8,8 +8,8 @@ package com.hongminh54.marisaoptimize.pathing;
 import baritone.api.BaritoneAPI;
 import baritone.api.utils.SettingsUtil;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
 
 import java.awt.*;
 import java.lang.reflect.Field;

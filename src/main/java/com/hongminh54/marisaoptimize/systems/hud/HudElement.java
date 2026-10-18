@@ -12,7 +12,7 @@ import com.hongminh54.marisaoptimize.systems.hud.screens.HudEditorScreen;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
 import com.hongminh54.marisaoptimize.utils.other.Snapper;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 
 public abstract class HudElement implements Snapper.Element, ISerializable<HudElement> {
     public final HudElementInfo<?> info;
@@ -112,8 +112,8 @@ public abstract class HudElement implements Snapper.Element, ISerializable<HudEl
     // Serialization
 
     @Override
-    public NbtCompound toTag() {
-        NbtCompound tag = new NbtCompound();
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
 
         tag.putString("name", info.name);
         tag.putBoolean("active", active);
@@ -127,7 +127,7 @@ public abstract class HudElement implements Snapper.Element, ISerializable<HudEl
     }
 
     @Override
-    public HudElement fromTag(NbtCompound tag) {
+    public HudElement fromTag(CompoundTag tag) {
         settings.reset();
 
         tag.getBoolean("active").ifPresent(active1 -> active = active1);

@@ -13,7 +13,7 @@ import com.hongminh54.marisaoptimize.gui.widgets.pressable.WPlus;
 import com.hongminh54.marisaoptimize.systems.hud.Hud;
 import com.hongminh54.marisaoptimize.systems.hud.HudElementInfo;
 import com.hongminh54.marisaoptimize.utils.Utils;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import org.jetbrains.annotations.Nullable;
 
 public class HudElementPresetsScreen extends WindowScreen {
@@ -40,7 +40,7 @@ public class HudElementPresetsScreen extends WindowScreen {
         enterAction = () -> {
             if (firstPreset == null) return;
             Hud.get().add(firstPreset, x, y);
-            close();
+            onClose();
         };
     }
 
@@ -63,7 +63,7 @@ public class HudElementPresetsScreen extends WindowScreen {
             WPlus add = l.add(theme.plus()).expandCellX().right().widget();
             add.action = () -> {
                 Hud.get().add(preset, x, y);
-                close();
+                onClose();
             };
 
             if (firstPreset == null) firstPreset = preset;
@@ -71,7 +71,7 @@ public class HudElementPresetsScreen extends WindowScreen {
     }
 
     @Override
-    protected void onRenderBefore(DrawContext drawContext, float delta) {
+    protected void onRenderBefore(GuiGraphicsExtractor drawContext, float delta) {
         HudEditorScreen.renderElements(drawContext);
     }
 }

@@ -13,7 +13,7 @@ import com.hongminh54.marisaoptimize.settings.Settings;
 import com.hongminh54.marisaoptimize.systems.config.Config;
 import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
 import com.hongminh54.marisaoptimize.utils.render.prompts.YesNoPrompt;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 
 public class ConfigTab extends Tab {
     public ConfigTab() {

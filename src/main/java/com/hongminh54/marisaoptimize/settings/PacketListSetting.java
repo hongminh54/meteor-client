@@ -7,11 +7,12 @@ package com.hongminh54.marisaoptimize.settings;
 
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import com.hongminh54.marisaoptimize.utils.network.PacketUtils;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
-import net.minecraft.nbt.NbtString;
-import net.minecraft.network.packet.Packet;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.PacketType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,11 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class PacketListSetting extends Setting<Set<Class<? extends Packet<?>>>> {
-    public final Predicate<Class<? extends Packet<?>>> filter;
+public class PacketListSetting extends Setting<Set<PacketType<? extends Packet<?>>>> {
+    public final Predicate<PacketType<? extends Packet<?>>> filter;
     private static List<String> suggestions;
 
-    public PacketListSetting(String name, String description, Set<Class<? extends Packet<?>>> defaultValue, Consumer<Set<Class<? extends Packet<?>>>> onChanged, Consumer<Setting<Set<Class<? extends Packet<?>>>>> onModuleActivated, Predicate<Class<? extends Packet<?>>> filter, IVisible visible) {
+    public PacketListSetting(String name, String description, Set<PacketType<? extends Packet<?>>> defaultValue, Consumer<Set<PacketType<? extends Packet<?>>>> onChanged, Consumer<Setting<Set<PacketType<? extends Packet<?>>>>> onModuleActivated, Predicate<PacketType<? extends Packet<?>>> filter, IVisible visible) {
         super(name, description, defaultValue, onChanged, onModuleActivated, visible);
 
         this.filter = filter;
@@ -35,13 +36,13 @@ public class PacketListSetting extends Setting<Set<Class<? extends Packet<?>>>> 
     }
 
     @Override
-    protected Set<Class<? extends Packet<?>>> parseImpl(String str) {
+    protected Set<PacketType<? extends Packet<?>>> parseImpl(String str) {
         String[] values = str.split(",");
-        Set<Class<? extends Packet<?>>> packets = new ObjectOpenHashSet<>(values.length);
+        Set<PacketType<? extends Packet<?>>> packets = new ObjectOpenHashSet<>(values.length);
 
         try {
             for (String value : values) {
-                Class<? extends Packet<?>> packet = PacketUtils.getPacket(value.trim());
+                PacketType<? extends Packet<?>> packet = PacketUtils.getPacket(value.trim());
                 if (packet != null && (filter == null || filter.test(packet))) packets.add(packet);
             }
         } catch (Exception ignored) {}
@@ -50,7 +51,7 @@ public class PacketListSetting extends Setting<Set<Class<? extends Packet<?>>>> 
     }
 
     @Override
-    protected boolean isValueValid(Set<Class<? extends Packet<?>>> value) {
+    protected boolean isValueValid(Set<PacketType<? extends Packet<?>>> value) {
         return true;
     }
 
@@ -59,11 +60,11 @@ public class PacketListSetting extends Setting<Set<Class<? extends Packet<?>>>> 
         if (suggestions == null) {
             suggestions = new ArrayList<>(PacketUtils.getC2SPackets().size() + PacketUtils.getS2CPackets().size());
 
-            for (Class<? extends Packet<?>> packet : PacketUtils.getC2SPackets()) {
+            for (PacketType<? extends Packet<?>> packet : PacketUtils.getC2SPackets()) {
                 suggestions.add(PacketUtils.getName(packet));
             }
 
-            for (Class<? extends Packet<?>> packet : PacketUtils.getS2CPackets()) {
+            for (PacketType<? extends Packet<?>> packet : PacketUtils.getS2CPackets()) {
                 suggestions.add(PacketUtils.getName(packet));
             }
         }
@@ -72,10 +73,10 @@ public class PacketListSetting extends Setting<Set<Class<? extends Packet<?>>>> 
     }
 
     @Override
-    public NbtCompound save(NbtCompound tag) {
-        NbtList valueTag = new NbtList();
-        for (Class<? extends Packet<?>> packet : get()) {
-            valueTag.add(NbtString.of(PacketUtils.getName(packet)));
+    public CompoundTag save(CompoundTag tag) {
+        ListTag valueTag = new ListTag();
+        for (PacketType<? extends Packet<?>> packet : get()) {
+            valueTag.add(StringTag.valueOf(PacketUtils.getName(packet)));
         }
         tag.put("value", valueTag);
 
@@ -83,13 +84,13 @@ public class PacketListSetting extends Setting<Set<Class<? extends Packet<?>>>> 
     }
 
     @Override
-    public Set<Class<? extends Packet<?>>> load(NbtCompound tag) {
+    public Set<PacketType<? extends Packet<?>>> load(CompoundTag tag) {
         get().clear();
 
-        NbtElement valueTag = tag.get("value");
-        if (valueTag instanceof NbtList) {
-            for (NbtElement t : (NbtList) valueTag) {
-                Class<? extends Packet<?>> packet = PacketUtils.getPacket(t.asString().orElse(""));
+        Tag valueTag = tag.get("value");
+        if (valueTag instanceof ListTag) {
+            for (Tag t : (ListTag) valueTag) {
+                PacketType<? extends Packet<?>> packet = PacketUtils.getPacket(t.asString().orElse(""));
                 if (packet != null && (filter == null || filter.test(packet))) get().add(packet);
             }
         }
@@ -97,14 +98,14 @@ public class PacketListSetting extends Setting<Set<Class<? extends Packet<?>>>> 
         return get();
     }
 
-    public static class Builder extends SettingBuilder<Builder, Set<Class<? extends Packet<?>>>, PacketListSetting> {
-        private Predicate<Class<? extends Packet<?>>> filter;
+    public static class Builder extends SettingBuilder<Builder, Set<PacketType<? extends Packet<?>>>, PacketListSetting> {
+        private Predicate<PacketType<? extends Packet<?>>> filter;
 
         public Builder() {
             super(new ObjectOpenHashSet<>(0));
         }
 
-        public Builder filter(Predicate<Class<? extends Packet<?>>> filter) {
+        public Builder filter(Predicate<PacketType<? extends Packet<?>>> filter) {
             this.filter = filter;
             return this;
         }

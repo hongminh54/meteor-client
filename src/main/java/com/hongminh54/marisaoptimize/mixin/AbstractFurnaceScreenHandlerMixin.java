@@ -6,18 +6,18 @@
 package com.hongminh54.marisaoptimize.mixin;
 
 import com.hongminh54.marisaoptimize.mixininterface.IAbstractFurnaceScreenHandler;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.AbstractFurnaceScreenHandler;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.AbstractFurnaceMenu;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(AbstractFurnaceScreenHandler.class)
+@Mixin(AbstractFurnaceMenu.class)
 public abstract class AbstractFurnaceScreenHandlerMixin implements IAbstractFurnaceScreenHandler {
     @Shadow
-    protected abstract boolean isSmeltable(ItemStack itemStack);
+    protected abstract boolean canSmelt(ItemStack itemStack);
 
     @Override
     public boolean meteor$isItemSmeltable(ItemStack itemStack) {
-        return isSmeltable(itemStack);
+        return canSmelt(itemStack);
     }
 }

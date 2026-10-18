@@ -7,8 +7,8 @@ package com.hongminh54.marisaoptimize.systems.accounts.types;
 
 import com.hongminh54.marisaoptimize.systems.accounts.Account;
 import com.hongminh54.marisaoptimize.systems.accounts.AccountType;
-import net.minecraft.client.session.Session;
-import net.minecraft.util.Uuids;
+import net.minecraft.client.User;
+import net.minecraft.core.UUIDUtil;
 
 import java.util.Optional;
 
@@ -27,7 +27,7 @@ public class CrackedAccount extends Account<CrackedAccount> {
     public boolean login() {
         super.login();
 
-        setSession(new Session(name, Uuids.getOfflinePlayerUuid(name), "", Optional.empty(), Optional.empty()));
+        setSession(new User(name, UUIDUtil.createOfflinePlayerUUID(name), "", Optional.empty(), Optional.empty()));
         return true;
     }
 

@@ -21,7 +21,7 @@ import com.hongminh54.marisaoptimize.systems.hud.HudElement;
 import com.hongminh54.marisaoptimize.systems.hud.XAnchor;
 import com.hongminh54.marisaoptimize.systems.hud.YAnchor;
 import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import static com.hongminh54.marisaoptimize.utils.Utils.getWindowWidth;
 
@@ -113,7 +113,7 @@ public class HudElementScreen extends WindowScreen {
         WMinus remove = bottomList.add(theme.minus()).expandCellX().right().widget();
         remove.action = () -> {
             element.remove();
-            close();
+            onClose();
         };
     }
 
@@ -129,7 +129,7 @@ public class HudElementScreen extends WindowScreen {
     }
 
     @Override
-    protected void onRenderBefore(DrawContext drawContext, float delta) {
+    protected void onRenderBefore(GuiGraphicsExtractor drawContext, float delta) {
         HudEditorScreen.renderElements(drawContext);
     }
 

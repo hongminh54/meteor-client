@@ -7,9 +7,9 @@ package com.hongminh54.marisaoptimize.gui.renderer.packer;
 
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.textures.FilterMode;
-import com.mojang.blaze3d.textures.TextureFormat;
+import com.mojang.blaze3d.GpuFormat;
 import com.hongminh54.marisaoptimize.renderer.Texture;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.stb.STBImageResize;
@@ -32,8 +32,7 @@ public class TexturePacker {
     private final List<Image> images = new ArrayList<>();
 
     public GuiTexture add(Identifier id) {
-        try {
-            InputStream in = mc.getResourceManager().getResource(id).get().getInputStream();
+        try (InputStream in = mc.getResourceManager().getResourceOrThrow(id).open()) {
             GuiTexture texture = new GuiTexture();
 
             try (MemoryStack stack = MemoryStack.stackPush()) {
@@ -48,6 +47,7 @@ public class TexturePacker {
                     IntBuffer ignored = stack.mallocInt(1);
 
                     ByteBuffer imageBuffer = STBImage.stbi_load_from_memory(rawImageBuffer, w, h, ignored, 4);
+                    if (imageBuffer == null) throw new IOException("Failed to decode " + id + ": " + STBImage.stbi_failure_reason());
 
                     int width = w.get(0);
                     int height = h.get(0);
@@ -77,10 +77,10 @@ public class TexturePacker {
 
     private void addResized(GuiTexture texture, ByteBuffer srcImageBuffer, int srcWidth, int srcHeight, int width) {
         double scaleFactor = (double) width / srcWidth;
-        int height = (int) (srcHeight * scaleFactor);
+        int height = Math.max(1, (int) (srcHeight * scaleFactor));
 
         ByteBuffer imageBuffer = BufferUtils.createByteBuffer(width * height * 4);
-        STBImageResize.stbir_resize_uint8(srcImageBuffer, srcWidth, srcHeight, 0, imageBuffer, width, height, 0, 4);
+        STBImageResize.stbir_resize_uint8_linear(srcImageBuffer, srcWidth, srcHeight, 0, imageBuffer, width, height, 0, 4);
 
         TextureRegion region = new TextureRegion(width, height);
         texture.add(region);
@@ -142,7 +142,7 @@ public class TexturePacker {
 
         ((Buffer) buffer).rewind();
 
-        Texture texture = new Texture(width, height, TextureFormat.RGBA8, FilterMode.LINEAR, FilterMode.LINEAR);
+        Texture texture = new Texture(width, height, GpuFormat.RGBA8_UNORM, FilterMode.LINEAR, FilterMode.LINEAR);
         texture.upload(buffer);
 
         return texture;

@@ -9,10 +9,10 @@ import com.hongminh54.marisaoptimize.MarisaOptimize;
 import com.hongminh54.marisaoptimize.events.world.TickEvent;
 import com.hongminh54.marisaoptimize.utils.PreInit;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.client.texture.NativeImage;
-import net.minecraft.client.texture.NativeImageBackedTexture;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Identifier;
+import com.mojang.blaze3d.platform.NativeImage;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.resources.Identifier;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,8 +68,8 @@ public class Capes {
         }
     }
 
-    public static Identifier get(PlayerEntity player) {
-        String capeName = OWNERS.get(player.getUuid());
+    public static Identifier get(Player player) {
+        String capeName = OWNERS.get(player.getUUID());
         if (capeName != null) {
             Cape cape = TEXTURES.get(capeName);
             if (cape == null) return null;
@@ -142,7 +142,7 @@ public class Capes {
         }
 
         public void register() {
-            mc.getTextureManager().registerTexture(identifier, new NativeImageBackedTexture(null, img));
+            mc.getTextureManager().register(identifier, new DynamicTexture(() -> "Marisa cape " + name, img));
             img = null;
 
             downloading = false;

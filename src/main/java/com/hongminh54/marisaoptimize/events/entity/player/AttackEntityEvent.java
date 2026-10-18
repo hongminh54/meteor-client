@@ -6,7 +6,7 @@
 package com.hongminh54.marisaoptimize.events.entity.player;
 
 import com.hongminh54.marisaoptimize.events.Cancellable;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 
 public class AttackEntityEvent extends Cancellable {
     private static final AttackEntityEvent INSTANCE = new AttackEntityEvent();

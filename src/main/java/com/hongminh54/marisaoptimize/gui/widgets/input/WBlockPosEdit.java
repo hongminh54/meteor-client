@@ -14,9 +14,9 @@ import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.render.marker.Marker;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.core.BlockPos;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
@@ -49,14 +49,14 @@ public class WBlockPosEdit extends WHorizontalList {
 
                 clicking = true;
                 MarisaOptimize.EVENT_BUS.subscribe(this);
-                previousScreen = mc.currentScreen;
-                mc.setScreen(null);
+                previousScreen = mc.gui.screen();
+                mc.gui.setScreen(null);
             };
 
             WButton here = add(theme.button("Set Here")).expandX().widget();
             here.action = () -> {
                 lastValue = value;
-                set(new BlockPos(mc.player.getBlockPos()));
+                set(new BlockPos(mc.player.blockPosition()));
                 newValueCheck();
 
                 clear();
@@ -71,7 +71,7 @@ public class WBlockPosEdit extends WHorizontalList {
             clicking = false;
             event.cancel();
             MarisaOptimize.EVENT_BUS.unsubscribe(this);
-            mc.setScreen(previousScreen);
+            mc.gui.setScreen(previousScreen);
         }
     }
 
@@ -89,7 +89,7 @@ public class WBlockPosEdit extends WHorizontalList {
             clicking = false;
             event.cancel();
             MarisaOptimize.EVENT_BUS.unsubscribe(this);
-            mc.setScreen(previousScreen);
+            mc.gui.setScreen(previousScreen);
         }
     }
 

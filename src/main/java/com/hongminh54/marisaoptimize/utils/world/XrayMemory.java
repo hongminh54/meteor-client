@@ -9,11 +9,11 @@ import com.hongminh54.marisaoptimize.mixin.ClientChunkManagerAccessor;
 import com.hongminh54.marisaoptimize.mixin.ClientChunkMapAccessor;
 import it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.chunk.WorldChunk;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.chunk.LevelChunk;
 
 import java.util.function.Predicate;
 
@@ -33,7 +33,7 @@ public class XrayMemory {
     }
 
     public static void capture(BlockPos pos, BlockState state, Predicate<Block> isWhitelisted) {
-        if (mc.world == null) return;
+        if (mc.level == null) return;
 
         if (state.isAir()) {
             remove(pos);
@@ -42,23 +42,23 @@ public class XrayMemory {
 
         if (!isWhitelisted.test(state.getBlock())) return;
 
-        put(ChunkPos.toLong(pos.getX() >> 4, pos.getZ() >> 4), pos.asLong(), state);
+        put(ChunkPos.pack(pos.getX() >> 4, pos.getZ() >> 4), pos.asLong(), state);
     }
 
     /**
      * Captures all whitelisted blocks of a chunk whose data is trusted
      * (classified as not obfuscated by {@link XrayNoiseFilter}).
      */
-    public static int captureChunk(WorldChunk chunk, Predicate<Block> isWhitelisted) {
-        if (mc.world == null || chunk == null) return 0;
+    public static int captureChunk(LevelChunk chunk, Predicate<Block> isWhitelisted) {
+        if (mc.level == null || chunk == null) return 0;
 
-        long chunkKey = chunk.getPos().toLong();
+        long chunkKey = chunk.getPos().pack();
         int captured = 0;
-        BlockPos.Mutable pos = new BlockPos.Mutable();
-        int startX = chunk.getPos().getStartX();
-        int startZ = chunk.getPos().getStartZ();
-        int bottomY = mc.world.getBottomY();
-        int topY = bottomY + mc.world.getDimension().height();
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        int startX = chunk.getPos().getMinBlockX();
+        int startZ = chunk.getPos().getMinBlockZ();
+        int bottomY = mc.level.getMinY();
+        int topY = bottomY + mc.level.getHeight();
 
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
@@ -87,17 +87,17 @@ public class XrayMemory {
     }
 
     public static void remove(BlockPos pos) {
-        Object2ObjectLinkedOpenHashMap<Long, BlockState> map = chunks.get(ChunkPos.toLong(pos.getX() >> 4, pos.getZ() >> 4));
+        Object2ObjectLinkedOpenHashMap<Long, BlockState> map = chunks.get(ChunkPos.pack(pos.getX() >> 4, pos.getZ() >> 4));
         if (map != null) {
             map.remove(pos.asLong());
-            if (map.isEmpty()) chunks.remove(ChunkPos.toLong(pos.getX() >> 4, pos.getZ() >> 4));
+            if (map.isEmpty()) chunks.remove(ChunkPos.pack(pos.getX() >> 4, pos.getZ() >> 4));
         }
     }
 
     public static BlockState get(BlockPos pos) {
-        if (mc.world == null) return null;
+        if (mc.level == null) return null;
 
-        Object2ObjectLinkedOpenHashMap<Long, BlockState> map = chunks.get(ChunkPos.toLong(pos.getX() >> 4, pos.getZ() >> 4));
+        Object2ObjectLinkedOpenHashMap<Long, BlockState> map = chunks.get(ChunkPos.pack(pos.getX() >> 4, pos.getZ() >> 4));
         return map == null ? null : map.get(pos.asLong());
     }
 
@@ -106,7 +106,7 @@ public class XrayMemory {
     }
 
     public static boolean chunkHasMemory(BlockPos pos) {
-        Object2ObjectLinkedOpenHashMap<Long, BlockState> map = chunks.get(ChunkPos.toLong(pos.getX() >> 4, pos.getZ() >> 4));
+        Object2ObjectLinkedOpenHashMap<Long, BlockState> map = chunks.get(ChunkPos.pack(pos.getX() >> 4, pos.getZ() >> 4));
         return map != null && !map.isEmpty();
     }
 
@@ -114,17 +114,17 @@ public class XrayMemory {
      * Restores remembered blocks that the server re-obfuscated and forgets
      * positions that are now really air. Returns the number of restored blocks.
      */
-    public static int applyToChunk(WorldChunk chunk) {
-        if (chunk == null || mc.world == null) return 0;
+    public static int applyToChunk(LevelChunk chunk) {
+        if (chunk == null || mc.level == null) return 0;
 
-        Object2ObjectLinkedOpenHashMap<Long, BlockState> map = chunks.get(chunk.getPos().toLong());
+        Object2ObjectLinkedOpenHashMap<Long, BlockState> map = chunks.get(chunk.getPos().pack());
         if (map == null) return 0;
 
         int applied = 0;
 
         for (var it = map.object2ObjectEntrySet().fastIterator(); it.hasNext(); ) {
             var entry = it.next();
-            BlockPos pos = BlockPos.fromLong(entry.getKey().longValue());
+            BlockPos pos = BlockPos.of(entry.getKey().longValue());
             BlockState remembered = entry.getValue();
             BlockState current = chunk.getBlockState(pos);
 
@@ -136,19 +136,19 @@ public class XrayMemory {
             }
         }
 
-        if (map.isEmpty()) chunks.remove(chunk.getPos().toLong());
+        if (map.isEmpty()) chunks.remove(chunk.getPos().pack());
 
         return applied;
     }
 
     public static int applyAllLoaded() {
-        if (mc.world == null) return 0;
+        if (mc.level == null) return 0;
 
-        ClientChunkMapAccessor map = (ClientChunkMapAccessor) (Object) ((ClientChunkManagerAccessor) mc.world.getChunkManager()).meteor$getChunks();
+        ClientChunkMapAccessor map = (ClientChunkMapAccessor) (Object) ((ClientChunkManagerAccessor) mc.level.getChunkSource()).meteor$getChunks();
         int applied = 0;
 
         for (int i = 0; i < map.meteor$getChunks().length(); i++) {
-            WorldChunk chunk = map.meteor$getChunks().get(i);
+            LevelChunk chunk = map.meteor$getChunks().get(i);
             if (chunk != null) applied += applyToChunk(chunk);
         }
 
@@ -156,7 +156,7 @@ public class XrayMemory {
     }
 
     public static void clearChunk(ChunkPos chunkPos) {
-        chunks.remove(chunkPos.toLong());
+        chunks.remove(chunkPos.pack());
     }
 
     public static void clearAll() {

@@ -12,9 +12,9 @@ import com.hongminh54.marisaoptimize.systems.hud.HudRenderer;
 import com.hongminh54.marisaoptimize.utils.player.InvUtils;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import com.hongminh54.marisaoptimize.settings.*;
 
 public class ItemHud extends HudElement {

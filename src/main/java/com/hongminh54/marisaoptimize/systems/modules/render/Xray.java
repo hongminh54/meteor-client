@@ -25,14 +25,14 @@ import com.hongminh54.marisaoptimize.utils.world.XrayMemory;
 import com.hongminh54.marisaoptimize.utils.world.XrayNoiseFilter;
 import meteordevelopment.orbit.EventHandler;
 import net.irisshaders.iris.api.v0.IrisApi;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.network.packet.s2c.play.UnloadChunkS2CPacket;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.BlockGetter;
 
 import java.util.List;
 import com.hongminh54.marisaoptimize.settings.*;
@@ -49,7 +49,7 @@ public class Xray extends Module {
         .onChanged(v -> {
             XrayNoiseFilter.setWhitelist(this::isWhitelisted);
             XrayNoiseFilter.clearAll();
-            if (isActive()) mc.worldRenderer.reload();
+            if (isActive()) mc.levelExtractor.allChanged();
         })
         .build()
     );
@@ -61,7 +61,7 @@ public class Xray extends Module {
         .range(0, 255)
         .sliderMax(255)
         .onChanged(onChanged -> {
-            if (isActive()) mc.worldRenderer.reload();
+            if (isActive()) mc.levelExtractor.allChanged();
         })
         .build()
     );
@@ -71,7 +71,7 @@ public class Xray extends Module {
         .description("Show only exposed ores.")
         .defaultValue(false)
         .onChanged(onChanged -> {
-            if (isActive()) mc.worldRenderer.reload();
+            if (isActive()) mc.levelExtractor.allChanged();
         })
         .build());
 
@@ -82,7 +82,7 @@ public class Xray extends Module {
         .range(-1, 255)
         .sliderMax(255)
         .onChanged(onChanged -> {
-            if (isActive()) mc.worldRenderer.reload();
+            if (isActive()) mc.levelExtractor.allChanged();
         })
         .build());
 
@@ -97,7 +97,7 @@ public class Xray extends Module {
         .description("Analyzes chunk data to detect anti-xray noise: chunks with an unrealistic amount of whitelisted blocks are treated as fully obfuscated and only blocks remembered through block updates are shown. Also captures trusted chunk data into memory.")
         .defaultValue(true)
         .onChanged(onChanged -> {
-            if (isActive()) mc.worldRenderer.reload();
+            if (isActive()) mc.levelExtractor.allChanged();
         })
         .build());
 
@@ -109,7 +109,7 @@ public class Xray extends Module {
         .sliderMax(256)
         .onChanged(onChanged -> {
             XrayNoiseFilter.setDensityThreshold(onChanged);
-            if (isActive()) mc.worldRenderer.reload();
+            if (isActive()) mc.levelExtractor.allChanged();
         })
         .build());
 
@@ -118,7 +118,7 @@ public class Xray extends Module {
         .description("Completely hides suspected noise blocks instead of dimming them with noise-opacity.")
         .defaultValue(true)
         .onChanged(onChanged -> {
-            if (isActive()) mc.worldRenderer.reload();
+            if (isActive()) mc.levelExtractor.allChanged();
         })
         .build());
 
@@ -135,12 +135,12 @@ public class Xray extends Module {
         XrayNoiseFilter.setWhitelist(block -> blocks.get().contains(block));
         XrayNoiseFilter.setDensityThreshold(densityThreshold.get());
         XrayMemory.applyAllLoaded();
-        mc.worldRenderer.reload();
+        mc.levelExtractor.allChanged();
     }
 
     @Override
     public void onDeactivate() {
-        mc.worldRenderer.reload();
+        mc.levelExtractor.allChanged();
     }
 
     @Override
@@ -152,7 +152,7 @@ public class Xray extends Module {
 
     @EventHandler
     private void onRenderBlockEntity(RenderBlockEntityEvent event) {
-        if (isBlocked(event.blockEntityState.blockState.getBlock(), event.blockEntityState.pos)) event.cancel();
+        if (isBlocked(mc.level.getBlockState(event.blockEntityState.blockPos).getBlock(), event.blockEntityState.blockPos)) event.cancel();
     }
 
     @EventHandler
@@ -195,7 +195,7 @@ public class Xray extends Module {
 
     @EventHandler
     private void onReceivePacket(PacketEvent.Receive event) {
-        if (event.packet instanceof UnloadChunkS2CPacket packet && clearOnUnload.get()) XrayMemory.clearChunk(packet.pos());
+        if (event.packet instanceof ClientboundForgetLevelChunkPacket packet && clearOnUnload.get()) XrayMemory.clearChunk(packet.pos());
     }
 
     @EventHandler
@@ -203,15 +203,15 @@ public class Xray extends Module {
         if (reloadQueued && ++reloadTimer >= 5) {
             reloadTimer = 0;
             reloadQueued = false;
-            mc.worldRenderer.reload();
+            mc.levelExtractor.allChanged();
         }
     }
 
-    public boolean modifyDrawSide(BlockState state, BlockView view, BlockPos pos, Direction facing, boolean returns) {
+    public boolean modifyDrawSide(BlockState state, BlockGetter view, BlockPos pos, Direction facing, boolean returns) {
         if (!returns && !isBlocked(state.getBlock(), pos)) {
-            BlockPos adjPos = pos.offset(facing);
+            BlockPos adjPos = pos.relative(facing);
             BlockState adjState = view.getBlockState(adjPos);
-            return adjState.getCullingFace(facing.getOpposite()) != VoxelShapes.fullCube() || adjState.getBlock() != state.getBlock() || !adjState.isOpaqueFullCube() || isBlocked(adjState.getBlock(), adjPos);
+            return adjState.getFaceOcclusionShape(facing.getOpposite()) != Shapes.block() || adjState.getBlock() != state.getBlock() || !adjState.isSolidRender() || isBlocked(adjState.getBlock(), adjPos);
         }
 
         return returns;

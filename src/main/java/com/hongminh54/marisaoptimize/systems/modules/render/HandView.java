@@ -11,9 +11,9 @@ import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.utils.player.Rotations;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.RotationAxis;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.world.InteractionHand;
+import com.mojang.math.Axis;
 import org.joml.Vector3d;
 import com.hongminh54.marisaoptimize.settings.*;
 
@@ -188,7 +188,7 @@ public class HandView extends Module {
             applyServerRotations(event.matrix);
         }
 
-        if (event.hand == Hand.MAIN_HAND) {
+        if (event.hand == InteractionHand.MAIN_HAND) {
             rotate(event.matrix, rotMain.get());
             scale(event.matrix, scaleMain.get());
             translate(event.matrix, posMain.get());
@@ -207,23 +207,23 @@ public class HandView extends Module {
         translate(event.matrix, posArm.get());
     }
 
-    private void rotate(MatrixStack matrix, Vector3d rotation) {
-        matrix.multiply(RotationAxis.POSITIVE_X.rotationDegrees((float) rotation.x));
-        matrix.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) rotation.y));
-        matrix.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float) rotation.z));
+    private void rotate(PoseStack matrix, Vector3d rotation) {
+        matrix.mulPose(Axis.XP.rotationDegrees((float) rotation.x));
+        matrix.mulPose(Axis.YP.rotationDegrees((float) rotation.y));
+        matrix.mulPose(Axis.ZP.rotationDegrees((float) rotation.z));
     }
 
-    private void scale(MatrixStack matrix, Vector3d scale) {
+    private void scale(PoseStack matrix, Vector3d scale) {
         matrix.scale((float) scale.x, (float) scale.y, (float) scale.z);
     }
 
-    private void translate(MatrixStack matrix, Vector3d translation) {
+    private void translate(PoseStack matrix, Vector3d translation) {
         matrix.translate((float) translation.x, (float) translation.y, (float) translation.z);
     }
 
-    private void applyServerRotations(MatrixStack matrix) {
-        matrix.multiply(RotationAxis.POSITIVE_X.rotationDegrees(mc.player.getPitch() - Rotations.serverPitch));
-        matrix.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(mc.player.getYaw() - Rotations.serverYaw));
+    private void applyServerRotations(PoseStack matrix) {
+        matrix.mulPose(Axis.XP.rotationDegrees(mc.player.getXRot() - Rotations.serverPitch));
+        matrix.mulPose(Axis.YP.rotationDegrees(mc.player.getYRot() - Rotations.serverYaw));
     }
 
     public boolean oldAnimations() {

@@ -7,13 +7,15 @@ package com.hongminh54.marisaoptimize.mixin;
 
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.render.BetterTooltips;
-import net.minecraft.component.ComponentsAccess;
-import net.minecraft.component.type.ContainerComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.text.Text;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.network.chat.Component;
+import java.util.List;
+import java.util.Optional;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,14 +25,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.function.Consumer;
 
-@Mixin(ContainerComponent.class)
+@Mixin(ItemContainerContents.class)
 public abstract class ContainerComponentMixin {
     @Shadow
     @Final
-    private DefaultedList<ItemStack> stacks;
+    private List<Optional<ItemStackTemplate>> items;
 
-    @Inject(method = "appendTooltip", at = @At("HEAD"), cancellable = true)
-    private void onAppendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components, CallbackInfo ci) {
+    @Inject(method = "addToTooltip", at = @At("HEAD"), cancellable = true)
+    private void onAppendTooltip(Item.TooltipContext context, Consumer<Component> textConsumer, TooltipFlag type, DataComponentGetter components, CallbackInfo ci) {
         if (Modules.get() == null) return;
 
         BetterTooltips tooltips = Modules.get().get(BetterTooltips.class);
@@ -38,7 +40,7 @@ public abstract class ContainerComponentMixin {
             if (tooltips.previewShulkers()) ci.cancel();
             else if (tooltips.shulkerCompactTooltip()) {
                 ci.cancel();
-                tooltips.applyCompactShulkerTooltip(stacks, textConsumer);
+                tooltips.applyCompactShulkerTooltip(items.stream().map(item -> item.map(ItemStackTemplate::create).orElse(ItemStack.EMPTY)).toList(), textConsumer);
             }
         }
     }

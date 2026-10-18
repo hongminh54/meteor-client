@@ -18,7 +18,7 @@ import com.hongminh54.marisaoptimize.systems.friends.Friend;
 import com.hongminh54.marisaoptimize.systems.friends.Friends;
 import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
 import com.hongminh54.marisaoptimize.utils.network.MeteorExecutor;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 

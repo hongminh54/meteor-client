@@ -12,8 +12,8 @@ import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.waypoints.Waypoints;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.misc.ISerializable;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -71,8 +71,8 @@ public class Profile implements ISerializable<Profile> {
     );
 
     public Profile() {}
-    public Profile(NbtElement tag) {
-        fromTag((NbtCompound) tag);
+    public Profile(Tag tag) {
+        fromTag((CompoundTag) tag);
     }
 
     public void load() {
@@ -123,8 +123,8 @@ public class Profile implements ISerializable<Profile> {
     }
 
     @Override
-    public NbtCompound toTag() {
-        NbtCompound tag = new NbtCompound();
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
 
         tag.put("settings", settings.toTag());
 
@@ -132,7 +132,7 @@ public class Profile implements ISerializable<Profile> {
     }
 
     @Override
-    public Profile fromTag(NbtCompound tag) {
+    public Profile fromTag(CompoundTag tag) {
         if (tag.contains("settings")) {
             settings.fromTag(tag.getCompoundOrEmpty("settings"));
         }

@@ -5,8 +5,8 @@
 
 package com.hongminh54.marisaoptimize.utils.world;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Predicate;
 
@@ -28,8 +28,8 @@ public class LookRaycaster {
      * returns true. Returns null if no such cell is found within {@code reach}
      * blocks or if the ray leaves the world.
      */
-    public static BlockPos firstOpaque(Vec3d origin, Vec3d direction, double reach, Predicate<BlockPos> isOpaque) {
-        if (mc.world == null || direction.lengthSquared() < EPS) return null;
+    public static BlockPos firstOpaque(Vec3 origin, Vec3 direction, double reach, Predicate<BlockPos> isOpaque) {
+        if (mc.level == null || direction.lengthSqr() < EPS) return null;
 
         int x = floor(origin.x);
         int y = floor(origin.y);
@@ -47,7 +47,7 @@ public class LookRaycaster {
         double tMaxY = tDeltaY == Double.MAX_VALUE ? Double.MAX_VALUE : tDeltaY * (direction.y > 0 ? y + 1 - origin.y : origin.y - y);
         double tMaxZ = tDeltaZ == Double.MAX_VALUE ? Double.MAX_VALUE : tDeltaZ * (direction.z > 0 ? z + 1 - origin.z : origin.z - z);
 
-        BlockPos.Mutable pos = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         int maxSteps = (int) Math.ceil(reach) + 2;
 
         for (int i = 0; i < maxSteps; i++) {
@@ -70,8 +70,8 @@ public class LookRaycaster {
 
             if (t > reach) break;
             pos.set(x, y, z);
-            if (!mc.world.isInBuildLimit(pos)) continue;
-            if (isOpaque.test(pos)) return pos.toImmutable();
+            if (!mc.level.isInWorldBounds(pos)) continue;
+            if (isOpaque.test(pos)) return pos.immutable();
         }
 
         return null;

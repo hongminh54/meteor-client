@@ -9,8 +9,8 @@ import com.mojang.blaze3d.textures.GpuTextureView;
 import com.hongminh54.marisaoptimize.gui.renderer.packer.TextureRegion;
 import com.hongminh54.marisaoptimize.utils.PreInit;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.GpuSampler;
+import net.minecraft.client.Minecraft;
+import com.mojang.blaze3d.textures.GpuSampler;
 
 public class Renderer2D {
     public static Renderer2D COLOR;
@@ -64,13 +64,13 @@ public class Renderer2D {
         if (triangles.isBuilding()) triangles.end();
 
         MeshRenderer.begin()
-            .attachments(MinecraftClient.getInstance().getFramebuffer())
+            .attachments(Minecraft.getInstance().gameRenderer.mainRenderTarget())
             .pipeline(MeteorRenderPipelines.UI_COLORED_LINES)
             .mesh(lines)
             .end();
 
         MeshRenderer.begin()
-            .attachments(MinecraftClient.getInstance().getFramebuffer())
+            .attachments(Minecraft.getInstance().gameRenderer.mainRenderTarget())
             .pipeline(textured ? MeteorRenderPipelines.UI_TEXTURED : MeteorRenderPipelines.UI_COLORED)
             .mesh(triangles)
             .sampler(samplerName, samplerView, sampler)

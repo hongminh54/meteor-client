@@ -7,21 +7,17 @@ package com.hongminh54.marisaoptimize.mixin;
 
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.render.NoRender;
-import net.minecraft.client.render.item.ItemRenderState;
-import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-@Mixin(ItemRenderer.class)
+@Mixin(ItemFeatureRenderer.class)
 public abstract class ItemRendererMixin {
-    @ModifyVariable(
-        method = "renderItem(Lnet/minecraft/item/ItemDisplayContext;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;II[ILjava/util/List;Lnet/minecraft/client/render/RenderLayer;Lnet/minecraft/client/render/item/ItemRenderState$Glint;)V",
-        at = @At("HEAD"),
-        argsOnly = true
-    )
-    private static ItemRenderState.Glint modifyEnchant(ItemRenderState.Glint glint) {
-        if (Modules.get().get(NoRender.class).noEnchantGlint()) return ItemRenderState.Glint.NONE;
+    @ModifyExpressionValue(method = "prepareFoilSubmit", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/feature/ItemFeatureRenderer$Submit;foilType()Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;"))
+    private ItemStackRenderState.FoilType modifyEnchant(ItemStackRenderState.FoilType glint) {
+        if (Modules.get().get(NoRender.class).noEnchantGlint()) return ItemStackRenderState.FoilType.NONE;
         return glint;
     }
 }

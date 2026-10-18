@@ -11,9 +11,9 @@ import com.hongminh54.marisaoptimize.settings.Setting;
 import com.hongminh54.marisaoptimize.settings.SettingGroup;
 import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.tags.ItemTags;
 
 import java.util.Set;
 
@@ -41,7 +41,7 @@ public class NoMiningTrace extends Module {
     public boolean canWork(Entity entity) {
         if (!isActive()) return false;
 
-        return (!onlyWhenHoldingPickaxe.get() || mc.player.getMainHandStack().isIn(ItemTags.PICKAXES) || mc.player.getOffHandStack().isIn(ItemTags.PICKAXES)) &&
+        return (!onlyWhenHoldingPickaxe.get() || mc.player.getMainHandItem().is(ItemTags.PICKAXES) || mc.player.getOffhandItem().is(ItemTags.PICKAXES)) &&
             (entity == null || !entities.get().contains(entity.getType()));
     }
 }

@@ -10,7 +10,7 @@ import com.hongminh54.marisaoptimize.commands.arguments.ProfileArgumentType;
 import com.hongminh54.marisaoptimize.systems.profiles.Profile;
 import com.hongminh54.marisaoptimize.systems.profiles.Profiles;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.minecraft.command.CommandSource;
+import net.minecraft.client.multiplayer.ClientSuggestionProvider;
 
 public class ProfilesCommand extends Command {
 
@@ -19,7 +19,7 @@ public class ProfilesCommand extends Command {
     }
 
     @Override
-    public void build(LiteralArgumentBuilder<CommandSource> builder) {
+    public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.then(literal("load").then(argument("profile", ProfileArgumentType.create()).executes(context -> {
             Profile profile = ProfileArgumentType.get(context);
 

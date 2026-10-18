@@ -6,7 +6,7 @@
 package com.hongminh54.marisaoptimize.renderer;
 
 import com.mojang.blaze3d.buffers.GpuBuffer;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.PrimitiveTopology;
 import com.hongminh54.marisaoptimize.utils.PreInit;
 
 public class FullScreenRenderer {
@@ -24,7 +24,7 @@ public class FullScreenRenderer {
 
     @PreInit
     public static void init() {
-        mesh = new MeshBuilder(MeteorVertexFormats.POS2, VertexFormat.DrawMode.TRIANGLES, 4, 6);
+        mesh = new MeshBuilder(MeteorVertexFormats.POS2, PrimitiveTopology.TRIANGLES, 4, 6);
 
         mesh.begin();
 

@@ -8,7 +8,7 @@ package com.hongminh54.marisaoptimize.systems.modules.misc.swarm;
 import com.hongminh54.marisaoptimize.commands.Commands;
 import com.hongminh54.marisaoptimize.pathing.PathManagers;
 import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 
 import java.io.DataInputStream;
 import java.io.IOException;

@@ -5,7 +5,7 @@
 
 package com.hongminh54.marisaoptimize.events.entity;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 
 public class EntityDestroyEvent {
     private static final EntityDestroyEvent INSTANCE = new EntityDestroyEvent();

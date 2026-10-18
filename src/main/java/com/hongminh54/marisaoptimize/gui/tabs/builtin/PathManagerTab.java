@@ -11,7 +11,7 @@ import com.hongminh54.marisaoptimize.gui.tabs.TabScreen;
 import com.hongminh54.marisaoptimize.gui.tabs.WindowTabScreen;
 import com.hongminh54.marisaoptimize.gui.widgets.input.WTextBox;
 import com.hongminh54.marisaoptimize.pathing.PathManagers;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 
 public class PathManagerTab extends Tab {
     public PathManagerTab() {

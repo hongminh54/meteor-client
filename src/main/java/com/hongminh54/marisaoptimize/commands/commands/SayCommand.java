@@ -10,13 +10,13 @@ import com.hongminh54.marisaoptimize.mixin.ClientPlayNetworkHandlerAccessor;
 import com.hongminh54.marisaoptimize.utils.misc.MeteorStarscript;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.command.CommandSource;
-import net.minecraft.network.encryption.NetworkEncryptionUtils;
-import net.minecraft.network.message.LastSeenMessagesCollector;
-import net.minecraft.network.message.MessageBody;
-import net.minecraft.network.message.MessageSignatureData;
-import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.client.multiplayer.ClientSuggestionProvider;
+import net.minecraft.util.Crypt;
+import net.minecraft.network.chat.LastSeenMessagesTracker;
+import net.minecraft.network.chat.SignedMessageBody;
+import net.minecraft.network.chat.MessageSignature;
+import net.minecraft.network.protocol.game.ServerboundChatPacket;
 import org.meteordev.starscript.Script;
 
 import java.time.Instant;
@@ -27,7 +27,7 @@ public class SayCommand extends Command {
     }
 
     @Override
-    public void build(LiteralArgumentBuilder<CommandSource> builder) {
+    public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.then(argument("message", StringArgumentType.greedyString()).executes(context -> {
             String msg = context.getArgument("message", String.class);
             Script script = MeteorStarscript.compile(msg);
@@ -37,11 +37,11 @@ public class SayCommand extends Command {
 
                 if (message != null) {
                     Instant instant = Instant.now();
-                    long l = NetworkEncryptionUtils.SecureRandomUtil.nextLong();
-                    ClientPlayNetworkHandler handler = mc.getNetworkHandler();
-                    LastSeenMessagesCollector.LastSeenMessages lastSeenMessages = ((ClientPlayNetworkHandlerAccessor) handler).meteor$getLastSeenMessagesCollector().collect();
-                    MessageSignatureData messageSignatureData = ((ClientPlayNetworkHandlerAccessor) handler).meteor$getMessagePacker().pack(new MessageBody(message, instant, l, lastSeenMessages.lastSeen()));
-                    handler.sendPacket(new ChatMessageC2SPacket(message, instant, l, messageSignatureData, lastSeenMessages.update()));
+                    long l = Crypt.SaltSupplier.getLong();
+                    ClientPacketListener handler = mc.getConnection();
+                    LastSeenMessagesTracker.Update lastSeenMessages = ((ClientPlayNetworkHandlerAccessor) handler).meteor$getLastSeenMessagesCollector().generateAndApplyUpdate();
+                    MessageSignature messageSignatureData = ((ClientPlayNetworkHandlerAccessor) handler).meteor$getMessagePacker().pack(new SignedMessageBody(message, instant, l, lastSeenMessages.lastSeen()));
+                    handler.send(new ServerboundChatPacket(message, instant, l, messageSignatureData, lastSeenMessages.update()));
                 }
             }
 

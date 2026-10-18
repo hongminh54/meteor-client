@@ -7,15 +7,14 @@ package com.hongminh54.marisaoptimize.events.meteor;
 
 import com.hongminh54.marisaoptimize.events.Cancellable;
 import com.hongminh54.marisaoptimize.utils.misc.input.KeyAction;
-import net.minecraft.client.input.KeyInput;
 
 public class KeyEvent extends Cancellable {
     private static final KeyEvent INSTANCE = new KeyEvent();
 
-    public KeyInput input;
+    public net.minecraft.client.input.KeyEvent input;
     public KeyAction action;
 
-    public static KeyEvent get(KeyInput input, KeyAction action) {
+    public static KeyEvent get(net.minecraft.client.input.KeyEvent input, KeyAction action) {
         INSTANCE.setCancelled(false);
         INSTANCE.input = input;
         INSTANCE.action = action;

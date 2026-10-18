@@ -9,13 +9,14 @@ import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.render.Xray;
 import com.hongminh54.marisaoptimize.systems.modules.world.Ambience;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.block.FluidRenderer;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockRenderView;
+import net.minecraft.world.level.block.state.BlockState;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.block.FluidRenderer;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.util.ARGB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,23 +25,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FluidRenderer.class)
 public abstract class FluidRendererMixin {
-    @Unique private final ThreadLocal<Integer> alphas = new ThreadLocal<>();
+    @Unique private final ThreadLocal<Integer> alphas = ThreadLocal.withInitial(() -> -1);
     @Unique private final ThreadLocal<Boolean> ambient = ThreadLocal.withInitial(() -> false);
 
-    @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    private void onRender(BlockRenderView world, BlockPos pos, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState, CallbackInfo info) {
+    @Inject(method = "tesselate", at = @At("HEAD"), cancellable = true)
+    private void onRender(BlockAndTintGetter world, BlockPos pos, FluidRenderer.Output output, BlockState blockState, FluidState fluidState, CallbackInfo info) {
         Ambience ambience = Modules.get().get(Ambience.class);
-        ambient.set(ambience.isActive() && ambience.customLavaColor.get() && fluidState.isIn(FluidTags.LAVA));
+        ambient.set(ambience.isActive() && ambience.customLavaColor.get() && fluidState.is(FluidTags.LAVA));
 
         // Xray and Wallhack
-        int alpha = Xray.getAlpha(fluidState.getBlockState(), pos);
+        int alpha = Xray.getAlpha(fluidState.createLegacyBlock(), pos);
 
         if (alpha == 0) info.cancel();
         else alphas.set(alpha);
     }
 
     @Inject(method = "vertex", at = @At("HEAD"), cancellable = true)
-    private void onVertex(VertexConsumer vertexConsumer, float x, float y, float z, float red, float green, float blue, float u, float v, int light, CallbackInfo info) {
+    private void onVertex(VertexConsumer vertexConsumer, float x, float y, float z, int packedColor, float u, float v, int light, CallbackInfo info) {
         int alpha = alphas.get();
 
         if (ambient.get()) {
@@ -49,13 +50,13 @@ public abstract class FluidRendererMixin {
             info.cancel();
         }
         else if (alpha != -1) {
-            vertex(vertexConsumer, x, y, z, (int) (red * 255), (int) (green * 255), (int) (blue * 255), alpha, u, v, light);
+            vertex(vertexConsumer, x, y, z, ARGB.red(packedColor), ARGB.green(packedColor), ARGB.blue(packedColor), alpha, u, v, light);
             info.cancel();
         }
     }
 
     @Unique
     private void vertex(VertexConsumer vertexConsumer, float x, float y, float z, int red, int green, int blue, int alpha, float u, float v, int light) {
-        vertexConsumer.vertex(x, y, z).color(red, green, blue, alpha).texture(u, v).light(light).normal(0.0f, 1.0f, 0.0f);
+        vertexConsumer.addVertex(x, y, z).setColor(red, green, blue, alpha).setUv(u, v).setLight(light).setNormal(0.0f, 1.0f, 0.0f);
     }
 }

@@ -6,15 +6,15 @@
 package com.hongminh54.marisaoptimize.utils.world;
 
 import com.hongminh54.marisaoptimize.mixin.ChunkAccessor;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.chunk.ChunkAccess;
 
 import java.util.Iterator;
 import java.util.Map;
 
 public class BlockEntityIterator implements Iterator<BlockEntity> {
-    private final Iterator<Chunk> chunks;
+    private final Iterator<ChunkAccess> chunks;
     private Iterator<BlockEntity> blockEntities;
 
     public BlockEntityIterator() {

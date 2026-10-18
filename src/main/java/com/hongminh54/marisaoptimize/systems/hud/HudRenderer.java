@@ -19,11 +19,11 @@ import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.entity.state.LivingEntityRenderState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.Identifier;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -35,7 +35,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
-import com.hongminh54.marisaoptimize.mixininterface.IGameRenderer;
 import com.hongminh54.marisaoptimize.renderer.*;
 
 public class HudRenderer {
@@ -56,24 +55,25 @@ public class HudRenderer {
         })
         .build(CacheLoader.from(HudRenderer::loadFont));
 
-    public DrawContext drawContext;
+    public GuiGraphicsExtractor drawContext;
     public double delta;
 
     private HudRenderer() {
         MarisaOptimize.EVENT_BUS.subscribe(this);
     }
 
-    public void begin(DrawContext drawContext) {
+    public void begin(GuiGraphicsExtractor drawContext) {
         Renderer2D.COLOR.begin();
 
         this.drawContext = drawContext;
         this.delta = Utils.frameTime;
 
-        drawContext.createNewRootLayer();
+        drawContext.nextStratum();
+        drawContext.pose().pushMatrix();
+        drawContext.pose().scale(1.0f / mc.getWindow().getGuiScale());
 
         if (!hud.hasCustomFont()) {
-            VanillaTextRenderer.INSTANCE.scaleIndividually = true;
-            VanillaTextRenderer.INSTANCE.begin();
+            VanillaTextRenderer.INSTANCE.begin(drawContext);
         }
     }
 
@@ -87,10 +87,10 @@ public class HudRenderer {
 
                 if (fontHolder.visited) {
                     MeshRenderer.begin()
-                        .attachments(mc.getFramebuffer())
+                        .attachments(mc.gameRenderer.mainRenderTarget())
                         .pipeline(MeteorRenderPipelines.UI_TEXT)
                         .mesh(fontHolder.getMesh())
-                        .sampler("u_Texture", fontHolder.font.texture.getGlTextureView(), fontHolder.font.texture.getSampler())
+                        .sampler("u_Texture", fontHolder.font.texture.getTextureView(), fontHolder.font.texture.getSampler())
                         .end();
                 }
                 else {
@@ -109,7 +109,8 @@ public class HudRenderer {
         for (Runnable task : postTasks) task.run();
         postTasks.clear();
 
-        drawContext.createNewRootLayer();
+        drawContext.pose().popMatrix();
+        drawContext.nextStratum();
 
         drawContext = null;
     }
@@ -133,7 +134,7 @@ public class HudRenderer {
     public void texture(Identifier id, double x, double y, double width, double height, Color color) {
         Renderer2D.TEXTURE.begin();
         Renderer2D.TEXTURE.texQuad(x, y, width, height, color);
-        Renderer2D.TEXTURE.render(mc.getTextureManager().getTexture(id).getGlTextureView(), mc.getTextureManager().getTexture(id).getSampler());
+        Renderer2D.TEXTURE.render(mc.getTextureManager().getTexture(id).getTextureView(), mc.getTextureManager().getTexture(id).getSampler());
     }
 
     public double text(String text, double x, double y, Color color, boolean shadow, double scale) {
@@ -212,37 +213,39 @@ public class HudRenderer {
     }
 
     public void item(ItemStack itemStack, int x, int y, float scale, boolean overlay, String countOverlay) {
-        RenderUtils.drawItem(drawContext, itemStack, x, y, scale, overlay, countOverlay, true);
+        RenderUtils.drawItem(drawContext, itemStack, x, y, scale, overlay, countOverlay, false);
     }
 
     public void item(ItemStack itemStack, int x, int y, float scale, boolean overlay) {
-        RenderUtils.drawItem(drawContext, itemStack, x, y, scale, overlay);
+        RenderUtils.drawItem(drawContext, itemStack, x, y, scale, overlay, null, false);
     }
 
     public void entity(LivingEntity entity,  int x, int y, int width, int height, float yaw, float pitch) {
-        float previousBodyYaw = entity.bodyYaw;
-        float previousYaw = entity.getYaw();
-        float previousPitch = entity.getPitch();
-        float lastLastHeadYaw = entity.lastHeadYaw;
-        float lastHeadYaw = entity.headYaw;
+        float previousBodyYaw = entity.yBodyRot;
+        float previousYaw = entity.getYRot();
+        float previousPitch = entity.getXRot();
+        float previousHeadYaw = entity.yHeadRot;
+        float previousHeadYawOld = entity.yHeadRotO;
 
         float tanYaw = (float) Math.atan((yaw) / 40.0f);
         float tanPitch = (float) Math.atan((pitch) / 40.0f);
-        entity.bodyYaw = 180.0f + tanYaw * 20.0f;
-        entity.setYaw(180.0f + tanYaw * 40.0f);
-        entity.setPitch(-tanPitch * 20.0f);
-        entity.headYaw = entity.getYaw();
-        entity.lastHeadYaw = entity.getYaw();
+        LivingEntityRenderState state;
+        try {
+            entity.yBodyRot = 180.0f + tanYaw * 20.0f;
+            entity.setYRot(180.0f + tanYaw * 40.0f);
+            entity.setXRot(-tanPitch * 20.0f);
+            entity.yHeadRot = entity.getYRot();
+            entity.yHeadRotO = entity.getYRot();
+            state = (LivingEntityRenderState) mc.getEntityRenderDispatcher().getRenderer(entity).createRenderState(entity, 1);
+        } finally {
+            entity.yBodyRot = previousBodyYaw;
+            entity.setYRot(previousYaw);
+            entity.setXRot(previousPitch);
+            entity.yHeadRot = previousHeadYaw;
+            entity.yHeadRotO = previousHeadYawOld;
+        }
 
-        var state = (LivingEntityRenderState) mc.getEntityRenderDispatcher().getRenderer(entity).getAndUpdateRenderState(entity, 1);
-
-        entity.bodyYaw = previousBodyYaw;
-        entity.setYaw(previousYaw);
-        entity.setPitch(previousPitch);
-        entity.lastHeadYaw = lastLastHeadYaw;
-        entity.headYaw = lastHeadYaw;
-
-        float s = 1.0f / mc.getWindow().getScaleFactor();
+        float s = 1.0f / mc.getWindow().getGuiScale();
         int x1 = (int) (x * s);
         int y1 = (int) (y * s);
         int x2 = (int) ((x + width) * s);
@@ -252,7 +255,7 @@ public class HudRenderer {
         Vector3f translation = new Vector3f(0, 1f, 0);
         Quaternionf rotation = new Quaternionf().rotateZ((float) Math.PI);
 
-        drawContext.addEntity(state, scale, translation, rotation, null, x1, y1, x2, y2);
+        drawContext.entity(state, scale, translation, rotation, null, x1, y1, x2, y2);
     }
 
     private FontHolder getFontHolder(double scale, boolean render) {

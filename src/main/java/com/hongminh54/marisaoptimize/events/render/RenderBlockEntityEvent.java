@@ -6,7 +6,7 @@
 package com.hongminh54.marisaoptimize.events.render;
 
 import com.hongminh54.marisaoptimize.events.Cancellable;
-import net.minecraft.client.render.block.entity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 
 public class RenderBlockEntityEvent extends Cancellable {
     private static final RenderBlockEntityEvent INSTANCE = new RenderBlockEntityEvent();

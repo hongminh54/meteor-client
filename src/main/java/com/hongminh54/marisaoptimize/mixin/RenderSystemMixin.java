@@ -5,7 +5,7 @@
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import com.hongminh54.marisaoptimize.renderer.MeshUniforms;
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.misc.InventoryTweaks;
@@ -19,10 +19,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
-@Mixin(RenderSystem.class)
+@Mixin(Minecraft.class)
 public abstract class RenderSystemMixin {
-    @Inject(method = "flipFrame", at = @At("TAIL"))
-    private static void meteor$flipFrame(CallbackInfo info) {
+    @Inject(method = "renderFrame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;endFrame()V", shift = At.Shift.AFTER))
+    private void meteor$flipFrame(boolean advanceGameTime, CallbackInfo info) {
         MeshUniforms.flipFrame();
         PostProcessShader.flipFrame();
         ChamsShader.flipFrame();

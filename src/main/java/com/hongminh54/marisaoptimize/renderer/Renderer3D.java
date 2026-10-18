@@ -8,10 +8,10 @@ package com.hongminh54.marisaoptimize.renderer;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import com.hongminh54.marisaoptimize.utils.world.Dir;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
+import net.minecraft.client.Minecraft;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.AABB;
 
 public class Renderer3D {
     public final MeshBuilder lines;
@@ -31,15 +31,15 @@ public class Renderer3D {
         triangles.begin();
     }
 
-    public void render(MatrixStack matrices) {
+    public void render(PoseStack matrices) {
         MeshRenderer.begin()
-            .attachments(MinecraftClient.getInstance().getFramebuffer())
+            .attachments(Minecraft.getInstance().gameRenderer.mainRenderTarget())
             .pipeline(linesPipeline)
             .mesh(lines, matrices)
             .end();
 
         MeshRenderer.begin()
-            .attachments(MinecraftClient.getInstance().getFramebuffer())
+            .attachments(Minecraft.getInstance().gameRenderer.mainRenderTarget())
             .pipeline(trianglesPipeline)
             .mesh(triangles, matrices)
             .end();
@@ -234,7 +234,7 @@ public class Renderer3D {
         if (mode.sides()) boxSides(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1, sideColor, excludeDir);
     }
 
-    public void box(Box box, Color sideColor, Color lineColor, ShapeMode mode, int excludeDir) {
+    public void box(AABB box, Color sideColor, Color lineColor, ShapeMode mode, int excludeDir) {
         if (mode.lines()) boxLines(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ, lineColor, excludeDir);
         if (mode.sides()) boxSides(box.minX, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ, sideColor, excludeDir);
     }

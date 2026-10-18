@@ -19,10 +19,10 @@ import com.hongminh54.marisaoptimize.utils.PostInit;
 import com.hongminh54.marisaoptimize.utils.misc.Pool;
 import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class GuiRenderer {
     public WWidget tooltipWidget;
     private double tooltipAnimProgress;
 
-    private DrawContext drawContext;
+    private GuiGraphicsExtractor drawContext;
 
     public static GuiTexture addTexture(Identifier id) {
         return TEXTURE_PACKER.add(id);
@@ -81,13 +81,13 @@ public class GuiRenderer {
         TEXTURE = TEXTURE_PACKER.pack();
     }
 
-    public void begin(DrawContext drawContext) {
+    public void begin(GuiGraphicsExtractor drawContext) {
         this.drawContext = drawContext;
-        this.drawContext.createNewRootLayer();
+        this.drawContext.nextStratum();
 
-        var matrices = drawContext.getMatrices();
+        var matrices = drawContext.pose();
         matrices.pushMatrix();
-        matrices.scale(1.0f / mc.getWindow().getScaleFactor());
+        matrices.scale(1.0f / mc.getWindow().getGuiScale());
 
         scissorStart(0, 0, getWindowWidth(), getWindowHeight());
     }
@@ -98,8 +98,8 @@ public class GuiRenderer {
         for (Runnable task : postTasks) task.run();
         postTasks.clear();
 
-        drawContext.getMatrices().popMatrix();
-        drawContext.createNewRootLayer();
+        drawContext.pose().popMatrix();
+        drawContext.nextStratum();
     }
 
     public void beginRender() {
@@ -118,17 +118,17 @@ public class GuiRenderer {
         rTex.end();
 
         r.render();
-        rTex.render("u_Texture", TEXTURE.getGlTextureView(), TEXTURE.getSampler());
+        rTex.render("u_Texture", TEXTURE.getTextureView(), TEXTURE.getSampler());
 
         // Normal text
-        theme.textRenderer().begin(theme.scale(1));
+        theme.textRenderer().begin(drawContext, theme.scale(1));
         for (TextOperation text : texts) {
             if (!text.title) text.run(textPool);
         }
         theme.textRenderer().end();
 
         // Title text
-        theme.textRenderer().begin(theme.scale(1.25));
+        theme.textRenderer().begin(drawContext, theme.scale(1.25));
         for (TextOperation text : texts) {
             if (text.title) text.run(textPool);
         }
@@ -173,9 +173,9 @@ public class GuiRenderer {
         scissorPool.free(scissor);
     }
 
-    public boolean renderTooltip(DrawContext drawContext, double mouseX, double mouseY, double delta) {
+    public boolean renderTooltip(GuiGraphicsExtractor drawContext, double mouseX, double mouseY, double delta) {
         tooltipAnimProgress += (tooltip != null ? 1 : -1) * delta * 14;
-        tooltipAnimProgress = MathHelper.clamp(tooltipAnimProgress, 0, 1);
+        tooltipAnimProgress = Mth.clamp(tooltipAnimProgress, 0, 1);
 
         boolean toReturn = false;
 
@@ -254,7 +254,7 @@ public class GuiRenderer {
             rTex.texQuad(x, y, width, height, rotation, 0, 0, 1, 1, WHITE);
             rTex.end();
 
-            rTex.render(texture.getGlTextureView(), texture.getSampler());
+            rTex.render(texture.getTextureView(), texture.getSampler());
         });
     }
 

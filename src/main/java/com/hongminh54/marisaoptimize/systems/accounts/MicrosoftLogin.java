@@ -9,7 +9,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import com.hongminh54.marisaoptimize.MarisaOptimize;
 import com.hongminh54.marisaoptimize.utils.network.Http;
-import net.minecraft.util.Pair;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.util.Util;
 
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class MicrosoftLogin {
 
         startServer();
         String url = "https://login.live.com/oauth20_authorize.srf?client_id=" + CLIENT_ID + "&response_type=code&redirect_uri=http://127.0.0.1:" + PORT + "&scope=XboxLive.signin%20offline_access&prompt=select_account";
-        Util.getOperatingSystem().open(url);
+        Util.getPlatform().openUri(url);
 
         return url;
     }
@@ -142,8 +142,8 @@ public class MicrosoftLogin {
 
             boolean ok = false;
             for (Pair<String, String> pair : query) {
-                if (pair.getLeft().equals("code")) {
-                    handleCode(pair.getRight());
+                if (pair.getFirst().equals("code")) {
+                    handleCode(pair.getSecond());
 
                     ok = true;
                     break;

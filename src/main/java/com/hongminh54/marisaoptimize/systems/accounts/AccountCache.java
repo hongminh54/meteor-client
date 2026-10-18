@@ -11,7 +11,7 @@ import com.hongminh54.marisaoptimize.utils.misc.NbtException;
 import com.hongminh54.marisaoptimize.utils.network.MeteorExecutor;
 import com.hongminh54.marisaoptimize.utils.render.PlayerHeadTexture;
 import com.hongminh54.marisaoptimize.utils.render.PlayerHeadUtils;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.CompoundTag;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
@@ -51,8 +51,8 @@ public class AccountCache implements ISerializable<AccountCache> {
     }
 
     @Override
-    public NbtCompound toTag() {
-        NbtCompound tag = new NbtCompound();
+    public CompoundTag toTag() {
+        CompoundTag tag = new CompoundTag();
 
         tag.putString("username", username);
         tag.putString("uuid", uuid);
@@ -61,7 +61,7 @@ public class AccountCache implements ISerializable<AccountCache> {
     }
 
     @Override
-    public AccountCache fromTag(NbtCompound tag) {
+    public AccountCache fromTag(CompoundTag tag) {
         if (tag.getString("username").isEmpty() || tag.getString("uuid").isEmpty()) throw new NbtException();
 
         username = tag.getString("username").get();

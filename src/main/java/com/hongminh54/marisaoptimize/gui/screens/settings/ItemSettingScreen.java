@@ -13,9 +13,9 @@ import com.hongminh54.marisaoptimize.gui.widgets.input.WTextBox;
 import com.hongminh54.marisaoptimize.gui.widgets.pressable.WButton;
 import com.hongminh54.marisaoptimize.settings.ItemSetting;
 import com.hongminh54.marisaoptimize.utils.misc.Names;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.registries.BuiltInRegistries;
 import org.apache.commons.lang3.Strings;
 
 public class ItemSettingScreen extends WindowScreen {
@@ -48,18 +48,18 @@ public class ItemSettingScreen extends WindowScreen {
     }
 
     public void initTable() {
-        for (Item item : Registries.ITEM) {
+        for (Item item : BuiltInRegistries.ITEM) {
             if (setting.filter != null && !setting.filter.test(item)) continue;
             if (item == Items.AIR) continue;
 
-            WItemWithLabel itemLabel = theme.itemWithLabel(item.getDefaultStack(), Names.get(item));
+            WItemWithLabel itemLabel = theme.itemWithLabel(item.getDefaultInstance(), Names.get(item));
             if (!filterText.isEmpty() && !Strings.CI.contains(itemLabel.getLabelText(), filterText)) continue;
             table.add(itemLabel);
 
             WButton select = table.add(theme.button("Select")).expandCellX().right().widget();
             select.action = () -> {
                 setting.set(item);
-                close();
+                onClose();
             };
 
             table.row();

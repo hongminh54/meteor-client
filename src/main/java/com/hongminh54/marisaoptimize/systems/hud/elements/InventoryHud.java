@@ -13,9 +13,9 @@ import com.hongminh54.marisaoptimize.systems.hud.HudRenderer;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.resources.Identifier;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 import com.hongminh54.marisaoptimize.settings.*;
@@ -103,7 +103,7 @@ public class InventoryHud extends HudElement {
             for (int row = 0; row < 3; row++) {
                 for (int i = 0; i < 9; i++) {
                     int index = row * 9 + i;
-                    ItemStack stack = hasContainer ? containerItems[index] : mc.player.getInventory().getStack(index + 9);
+                    ItemStack stack = hasContainer ? containerItems[index] : mc.player.getInventory().getItem(index + 9);
                     if (stack == null) continue;
 
                     int itemX = background.get() == Background.Texture ? (int) (x + (8 + i * 18) * getScale()) : (int) (x + (1 + i * 18) * getScale());
@@ -132,10 +132,10 @@ public class InventoryHud extends HudElement {
     private ItemStack getContainer() {
         if (isInEditor() || mc.player == null) return null;
 
-        ItemStack stack = mc.player.getOffHandStack();
+        ItemStack stack = mc.player.getOffhandItem();
         if (Utils.hasItems(stack) || stack.getItem() == Items.ENDER_CHEST) return stack;
 
-        stack = mc.player.getMainHandStack();
+        stack = mc.player.getMainHandItem();
         if (Utils.hasItems(stack) || stack.getItem() == Items.ENDER_CHEST) return stack;
 
         return null;

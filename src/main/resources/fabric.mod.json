@@ -26,7 +26,7 @@
     "marisa-optimize-lithium.mixins.json",
     "marisa-optimize-viafabricplus.mixins.json"
   ],
-  "accessWidener": "marisa-optimize.accesswidener",
+  "accessWidener": "marisa-optimize.classtweaker",
   "custom": {
     "marisa-optimize:build_number": "${build_number}",
     "marisa-optimize:color": "145,61,226",
@@ -41,16 +41,16 @@
     }
   },
   "depends": {
-    "java": ">=21",
-    "minecraft": ["${minecraft_version}"],
+    "java": ">=${jdk_version}",
+    "minecraft": "${minecraft_version}",
     "fabricloader": ">=${loader_version}"
   },
   "breaks": {
     "optifabric": "*",
     "feather": "*",
     "origins": "*",
-    "sodium": "<0.8.7",
+    "sodium": "<0.9.1",
     "morechathistory": "*",
-    "lithium": "<0.21.3"
+    "lithium": "<0.22.1"
   }
 }

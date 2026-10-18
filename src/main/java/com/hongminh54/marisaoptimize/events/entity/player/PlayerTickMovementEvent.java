@@ -6,7 +6,7 @@
 package com.hongminh54.marisaoptimize.events.entity.player;
 
 /**
- * @see net.minecraft.client.network.ClientPlayerEntity#tickMovement()
+ * @see net.minecraft.client.player.LocalPlayer#aiStep()
  */
 public class PlayerTickMovementEvent {
     private static final PlayerTickMovementEvent INSTANCE = new PlayerTickMovementEvent();

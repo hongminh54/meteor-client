@@ -11,22 +11,23 @@ import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTextureView;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.IndexType;
+import com.mojang.blaze3d.systems.CommandEncoder;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.render.RenderUtils;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
-import net.minecraft.client.gl.Framebuffer;
-import net.minecraft.client.gl.GpuSampler;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Pair;
-import net.minecraft.util.math.ColorHelper;
-import net.minecraft.util.math.Vec3d;
+import com.mojang.blaze3d.pipeline.RenderTarget;
+import com.mojang.blaze3d.textures.GpuSampler;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
 import java.util.HashMap;
 import java.util.OptionalDouble;
-import java.util.OptionalInt;
+import java.util.Optional;
+import org.joml.Vector4f;
+import org.joml.Vector4fc;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
@@ -40,11 +41,13 @@ public class MeshRenderer {
     private Color clearColor;
     private RenderPipeline pipeline;
     private @Nullable MeshBuilder mesh;
-    private @Nullable GpuBuffer vertexBuffer;
-    private @Nullable GpuBuffer indexBuffer;
+    private @Nullable GpuBufferSlice vertexBuffer;
+    private @Nullable GpuBufferSlice indexBuffer;
     private Matrix4f matrix;
     private final HashMap<String, GpuBufferSlice> uniforms = new HashMap<>();
-    private final HashMap<String, Pair<GpuTextureView, GpuSampler>> samplers = new HashMap<>();
+    private final HashMap<String, TextureViewAndSampler> samplers = new HashMap<>();
+
+    private record TextureViewAndSampler(GpuTextureView view, GpuSampler sampler) {}
 
     private MeshRenderer() {}
 
@@ -62,9 +65,9 @@ public class MeshRenderer {
         return this;
     }
 
-    public MeshRenderer attachments(Framebuffer framebuffer) {
-        colorAttachment = framebuffer.getColorAttachmentView();
-        depthAttachment = framebuffer.getDepthAttachmentView();
+    public MeshRenderer attachments(RenderTarget framebuffer) {
+        colorAttachment = framebuffer.getColorTextureView();
+        depthAttachment = framebuffer.getDepthTextureView();
         return this;
     }
 
@@ -79,6 +82,10 @@ public class MeshRenderer {
     }
 
     public MeshRenderer mesh(GpuBuffer vertices, GpuBuffer indices) {
+        return mesh(vertices.slice(), indices.slice());
+    }
+
+    public MeshRenderer mesh(GpuBufferSlice vertices, GpuBufferSlice indices) {
         this.vertexBuffer = vertices;
         this.indexBuffer = indices;
         return this;
@@ -94,7 +101,7 @@ public class MeshRenderer {
         return this.transform(matrix);
     }
 
-    public MeshRenderer mesh(MeshBuilder mesh, MatrixStack matrices) {
+    public MeshRenderer mesh(MeshBuilder mesh, PoseStack matrices) {
         this.mesh = mesh;
         return this.transform(matrices);
     }
@@ -104,8 +111,8 @@ public class MeshRenderer {
         return this;
     }
 
-    public MeshRenderer transform(MatrixStack matrices) {
-        this.matrix = matrices.peek().getPositionMatrix();
+    public MeshRenderer transform(PoseStack matrices) {
+        this.matrix = matrices.last().pose();
         return this;
     }
 
@@ -120,72 +127,84 @@ public class MeshRenderer {
 
     public MeshRenderer sampler(String name, GpuTextureView view, GpuSampler sampler) {
         if (name != null && view != null && sampler != null) {
-            samplers.put(name, new Pair<>(view, sampler));
+            samplers.put(name, new TextureViewAndSampler(view, sampler));
         }
 
         return this;
     }
 
     public void end() {
+        try {
+            draw();
+        } finally {
+            reset();
+        }
+    }
+
+    private void draw() {
         if (mesh != null && mesh.isBuilding()) {
             mesh.end();
         }
 
         int indexCount = mesh != null ? mesh.getIndicesCount()
-            : (int) (indexBuffer != null ? indexBuffer.size() / Integer.BYTES : -1);
-        // todo hope this is alright @minegame take a look please (lossy conversion from long to int)
+            : (indexBuffer != null ? Math.toIntExact(indexBuffer.length() / Integer.BYTES) : -1);
 
         if (indexCount > 0) {
 
-            if (Utils.rendering3D || matrix != null) {
+            boolean transform = Utils.rendering3D || matrix != null;
+            if (transform) {
                 RenderSystem.getModelViewStack().pushMatrix();
             }
 
-            if (matrix != null) {
-                RenderSystem.getModelViewStack().mul(matrix);
-            }
+            try {
+                if (matrix != null) {
+                    RenderSystem.getModelViewStack().mul(matrix);
+                }
 
-            if (Utils.rendering3D) {
-                applyCameraPos();
-            }
+                if (Utils.rendering3D) {
+                    applyCameraPos();
+                }
 
-            GpuBuffer vertexBuffer = mesh != null ? mesh.getVertexBuffer() : this.vertexBuffer;
-            GpuBuffer indexBuffer = mesh != null ? mesh.getIndexBuffer() : this.indexBuffer;
-
-            {
-                OptionalInt clearColor = this.clearColor != null ?
-                    OptionalInt.of(ColorHelper.getArgb(this.clearColor.a, this.clearColor.r, this.clearColor.g, this.clearColor.b)) :
-                    OptionalInt.empty();
+                CommandEncoder encoder = RenderSystem.getDevice().createCommandEncoder();
+                GpuBufferSlice vertexBuffer = mesh != null ? mesh.uploadVertexBuffer(encoder) : java.util.Objects.requireNonNull(this.vertexBuffer);
+                GpuBufferSlice indexBuffer = mesh != null ? mesh.uploadIndexBuffer(encoder) : java.util.Objects.requireNonNull(this.indexBuffer);
+                if (indexBuffer.offset() % Integer.BYTES != 0) {
+                    throw new IllegalArgumentException("Index buffer offset must be aligned to four bytes.");
+                }
+                int firstIndex = Math.toIntExact(indexBuffer.offset() / Integer.BYTES);
+                Optional<Vector4fc> clearColor = this.clearColor != null ?
+                    Optional.of(new Vector4f(this.clearColor.r / 255f, this.clearColor.g / 255f, this.clearColor.b / 255f, this.clearColor.a / 255f)) :
+                    Optional.empty();
 
                 GpuBufferSlice meshData = MeshUniforms.write(RenderUtils.projection, RenderSystem.getModelViewStack());
 
-                RenderPass pass = (depthAttachment != null && pipeline.wantsDepthTexture()) ?
-                    RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Meteor MeshRenderer", colorAttachment, clearColor, depthAttachment, OptionalDouble.empty()) :
-                    RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Meteor MeshRenderer", colorAttachment, clearColor);
+                try (RenderPass pass = (depthAttachment != null && pipeline.wantsDepthTexture()) ?
+                    encoder.createRenderPass(() -> "Marisa MeshRenderer", colorAttachment, clearColor, depthAttachment, OptionalDouble.empty()) :
+                    encoder.createRenderPass(() -> "Marisa MeshRenderer", colorAttachment, clearColor)) {
 
-                pass.setPipeline(pipeline);
-                pass.setUniform("MeshData", meshData);
+                    pass.setPipeline(pipeline);
+                    pass.setUniform("MeshData", meshData);
 
-                for (var name : uniforms.keySet()) {
-                    pass.setUniform(name, uniforms.get(name));
+                    for (var entry : uniforms.entrySet()) {
+                        pass.setUniform(entry.getKey(), entry.getValue());
+                    }
+
+                    for (var entry : samplers.entrySet()) {
+                        pass.bindTexture(entry.getKey(), entry.getValue().view(), entry.getValue().sampler());
+                    }
+
+                    pass.setVertexBuffer(0, vertexBuffer);
+                    pass.setIndexBuffer(indexBuffer.buffer(), IndexType.INT);
+                    pass.drawIndexed(indexCount, 1, firstIndex, 0, 0);
                 }
 
-                for (var name : samplers.keySet()) {
-                    pass.bindTexture(name, samplers.get(name).getLeft(), samplers.get(name).getRight());
-                }
-
-                pass.setVertexBuffer(0, vertexBuffer);
-                pass.setIndexBuffer(indexBuffer, VertexFormat.IndexType.INT);
-                pass.drawIndexed(0, 0, indexCount, 1);
-
-                pass.close();
-            }
-
-            if (Utils.rendering3D || matrix != null) {
-                RenderSystem.getModelViewStack().popMatrix();
+            } finally {
+                if (transform) RenderSystem.getModelViewStack().popMatrix();
             }
         }
+    }
 
+    private void reset() {
         colorAttachment = null;
         depthAttachment = null;
         clearColor = null;
@@ -201,7 +220,7 @@ public class MeshRenderer {
     }
 
     private static void applyCameraPos() {
-        Vec3d cameraPos = mc.gameRenderer.getCamera().getCameraPos();
+        Vec3 cameraPos = mc.gameRenderer.mainCamera().position();
         RenderSystem.getModelViewStack().translate(0, (float) -cameraPos.y, 0);
     }
 }

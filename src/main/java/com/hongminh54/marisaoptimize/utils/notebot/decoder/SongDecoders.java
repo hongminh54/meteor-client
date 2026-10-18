@@ -10,7 +10,7 @@ import com.hongminh54.marisaoptimize.systems.modules.misc.Notebot;
 import com.hongminh54.marisaoptimize.utils.notebot.NotebotUtils;
 import com.hongminh54.marisaoptimize.utils.notebot.song.Note;
 import com.hongminh54.marisaoptimize.utils.notebot.song.Song;
-import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import org.apache.commons.io.FilenameUtils;
 import org.jetbrains.annotations.NotNull;
 

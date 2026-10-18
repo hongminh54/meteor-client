@@ -11,7 +11,7 @@ import com.hongminh54.marisaoptimize.gui.WindowScreen;
 import com.hongminh54.marisaoptimize.gui.widgets.containers.WHorizontalList;
 import com.hongminh54.marisaoptimize.gui.widgets.pressable.WCheckbox;
 import com.hongminh54.marisaoptimize.systems.config.Config;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,10 +62,10 @@ public abstract class Prompt<T> {
         if (id != null && Config.get().dontShowAgainPrompts.contains(id)) return false;
 
         if (!RenderSystem.isOnRenderThread()) {
-            mc.execute(() -> mc.setScreen(new PromptScreen(theme)));
+            mc.execute(() -> mc.gui.setScreen(new PromptScreen(theme)));
         }
         else {
-            mc.setScreen(new PromptScreen(theme));
+            mc.gui.setScreen(new PromptScreen(theme));
         }
 
         return true;

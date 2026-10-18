@@ -5,8 +5,8 @@
 
 package com.hongminh54.marisaoptimize.mixininterface;
 
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 
 public interface IChatHud {
-    void meteor$add(Text message, int id);
+    void meteor$add(Component message, int id);
 }

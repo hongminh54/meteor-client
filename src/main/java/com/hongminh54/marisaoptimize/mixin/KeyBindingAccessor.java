@@ -5,28 +5,28 @@
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
+import net.minecraft.client.KeyMapping;
+import com.mojang.blaze3d.platform.InputConstants;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.Map;
 
-@Mixin(KeyBinding.class)
+@Mixin(KeyMapping.class)
 public interface KeyBindingAccessor {
-    @Accessor("KEYS_BY_ID")
-    static Map<String, KeyBinding> getKeysById() { return null; }
+    @Accessor("ALL")
+    static Map<String, KeyMapping> getKeysById() { return null; }
 
-    @Accessor("boundKey")
-    InputUtil.Key meteor$getKey();
+    @Accessor("key")
+    InputConstants.Key meteor$getKey();
 
-    @Accessor("timesPressed")
+    @Accessor("clickCount")
     int meteor$getTimesPressed();
 
-    @Accessor("timesPressed")
+    @Accessor("clickCount")
     void meteor$setTimesPressed(int timesPressed);
 
-    @Invoker("reset")
+    @Invoker("release")
     void meteor$invokeReset();
 }

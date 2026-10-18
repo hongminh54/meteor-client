@@ -17,17 +17,17 @@ import com.hongminh54.marisaoptimize.utils.world.XrayMemory;
 import com.hongminh54.marisaoptimize.utils.world.XrayNoiseFilter;
 import it.unimi.dsi.fastutil.longs.Long2LongOpenHashMap;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
-import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RaycastContext;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
+import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.ClipContext;
 
 public class AntiAntiXray extends Module {
     public enum RevealMode {
@@ -158,7 +158,7 @@ public class AntiAntiXray extends Module {
 
     @EventHandler
     private void onTick(TickEvent.Pre event) {
-        if (!Modules.get().get(Xray.class).isActive() || mc.world == null || mc.player == null || mc.getNetworkHandler() == null) return;
+        if (!Modules.get().get(Xray.class).isActive() || mc.level == null || mc.player == null || mc.getConnection() == null) return;
 
         if (adaptive.get() && AntiXrayServerType.isLookRevealServer()) return;
 
@@ -172,7 +172,7 @@ public class AntiAntiXray extends Module {
             return;
         }
 
-        if (mc.interactionManager.isBreakingBlock() || BlockUtils.breaking) return;
+        if (mc.gameMode.isDestroying() || BlockUtils.breaking) return;
 
         if (pauseWhenMoving.get() && isMoving()) return;
         if (pauseNearPlayers.get() && playerNearby()) return;
@@ -191,13 +191,13 @@ public class AntiAntiXray extends Module {
     }
 
     private boolean isMoving() {
-        Vec3d v = mc.player.getVelocity();
+        Vec3 v = mc.player.getDeltaMovement();
         return Math.sqrt(v.x * v.x + v.z * v.z) > 0.1;
     }
 
     private boolean playerNearby() {
-        for (PlayerEntity player : mc.world.getPlayers()) {
-            if (player != mc.player && player.squaredDistanceTo(mc.player) < 64) return true;
+        for (Player player : mc.level.players()) {
+            if (player != mc.player && player.distanceToSqr(mc.player) < 64) return true;
         }
         return false;
     }
@@ -219,39 +219,39 @@ public class AntiAntiXray extends Module {
     }
 
     private boolean trySafePunch() {
-        if (!(mc.crosshairTarget instanceof BlockHitResult bhr)) return false;
+        if (!(mc.hitResult instanceof BlockHitResult bhr)) return false;
 
         BlockPos pos = bhr.getBlockPos();
         if (!canReveal(pos)) return false;
 
-        punch(pos, bhr.getSide());
+        punch(pos, bhr.getDirection());
         return true;
     }
 
     private boolean tryCascadePunch() {
-        Vec3d eye = mc.player.getEyePos();
+        Vec3 eye = mc.player.getEyePosition();
         double bestDist = Double.MAX_VALUE;
         BlockPos best = null;
         Direction bestSide = null;
-        BlockPos.Mutable pos = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
         for (int dx = -4; dx <= 4; dx++) {
             for (int dy = -2; dy <= 2; dy++) {
                 for (int dz = -4; dz <= 4; dz++) {
                     pos.set(mc.player.getBlockX() + dx, mc.player.getBlockY() + dy, mc.player.getBlockZ() + dz);
 
-                    if (eye.distanceTo(pos.toCenterPos()) > 4.5) continue;
+                    if (eye.distanceTo(Vec3.atCenterOf(pos)) > 4.5) continue;
                     if (!XrayMemory.isRemembered(pos)) continue;
-                    if (mc.world.getBlockState(pos).isAir()) continue;
+                    if (mc.level.getBlockState(pos).isAir()) continue;
                     if (pos.getY() > maxY.get()) continue;
 
                     long now = System.currentTimeMillis();
                     if (now - lastCascade.getOrDefault(pos.asLong(), 0) < cascadeCooldown.get() * 1000L) continue;
 
-                    double dist = eye.squaredDistanceTo(pos.getX(), pos.getY(), pos.getZ());
+                    double dist = eye.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
                     if (dist < bestDist) {
                         bestDist = dist;
-                        best = pos.toImmutable();
+                        best = pos.immutable();
                         bestSide = BlockUtils.getDirection(best);
                     }
                 }
@@ -266,34 +266,34 @@ public class AntiAntiXray extends Module {
     }
 
     private boolean trySweepPunch() {
-        Vec3d eye = mc.player.getEyePos();
+        Vec3 eye = mc.player.getEyePosition();
         double bestDist = Double.MAX_VALUE;
         BlockPos best = null;
         Direction bestSide = null;
         ChunkPos bestChunk = null;
-        BlockPos.Mutable pos = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
         long now = System.currentTimeMillis();
 
         for (int cx = -2; cx <= 2; cx++) {
             for (int cz = -2; cz <= 2; cz++) {
-                ChunkPos chunkPos = new ChunkPos(mc.player.getChunkPos().x + cx, mc.player.getChunkPos().z + cz);
+                ChunkPos chunkPos = new ChunkPos(mc.player.chunkPosition().x() + cx, mc.player.chunkPosition().z() + cz);
                 if (!XrayNoiseFilter.isSuspect(chunkPos)) continue;
-                if (now - lastSweep.getOrDefault(chunkPos.toLong(), 0) < 30000) continue;
+                if (now - lastSweep.getOrDefault(chunkPos.pack(), 0) < 30000) continue;
 
                 for (int dx = -4; dx <= 4; dx++) {
                     for (int dy = -2; dy <= 2; dy++) {
                         for (int dz = -4; dz <= 4; dz++) {
                             pos.set(mc.player.getBlockX() + dx, mc.player.getBlockY() + dy, mc.player.getBlockZ() + dz);
 
-                            if (pos.getX() >> 4 != chunkPos.x || pos.getZ() >> 4 != chunkPos.z) continue;
-                            if (eye.distanceTo(pos.toCenterPos()) > 4.5) continue;
+                            if (pos.getX() >> 4 != chunkPos.x() || pos.getZ() >> 4 != chunkPos.z()) continue;
+                            if (eye.distanceTo(Vec3.atCenterOf(pos)) > 4.5) continue;
                             if (!canReveal(pos)) continue;
 
-                            double dist = eye.squaredDistanceTo(pos.getX(), pos.getY(), pos.getZ());
+                            double dist = eye.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
                             if (dist < bestDist) {
                                 bestDist = dist;
-                                best = pos.toImmutable();
+                                best = pos.immutable();
                                 bestSide = BlockUtils.getDirection(best);
                                 bestChunk = chunkPos;
                             }
@@ -305,31 +305,31 @@ public class AntiAntiXray extends Module {
 
         if (best == null || bestChunk == null) return false;
 
-        lastSweep.put(bestChunk.toLong(), now);
+        lastSweep.put(bestChunk.pack(), now);
         punch(best, bestSide);
         return true;
     }
 
     private void tryAggressivePunch() {
-        Vec3d eye = mc.player.getEyePos();
+        Vec3 eye = mc.player.getEyePosition();
         double bestDist = Double.MAX_VALUE;
         BlockPos best = null;
         Direction bestSide = null;
-        BlockPos.Mutable pos = new BlockPos.Mutable();
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
         for (int dx = -4; dx <= 4; dx++) {
             for (int dy = -2; dy <= 2; dy++) {
                 for (int dz = -4; dz <= 4; dz++) {
                     pos.set(mc.player.getBlockX() + dx, mc.player.getBlockY() + dy, mc.player.getBlockZ() + dz);
 
-                    if (eye.distanceTo(pos.toCenterPos()) > 4.5) continue;
+                    if (eye.distanceTo(Vec3.atCenterOf(pos)) > 4.5) continue;
                     if (!canReveal(pos)) continue;
                     if (!hasLineOfSight(pos)) continue;
 
-                    double dist = eye.squaredDistanceTo(pos.getX(), pos.getY(), pos.getZ());
+                    double dist = eye.distanceToSqr(pos.getX(), pos.getY(), pos.getZ());
                     if (dist < bestDist) {
                         bestDist = dist;
-                        best = pos.toImmutable();
+                        best = pos.immutable();
                         bestSide = BlockUtils.getDirection(best);
                     }
                 }
@@ -341,38 +341,38 @@ public class AntiAntiXray extends Module {
 
     private void fakeLook() {
         fakeLookIndex++;
-        double yaw = Math.toRadians(mc.player.getYaw() + fakeLookIndex * 30.0);
+        double yaw = Math.toRadians(mc.player.getYRot() + fakeLookIndex * 30.0);
         double pitch = Math.toRadians(-15);
 
-        Vec3d dir = new Vec3d(-Math.sin(yaw) * Math.cos(pitch), -Math.sin(pitch), Math.cos(yaw) * Math.cos(pitch));
-        BlockPos.Mutable pos = new BlockPos.Mutable();
-        Vec3d start = mc.player.getEyePos();
+        Vec3 dir = new Vec3(-Math.sin(yaw) * Math.cos(pitch), -Math.sin(pitch), Math.cos(yaw) * Math.cos(pitch));
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        Vec3 start = mc.player.getEyePosition();
         BlockPos target = null;
 
         for (int i = 1; i <= fakeLookDistance.get(); i++) {
-            Vec3d point = start.add(dir.x * i, dir.y * i, dir.z * i);
+            Vec3 point = start.add(dir.x * i, dir.y * i, dir.z * i);
             pos.set(point.x, point.y, point.z);
 
-            if (!mc.world.isInBuildLimit(pos)) break;
+            if (!mc.level.isInWorldBounds(pos)) break;
 
-            if (!mc.world.getBlockState(pos).isAir()) {
-                target = pos.toImmutable();
+            if (!mc.level.getBlockState(pos).isAir()) {
+                target = pos.immutable();
                 break;
             }
         }
 
         if (target == null) return;
 
-        mc.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.LookAndOnGround((float) Rotations.getYaw(target), (float) Rotations.getPitch(target), mc.player.isOnGround(), mc.player.horizontalCollision));
+        mc.getConnection().send(new ServerboundMovePlayerPacket.Rot((float) Rotations.getYaw(target), (float) Rotations.getPitch(target), mc.player.onGround(), mc.player.horizontalCollision));
     }
 
     private boolean canReveal(BlockPos pos) {
-        if (mc.world.isOutOfHeightLimit(pos)) return false;
+        if (mc.level.isOutsideBuildHeight(pos)) return false;
         if (pos.getY() > maxY.get()) return false;
-        if (!mc.world.getChunkManager().isChunkLoaded(pos.getX() >> 4, pos.getZ() >> 4)) return false;
+        if (!mc.level.getChunkSource().hasChunk(pos.getX() >> 4, pos.getZ() >> 4)) return false;
 
-        BlockState state = mc.world.getBlockState(pos);
-        if (state.isAir() || state.getHardness(mc.world, pos) == -1) return false;
+        BlockState state = mc.level.getBlockState(pos);
+        if (state.isAir() || state.getDestroySpeed(mc.level, pos) == -1) return false;
         if (Modules.get().get(Xray.class).isWhitelisted(state.getBlock())) return false;
 
         long now = System.currentTimeMillis();
@@ -383,14 +383,14 @@ public class AntiAntiXray extends Module {
     }
 
     private boolean hasLineOfSight(BlockPos pos) {
-        BlockHitResult hit = mc.world.raycast(new RaycastContext(mc.player.getEyePos(), pos.toCenterPos(), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, mc.player));
+        BlockHitResult hit = mc.level.clip(new ClipContext(mc.player.getEyePosition(), Vec3.atCenterOf(pos), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, mc.player));
         return hit.getType() == HitResult.Type.MISS || hit.getBlockPos().equals(pos);
     }
 
     private void punch(BlockPos pos, Direction side) {
         lastPunched.put(pos.asLong(), System.currentTimeMillis());
 
-        mc.interactionManager.sendSequencedPacket(mc.world, sequence -> new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.START_DESTROY_BLOCK, pos, side == null ? Direction.UP : side, sequence));
-        mc.getNetworkHandler().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK, pos, side == null ? Direction.UP : side));
+        mc.gameMode.startPrediction(mc.level, sequence -> new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.START_DESTROY_BLOCK, pos, side == null ? Direction.UP : side, sequence));
+        mc.getConnection().send(new ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.ABORT_DESTROY_BLOCK, pos, side == null ? Direction.UP : side));
     }
 }

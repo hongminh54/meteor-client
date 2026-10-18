@@ -5,36 +5,25 @@
 
 package com.hongminh54.marisaoptimize.renderer.text;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
-import net.minecraft.client.font.TextRenderer.TextLayerType;
-import net.minecraft.client.render.LightmapTextureManager;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.BufferAllocator;
-import net.minecraft.client.util.math.MatrixStack;
-import org.joml.Matrix4f;
-import org.joml.Matrix4fStack;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import org.joml.Matrix3x2fStack;
+
+import java.util.Objects;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public class VanillaTextRenderer implements TextRenderer {
     public static final VanillaTextRenderer INSTANCE = new VanillaTextRenderer();
 
-    private final BufferAllocator buffer = new BufferAllocator(2048);
-    private final VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(buffer);
-
-    private final MatrixStack matrices = new MatrixStack();
-    private final Matrix4f emptyMatrix = new Matrix4f();
-
     public double scale = 2;
     public boolean scaleIndividually;
 
+    private GuiGraphicsExtractor graphics;
     private boolean building;
     private double alpha = 1;
 
-    private VanillaTextRenderer() {
-        // Use INSTANCE
-    }
+    private VanillaTextRenderer() {}
 
     @Override
     public void setAlpha(double a) {
@@ -44,51 +33,41 @@ public class VanillaTextRenderer implements TextRenderer {
     @Override
     public double getWidth(String text, int length, boolean shadow) {
         if (text.isEmpty()) return 0;
-
         if (length != text.length()) text = text.substring(0, length);
-        return (mc.textRenderer.getWidth(text) + (shadow ? 1 : 0)) * scale;
+        return (mc.font.width(text) + (shadow ? 1 : 0)) * scale;
     }
 
     @Override
     public double getHeight(boolean shadow) {
-        return (mc.textRenderer.fontHeight + (shadow ? 1 : 0)) * scale;
+        return (mc.font.lineHeight + (shadow ? 1 : 0)) * scale;
     }
 
     @Override
-    public void begin(double scale, boolean scaleOnly, boolean big) {
-        if (building) throw new RuntimeException("VanillaTextRenderer.begin() called twice");
-
+    public void begin(GuiGraphicsExtractor graphics, double scale, boolean scaleOnly, boolean big) {
+        if (building) throw new IllegalStateException("VanillaTextRenderer.begin() called twice");
+        this.graphics = Objects.requireNonNull(graphics, "Vanilla text requires GUI graphics");
         this.scale = scale * 2;
-        this.building = true;
+        building = true;
     }
 
     @Override
     public double render(String text, double x, double y, Color color, boolean shadow) {
-        boolean wasBuilding = building;
-        if (!wasBuilding) begin();
+        if (!building) throw new IllegalStateException("VanillaTextRenderer.render() called without begin()");
 
         x += 0.5 * scale;
         y += 0.5 * scale;
-
-        int preA = color.a;
-        color.a = (int) (((double) color.a / 255 * alpha) * 255);
-
-        Matrix4f matrix = emptyMatrix;
-        if (scaleIndividually) {
-            matrices.push();
-            matrices.scale((float) scale, (float) scale, 1);
-            matrix = matrices.peek().getPositionMatrix();
+        int previousAlpha = color.a;
+        Matrix3x2fStack matrices = graphics.pose();
+        matrices.pushMatrix();
+        try {
+            color.a = (int) (previousAlpha * alpha);
+            matrices.scale((float) scale, (float) scale);
+            graphics.text(mc.font, text, (int) (x / scale), (int) (y / scale), color.getPacked(), shadow);
+            return (x / scale + mc.font.width(text) - 1) * scale;
+        } finally {
+            matrices.popMatrix();
+            color.a = previousAlpha;
         }
-
-        mc.textRenderer.draw(text, (float) (x / scale), (float) (y / scale), color.getPacked(), shadow, matrix, immediate, TextLayerType.NORMAL, 0, LightmapTextureManager.MAX_LIGHT_COORDINATE);
-        double x2 = (x / scale) + mc.textRenderer.getWidth(text);
-
-        if (scaleIndividually) matrices.pop();
-
-        color.a = preA;
-
-        if (!wasBuilding) end();
-        return (x2 - 1) * scale;
     }
 
     @Override
@@ -98,18 +77,9 @@ public class VanillaTextRenderer implements TextRenderer {
 
     @Override
     public void end() {
-        if (!building) throw new RuntimeException("VanillaTextRenderer.end() called without calling begin()");
-
-        Matrix4fStack matrixStack = RenderSystem.getModelViewStack();
-
-        matrixStack.pushMatrix();
-        if (!scaleIndividually) matrixStack.scale((float) scale, (float) scale, 1);
-
-        immediate.draw();
-
-        matrixStack.popMatrix();
-
-        this.scale = 2;
-        this.building = false;
+        if (!building) throw new IllegalStateException("VanillaTextRenderer.end() called without begin()");
+        graphics = null;
+        scale = 2;
+        building = false;
     }
 }

@@ -16,3 +16,7 @@ logs
 .idea/*
 !.idea/copyright/*
 !.idea/scopes/*
+
+# Local upstream reference checkout, not part of the Marisa distribution.
+/meteor-client/
+__pycache__/

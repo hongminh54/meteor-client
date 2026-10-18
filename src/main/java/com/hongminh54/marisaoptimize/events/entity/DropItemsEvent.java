@@ -6,7 +6,7 @@
 package com.hongminh54.marisaoptimize.events.entity;
 
 import com.hongminh54.marisaoptimize.events.Cancellable;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class DropItemsEvent extends Cancellable {
     private static final DropItemsEvent INSTANCE = new DropItemsEvent();

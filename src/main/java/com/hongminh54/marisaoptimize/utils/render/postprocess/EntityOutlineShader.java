@@ -9,7 +9,7 @@ import com.hongminh54.marisaoptimize.renderer.MeshRenderer;
 import com.hongminh54.marisaoptimize.renderer.MeteorRenderPipelines;
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.render.ESP;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 
 public class EntityOutlineShader extends EntityShader {
     private static ESP esp;

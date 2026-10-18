@@ -7,32 +7,28 @@ package com.hongminh54.marisaoptimize.utils.render.postprocess;
 
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.hongminh54.marisaoptimize.mixininterface.IWorldRenderer;
-import com.hongminh54.marisaoptimize.utils.render.CustomOutlineVertexConsumerProvider;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 
 public abstract class EntityShader extends PostProcessShader {
-    public final CustomOutlineVertexConsumerProvider vertexConsumerProvider;
-
     protected EntityShader(RenderPipeline pipeline) {
         super(pipeline);
-        this.vertexConsumerProvider = new CustomOutlineVertexConsumerProvider();
     }
 
     public abstract boolean shouldDraw(Entity entity);
 
     @Override
     protected void preDraw() {
-        ((IWorldRenderer) mc.worldRenderer).meteor$pushEntityOutlineFramebuffer(framebuffer);
+        ((IWorldRenderer) mc.levelRenderer).meteor$pushEntityOutlineFramebuffer(framebuffer);
     }
 
     @Override
     protected void postDraw() {
-        ((IWorldRenderer) mc.worldRenderer).meteor$popEntityOutlineFramebuffer();
+        ((IWorldRenderer) mc.levelRenderer).meteor$popEntityOutlineFramebuffer();
     }
 
     public void submitVertices() {
-        submitVertices(vertexConsumerProvider::draw);
+        // Entity outlines are executed by FeatureRenderDispatcher during submission.
     }
 }

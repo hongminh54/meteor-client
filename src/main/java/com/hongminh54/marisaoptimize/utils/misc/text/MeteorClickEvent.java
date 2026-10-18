@@ -5,15 +5,11 @@
 
 package com.hongminh54.marisaoptimize.utils.misc.text;
 
-import com.hongminh54.marisaoptimize.mixin.ScreenMixin;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.ClickEvent;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import net.minecraft.network.chat.ClickEvent;
 
 /**
  * This class does nothing except ensure that {@link ClickEvent}'s containing Marisa Optimize commands can only be executed if they come from the client.
- * @see ScreenMixin#onHandleBasicClickEvent(ClickEvent, MinecraftClient, Screen, CallbackInfo)
+ * The screen click handler must only dispatch this client-owned event type.
  */
 public class MeteorClickEvent implements ClickEvent {
     public final String value;
@@ -23,7 +19,7 @@ public class MeteorClickEvent implements ClickEvent {
     }
 
     @Override
-    public Action getAction() {
+    public Action action() {
         return Action.RUN_COMMAND;
     }
 }

@@ -25,9 +25,9 @@ import com.hongminh54.marisaoptimize.systems.profiles.Profiles;
 import com.hongminh54.marisaoptimize.utils.Utils;
 import com.hongminh54.marisaoptimize.utils.misc.NbtUtils;
 import com.hongminh54.marisaoptimize.utils.render.prompts.OkPrompt;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.NbtIo;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
@@ -89,7 +89,7 @@ public class ProfilesTab extends Tab {
             // Create
             WButton create = l.add(theme.button("Create")).expandX().widget();
             create.tooltip = "Create new profile";
-            create.action = () -> mc.setScreen(new EditProfileScreen(theme, null, this::reload));
+            create.action = () -> mc.gui.setScreen(new EditProfileScreen(theme, null, this::reload));
 
             // Import
             WButton importBtn = l.add(theme.button("Import")).expandX().widget();
@@ -126,10 +126,10 @@ public class ProfilesTab extends Tab {
                 load.action = profile::load;
 
                 WButton export = table.add(theme.button("Export")).widget();
-                export.action = () -> mc.setScreen(new ExportProfileScreen(theme, profile));
+                export.action = () -> mc.gui.setScreen(new ExportProfileScreen(theme, profile));
 
                 WButton edit = table.add(theme.button(GuiRenderer.EDIT)).widget();
-                edit.action = () -> mc.setScreen(new EditProfileScreen(theme, profile, this::reload));
+                edit.action = () -> mc.gui.setScreen(new EditProfileScreen(theme, profile, this::reload));
 
                 WConfirmedMinus remove = table.add(theme.confirmedMinus()).widget();
                 remove.action = () -> {
@@ -146,20 +146,21 @@ public class ProfilesTab extends Tab {
             if (file == null) return null;
             File profileFile = new File(file);
 
-            NbtCompound nbt = NbtIo.read(profileFile.toPath());
+            CompoundTag nbt = NbtIo.read(profileFile.toPath());
 
             Profile p = new Profile();
-            if (!p.name.set(nbt.getString("name", profileFile.getName()))) return null;
+            if (nbt == null || !p.name.set(nbt.getStringOr("name", profileFile.getName()))) return null;
             File profileFolder = p.getSafeFile();
             if (profileFolder == null) return null;
             //noinspection ResultOfMethodCallIgnored
             profileFolder.mkdirs();
 
             nbt.remove("name");
-            for (Map.Entry<String, NbtElement> entry : nbt.entrySet()) {
+            for (Map.Entry<String, Tag> entry : nbt.entrySet()) {
                 String filename = entry.getKey();
                 if (!filename.endsWith(".nbt")) continue;
                 if (filename.contains("/") || filename.contains("\\") || new File(filename).isAbsolute()) continue;
+                if (!(entry.getValue() instanceof CompoundTag contents)) continue;
 
                 switch (filename) {
                     case "hud.nbt" -> p.hud.set(true);
@@ -173,7 +174,7 @@ public class ProfilesTab extends Tab {
                 File f = new File(profileFolder, filename).getCanonicalFile();
                 if (!f.toPath().startsWith(profileFolder.toPath())) continue;
 
-                NbtIo.write(entry.getValue(), new DataOutputStream(new FileOutputStream(f)));
+                NbtIo.write(contents, f.toPath());
             }
 
             Profiles.get().getAll().add(p);
@@ -234,7 +235,7 @@ public class ProfilesTab extends Tab {
                 if (isNew) Profiles.get().add(profile);
                 else Profiles.get().save();
 
-                close();
+                onClose();
             };
 
             enterAction = save.action;
@@ -279,7 +280,7 @@ public class ProfilesTab extends Tab {
             WButton export = add(theme.button("Export profile")).expandX().widget();
             export.action = () -> {
                 exportProfile(profile, hud.checked, macros.checked, modules.checked, waypoints.checked);
-                close();
+                onClose();
             };
         }
 
@@ -298,7 +299,7 @@ public class ProfilesTab extends Tab {
             if (path == null) return;
             Path p = Path.of(path.endsWith(".nbt") ? path : path + ".nbt");
 
-            NbtCompound nbt = new NbtCompound();
+            CompoundTag nbt = new CompoundTag();
             nbt.putString("name", profile.name.get());
 
             try {

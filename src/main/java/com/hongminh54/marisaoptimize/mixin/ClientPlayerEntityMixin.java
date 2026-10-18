@@ -19,16 +19,16 @@ import com.hongminh54.marisaoptimize.systems.modules.player.LiquidInteract;
 import com.hongminh54.marisaoptimize.systems.modules.player.NoMiningTrace;
 import com.hongminh54.marisaoptimize.systems.modules.player.Portals;
 import com.hongminh54.marisaoptimize.utils.entity.fakeplayer.FakePlayerEntity;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.input.Input;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.JumpingMount;
-import net.minecraft.util.PlayerInput;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.ClientInput;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.PlayerRideableJumping;
+import net.minecraft.world.entity.player.Input;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -38,46 +38,46 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.hongminh54.marisaoptimize.systems.modules.movement.*;
 
-@Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
+@Mixin(LocalPlayer.class)
+public abstract class ClientPlayerEntityMixin extends AbstractClientPlayer {
     @Shadow
-    public Input input;
+    public ClientInput input;
 
-    public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) {
+    public ClientPlayerEntityMixin(ClientLevel world, GameProfile profile) {
         super(world, profile);
     }
 
-    @Inject(method = "dropSelectedItem", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "drop", at = @At("HEAD"), cancellable = true)
     private void onDropSelectedItem(boolean dropEntireStack, CallbackInfoReturnable<Boolean> info) {
-        if (MarisaOptimize.EVENT_BUS.post(DropItemsEvent.get(getMainHandStack())).isCancelled()) info.setReturnValue(false);
+        if (MarisaOptimize.EVENT_BUS.post(DropItemsEvent.get(getMainHandItem())).isCancelled()) info.setReturnValue(false);
     }
 
-    @ModifyExpressionValue(method = "tickNausea", at = @At(value = "FIELD", target = "Lnet/minecraft/client/MinecraftClient;currentScreen:Lnet/minecraft/client/gui/screen/Screen;", opcode = Opcodes.GETFIELD))
+    @ModifyExpressionValue(method = "handlePortalTransitionEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;screen()Lnet/minecraft/client/gui/screens/Screen;", ordinal = 0))
     private Screen modifyNauseaCurrentScreen(Screen original) {
         if (Modules.get().isActive(Portals.class)) return null;
         return original;
     }
 
-    @ModifyExpressionValue(method = "applyMovementSpeedFactors", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"))
+    @ModifyExpressionValue(method = "modifyInput", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem()Z"))
     private boolean redirectUsingItem(boolean isUsingItem) {
         if (Modules.get().get(NoSlow.class).items()) return false;
         return isUsingItem;
     }
 
-    @Inject(method = "isSneaking", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isShiftKeyDown", at = @At("HEAD"), cancellable = true)
     private void onIsSneaking(CallbackInfoReturnable<Boolean> info) {
         if (Modules.get().get(Scaffold.class).scaffolding()) info.setReturnValue(false);
         if (Modules.get().get(Flight.class).noSneak()) info.setReturnValue(false);
     }
 
-    @Inject(method = "shouldSlowDown", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isMovingSlowly", at = @At("HEAD"), cancellable = true)
     private void onShouldSlowDown(CallbackInfoReturnable<Boolean> info) {
         if (Modules.get().get(NoSlow.class).sneaking()) {
-            info.setReturnValue(isCrawling());
+            info.setReturnValue(isVisuallyCrawling());
         }
     }
 
-    @Inject(method = "pushOutOfBlocks", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "moveTowardsClosestSpace", at = @At("HEAD"), cancellable = true)
     private void onPushOutOfBlocks(double x, double d, CallbackInfo info) {
         Velocity velocity = Modules.get().get(Velocity.class);
         if (velocity.isActive() && velocity.blocks.get()) {
@@ -85,10 +85,10 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         }
     }
 
-    @ModifyExpressionValue(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/input/Input;playerInput:Lnet/minecraft/util/PlayerInput;", opcode = Opcodes.GETFIELD))
-    private PlayerInput isSneaking(PlayerInput original) {
+    @ModifyExpressionValue(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/player/ClientInput;keyPresses:Lnet/minecraft/world/entity/player/Input;", opcode = Opcodes.GETFIELD))
+    private Input isSneaking(Input original) {
         if (Modules.get().get(Sneak.class).doPacket() || Modules.get().get(NoSlow.class).airStrict()) {
-            return new PlayerInput(
+            return new Input(
                 original.forward(),
                 original.backward(),
                 original.left(),
@@ -101,24 +101,24 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         return original;
     }
 
-    @Inject(method = "tickMovement", at = @At("HEAD"))
+    @Inject(method = "aiStep", at = @At("HEAD"))
     private void preTickMovement(CallbackInfo ci) {
         MarisaOptimize.EVENT_BUS.post(PlayerTickMovementEvent.get());
     }
 
-    @ModifyReturnValue(method = "getMountJumpStrength", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getJumpRidingScale", at = @At("RETURN"))
     private float modifyMountJumpStrength(float original) {
         if (Modules.get().get(EntityControl.class).maxJump()) return 1f;
         return original;
     }
 
-    @Inject(method = "getJumpingMount", at = @At("RETURN"), cancellable = true)
-    private void changeJumpingMount(CallbackInfoReturnable<JumpingMount> info) {
+    @Inject(method = "jumpableVehicle", at = @At("RETURN"), cancellable = true)
+    private void changeJumpingMount(CallbackInfoReturnable<PlayerRideableJumping> info) {
         if (Modules.get().get(EntityControl.class).cancelJump()) info.setReturnValue(null);
     }
 
-    @ModifyReturnValue(method = "getCrosshairTarget(Lnet/minecraft/entity/Entity;DDF)Lnet/minecraft/util/hit/HitResult;", at = @At("RETURN"))
-    private static HitResult onUpdateTargetedEntity(HitResult original, @Local HitResult hitResult) {
+    @ModifyReturnValue(method = "pick", at = @At("RETURN"))
+    private static HitResult onUpdateTargetedEntity(HitResult original, @Local(name = "blockHitResult") HitResult hitResult) {
         if (original instanceof EntityHitResult ehr) {
             if (Modules.get().get(NoMiningTrace.class).canWork(ehr.getEntity()) && hitResult.getType() == HitResult.Type.BLOCK) {
                 return hitResult;
@@ -131,58 +131,58 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         return original;
     }
 
-    @ModifyExpressionValue(method = "getCrosshairTarget(Lnet/minecraft/entity/Entity;DDF)Lnet/minecraft/util/hit/HitResult;", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;raycast(DFZ)Lnet/minecraft/util/hit/HitResult;"))
-    private static HitResult modifyRaycastResult(HitResult original, Entity entity, double blockInteractionRange, double entityInteractionRange, float tickProgress, @Local(ordinal = 0, argsOnly = true) double maxDistance) {
+    @ModifyExpressionValue(method = "pick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;pick(DFZ)Lnet/minecraft/world/phys/HitResult;"))
+    private static HitResult modifyRaycastResult(HitResult original, @Local(argsOnly = true, name = "cameraEntity") Entity entity, @Local(argsOnly = true, name = "partialTicks") float tickProgress, @Local(name = "maxDistance") double maxDistance) {
         if (!Modules.get().isActive(LiquidInteract.class)) return original;
         if (original.getType() != HitResult.Type.MISS) return original;
 
-        return entity.raycast(maxDistance, tickProgress, true);
+        return entity.pick(maxDistance, tickProgress, true);
     }
 
     // Sprint
 
-    @ModifyExpressionValue(method = "canStartSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/input/Input;hasForwardMovement()Z"))
+    @ModifyExpressionValue(method = "canStartSprinting", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/ClientInput;hasForwardImpulse()Z"))
     private boolean modifyIsWalking(boolean original) {
         if (!Modules.get().get(Sprint.class).rageSprint()) return original;
 
-        float forwards = Math.abs(forwardSpeed);
-        float sideways = Math.abs(sidewaysSpeed);
+        float forwards = Math.abs(zza);
+        float sideways = Math.abs(xxa);
 
-        return (isSubmergedInWater() ? (forwards > 1.0E-5F || sideways > 1.0E-5F) : (forwards > 0.8 || sideways > 0.8));
+        return (isUnderWater() ? (forwards > 1.0E-5F || sideways > 1.0E-5F) : (forwards > 0.8 || sideways > 0.8));
     }
 
-    @ModifyExpressionValue(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/input/Input;hasForwardMovement()Z"))
+    @ModifyExpressionValue(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/ClientInput;hasForwardImpulse()Z"))
     private boolean modifyMovement(boolean original) {
         if (!Modules.get().get(Sprint.class).rageSprint()) return original;
 
-        return Math.abs(sidewaysSpeed) > 1.0E-5F || Math.abs(forwardSpeed) > 1.0E-5F;
+        return Math.abs(xxa) > 1.0E-5F || Math.abs(zza) > 1.0E-5F;
     }
 
-    @WrapWithCondition(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;setSprinting(Z)V", ordinal = 3))
-    private boolean wrapSetSprinting(ClientPlayerEntity instance, boolean b) {
+    @WrapWithCondition(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;setSprinting(Z)V", ordinal = 3))
+    private boolean wrapSetSprinting(LocalPlayer instance, boolean b) {
         Sprint s = Modules.get().get(Sprint.class);
 
-        return !s.rageSprint() || s.unsprintInWater() && isTouchingWater();
+        return !s.rageSprint() || s.unsprintInWater() && isInWater();
     }
 
     // Rotations
 
-    @Inject(method = "sendMovementPackets", at = @At("HEAD"))
+    @Inject(method = "sendPosition", at = @At("HEAD"))
     private void onSendMovementPacketsHead(CallbackInfo info) {
         MarisaOptimize.EVENT_BUS.post(SendMovementPacketsEvent.Pre.get());
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/packet/Packet;)V", ordinal = 1))
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V", ordinal = 1))
     private void onTickHasVehicleBeforeSendPackets(CallbackInfo info) {
         MarisaOptimize.EVENT_BUS.post(SendMovementPacketsEvent.Pre.get());
     }
 
-    @Inject(method = "sendMovementPackets", at = @At("TAIL"))
+    @Inject(method = "sendPosition", at = @At("TAIL"))
     private void onSendMovementPacketsTail(CallbackInfo info) {
         MarisaOptimize.EVENT_BUS.post(SendMovementPacketsEvent.Post.get());
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/packet/Packet;)V", ordinal = 1, shift = At.Shift.AFTER))
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;send(Lnet/minecraft/network/protocol/Packet;)V", ordinal = 1, shift = At.Shift.AFTER))
     private void onTickHasVehicleAfterSendPackets(CallbackInfo info) {
         MarisaOptimize.EVENT_BUS.post(SendMovementPacketsEvent.Post.get());
     }

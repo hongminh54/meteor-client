@@ -5,7 +5,7 @@
 
 package com.hongminh54.marisaoptimize.events.entity.player;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class FinishUsingItemEvent {
     private static final FinishUsingItemEvent INSTANCE = new FinishUsingItemEvent();

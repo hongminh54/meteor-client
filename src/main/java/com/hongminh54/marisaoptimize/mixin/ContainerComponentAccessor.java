@@ -5,14 +5,20 @@
 
 package com.hongminh54.marisaoptimize.mixin;
 
-import net.minecraft.component.type.ContainerComponent;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
+import java.util.List;
+import java.util.Optional;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(ContainerComponent.class)
+@Mixin(ItemContainerContents.class)
 public interface ContainerComponentAccessor {
-    @Accessor("stacks")
-    DefaultedList<ItemStack> meteor$getStacks();
+    @Accessor("items")
+    List<Optional<ItemStackTemplate>> meteor$getItems();
+
+    default List<ItemStack> meteor$getStacks() {
+        return meteor$getItems().stream().map(item -> item.map(ItemStackTemplate::create).orElse(ItemStack.EMPTY)).toList();
+    }
 }

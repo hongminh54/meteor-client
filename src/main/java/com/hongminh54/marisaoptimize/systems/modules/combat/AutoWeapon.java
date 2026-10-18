@@ -11,10 +11,10 @@ import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.utils.entity.DamageUtils;
 import com.hongminh54.marisaoptimize.utils.player.InvUtils;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.ItemTags;
 import com.hongminh54.marisaoptimize.settings.*;
 
 public class AutoWeapon extends Module {
@@ -60,16 +60,16 @@ public class AutoWeapon extends Module {
         double currentDamageS;
         double currentDamageA;
         for (int i = 0; i < 9; i++) {
-            ItemStack stack = mc.player.getInventory().getStack(i);
-            if (stack.isIn(ItemTags.SWORDS)
-                && (!antiBreak.get() || (stack.getMaxDamage() - stack.getDamage()) > 10)) {
+            ItemStack stack = mc.player.getInventory().getItem(i);
+            if (stack.is(ItemTags.SWORDS)
+                && (!antiBreak.get() || (stack.getMaxDamage() - stack.getDamageValue()) > 10)) {
                 currentDamageS = DamageUtils.getAttackDamage(mc.player, target, stack);
                 if (currentDamageS > damageS) {
                     damageS = currentDamageS;
                     slotS = i;
                 }
             } else if (stack.getItem() instanceof AxeItem
-                && (!antiBreak.get() || (stack.getMaxDamage() - stack.getDamage()) > 10)) {
+                && (!antiBreak.get() || (stack.getMaxDamage() - stack.getDamageValue()) > 10)) {
                 currentDamageA = DamageUtils.getAttackDamage(mc.player, target, stack);
                 if (currentDamageA > damageA) {
                     damageA = currentDamageA;

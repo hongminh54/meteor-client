@@ -25,7 +25,7 @@ import com.hongminh54.marisaoptimize.systems.accounts.Account;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.utils.render.color.Color;
 import com.hongminh54.marisaoptimize.utils.render.color.SettingColor;
-import net.minecraft.client.util.MacWindowUtil;
+import com.mojang.blaze3d.platform.MacosUtil;
 
 import static com.hongminh54.marisaoptimize.MarisaOptimize.mc;
 import com.hongminh54.marisaoptimize.gui.themes.meteor.widgets.*;
@@ -55,7 +55,7 @@ public class MeteorGuiTheme extends GuiTheme {
         .sliderRange(0.75, 4)
         .onSliderRelease()
         .onChanged(aDouble -> {
-            if (mc.currentScreen instanceof WidgetScreen) ((WidgetScreen) mc.currentScreen).invalidate();
+            if (mc.gui.screen() instanceof WidgetScreen widgetScreen) widgetScreen.invalidate();
         })
         .build()
     );
@@ -79,7 +79,7 @@ public class MeteorGuiTheme extends GuiTheme {
         .description("Hide HUD when in GUI.")
         .defaultValue(false)
         .onChanged(v -> {
-            if (mc.currentScreen instanceof WidgetScreen) mc.options.hudHidden = v;
+            if (mc.gui.screen() instanceof WidgetScreen) mc.gameRenderer.gameRenderState().guiRenderState.isHudHidden = v;
         })
         .build()
     );
@@ -370,8 +370,8 @@ public class MeteorGuiTheme extends GuiTheme {
     public double scale(double value) {
         double scaled = value * scale.get();
 
-        if (MacWindowUtil.IS_MAC) {
-            scaled /= (double) mc.getWindow().getWidth() / mc.getWindow().getFramebufferWidth();
+        if (MacosUtil.IS_MACOS) {
+            scaled /= (double) mc.getWindow().getScreenWidth() / mc.getWindow().getWidth();
         }
 
         return scaled;

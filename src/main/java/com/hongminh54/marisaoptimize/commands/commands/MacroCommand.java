@@ -13,8 +13,8 @@ import com.hongminh54.marisaoptimize.systems.macros.Macro;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.argument.TimeArgumentType;
+import net.minecraft.client.multiplayer.ClientSuggestionProvider;
+import net.minecraft.commands.arguments.TimeArgument;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class MacroCommand extends Command {
     List<ScheduledMacro> scheduledMacros = new ArrayList<>();
 
     @Override
-    public void build(LiteralArgumentBuilder<CommandSource> builder) {
+    public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder
             .then(literal("clear")
                 .executes(context -> {
@@ -66,7 +66,7 @@ public class MacroCommand extends Command {
 
                     return SINGLE_SUCCESS;
                 })
-                .then(argument("delay", TimeArgumentType.time())
+                .then(argument("delay", TimeArgument.time())
                     .executes(context -> {
                         Macro macro = MacroArgumentType.get(context);
                         scheduleQueue.add(new ScheduledMacro(IntegerArgumentType.getInteger(context, "delay"), macro));

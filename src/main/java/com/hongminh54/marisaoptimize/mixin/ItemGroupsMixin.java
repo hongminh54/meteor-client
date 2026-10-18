@@ -8,13 +8,13 @@ package com.hongminh54.marisaoptimize.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.systems.modules.render.BetterTooltips;
-import net.minecraft.item.ItemGroups;
+import net.minecraft.world.item.CreativeModeTabs;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ItemGroups.class)
+@Mixin(CreativeModeTabs.class)
 public abstract class ItemGroupsMixin {
-    @ModifyReturnValue(method = "updateDisplayContext", at = @At("RETURN"))
+    @ModifyReturnValue(method = "tryRebuildTabContents", at = @At("RETURN"))
     private static boolean modifyReturn(boolean original) {
         return original || Modules.get().get(BetterTooltips.class).updateTooltips();
     }

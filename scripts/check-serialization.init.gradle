@@ -1,0 +1,283 @@
+// Isolated regression check; does not compile or replace the unfinished client.
+allprojects {
+    afterEvaluate { project ->
+        if (!project.plugins.hasPlugin('java')) return
+
+        def output = project.layout.buildDirectory.dir('migration-checks/serialization')
+        def packetCompile = project.tasks.register('compileMigrationPackets', JavaCompile) {
+            javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.sourceSets.main.compileClasspath
+            destinationDirectory = output.map { it.dir('packet-classes') }
+            options.encoding = 'UTF-8'
+            options.compilerArgs.addAll(['-proc:none', '-implicit:none'])
+            options.sourcepath = project.files()
+            source project.file('src/main/java/com/hongminh54/marisaoptimize/utils/network/PacketUtils.java')
+            source project.file('src/main/java/com/hongminh54/marisaoptimize/utils/network/LegacyPacketNames.java')
+            source project.file('scripts/tests/PacketRegistryCheck.java')
+        }
+        project.tasks.register('checkMigrationPackets', JavaExec) {
+            dependsOn packetCompile
+            javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(packetCompile.flatMap { it.destinationDirectory }) + project.sourceSets.main.compileClasspath
+            mainClass = 'PacketRegistryCheck'
+        }
+        def sliderCompile = project.tasks.register('compileMigrationSlider', JavaCompile) {
+            javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.sourceSets.main.compileClasspath
+            destinationDirectory = output.map { it.dir('slider-classes') }
+            options.encoding = 'UTF-8'
+            options.compilerArgs.addAll(['-proc:none', '-implicit:none'])
+            options.sourcepath = project.files()
+            source project.file('src/main/java/com/hongminh54/marisaoptimize/gui/widgets/input/WSlider.java')
+            source project.file('scripts/tests/SliderInputCheck.java')
+            source project.fileTree('scripts/tests/widget-stubs') { include '**/*.java' }
+        }
+        project.tasks.register('checkMigrationSlider', JavaExec) {
+            dependsOn sliderCompile
+            javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(sliderCompile.flatMap { it.destinationDirectory }) + project.sourceSets.main.compileClasspath
+            mainClass = 'SliderInputCheck'
+        }
+        def prepare = project.tasks.register('prepareSerializationCheck') {
+            doLast {
+                def stub = new File(output.get().asFile, 'stubs/com/hongminh54/marisaoptimize/utils/render/color/RainbowColors.java')
+                stub.parentFile.mkdirs()
+                // SettingColor.update's global provider is unrelated to serialization.
+                // Global/game dependencies are stubbed; tested settings and Minecraft NBT are real.
+                stub.text = '''package com.hongminh54.marisaoptimize.utils.render.color;
+public class RainbowColors { public static final RainbowColor GLOBAL = new RainbowColor(); }
+'''
+                [
+                    'systems/modules/Module.java': 'package com.hongminh54.marisaoptimize.systems.modules; public class Module {}',
+                    'utils/Utils.java': 'package com.hongminh54.marisaoptimize.utils; public class Utils { public static String nameToTitle(String name) { return name; } public static boolean canUpdate() { return false; } }',
+                    'MarisaOptimize.java': '''package com.hongminh54.marisaoptimize;
+public class MarisaOptimize {
+ public static final java.io.File FOLDER = new java.io.File("build/migration-checks/unused");
+ public static final String MOD_ID = "marisa-optimize";
+ public static final meteordevelopment.orbit.IEventBus EVENT_BUS = new meteordevelopment.orbit.EventBus();
+ public static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger("migration-check");
+ public static net.minecraft.client.Minecraft mc;
+ public static final Addon ADDON = new Addon();
+ public static class Addon { public final com.hongminh54.marisaoptimize.utils.render.color.Color color = new com.hongminh54.marisaoptimize.utils.render.color.Color(120, 80, 200); }
+}''',
+                    'systems/config/Config.java': '''package com.hongminh54.marisaoptimize.systems.config;
+public class Config {
+  public static Config get() { return new Config(); }
+  public final Prefix prefix = new Prefix();
+  public static class Prefix { public String get() { return "."; } }
+ public final com.hongminh54.marisaoptimize.settings.BoolSetting deleteChatFeedback = new com.hongminh54.marisaoptimize.settings.BoolSetting.Builder().build();
+}''',
+                    'pathing/BaritoneUtils.java': 'package com.hongminh54.marisaoptimize.pathing; public class BaritoneUtils { public static boolean IS_AVAILABLE; public static String getPrefix() { return "#"; } }'
+                ].each { path, text ->
+                    def file = new File(output.get().asFile, 'stubs/com/hongminh54/marisaoptimize/' + path)
+                    file.parentFile.mkdirs()
+                    file.text = text
+                }
+            }
+        }
+        // Real command base and help/list rendering; registry/global command registration is stubbed.
+        project.tasks.register('compileMigrationCommands', JavaCompile) {
+            dependsOn 'compileSerializationCheck'
+            javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(output.map { it.dir('classes') }) + project.sourceSets.main.compileClasspath
+            destinationDirectory = output.map { it.dir('command-classes') }
+            options.encoding = 'UTF-8'
+            options.compilerArgs.addAll(['-proc:none', '-implicit:none'])
+            options.sourcepath = project.files()
+            source project.files(
+                'src/main/java/com/hongminh54/marisaoptimize/commands/Command.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/arguments/CommandArgumentType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/CommandsCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/DisconnectCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/FovCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/DismountCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/InputCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/events/world/TickEvent.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/KeyBindingAccessor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/SaveMapCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/ServerCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/NbtCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/world/ChunkIterator.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/world/BlockEntityIterator.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/world/BlockIterator.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/world/CardinalDirection.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/world/Dir.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/Pool.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/ClientChunkManagerAccessor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/ClientChunkMapAccessor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/ChunkAccessor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/PreInit.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/MyPotion.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/Names.java',
+                'src/main/java/com/hongminh54/marisaoptimize/events/game/ResourcePacksReloadedEvent.java',
+                'src/main/java/com/hongminh54/marisaoptimize/systems/System.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/files/StreamUtils.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/world/TickRate.java',
+                'src/main/java/com/hongminh54/marisaoptimize/events/Cancellable.java',
+                'src/main/java/com/hongminh54/marisaoptimize/events/packets/PacketEvent.java',
+                'src/main/java/com/hongminh54/marisaoptimize/events/game/GameJoinedEvent.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/ClientPlayNetworkHandlerAccessor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/MapTextureManagerAccessor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/settings/ItemSetting.java',
+                'src/main/java/com/hongminh54/marisaoptimize/settings/SoundEventListSetting.java',
+                'src/main/java/com/hongminh54/marisaoptimize/settings/ParticleTypeListSetting.java',
+                'src/main/java/com/hongminh54/marisaoptimize/settings/StatusEffectListSetting.java',
+                'src/main/java/com/hongminh54/marisaoptimize/settings/StatusEffectAmplifierMapSetting.java',
+                'src/main/java/com/hongminh54/marisaoptimize/settings/ScreenHandlerListSetting.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/notebot/NotebotUtils.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/notebot/song/Note.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/notebot/song/Song.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/notebot/instrumentdetect/InstrumentDetectFunction.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/notebot/instrumentdetect/InstrumentDetectMode.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/entity/fakeplayer/FakePlayerEntity.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/AbstractClientPlayerEntityAccessor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/RotationCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/arguments/DirectionArgumentType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/settings/EnchantmentListSetting.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixininterface/ISimpleOption.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/SimpleOptionMixin.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/DropCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/VClipCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/HClipCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/GamemodeCommand.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/commands/HelpCommand.java'
+            )
+            source project.fileTree('scripts/tests/command-stubs') { include '**/*.java' }
+        }
+        // Event payloads use real 26.2 classes; renderer/global-dependent events are excluded.
+        project.tasks.register('compileMigrationEvents', JavaCompile) {
+            dependsOn 'compileSerializationCheck'
+            javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(output.map { it.dir('classes') }) + project.sourceSets.main.compileClasspath
+            destinationDirectory = output.map { it.dir('event-classes') }
+            options.encoding = 'UTF-8'
+            options.compilerArgs.addAll(['-proc:none', '-implicit:none'])
+            options.sourcepath = project.files()
+            source project.fileTree('src/main/java/com/hongminh54/marisaoptimize/events') {
+                include '**/*.java'
+                exclude 'render/Render2DEvent.java', 'render/Render3DEvent.java', 'render/RenderItemEntityEvent.java'
+            }
+            source project.file('src/main/java/com/hongminh54/marisaoptimize/utils/misc/input/KeyAction.java')
+        }
+        // Compile the session environment against real 26.2/authlib types without logging in.
+        def friendsCompile = project.tasks.register('compileMigrationFriends', JavaCompile) {
+            dependsOn 'compileSerializationCheck'
+            javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(output.map { it.dir('classes') }) + project.sourceSets.main.compileClasspath
+            destinationDirectory = output.map { it.dir('friend-classes') }
+            options.encoding = 'UTF-8'
+            options.compilerArgs.addAll(['-proc:none', '-implicit:none'])
+            options.sourcepath = project.files()
+            for (name in ['systems/friends/Friend', 'systems/friends/Friends', 'utils/misc/NbtUtils', 'utils/network/Http', 'utils/network/JsonBodyHandler', 'utils/network/FailedHttpResponse', 'utils/other/JsonDateDeserializer']) {
+                source project.file('src/main/java/com/hongminh54/marisaoptimize/' + name + '.java')
+            }
+            source project.fileTree('scripts/tests/friend-stubs') { include '**/*.java' }
+            source project.fileTree('scripts/tests/account-stubs') { include '**/*.java'; exclude '**/MeteorExecutor.java' }
+            source project.file('scripts/tests/FriendSerializationCheck.java')
+        }
+        def inventoryCompile = project.tasks.register('compileMigrationInventory', JavaCompile) {
+            dependsOn 'compileSerializationCheck'
+            javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(output.map { it.dir('classes') }) + project.sourceSets.main.compileClasspath
+            destinationDirectory = output.map { it.dir('inventory-classes') }
+            options.encoding = 'UTF-8'
+            options.compilerArgs.addAll(['-proc:none', '-implicit:none'])
+            options.sourcepath = project.files()
+            for (name in ['utils/player/InvUtils', 'utils/player/FindItemResult', 'mixininterface/IClientPlayerInteractionManager', 'commands/Command', 'commands/commands/GiveCommand', 'commands/commands/DropCommand']) {
+                source project.file('src/main/java/com/hongminh54/marisaoptimize/' + name + '.java')
+            }
+            for (name in ['utils/player/SlotUtils', 'mixin/CreativeInventoryScreenAccessor', 'mixin/ItemGroupsAccessor', 'mixin/MountScreenHandlerAccessor']) {
+                source project.file('src/main/java/com/hongminh54/marisaoptimize/' + name + '.java')
+            }
+            source project.file('scripts/tests/InventoryResultCheck.java')
+        }
+        project.tasks.register('checkMigrationInventory', JavaExec) {
+            dependsOn inventoryCompile
+            javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(inventoryCompile.flatMap { it.destinationDirectory }, output.map { it.dir('classes') }) + project.sourceSets.main.compileClasspath
+            mainClass = 'InventoryResultCheck'
+        }
+        project.tasks.register('checkMigrationFriends', JavaExec) {
+            dependsOn friendsCompile
+            javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(friendsCompile.flatMap { it.destinationDirectory }, output.map { it.dir('classes') }) + project.sourceSets.main.compileClasspath
+            mainClass = 'FriendSerializationCheck'
+        }
+        def accountCompile = project.tasks.register('compileMigrationAccount', JavaCompile) {
+            dependsOn prepare
+            dependsOn 'compileSerializationCheck'
+            javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(output.map { it.dir('classes') }) + project.sourceSets.main.compileClasspath
+            destinationDirectory = output.map { it.dir('account-classes') }
+            options.encoding = 'UTF-8'
+            options.compilerArgs.addAll(['-proc:none', '-implicit:none'])
+            options.sourcepath = project.files()
+            source project.files(
+                'src/main/java/com/hongminh54/marisaoptimize/systems/accounts/Account.java',
+                'src/main/java/com/hongminh54/marisaoptimize/systems/accounts/AccountType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/systems/accounts/AccountCache.java',
+                'src/main/java/com/hongminh54/marisaoptimize/systems/accounts/types/CrackedAccount.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/NbtException.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/ISerializable.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/ICopyable.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/MinecraftClientAccessor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/PlayerSkinProviderAccessor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixin/FileCacheAccessor.java'
+            )
+            source project.file('scripts/tests/AccountSerializationCheck.java')
+            source project.files(output.map { it.file('stubs/com/hongminh54/marisaoptimize/MarisaOptimize.java') })
+            source project.fileTree('scripts/tests/account-stubs') { include '**/*.java' }
+        }
+        project.tasks.register('checkMigrationAccount', JavaExec) {
+            dependsOn accountCompile
+            javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(accountCompile.flatMap { it.destinationDirectory }, output.map { it.dir('classes') }) + project.sourceSets.main.compileClasspath
+            mainClass = 'AccountSerializationCheck'
+        }
+        def compile = project.tasks.register('compileSerializationCheck', JavaCompile) {
+            dependsOn prepare
+            javaCompiler = project.javaToolchains.compilerFor {
+                languageVersion = JavaLanguageVersion.of(25)
+            }
+            classpath = project.sourceSets.main.compileClasspath
+            destinationDirectory = output.map { it.dir('classes') }
+            options.encoding = 'UTF-8'
+            options.compilerArgs.addAll(['-proc:none', '-implicit:none'])
+            options.sourcepath = project.files()
+            source project.files(
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/ICopyable.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/ISerializable.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/IGetter.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/ComponentMapReader.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/arguments/BlockPosArgumentType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/arguments/ComponentMapArgumentType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/arguments/CompoundNbtTagArgumentType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/arguments/DirectionArgumentType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/arguments/PlayerArgumentType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/arguments/PlayerListEntryArgumentType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/commands/arguments/RegistryEntryReferenceArgumentType.java',
+                'src/main/java/com/hongminh54/marisaoptimize/gui/utils/WindowConfig.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/PostInit.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/player/ChatUtils.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/misc/text/MeteorClickEvent.java',
+                'src/main/java/com/hongminh54/marisaoptimize/mixininterface/IChatHud.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/render/color/Color.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/render/color/SettingColor.java',
+                'src/main/java/com/hongminh54/marisaoptimize/utils/render/color/RainbowColor.java',
+                'scripts/tests/SerializationCheck.java'
+            )
+            for (name in ['IVisible', 'Setting', 'SettingGroup', 'BoolSetting', 'IntSetting', 'DoubleSetting', 'EnumSetting', 'ColorSetting', 'Vector3dSetting', 'BlockPosSetting', 'BlockSetting', 'BlockListSetting', 'ItemListSetting']) {
+                source project.file('src/main/java/com/hongminh54/marisaoptimize/settings/' + name + '.java')
+            }
+            source project.fileTree(output.get().dir('stubs')) { include '**/*.java' }
+        }
+        project.tasks.register('checkMigrationSerialization', JavaExec) {
+            dependsOn compile
+            javaLauncher = project.javaToolchains.launcherFor {
+                languageVersion = JavaLanguageVersion.of(25)
+            }
+            classpath = project.files(compile.flatMap { it.destinationDirectory }) + project.sourceSets.main.compileClasspath
+            mainClass = 'SerializationCheck'
+        }
+    }
+}

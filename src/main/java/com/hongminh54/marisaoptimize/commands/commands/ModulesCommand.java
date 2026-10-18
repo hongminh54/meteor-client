@@ -10,11 +10,11 @@ import com.hongminh54.marisaoptimize.systems.modules.Module;
 import com.hongminh54.marisaoptimize.systems.modules.Modules;
 import com.hongminh54.marisaoptimize.utils.player.ChatUtils;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.minecraft.command.CommandSource;
-import net.minecraft.text.HoverEvent;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.multiplayer.ClientSuggestionProvider;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 
 public class ModulesCommand extends Command {
     public ModulesCommand() {
@@ -22,12 +22,12 @@ public class ModulesCommand extends Command {
     }
 
     @Override
-    public void build(LiteralArgumentBuilder<CommandSource> builder) {
+    public void build(LiteralArgumentBuilder<ClientSuggestionProvider> builder) {
         builder.executes(context -> {
             ChatUtils.info("--- Modules ((highlight)%d(default)) ---", Modules.get().getCount());
 
             Modules.loopCategories().forEach(category -> {
-                MutableText categoryMessage = Text.literal("");
+                MutableComponent categoryMessage = Component.literal("");
                 Modules.get().getGroup(category).forEach(module -> categoryMessage.append(getModuleText(module)));
                 ChatUtils.sendMsg(category.name, categoryMessage);
             });
@@ -36,17 +36,17 @@ public class ModulesCommand extends Command {
         });
     }
 
-    private MutableText getModuleText(Module module) {
+    private MutableComponent getModuleText(Module module) {
         // Hover tooltip
-        MutableText tooltip = Text.literal("");
+        MutableComponent tooltip = Component.literal("");
 
-        tooltip.append(Text.literal(module.title).formatted(Formatting.BLUE, Formatting.BOLD)).append("\n");
-        tooltip.append(Text.literal(module.name).formatted(Formatting.GRAY)).append("\n\n");
-        tooltip.append(Text.literal(module.description).formatted(Formatting.WHITE));
+        tooltip.append(Component.literal(module.title).withStyle(ChatFormatting.BLUE, ChatFormatting.BOLD)).append("\n");
+        tooltip.append(Component.literal(module.name).withStyle(ChatFormatting.GRAY)).append("\n\n");
+        tooltip.append(Component.literal(module.description).withStyle(ChatFormatting.WHITE));
 
-        MutableText finalModule = Text.literal(module.title);
-        if (!module.isActive()) finalModule.formatted(Formatting.GRAY);
-        if (!module.equals(Modules.get().getGroup(module.category).getLast())) finalModule.append(Text.literal(", ").formatted(Formatting.GRAY));
+        MutableComponent finalModule = Component.literal(module.title);
+        if (!module.isActive()) finalModule.withStyle(ChatFormatting.GRAY);
+        if (!module.equals(Modules.get().getGroup(module.category).getLast())) finalModule.append(Component.literal(", ").withStyle(ChatFormatting.GRAY));
         finalModule.setStyle(finalModule.getStyle().withHoverEvent(new HoverEvent.ShowText(tooltip)));
 
         return finalModule;
