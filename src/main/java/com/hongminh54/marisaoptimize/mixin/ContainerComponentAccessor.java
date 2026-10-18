@@ -11,14 +11,16 @@ import net.minecraft.world.item.ItemStackTemplate;
 import java.util.List;
 import java.util.Optional;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(ItemContainerContents.class)
-public interface ContainerComponentAccessor {
+public abstract class ContainerComponentAccessor {
     @Accessor("items")
-    List<Optional<ItemStackTemplate>> meteor$getItems();
+    public abstract List<Optional<ItemStackTemplate>> meteor$getItems();
 
-    default List<ItemStack> meteor$getStacks() {
+    @Unique
+    public List<ItemStack> meteor$getStacks() {
         return meteor$getItems().stream().map(item -> item.map(ItemStackTemplate::create).orElse(ItemStack.EMPTY)).toList();
     }
 }

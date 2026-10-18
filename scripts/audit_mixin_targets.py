@@ -44,6 +44,12 @@ def audit(path):
             if index + 1 < len(lines) and 'descriptor:' in lines[index + 1]:
                 methods.add(method + lines[index + 1].split('descriptor:', 1)[1].strip())
     errors = []
+    # An interface with concrete/default methods is a standard interface mixin,
+    # not a pure accessor mixin; it cannot target a concrete Minecraft class.
+    if (re.search(r'\binterface\s+\w+', text)
+            and re.search(r'\bdefault\s+', text)
+            and not re.search(r'\binterface\s+' + re.escape(name) + r'\b', result.stdout)):
+        errors.append(f'{path.name}: interface mixin with default methods targets class {name}')
     for shadow in re.finditer(r'@Shadow\b(?:(?!;|\{).)*?\b([\w$]+)\s*(?:\([^;]*\))?\s*;', text, re.S):
         member = shadow[1]
         if not re.search(r'\b' + re.escape(member) + r'(?:\(|;)', result.stdout):
