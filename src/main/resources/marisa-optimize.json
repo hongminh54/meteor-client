@@ -202,7 +202,7 @@
     "WorldAccessor",
     "WorldBorderMixin",
     "WorldChunkMixin",
-    "WorldRendererAccessor",
+    "ClientLevelAccessor",
     "WorldRendererMixin",
     "LevelExtractorMixin",
     "YggdrasilMinecraftSessionServiceAccessor"

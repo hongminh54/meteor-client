@@ -9,7 +9,7 @@ import com.hongminh54.marisaoptimize.events.packets.PacketEvent;
 import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
 import com.hongminh54.marisaoptimize.events.world.TickEvent;
 import com.hongminh54.marisaoptimize.mixin.DirectionAccessor;
-import com.hongminh54.marisaoptimize.mixin.WorldRendererAccessor;
+import com.hongminh54.marisaoptimize.mixin.ClientLevelAccessor;
 import com.hongminh54.marisaoptimize.renderer.ShapeMode;
 import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
@@ -372,7 +372,7 @@ public class Surround extends Module {
 
         // Check if the block is being mined
         boolean beingMined = false;
-        for (BlockDestructionProgress value : ((WorldRendererAccessor) mc.levelRenderer).meteor$getBlockBreakingInfos().values()) {
+        for (BlockDestructionProgress value : ((ClientLevelAccessor) mc.level).meteor$getBlockBreakingInfos().values()) {
             if (value.getPos().equals(placePos)) {
                 beingMined = true;
                 break;

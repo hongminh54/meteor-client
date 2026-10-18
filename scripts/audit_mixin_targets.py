@@ -1,7 +1,7 @@
 """Check explicit Minecraft mixin targets against the cached official-name JAR.
 
 This is a static smoke check, not a substitute for applying Mixins in a client.
-Checks target class existence and named injection methods (including descriptors).
+Checks target class existence, accessor fields and named injection methods (including descriptors).
 """
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -44,6 +44,10 @@ def audit(path):
             if index + 1 < len(lines) and 'descriptor:' in lines[index + 1]:
                 methods.add(method + lines[index + 1].split('descriptor:', 1)[1].strip())
     errors = []
+    for accessor in re.finditer(r'@Accessor\("([^"\n]+)"\)', text):
+        field = accessor[1]
+        if not re.search(r'\b' + re.escape(field) + r';', result.stdout):
+            errors.append(f'{path.name}: {name} missing accessor field {field}')
     # An interface with concrete/default methods is a standard interface mixin,
     # not a pure accessor mixin; it cannot target a concrete Minecraft class.
     if (re.search(r'\binterface\s+\w+', text)

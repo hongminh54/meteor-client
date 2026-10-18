@@ -5,7 +5,7 @@
 
 package com.hongminh54.marisaoptimize.systems.hud.elements;
 
-import com.hongminh54.marisaoptimize.mixin.WorldRendererAccessor;
+import com.hongminh54.marisaoptimize.mixin.ClientLevelAccessor;
 import com.hongminh54.marisaoptimize.systems.hud.Hud;
 import com.hongminh54.marisaoptimize.systems.hud.HudElement;
 import com.hongminh54.marisaoptimize.systems.hud.HudElementInfo;
@@ -116,7 +116,7 @@ public class HoleHud extends HudElement {
 
         if (dir == Direction.DOWN) return;
 
-        ((WorldRendererAccessor) mc.levelRenderer).meteor$getBlockBreakingInfos().values().forEach(info -> {
+        ((ClientLevelAccessor) mc.level).meteor$getBlockBreakingInfos().values().forEach(info -> {
             if (info.getPos().equals(mc.player.blockPosition().relative(dir))) {
                 renderBreaking(renderer, x, y, info.getProgress() / 9f);
             }

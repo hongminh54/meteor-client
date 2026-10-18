@@ -7,7 +7,7 @@ package com.hongminh54.marisaoptimize.systems.modules.render;
 
 import com.hongminh54.marisaoptimize.events.render.Render3DEvent;
 import com.hongminh54.marisaoptimize.mixin.ClientPlayerInteractionManagerAccessor;
-import com.hongminh54.marisaoptimize.mixin.WorldRendererAccessor;
+import com.hongminh54.marisaoptimize.mixin.ClientLevelAccessor;
 import com.hongminh54.marisaoptimize.renderer.ShapeMode;
 import com.hongminh54.marisaoptimize.systems.modules.Categories;
 import com.hongminh54.marisaoptimize.systems.modules.Module;
@@ -112,7 +112,7 @@ public class BreakIndicators extends Module {
     }
 
     private void renderNormal(Render3DEvent event) {
-        Map<Integer, BlockDestructionProgress> blocks = ((WorldRendererAccessor) mc.levelRenderer).meteor$getBlockBreakingInfos();
+        Map<Integer, BlockDestructionProgress> blocks = ((ClientLevelAccessor) mc.level).meteor$getBlockBreakingInfos();
 
         float ownBreakingStage = ((ClientPlayerInteractionManagerAccessor) mc.gameMode).meteor$getBreakingProgress();
         BlockPos ownBreakingPos = ((ClientPlayerInteractionManagerAccessor) mc.gameMode).meteor$getCurrentBreakingBlockPos();
