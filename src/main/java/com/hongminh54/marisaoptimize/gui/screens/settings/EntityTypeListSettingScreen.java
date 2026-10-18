@@ -239,7 +239,7 @@ public class EntityTypeListSettingScreen extends WindowScreen {
 
             //noinspection DataFlowIssue
             if (component.type() == entityType) {
-                stack = item.getDefaultInstance();
+                stack = com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils.toStack(item);
                 break;
             }
         }

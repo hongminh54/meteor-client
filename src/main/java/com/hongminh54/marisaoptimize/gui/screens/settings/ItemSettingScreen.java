@@ -52,7 +52,7 @@ public class ItemSettingScreen extends WindowScreen {
             if (setting.filter != null && !setting.filter.test(item)) continue;
             if (item == Items.AIR) continue;
 
-            WItemWithLabel itemLabel = theme.itemWithLabel(item.getDefaultInstance(), Names.get(item));
+            WItemWithLabel itemLabel = theme.itemWithLabel(com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils.toStack(item), Names.get(item));
             if (!filterText.isEmpty() && !Strings.CI.contains(itemLabel.getLabelText(), filterText)) continue;
             table.add(itemLabel);
 

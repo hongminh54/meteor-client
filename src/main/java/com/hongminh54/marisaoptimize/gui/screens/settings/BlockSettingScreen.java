@@ -53,7 +53,7 @@ public class BlockSettingScreen extends WindowScreen {
             if (setting.filter != null && !setting.filter.test(block)) continue;
             if (skipValue(block)) continue;
 
-            WItemWithLabel item = theme.itemWithLabel(block.asItem().getDefaultInstance(), Names.get(block));
+            WItemWithLabel item = theme.itemWithLabel(com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils.toStack(block), Names.get(block));
             if (!filterText.isEmpty() && !Strings.CI.contains(item.getLabelText(), filterText)) continue;
             table.add(item);
 

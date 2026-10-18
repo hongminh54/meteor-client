@@ -31,7 +31,7 @@ public class ItemListSettingScreen extends CollectionListSettingScreen<Item> {
 
     @Override
     protected WWidget getValueWidget(Item value) {
-        return theme.itemWithLabel(value.getDefaultInstance());
+        return theme.itemWithLabel(com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils.toStack(value));
     }
 
     @Override

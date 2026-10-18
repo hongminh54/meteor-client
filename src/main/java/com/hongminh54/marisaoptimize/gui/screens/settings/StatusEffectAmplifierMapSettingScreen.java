@@ -76,7 +76,7 @@ public class StatusEffectAmplifierMapSettingScreen extends WindowScreen {
     }
 
     private ItemStack getPotionStack(MobEffect effect) {
-        ItemStack potion = Items.POTION.getDefaultInstance();
+        ItemStack potion = com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils.toStack(Items.POTION);
 
         potion.set(
             DataComponents.POTION_CONTENTS,

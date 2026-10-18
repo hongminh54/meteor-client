@@ -51,7 +51,7 @@ public class StorageBlockListSettingScreen extends CollectionListSettingScreen<B
     @Override
     protected WWidget getValueWidget(BlockEntityType<?> value) {
         BlockEntityTypeInfo info = BLOCK_ENTITY_TYPE_INFO_MAP.getOrDefault(value, UNKNOWN);
-        return theme.itemWithLabel(info.item().getDefaultInstance(), info.name());
+        return theme.itemWithLabel(com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils.toStack(info.item()), info.name());
     }
 
     @Override

@@ -123,7 +123,7 @@ public class ModulesScreen extends TabScreen {
         searchWindow = w;
 
         if (theme.categoryIcons()) {
-            w.beforeHeaderInit = wContainer -> wContainer.add(theme.item(Items.COMPASS.getDefaultInstance())).pad(2);
+            w.beforeHeaderInit = wContainer -> wContainer.add(theme.item(com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils.toStack(Items.COMPASS))).pad(2);
         }
 
         c.add(w);
@@ -178,7 +178,7 @@ public class ModulesScreen extends TabScreen {
         w.spacing = 0;
 
         if (theme.categoryIcons()) {
-            w.beforeHeaderInit = wContainer -> wContainer.add(theme.item(Items.NETHER_STAR.getDefaultInstance())).pad(2);
+            w.beforeHeaderInit = wContainer -> wContainer.add(theme.item(com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils.toStack(Items.NETHER_STAR))).pad(2);
         }
 
         Cell<WWindow> cell = c.add(w);

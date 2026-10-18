@@ -8,14 +8,15 @@ package com.hongminh54.marisaoptimize.systems.modules;
 import com.hongminh54.marisaoptimize.addons.AddonManager;
 import com.hongminh54.marisaoptimize.addons.MeteorAddon;
 import net.minecraft.world.item.Items;
+import com.hongminh54.marisaoptimize.utils.render.DisplayItemUtils;
 
 public class Categories {
-    public static final Category Combat = new Category("Combat", Items.GOLDEN_SWORD.getDefaultInstance());
-    public static final Category Player = new Category("Player", Items.ARMOR_STAND.getDefaultInstance());
-    public static final Category Movement = new Category("Movement", Items.DIAMOND_BOOTS.getDefaultInstance());
-    public static final Category Render = new Category("Render", Items.GLASS.getDefaultInstance());
-    public static final Category World = new Category("World", Items.GRASS_BLOCK.getDefaultInstance());
-    public static final Category Misc = new Category("Misc", Items.LAVA_BUCKET.getDefaultInstance());
+    public static final Category Combat = new Category("Combat", DisplayItemUtils.toStack(Items.GOLDEN_SWORD));
+    public static final Category Player = new Category("Player", DisplayItemUtils.toStack(Items.ARMOR_STAND));
+    public static final Category Movement = new Category("Movement", DisplayItemUtils.toStack(Items.DIAMOND_BOOTS));
+    public static final Category Render = new Category("Render", DisplayItemUtils.toStack(Items.GLASS));
+    public static final Category World = new Category("World", DisplayItemUtils.toStack(Items.GRASS_BLOCK));
+    public static final Category Misc = new Category("Misc", DisplayItemUtils.toStack(Items.LAVA_BUCKET));
 
     public static boolean REGISTERING;
 

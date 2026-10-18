@@ -6,7 +6,6 @@
 package com.hongminh54.marisaoptimize.systems.modules;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 public class Category {
     public final String name;
@@ -16,7 +15,7 @@ public class Category {
     public Category(String name, ItemStack icon) {
         this.name = name;
         this.nameHash = name.hashCode();
-        this.icon = icon == null ? Items.AIR.getDefaultInstance() : icon;
+        this.icon = icon == null ? ItemStack.EMPTY : icon;
     }
     public Category(String name) {
         this(name, null);

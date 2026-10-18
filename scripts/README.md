@@ -43,3 +43,10 @@ GodMode cannot grant server-authoritative invulnerability on remote servers.
 `plan_baseline_migration.py` and `generate_packet_aliases.py` are review-only migration
 helpers requiring the local upstream checkout and historical mappings; normal builds
 and tests do not require that checkout.
+# Display items before joining a world (26.2)
+
+Run `./gradlew.bat -I scripts/check-serialization.init.gradle checkMigrationDisplayItems`.
+This bootstraps real Minecraft registries without binding world/server item components,
+then checks display-only stacks, category icons, model/name components, counts and empty
+icons. It also verifies the helper leaves the global item holder unbound. It does not
+test rendering or joining a world. Never use `DisplayItemUtils` stacks for gameplay.

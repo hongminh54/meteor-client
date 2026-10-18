@@ -4,6 +4,23 @@ allprojects {
         if (!project.plugins.hasPlugin('java')) return
 
         def output = project.layout.buildDirectory.dir('migration-checks/serialization')
+        def displayCompile = project.tasks.register('compileMigrationDisplayItems', JavaCompile) {
+            javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.sourceSets.main.compileClasspath
+            destinationDirectory = output.map { it.dir('display-classes') }
+            options.encoding = 'UTF-8'
+            options.compilerArgs.addAll(['-proc:none', '-implicit:none'])
+            options.sourcepath = project.files()
+            source project.file('src/main/java/com/hongminh54/marisaoptimize/utils/render/DisplayItemUtils.java')
+            source project.file('src/main/java/com/hongminh54/marisaoptimize/systems/modules/Category.java')
+            source project.file('scripts/tests/DisplayItemCheck.java')
+        }
+        project.tasks.register('checkMigrationDisplayItems', JavaExec) {
+            dependsOn displayCompile
+            javaLauncher = project.javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }
+            classpath = project.files(displayCompile.flatMap { it.destinationDirectory }) + project.sourceSets.main.compileClasspath
+            mainClass = 'DisplayItemCheck'
+        }
         def versionCompile = project.tasks.register('compileMigrationVersion', JavaCompile) {
             javaCompiler = project.javaToolchains.compilerFor { languageVersion = JavaLanguageVersion.of(25) }
             classpath = project.files()

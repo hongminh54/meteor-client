@@ -71,7 +71,7 @@ public class MeteorToast implements Toast {
         }
 
         public Builder icon(@Nullable Item item) {
-            this.icon = item != null ? item.getDefaultInstance() : null;
+            this.icon = item != null ? DisplayItemUtils.toStack(item) : null;
             return this;
         }
 

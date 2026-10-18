@@ -87,7 +87,7 @@ public class AutoReplenish extends Module {
     public AutoReplenish() {
         super(Categories.Player, "auto-replenish", "Automatically refills items in your hotbar, main hand, or offhand.");
 
-        Arrays.fill(items, Items.AIR.getDefaultInstance());
+        Arrays.fill(items, ItemStack.EMPTY);
     }
 
     @Override
